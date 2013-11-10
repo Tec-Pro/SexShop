@@ -8,11 +8,11 @@ package abm;
  *
  * @author joako
  */
-interface ABMInterface {
+interface ABMInterface<T> {
     
-    void alta(Object o);
+    void alta(T o);
     
-    void baja(Object o);
+    void baja(T o);
     
-    void modificar(Object o);
+    void modificar(T o);
 }
