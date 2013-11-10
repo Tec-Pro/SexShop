@@ -4,15 +4,19 @@
  */
 package abm;
 
+import java.sql.Connection;
+
 /**
  *
  * @author joako
  */
-interface ABMInterface {
+
+
+interface ABMInterface<T> {
+  
+    void alta(T o);
     
-    void alta(Object o);
+    void baja(T o);
     
-    void baja(Object o);
-    
-    void modificar(Object o);
+    void modificar(T o);
 }
