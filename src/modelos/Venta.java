@@ -27,6 +27,9 @@ public class Venta {
         this.monto = monto;
     }
     
+    public void calcularMonto(LinkedList<Producto> productos){
+        
+    }
     
     
     /**
