@@ -13,8 +13,7 @@ import java.sql.Connection;
 
 
 interface ABMInterface<T> {
-    Connection conn = ConnectionDataBase.getConnection();
-    
+  
     void alta(T o);
     
     void baja(T o);
