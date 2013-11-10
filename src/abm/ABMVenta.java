@@ -8,10 +8,12 @@ package abm;
  *
  * @author joako
  */
-public class ABMCompra implements ABMInterface {
-
-    public ABMCompra(){}
+public class ABMVenta implements ABMInterface{
     
+    public ABMVenta(){
+        
+    }
+
     @Override
     public void alta(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -26,5 +28,6 @@ public class ABMCompra implements ABMInterface {
     public void modificar(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }
