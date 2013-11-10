@@ -1,4 +1,7 @@
-/*create table proveedor (
+
+
+drop table if exists proveedor;
+create table proveedor (
     nombre varchar(50),
     apellido varchar(50),
     dni varchar(50) not null,
@@ -14,15 +17,7 @@
     constraint pkproveedor primary key(dni)    
 );
 
-create table provee(
-    idproveedor varchar(50) not null,
-    idcliente varchar(50) not null,
-    constraint pkprovee primary key(idproveedor,idcliente),
-    constraint fkproveecliente foreign key(idcliente) references cliente(dni),
-    constraint fkproveeproveedor foreign key(idproveedor) references proveedor(dni)
-);
-
-
+drop table if exists cliente;
 create table cliente (
     nombre varchar(50),
     apellido varchar(50),
@@ -33,6 +28,47 @@ create table cliente (
     constraint pkcliente primary key(dni)    
 );
 
+drop table if exists producto;
+create table producto (
+    precio real,
+    stock integer,
+    numero_producto integer not null,
+    nombre varchar(50),
+    tipo varchar(50),
+    marca varchar(50),
+    constraint pkproducto primary key(numero_producto)
+);
+
+drop table if exists venta;
+create table venta (
+    id integer not null auto_increment,
+    monto real not null,
+    idcliente varchar(50) not null,
+    constraint pkventa primary key(id),
+    constraint fkventacliente foreign key(idcliente) references cliente(dni)
+);
+    
+drop table if exists compra;
+create table compra (
+    id integer not null auto_increment,
+    monto real not null,
+    idproveedor varchar(50) not null,
+    constraint pkcompra primary key(id),
+    constraint fkcompraproveedor foreign key(idproveedor) references proveedor(dni)
+);
+
+
+drop table if exists provee;
+create table provee(
+    idproveedor varchar(50) not null,
+    idproducto integer not null,
+    constraint pkprovee primary key(idproveedor,idproducto),
+    constraint fkproveeproducto foreign key(idproducto) references producto(numero_producto),
+    constraint fkproveeproveedor foreign key(idproveedor) references proveedor(dni)
+);
+
+
+drop table if exists adquirio;
 create table adquirio(
     idcliente varchar(50) not null,
     idproducto integer not null,
@@ -41,32 +77,23 @@ create table adquirio(
     constraint fkadquirioproducto foreign key(idproducto) references producto(numero_producto) 
 );
 
-create table producto (
-    precio real,
-    stock integer,
-    numero_producto integer not null,
-    nombre varchar(50),
-    tipo varchar(50),
-    marca varchar(50),
-    idproveedor varchar(50),
-    constraint pkproducto primary key(numero_producto),
-    constraint fkproductoproveedor foreign key(idproveedor) references proveedor(dni) on update set null
+
+drop table if exists productosvendidos;
+create table productosvendidos (
+    idventa integer not null,
+    idproducto integer not null,
+    primary key(idventa,idproducto),
+    foreign key (idventa) references venta(id),
+    foreign key(idproducto) references producto(numero_producto)
 );
 
-create table venta (
-    monto real not null,
-    idcliente varchar(50) not null,
+drop table if exists productoscomprados;
+create table productoscomprados (
+    idcompra integer not null,
     idproducto integer not null,
-    constraint pkventa primary key(idproducto,idcliente,monto),
-    constraint fkventacliente foreign key(idcliente) references cliente(dni),
-    constraint fkventaproducto foreign key(idproducto) references producto(numero_producto) 
+    primary key(idcompra,idproducto),
+    foreign key (idcompra) references compra(id),
+    foreign key(idproducto) references producto(numero_producto)
 );
-*/
-create table compra (
-    monto real not null,
-    idproveedor varchar(50) not null,
-    idproducto integer not null,
-    constraint pkcompra primary key(idproducto,idproveedor,monto),
-    constraint fkcompraproveedor foreign key(idproveedor) references proveedor(dni),
-    constraint fkcompraproducto foreign key(idproducto) references producto(numero_producto)
-);
+
+
