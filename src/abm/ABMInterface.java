@@ -4,11 +4,16 @@
  */
 package abm;
 
+import java.sql.Connection;
+
 /**
  *
  * @author joako
  */
+
+
 interface ABMInterface<T> {
+    Connection conn = ConnectionDataBase.getConnection();
     
     void alta(T o);
     
