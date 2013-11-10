@@ -4,6 +4,8 @@
  */
 package modelos;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author joako
@@ -12,7 +14,7 @@ public class Producto {
     private Double precio;
     private Integer stock, numeroProducto;
     private String nombre, tipo, marca;
-    private Proveedor proveedor;
+    private LinkedList<Proveedor> proveedor;
 
     public Producto() {
         this.marca ="";
@@ -24,7 +26,7 @@ public class Producto {
         this.tipo = "";
     }
 
-    public Producto(Double precio, Integer stock, Integer numeroProducto, String nombre, String tipo, String marca, Proveedor proveedor) {
+    public Producto(Double precio, Integer stock, Integer numeroProducto, String nombre, String tipo, String marca, LinkedList<Proveedor> proveedor) {
         this.precio = precio;
         this.stock = stock;
         this.numeroProducto = numeroProducto;
@@ -123,14 +125,14 @@ public class Producto {
     /**
      * @return the proveedor
      */
-    public Proveedor getProveedor() {
+    public LinkedList<Proveedor> getProveedor() {
         return proveedor;
     }
 
     /**
      * @param proveedor the proveedor to set
      */
-    public void setProveedor(Proveedor proveedor) {
+    public void setProveedor(LinkedList<Proveedor> proveedor) {
         this.proveedor = proveedor;
     }
 }
