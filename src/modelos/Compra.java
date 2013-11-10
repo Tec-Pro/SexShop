@@ -10,37 +10,37 @@ import java.util.LinkedList;
  *
  * @author joako
  */
-public class Transaccion {
-    private Cliente cliente;
+public class Compra {
+    private Proveedor proveedor;
     private LinkedList<Producto> productos;
     private Double monto;
-
-    public Transaccion(){
-        cliente = null;
+    
+    public Compra(){
+        proveedor = null;
         productos = null;
         monto = null;
     }
 
-    public Transaccion(Cliente cliente, LinkedList<Producto> productos, Double monto) {
-        this.cliente = cliente;
+    public Compra(Proveedor proveedor, LinkedList<Producto> productos, Double monto) {
+        this.proveedor = proveedor;
         this.productos = productos;
         this.monto = monto;
     }
     
     
-    
+
     /**
-     * @return the cliente
+     * @return the proveedor
      */
-    public Cliente getCliente() {
-        return cliente;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
     /**
-     * @param cliente the cliente to set
+     * @param proveedor the proveedor to set
      */
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     /**
