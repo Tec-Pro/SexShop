@@ -6,7 +6,7 @@ package abm;
 
 /**
  *
- * @author joako
+ * @author eze
  */
 public class ABMVenta implements ABMInterface{
     
