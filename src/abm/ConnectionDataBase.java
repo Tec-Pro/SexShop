@@ -16,6 +16,10 @@ public class ConnectionDataBase {
 
     public static Connection connection;
 
+    public ConnectionDataBase() {
+        connection = null;
+    }
+    
     public void createConnection() {
         try {
             //Cargamos el puente JDBC =&gt; Mysql
@@ -34,7 +38,11 @@ public class ConnectionDataBase {
         setConnection(connection);
     }
 
-   public void closeConnection() {
+    public boolean connectionIsClose() {
+        return connection == null;
+    }
+    
+    public void closeConnection() {
         try {
             ConnectionDataBase.connection.close();
             System.out.println("Cerrar conexion con jdbc:mysql://localhost/sexshop ... OK");
