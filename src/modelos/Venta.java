@@ -4,8 +4,6 @@
  */
 package modelos;
 
-import abm.ConnectionDataBase;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -16,38 +14,20 @@ public class Venta {
     private Cliente cliente;
     private LinkedList<Producto> productos;
     private Double monto;
-    private ConnectionDataBase connection;
 
     public Venta(){
         cliente = null;
         productos = null;
         monto = null;
-        connection = null;
     }
 
-    public Venta(Cliente cliente, LinkedList<Producto> productos, Double monto, ConnectionDataBase connection) {
+    public Venta(Cliente cliente, LinkedList<Producto> productos, Double monto) {
         this.cliente = cliente;
         this.productos = productos;
         this.monto = monto;
-        this.connection = connection;
     }
     
-    public void calcularMonto(LinkedList<Producto> productos){
-        if ( connection.connectionIsClose()){
-            connection.createConnection();
-        }
-        Iterator itr = productos.iterator();
-        Producto prod;
-        Double acumMonto = 0.0;
-        while(itr.hasNext()){
-            prod = (Producto) itr.next();
-            acumMonto += prod.getPrecio();
-        }
-        this.monto = acumMonto;
-        connection.closeConnection();
-    }
-    
-    
+  
     /**
      * @return the cliente
      */
