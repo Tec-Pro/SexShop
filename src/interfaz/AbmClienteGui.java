@@ -6,6 +6,7 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AbmClienteGui extends javax.swing.JPanel {
 
-    private DefaultTableModel tablaClientes;
+    private DefaultTableModel tablaClientes;//tabla default de los clientes
     /**
      * Creates new form AbmClienteGui
      */
     public AbmClienteGui() {
         initComponents();
-        tablaClientes = (DefaultTableModel) tabla.getModel();
+        tablaClientes = (DefaultTableModel) tabla.getModel(); //conveirto la tabla
 
     }
     
@@ -32,11 +33,8 @@ public class AbmClienteGui extends javax.swing.JPanel {
         this.anterior.addActionListener(lis);
         this.modificar.addActionListener(lis);
         this.articulosComprados.addActionListener(lis);
-        tablaClientes.addRow(new Object[]{123, "Nicolas", "Column 3"} );
-        
     }
     
- 
 
     public JButton getAnterior() {
         return anterior;
@@ -69,11 +67,38 @@ public class AbmClienteGui extends javax.swing.JPanel {
     public DefaultTableModel getTablaClientes(){
         return tablaClientes;
     }
-            
 
-    
-    
+    public JTextField getApellido() {
+        return apellido;
+    }
 
+    public JTextField getBusquedaApellido() {
+        return busquedaApellido;
+    }
+
+    public JTextField getBusquedaCodigo() {
+        return busquedaCodigo;
+    }
+
+    public JTextField getCelular() {
+        return celular;
+    }
+
+    public JTextField getEmail() {
+        return email;
+    }
+
+    public JTextField getIdCliente() {
+        return idCliente;
+    }
+
+    public JTextField getNombre() {
+        return nombre;
+    }
+
+    public JTextField getTelFijo() {
+        return telFijo;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,8 +125,6 @@ public class AbmClienteGui extends javax.swing.JPanel {
         articulosComprados = new javax.swing.JButton();
         celular = new javax.swing.JTextField();
         apellido = new javax.swing.JTextField();
-        dni = new javax.swing.JTextField();
-        labelDni = new javax.swing.JLabel();
         labelApellido = new javax.swing.JLabel();
         labelCelular = new javax.swing.JLabel();
         panelControlCliente = new org.edisoncor.gui.panel.PanelImage();
@@ -127,6 +150,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
         imagenFondo.setPreferredSize(new java.awt.Dimension(820, 400));
 
         panelTitulo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/fondoCliente2.jpg"))); // NOI18N
         panelTitulo.setPreferredSize(new java.awt.Dimension(329, 49));
 
         titulo.setFont(new java.awt.Font("Century Schoolbook L", 3, 24)); // NOI18N
@@ -261,28 +285,6 @@ public class AbmClienteGui extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(18, 12, 0, 7);
         panelCliente.add(apellido, gridBagConstraints);
 
-        dni.setToolTipText("DNI del cliente");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 189;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(34, 12, 0, 7);
-        panelCliente.add(dni, gridBagConstraints);
-
-        labelDni.setBackground(new java.awt.Color(137, 98, 59));
-        labelDni.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
-        labelDni.setText("DNI");
-        labelDni.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(39, 46, 0, 0);
-        panelCliente.add(labelDni, gridBagConstraints);
-
         labelApellido.setBackground(new java.awt.Color(137, 98, 59));
         labelApellido.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelApellido.setText("Apellido");
@@ -308,7 +310,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
 
         panelControlCliente.setLayout(new java.awt.GridLayout(1, 0));
 
-        nuevo.setBackground(java.awt.Color.white);
+        nuevo.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
         nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/agregar.png"))); // NOI18N
         nuevo.setToolTipText("Nuevo cliente");
         nuevo.setPreferredSize(new java.awt.Dimension(70, 70));
@@ -340,6 +342,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
         panelControlCliente.add(siguiente);
 
         panelClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/fondoCliente2.jpg"))); // NOI18N
 
         tabla.setAutoCreateRowSorter(true);
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -347,14 +350,14 @@ public class AbmClienteGui extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código", "Apellido", "Nombre"
+                "Cod.", "Apellido", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -366,6 +369,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
             }
         });
         jScrollPane3.setViewportView(tabla);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
 
         busquedaCodigo.setToolTipText("Filtrar busqueda por ID");
 
@@ -464,7 +468,6 @@ public class AbmClienteGui extends javax.swing.JPanel {
     private javax.swing.JTextField busquedaApellido;
     private javax.swing.JTextField busquedaCodigo;
     private javax.swing.JTextField celular;
-    private javax.swing.JTextField dni;
     private javax.swing.JTextField email;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField idCliente;
@@ -476,7 +479,6 @@ public class AbmClienteGui extends javax.swing.JPanel {
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelCelular;
     private javax.swing.JLabel labelCodigo;
-    private javax.swing.JLabel labelDni;
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelTelefono;
