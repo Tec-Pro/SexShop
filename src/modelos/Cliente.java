@@ -17,12 +17,12 @@ public class Cliente {
     private LinkedList<Producto> productos;
 
     public Cliente() {
-        this.nombre = "";
-        this.apellido= "";
-        this.dni = "";
-        this.telefono = "";
-        this.celular = "";
-        this.mail = "";
+        this.nombre = null;
+        this.apellido= null;
+        this.dni = null;
+        this.telefono = null;
+        this.celular = null;
+        this.mail = null;
         this.productos = null;
     }
 

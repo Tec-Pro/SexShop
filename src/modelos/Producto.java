@@ -17,13 +17,13 @@ public class Producto {
     private LinkedList<Proveedor> proveedor;
 
     public Producto() {
-        this.marca ="";
-        this.nombre ="";
+        this.marca =null;
+        this.nombre =null;
         this.numeroProducto= null;
-        this.precio = 0.0;
+        this.precio = null;
         this.proveedor = null;
-        this.stock = 0;
-        this.tipo = "";
+        this.stock = null;
+        this.tipo = null;
     }
 
     public Producto(Double precio, Integer stock, Integer numeroProducto, String nombre, String tipo, String marca, LinkedList<Proveedor> proveedor) {

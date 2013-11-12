@@ -17,18 +17,18 @@ public class Proveedor {
        private LinkedList<Producto> provee;
 
     public Proveedor() {
-        nombre = "";
-        apellido = "";
-        dni = "";
-        telefono = "";
-        celular = "";
-        mail = "";
-        cuil = "";
-        nombreBanco = "";
-        sucursal = "";
-        tipoCuenta = "";
+        nombre = null;
+        apellido = null;
+        dni = null;
+        telefono = null;
+        celular = null;
+        mail = null;
+        cuil = null;
+        nombreBanco = null;
+        sucursal = null;
+        tipoCuenta = null;
         cuenta = null;
-        compraMinima = 0;
+        compraMinima = null;
         provee = null;
     }
 
