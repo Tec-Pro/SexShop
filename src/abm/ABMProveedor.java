@@ -19,7 +19,7 @@ public class ABMProveedor implements ABMInterface<Proveedor> {
     public void alta(Proveedor p) {
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
-            st.executeUpdate("INSERT INTO proveedor VALUES('"+p.getNombre()+"','"+p.getApellido()+"','"+p.getDni()+"','"+p.getTelefono()+"','"+p.getCelular()+"','"+p.getMail()+"','"+p.getCuil()+"','"+p.getNombreBanco()+"','"+p.getSucursal()+"','"+p.getTipoCuenta()+"','"+p.getCuenta()+"','"+p.getCompraMinima()+"')");
+            st.executeUpdate("INSERT INTO proveedor(nombre, apellido, dni, telefono, celular, mail, cuil,nombre_banco, sucursal, tipo_cuenta, cuenta, compra_minima) VALUES('"+p.getNombre()+"','"+p.getApellido()+"','"+p.getDni()+"','"+p.getTelefono()+"','"+p.getCelular()+"','"+p.getMail()+"','"+p.getCuil()+"','"+p.getNombreBanco()+"','"+p.getSucursal()+"','"+p.getTipoCuenta()+"','"+p.getCuenta()+"','"+p.getCompraMinima()+"')");
         } catch (SQLException ex) {
             Logger.getLogger(ABMProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }

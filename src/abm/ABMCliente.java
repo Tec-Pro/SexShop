@@ -4,6 +4,7 @@
  */
 package abm;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ public class ABMCliente implements ABMInterface<Cliente>{
     public void alta(Cliente c) {
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
-            st.executeUpdate("INSERT INTO cliente VALUES('"+c.getNombre()+"','"+c.getApellido()+"','"+c.getDni()+"','"+c.getTelefono()+"','"+c.getCelular()+"','"+c.getMail()+"')");
+            st.executeUpdate("INSERT INTO cliente(nombre, apellido, dni, telefono, celular, mail) VALUES('"+c.getNombre()+"','"+c.getApellido()+"','"+c.getDni()+"','"+c.getTelefono()+"','"+c.getCelular()+"','"+c.getMail()+"')");
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

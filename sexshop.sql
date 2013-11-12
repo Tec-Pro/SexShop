@@ -1,6 +1,15 @@
-
-
+drop table if exists productoscomprados;
+drop table if exists provee;
+drop table if exists productosvendidos;
+drop table if exists adquirio;
+drop table if exists venta;
+drop table if exists compra;
 drop table if exists proveedor;
+drop table if exists cliente;
+drop table if exists producto;
+
+
+
 create table proveedor (
     id integer not null auto_increment,
     nombre varchar(50),
@@ -18,7 +27,7 @@ create table proveedor (
     constraint pkproveedor primary key(id)    
 );
 
-drop table if exists cliente;
+
 create table cliente (
     id integer not null auto_increment,
     nombre varchar(50),
@@ -30,7 +39,7 @@ create table cliente (
     constraint pkcliente primary key(id)    
 );
 
-drop table if exists producto;
+
 create table producto (
     precio_venta real,
 	precio_compra real,
@@ -42,7 +51,7 @@ create table producto (
     constraint pkproducto primary key(numero_producto)
 );
 
-drop table if exists venta;
+
 create table venta (
     id integer not null auto_increment,
     monto real not null,
@@ -52,7 +61,7 @@ create table venta (
     constraint fkventacliente foreign key(idcliente) references cliente(id)
 );
     
-drop table if exists compra;
+
 create table compra (
     id integer not null auto_increment,
     monto real not null,
@@ -63,7 +72,6 @@ create table compra (
 );
 
 
-drop table if exists provee;
 create table provee(
     idproveedor integer not null,
     idproducto integer not null,
@@ -73,7 +81,7 @@ create table provee(
 );
 
 
-drop table if exists adquirio;
+
 create table adquirio(
     idcliente integer not null,
     idproducto integer not null,
@@ -83,7 +91,6 @@ create table adquirio(
 );
 
 
-drop table if exists productosvendidos;
 create table productosvendidos (
     idventa integer not null,
     idproducto integer not null,
@@ -93,7 +100,7 @@ create table productosvendidos (
     foreign key(idproducto) references producto(numero_producto)
 );
 
-drop table if exists productoscomprados;
+
 create table productoscomprados (
     idcompra integer not null,
     idproducto integer not null,
