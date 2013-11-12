@@ -2,9 +2,10 @@
 
 drop table if exists proveedor;
 create table proveedor (
+    id integer not null auto_increment,
     nombre varchar(50),
     apellido varchar(50),
-    dni varchar(50) not null,
+    dni varchar(50),
     telefono varchar(50),
     celular varchar(50),
     mail varchar(50),
@@ -14,23 +15,25 @@ create table proveedor (
     tipo_cuenta varchar(50),
     cuenta integer,
     compra_minima integer,
-    constraint pkproveedor primary key(dni)    
+    constraint pkproveedor primary key(id)    
 );
 
 drop table if exists cliente;
 create table cliente (
+    id integer not null auto_increment,
     nombre varchar(50),
     apellido varchar(50),
     dni varchar(50) not null,
     telefono varchar(50),
     celular varchar(50),
     mail varchar(50),
-    constraint pkcliente primary key(dni)    
+    constraint pkcliente primary key(id)    
 );
 
 drop table if exists producto;
 create table producto (
-    precio real,
+    precio_venta real,
+	precio_compra real,
     stock integer,
     numero_producto integer not null,
     nombre varchar(50),
@@ -43,37 +46,39 @@ drop table if exists venta;
 create table venta (
     id integer not null auto_increment,
     monto real not null,
-    idcliente varchar(50) not null,
+    idcliente integer not null,
+    fecha date,
     constraint pkventa primary key(id),
-    constraint fkventacliente foreign key(idcliente) references cliente(dni)
+    constraint fkventacliente foreign key(idcliente) references cliente(id)
 );
     
 drop table if exists compra;
 create table compra (
     id integer not null auto_increment,
     monto real not null,
-    idproveedor varchar(50) not null,
+    idproveedor integer not null,
+    fecha date,
     constraint pkcompra primary key(id),
-    constraint fkcompraproveedor foreign key(idproveedor) references proveedor(dni)
+    constraint fkcompraproveedor foreign key(idproveedor) references proveedor(id)
 );
 
 
 drop table if exists provee;
 create table provee(
-    idproveedor varchar(50) not null,
+    idproveedor integer not null,
     idproducto integer not null,
     constraint pkprovee primary key(idproveedor,idproducto),
     constraint fkproveeproducto foreign key(idproducto) references producto(numero_producto),
-    constraint fkproveeproveedor foreign key(idproveedor) references proveedor(dni)
+    constraint fkproveeproveedor foreign key(idproveedor) references proveedor(id)
 );
 
 
 drop table if exists adquirio;
 create table adquirio(
-    idcliente varchar(50) not null,
+    idcliente integer not null,
     idproducto integer not null,
     constraint pkadquirio primary key(idproducto,idcliente),
-    constraint fkadquiriocliente foreign key(idcliente) references cliente(dni) ,
+    constraint fkadquiriocliente foreign key(idcliente) references cliente(id) ,
     constraint fkadquirioproducto foreign key(idproducto) references producto(numero_producto) 
 );
 
@@ -82,6 +87,7 @@ drop table if exists productosvendidos;
 create table productosvendidos (
     idventa integer not null,
     idproducto integer not null,
+	cantidad integer,
     primary key(idventa,idproducto),
     foreign key (idventa) references venta(id),
     foreign key(idproducto) references producto(numero_producto)
@@ -91,6 +97,7 @@ drop table if exists productoscomprados;
 create table productoscomprados (
     idcompra integer not null,
     idproducto integer not null,
+	cantidad integer,
     primary key(idcompra,idproducto),
     foreign key (idcompra) references compra(id),
     foreign key(idproducto) references producto(numero_producto)
