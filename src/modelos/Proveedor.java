@@ -4,7 +4,13 @@
  */
 package modelos;
 
+import abm.ConnectionDataBase;
 import java.util.LinkedList;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,7 +56,17 @@ public class Proveedor {
        
     
     
-       
+    public Integer getId(){
+        try{
+           Statement st = ConnectionDataBase.getConnection().createStatement();
+           ResultSet rs=st.executeQuery("SELECT id FROM proveedor WHERE nombre='"+nombre+"' AND apellido='"+apellido+"' AND dni='"+dni+"' AND telefono='"+telefono+"' AND celular='"+celular+"' AND mail='"+mail+"' AND cuil='"+cuil+"' AND nombre_banco='"+nombreBanco+"' AND sucursal='"+sucursal+"' AND tipo_cuenta='"+tipoCuenta+"' AND cuenta='"+cuenta+"' AND compra_minima='"+compraMinima+"'");
+           if (rs.next()) return rs.getInt("id");
+        }
+         catch (SQLException ex) {
+            Logger.getLogger(Proveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
        
     /**
      * @return the nombre

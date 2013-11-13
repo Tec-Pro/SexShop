@@ -76,8 +76,8 @@ create table provee(
     idproveedor integer not null,
     idproducto integer not null,
     constraint pkprovee primary key(idproveedor,idproducto),
-    constraint fkproveeproducto foreign key(idproducto) references producto(numero_producto),
-    constraint fkproveeproveedor foreign key(idproveedor) references proveedor(id)
+    constraint fkproveeproveedor foreign key(idproveedor) references proveedor(id),
+    constraint fkproveeproducto foreign key(idproducto) references producto(numero_producto)
 );
 
 
@@ -95,6 +95,7 @@ create table productosvendidos (
     idventa integer not null,
     idproducto integer not null,
 	cantidad integer,
+	precio_final real,/*precio de venta mas descuentos etc*/
     primary key(idventa,idproducto),
     foreign key (idventa) references venta(id),
     foreign key(idproducto) references producto(numero_producto)
