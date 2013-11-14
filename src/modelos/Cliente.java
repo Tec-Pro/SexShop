@@ -4,7 +4,13 @@
  */
 package modelos;
 
+import abm.ConnectionDataBase;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -124,8 +130,16 @@ public class Cliente {
     /**
      * @return the id
      */
-    public Integer getId() {
-        return id;
+    public Integer getId(){
+        try{
+           Statement st = ConnectionDataBase.getConnection().createStatement();
+           ResultSet rs=st.executeQuery("SELECT id FROM cliente WHERE nombre='"+nombre+"' AND apellido='"+apellido+"' AND telefono='"+telefono+"'");
+           if (rs.next()) return rs.getInt("id");
+        }
+         catch (SQLException ex) {
+            Logger.getLogger(Proveedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**

@@ -19,18 +19,20 @@ public class ABMCliente implements ABMInterface<Cliente>{
 
     @Override
     public void alta(Cliente c) {
+        if (c.getId()==null){
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
-            ResultSet rs = st.executeQuery("Select * from cliente WHERE nombre = '"+c.getNombre()+ "' and apellido='"+c.getApellido()+"' and telefono ='"+c.getTelefono()+"'");
-            if (rs!=null){
-                st.executeUpdate("INSERT INTO cliente(nombre, apellido, telefono, celular, mail) VALUES('"+c.getNombre()+"','"+c.getApellido()+"','"+c.getTelefono()+"','"+c.getCelular()+"','"+c.getMail()+"')");
-            }
+            st.executeUpdate("INSERT INTO cliente(nombre, apellido, telefono, celular, mail) VALUES('"+c.getNombre()+"','"+c.getApellido()+"','"+c.getTelefono()+"','"+c.getCelular()+"','"+c.getMail()+"')");
             st.close();
-            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+        }else{
+            System.out.println("Registro ya existente");
+        }
+            
+    }   
+    
 
     @Override
     public void baja(Cliente c) {
