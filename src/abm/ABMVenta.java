@@ -32,7 +32,7 @@ public class ABMVenta implements ABMInterface<Venta> {
             //inserto venta en base de datos
             statement = ConnectionDataBase.getConnection().prepareStatement("INSERT INTO venta VALUES (null,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setDouble(1, v.getMonto());
-            statement.setString(2, v.getCliente().getDni());
+            statement.setString(2, v.getCliente().getId().toString());
             statement.executeUpdate();
 
             // Se obtiene la clave de la venta generada por la base de datos (idVenta)
@@ -75,7 +75,7 @@ public class ABMVenta implements ABMInterface<Venta> {
         Double acumMonto = 0.0;
         while (itr.hasNext()) {
             prod = (Producto) itr.next();
-            acumMonto += prod.getPrecio();
+            acumMonto += prod.getPrecioVenta();
         }
         return acumMonto;
     }
