@@ -33,7 +33,7 @@ public class Cliente {
     }
 
 
-    public Cliente(String nombre, String apellido, String dni, String telefono, String celular, String mail, LinkedList<Producto> productos) {
+    public Cliente(String nombre, String apellido, String telefono, String celular, String mail, LinkedList<Producto> productos) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
