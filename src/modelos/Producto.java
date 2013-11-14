@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * @author joako
  */
 public class Producto {
-    private Double precio;
+    private Double precioVenta,precioCompra;
     private Integer stock, numeroProducto;
     private String nombre, tipo, marca;
     private LinkedList<Proveedor> proveedor;
@@ -20,14 +20,16 @@ public class Producto {
         this.marca =null;
         this.nombre =null;
         this.numeroProducto= null;
-        this.precio = null;
+        this.precioVenta = null;
+        this.precioCompra =null;
         this.proveedor = null;
         this.stock = null;
         this.tipo = null;
     }
 
-    public Producto(Double precio, Integer stock, Integer numeroProducto, String nombre, String tipo, String marca, LinkedList<Proveedor> proveedor) {
-        this.precio = precio;
+    public Producto(Double precioVenta,Double precioCompra, Integer stock, Integer numeroProducto, String nombre, String tipo, String marca, LinkedList<Proveedor> proveedor) {
+        this.precioVenta = precioVenta;
+        this.precioCompra = precioCompra;
         this.stock = stock;
         this.numeroProducto = numeroProducto;
         this.nombre = nombre;
@@ -55,15 +57,29 @@ public class Producto {
     /**
      * @return the precio
      */
-    public Double getPrecio() {
-        return precio;
+    public Double getPrecioVenta() {
+        return precioVenta;
     }
 
     /**
      * @param precio the precio to set
      */
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setPrecioVenta(Double precio) {
+        this.precioVenta = precio;
+    }
+    
+     /**
+     * @return the precio
+     */
+    public Double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecioCompra(Double precio) {
+        this.precioCompra = precio;
     }
 
     /**

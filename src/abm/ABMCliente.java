@@ -21,7 +21,12 @@ public class ABMCliente implements ABMInterface<Cliente>{
     public void alta(Cliente c) {
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
-            st.executeUpdate("INSERT INTO cliente(nombre, apellido, dni, telefono, celular, mail) VALUES('"+c.getNombre()+"','"+c.getApellido()+"','"+c.getDni()+"','"+c.getTelefono()+"','"+c.getCelular()+"','"+c.getMail()+"')");
+            ResultSet rs = st.executeQuery("Select * from cliente WHERE nombre = '"+c.getNombre()+ "' and apellido='"+c.getApellido()+"' and telefono ='"+c.getTelefono()+"'");
+            if (rs!=null){
+                st.executeUpdate("INSERT INTO cliente(nombre, apellido, telefono, celular, mail) VALUES('"+c.getNombre()+"','"+c.getApellido()+"','"+c.getTelefono()+"','"+c.getCelular()+"','"+c.getMail()+"')");
+            }
+            st.close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -31,7 +36,8 @@ public class ABMCliente implements ABMInterface<Cliente>{
     public void baja(Cliente c) {
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
-            st.executeUpdate("DELETE FROM cliente WHERE dni = '"+c.getDni()+"'");
+            st.executeUpdate("DELETE FROM cliente WHERE id = '"+c.getId()+"'");
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -42,16 +48,17 @@ public class ABMCliente implements ABMInterface<Cliente>{
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
             if (c.getNombre() != null){
-                st.executeUpdate("UPDATE cliente SET nombre ='"+c.getNombre()+"' WHERE dni ='"+c.getDni()+"'");
+                st.executeUpdate("UPDATE cliente SET nombre ='"+c.getNombre()+"' WHERE id ='"+c.getId()+"'");
             }if (c.getApellido() != null){
-                st.executeUpdate("UPDATE cliente SET apellido ='"+c.getApellido()+"' WHERE dni ='"+c.getDni()+"'");
+                st.executeUpdate("UPDATE cliente SET apellido ='"+c.getApellido()+"' WHERE id ='"+c.getId()+"'");
             }if (c.getTelefono() != null){
-                st.executeUpdate("UPDATE cliente SET telefono ='"+c.getTelefono()+"' WHERE dni ='"+c.getDni()+"'");
+                st.executeUpdate("UPDATE cliente SET telefono ='"+c.getTelefono()+"' WHERE id ='"+c.getId()+"'");
             }if (c.getCelular() != null){
-                st.executeUpdate("UPDATE cliente SET celular ='"+c.getCelular()+"' WHERE dni ='"+c.getDni()+"'");
+                st.executeUpdate("UPDATE cliente SET celular ='"+c.getCelular()+"' WHERE id ='"+c.getId()+"'");
             }if (c.getMail() != null){
-                st.executeUpdate("UPDATE cliente SET mail ='"+c.getMail()+"' WHERE dni ='"+c.getDni()+"'");
+                st.executeUpdate("UPDATE cliente SET mail ='"+c.getMail()+"' WHERE id ='"+c.getId()+"'");
             }
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

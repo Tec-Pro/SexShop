@@ -23,7 +23,8 @@ public class ABMProducto implements ABMInterface<Producto>{
         try {
             if(p.getProveedor() != null){
                 Statement st = ConnectionDataBase.getConnection().createStatement();
-                st.executeUpdate("INSERT INTO producto VALUES('"+p.getPrecio()+"','"+p.getStock()+"','"+p.getNumeroProducto()+"','"+p.getNombre()+"','"+p.getTipo()+"','"+p.getMarca()+"')");
+                st.executeUpdate("INSERT INTO producto VALUES('"+p.getPrecioVenta()+","+p.getPrecioCompra()+  "','"+p.getStock()+"','"+p.getNumeroProducto()+"','"+p.getNombre()+"','"+p.getTipo()+"','"+p.getMarca()+"')");
+                st.close();
             } 
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -35,6 +36,7 @@ public class ABMProducto implements ABMInterface<Producto>{
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
             st.executeUpdate("DELETE FROM producto WHERE numero_producto = '"+p.getNumeroProducto()+"'");
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -44,8 +46,10 @@ public class ABMProducto implements ABMInterface<Producto>{
     public void modificar(Producto p) {
         try {
             Statement st = ConnectionDataBase.getConnection().createStatement();
-            if (p.getPrecio()!= null){
-                st.executeUpdate("UPDATE producto SET precio_venta ='"+p.getPrecio()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
+            if (p.getPrecioVenta()!= null){
+                st.executeUpdate("UPDATE producto SET precio_venta ='"+p.getPrecioVenta()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
+            }if (p.getPrecioCompra()!= null){
+                st.executeUpdate("UPDATE producto SET precio_compra ='"+p.getPrecioCompra()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
             }if (p.getStock()!= null){
                 st.executeUpdate("UPDATE producto SET stock ='"+p.getStock()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
             }if (p.getNumeroProducto()!= null){
@@ -57,6 +61,7 @@ public class ABMProducto implements ABMInterface<Producto>{
             }if (p.getMarca()!= null){
                 st.executeUpdate("UPDATE producto SET marca ='"+p.getMarca()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
             }
+            st.close();
         } catch (SQLException ex) {
             Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

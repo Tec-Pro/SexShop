@@ -1,3 +1,8 @@
+drop database if exists sexshop;
+create database sexshop;
+
+use sexshop;
+
 drop table if exists productoscomprados;
 drop table if exists provee;
 drop table if exists productosvendidos;
@@ -32,7 +37,6 @@ create table cliente (
     id integer not null auto_increment,
     nombre varchar(50),
     apellido varchar(50),
-    dni varchar(50) not null,
     telefono varchar(50),
     celular varchar(50),
     mail varchar(50),

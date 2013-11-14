@@ -13,13 +13,13 @@ import java.util.LinkedList;
 public class Cliente {
 
  
-    private String nombre, apellido, dni, telefono, celular, mail;
+    private String nombre, apellido, telefono, celular, mail;
+    private Integer id;
     private LinkedList<Producto> productos;
 
     public Cliente() {
         this.nombre = null;
         this.apellido= null;
-        this.dni = null;
         this.telefono = null;
         this.celular = null;
         this.mail = null;
@@ -30,7 +30,6 @@ public class Cliente {
     public Cliente(String nombre, String apellido, String dni, String telefono, String celular, String mail, LinkedList<Producto> productos) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.dni = dni;
         this.telefono = telefono;
         this.celular = celular;
         this.mail = mail;
@@ -65,21 +64,7 @@ public class Cliente {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
-    /**
-     * @return the dni
-     */
-    public String getDni() {
-        return dni;
-    }
-
-    /**
-     * @param dni the dni to set
-     */
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
+   
     /**
      * @return the telefono
      */
@@ -134,5 +119,19 @@ public class Cliente {
      */
     public void setProductos(LinkedList<Producto> productos) {
         this.productos = productos;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
