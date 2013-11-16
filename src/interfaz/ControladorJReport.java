@@ -5,8 +5,9 @@
 package interfaz;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -20,6 +21,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class ControladorJReport {
     private JasperReport reporte;
+    private final String logo= "/reporte/logo.png";
 
     
     public ControladorJReport(String jasper) throws JRException {
@@ -29,10 +31,16 @@ public class ControladorJReport {
 
     }
     
+    //listado de clientes productos y proveedores.
      public void mostrarReporte(Connection connection) throws ClassNotFoundException, SQLException, JRException{    
-             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, connection);
+         Map parametros = new HashMap();
+          parametros.clear();   
+          parametros.put("logo", this.getClass().getResourceAsStream(logo));
+         JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, connection);
           JasperViewer.viewReport( jasperPrint , false );
     }
      
 
+     
+    
 }

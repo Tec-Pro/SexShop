@@ -50,7 +50,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
         tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");
 
         Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/sexShop", "root", "root");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost/sexshop", "root", "root");
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
     }

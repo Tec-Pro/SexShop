@@ -45,8 +45,8 @@ create table cliente (
 
 
 create table producto (
-    precio_venta real,
-	precio_compra real,
+    precio_venta float,
+	precio_compra float,
     stock integer,
     numero_producto integer not null,
     nombre varchar(50),
@@ -58,7 +58,7 @@ create table producto (
 
 create table venta (
     id integer not null auto_increment,
-    monto real not null,
+    monto float not null,
     idcliente integer not null,
     fecha date,
     constraint pkventa primary key(id),
@@ -68,7 +68,7 @@ create table venta (
 
 create table compra (
     id integer not null auto_increment,
-    monto real not null,
+    monto float not null,
     idproveedor integer not null,
     fecha date,
     constraint pkcompra primary key(id),
