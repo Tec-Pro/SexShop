@@ -40,6 +40,14 @@ public class ControladorJReport {
           JasperViewer.viewReport( jasperPrint , false );
     }
      
+     public void mostrarFactura(Connection connection,int venta)throws ClassNotFoundException, SQLException, JRException{
+         Map parametros = new HashMap();
+         parametros.clear();
+         parametros.put("numFactura",venta );
+         JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, connection);
+         JasperViewer.viewReport( jasperPrint , false );
+     }
+     
 
      
     

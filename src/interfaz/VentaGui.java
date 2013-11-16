@@ -111,6 +111,10 @@ public class VentaGui extends javax.swing.JPanel {
     public DBDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
+
+    public JButton getImprimir() {
+        return imprimir;
+    }
     
 
  
@@ -485,6 +489,7 @@ public class VentaGui extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton articulosALaFactura;
     private javax.swing.JTextField busquedaApellido;

@@ -73,6 +73,7 @@ create table compra (
     fecha date,
     constraint pkcompra primary key(id),
     constraint fkcompraproveedor foreign key(idproveedor) references proveedor(id)
+
 );
 
 
@@ -113,5 +114,3 @@ create table productoscomprados (
     foreign key (idcompra) references compra(id),
     foreign key(idproducto) references producto(numero_producto)
 );
-
-

@@ -29,6 +29,8 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
     ModificarPrecioPorcentajeGui modificarPrecioGui;
     ControladorJReport reporteClientes;
     ControladorJReport reporteArticulos;
+    ControladorJReport reporteFactura;
+
     static Connection connection;
 
     /**
@@ -40,6 +42,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
         abmProducto = new AbmProductoGui();//creo panel abmProducto
         ventasRealizadas= new VentasRealizadas();
         venta= new VentaGui();
+        venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
         tab.add("Venta nueva", venta);
@@ -53,6 +56,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
         connection = DriverManager.getConnection("jdbc:mysql://localhost/sexshop", "root", "root");
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
+        reporteFactura = new ControladorJReport(("factura.jasper"));
     }
 
 
@@ -164,6 +168,17 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
                 System.out.println(abmProducto.getTablaArticulos().getValueAt(seleccionados[i], 0).toString());
             }
 
+        }
+        if(venta.getImprimir()==ae.getSource()){
+            try {
+                reporteFactura.mostrarFactura(connection, 1);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JRException ex) {
+                Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

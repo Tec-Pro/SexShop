@@ -80,70 +80,63 @@
 				<text><![CDATA[id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="36" y="20" width="82" height="15" uuid="95c1b226-7b96-438d-9ca5-42173d26d06e"/>
+				<reportElement style="Column header" x="46" y="20" width="72" height="15" uuid="95c1b226-7b96-438d-9ca5-42173d26d06e"/>
 				<text><![CDATA[nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="118" y="18" width="145" height="15" uuid="c0df163b-0e86-4645-98a3-dbdafa5d43c0"/>
+				<reportElement style="Column header" x="129" y="18" width="134" height="15" uuid="c0df163b-0e86-4645-98a3-dbdafa5d43c0"/>
 				<text><![CDATA[apellido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="263" y="19" width="73" height="15" uuid="299f46ad-d0f2-4313-98c9-19ee9d28c30c"/>
+				<reportElement style="Column header" x="275" y="19" width="61" height="15" uuid="299f46ad-d0f2-4313-98c9-19ee9d28c30c"/>
 				<text><![CDATA[telefono]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="336" y="19" width="65" height="15" uuid="a0007f98-7a56-4943-9f18-52dd7769f0ae"/>
+				<reportElement style="Column header" x="349" y="19" width="52" height="15" uuid="a0007f98-7a56-4943-9f18-52dd7769f0ae"/>
 				<text><![CDATA[celular]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="401" y="19" width="151" height="15" uuid="0a9d0e4e-bdc9-4e6b-b63f-6fd2f9cf0273"/>
+				<reportElement style="Column header" x="416" y="19" width="136" height="15" uuid="0a9d0e4e-bdc9-4e6b-b63f-6fd2f9cf0273"/>
 				<text><![CDATA[mail]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="dd82ac52-7413-45f3-85e4-c2b193da2943"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
+		<band height="37" splitType="Stretch">
 			<textField>
-				<reportElement style="Detail" x="0" y="0" width="36" height="15" uuid="89500673-8714-4b93-9e64-a53f87fecfba"/>
+				<reportElement style="Detail" x="0" y="0" width="36" height="30" uuid="89500673-8714-4b93-9e64-a53f87fecfba"/>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="36" y="1" width="82" height="15" uuid="11fb830c-0e39-42cf-b115-ef540778bca1"/>
+				<reportElement style="Detail" x="46" y="1" width="72" height="29" uuid="11fb830c-0e39-42cf-b115-ef540778bca1"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="263" y="0" width="73" height="15" uuid="24f56401-e5b5-423c-a57d-c0b40ceed96d"/>
+				<reportElement style="Detail" x="275" y="0" width="61" height="30" uuid="24f56401-e5b5-423c-a57d-c0b40ceed96d"/>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="401" y="0" width="151" height="15" uuid="0ef6bd5f-2840-472d-ad18-4627d19438f5"/>
+				<reportElement style="Detail" x="416" y="0" width="136" height="30" uuid="0ef6bd5f-2840-472d-ad18-4627d19438f5"/>
 				<textFieldExpression><![CDATA[$F{mail}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="336" y="0" width="65" height="15" uuid="6f752d92-76d3-45dc-888f-db21dc4ec3fe"/>
+				<reportElement style="Detail" x="349" y="0" width="52" height="30" uuid="6f752d92-76d3-45dc-888f-db21dc4ec3fe"/>
 				<textFieldExpression><![CDATA[$F{celular}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="118" y="0" width="145" height="15" uuid="cc1b4a25-e120-4911-9d3c-bb735a1e9433"/>
+				<reportElement style="Detail" x="129" y="0" width="134" height="30" uuid="cc1b4a25-e120-4911-9d3c-bb735a1e9433"/>
 				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
 			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="7d69091f-3ca0-47d8-bc10-897fa98633e8"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="30" width="555" height="1" uuid="7d69091f-3ca0-47d8-bc10-897fa98633e8"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="20" splitType="Stretch">

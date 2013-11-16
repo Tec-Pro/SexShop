@@ -1,0 +1,11 @@
+select
+v.id as numVenta,v.monto as montoVenta,v.fecha,
+c.id,c.nombre,c.apellido,
+pv.cantidad,
+p.precio_venta,p.numero_producto,p.nombre,p.tipo,p.marca
+from
+venta v
+inner join cliente c on v.idcliente=c.id
+inner join productosvendidos pv on v.id=pv.idventa
+inner join producto p on pv.idproducto=p.numero_producto
+
