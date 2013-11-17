@@ -34,8 +34,8 @@ public class AbmClienteGui extends javax.swing.JPanel {
         this.modificar.addActionListener(lis);
         this.articulosComprados.addActionListener(lis);
     }
+   
     
-
     public JButton getAnterior() {
         return anterior;
     }
@@ -66,6 +66,24 @@ public class AbmClienteGui extends javax.swing.JPanel {
     
     public DefaultTableModel getTablaClientes(){
         return tablaClientes;
+    }
+    
+    public void habilitarCampos(boolean b){
+        apellido.setEditable(b);
+        celular.setEditable(b);
+        email.setEditable(b);
+        idCliente.setEditable(b);
+        nombre.setEditable(b);
+        telFijo.setEditable(b); 
+    }
+    
+    public void limpiarCampos(){
+        apellido.setText("");
+        celular.setText("");
+        email.setText("");
+        idCliente.setText("");
+        nombre.setText("");
+        telFijo.setText("");
     }
 
     public JTextField getApellido() {

@@ -1026,7 +1026,7 @@ is divided into following sections:
                 =========================
             -->
 <target name="-post-jar">
-    <property name="store.jar.name" value="SexShop2"/>
+    <property name="store.jar.name" value="SexShop"/>
  
     <property name="store.dir" value="dist"/>
     <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>

@@ -27,7 +27,7 @@ public class ConnectionDataBase {
             Class.forName("com.mysql.jdbc.Driver");
             //Intentamos conectarnos a la base de Datos en este caso una base llamada temp
             System.out.println("Conectando a la base...");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/sexshop", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/sexshop", "root", "root"); //modificar acaaA!!!!!
             System.out.println("Conexion a BD establecida");
         } catch (SQLException ex) {
             System.out.println("Error de mysql");

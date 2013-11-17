@@ -55,6 +55,27 @@ public class AbmProductoGui extends javax.swing.JPanel {
         this.modificarPrecioPesos.addActionListener(lis);
     }
 
+    public void habilitarCampos(boolean b){
+        marca.setEditable(b);
+        stock.setEditable(b);
+        tipo.setEditable(b);
+        idArticulo.setEditable(b);
+        nombre.setEditable(b);
+        precioCompra.setEditable(b);
+        precioVenta.setEditable(b);
+        proveedores.setEditable(b);
+    }
+    
+    public void limpiarCampos(){
+        marca.setText("");
+        stock.setText("");
+        tipo.setText("");
+        idArticulo.setText("");
+        nombre.setText("");
+        precioCompra.setText("");
+        precioVenta.setText("");
+    }
+    
     //retorno la tabla default de los articulos
     public DefaultTableModel getTablaArticulos() {
         return tablaArticulos;

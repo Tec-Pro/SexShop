@@ -18,7 +18,7 @@ import net.sf.jasperreports.engine.JRException;
  *
  * @author nico
  */
-public class AplicacionGui extends javax.swing.JFrame implements ActionListener {
+public class AplicacionGui extends javax.swing.JFrame{
 
     private AbmClienteGui abmCliente; //Panel abmCliente
     private AbmProductoGui abmProducto; //Panel abmProducto
@@ -42,7 +42,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
         abmProducto = new AbmProductoGui();//creo panel abmProducto
         ventasRealizadas= new VentasRealizadas();
         venta= new VentaGui();
-        venta.setActionListener(this);
+        //venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
         tab.add("Venta nueva", venta);
@@ -50,16 +50,20 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");
         tab.setToolTipTextAt(1, "Alta baja y modificacion de productos");
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
-        tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");
-
-        Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/sexshop", "root", "root");
+        tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");       
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
         reporteFactura = new ControladorJReport(("factura.jasper"));
     }
 
-
+    public AbmClienteGui getAbmClienteGui(){
+        return abmCliente;
+    }
+    
+    public AbmProductoGui getAbmProductoGui(){
+        return abmProducto;
+    } 
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,7 +86,6 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
         setExtendedState(6);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
-        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
@@ -114,7 +117,9 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    
     //borrar después
     private void listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClientesActionPerformed
         try {
@@ -155,7 +160,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
     // End of variables declaration//GEN-END:variables
 
     //borrar después, son pruebas
-    @Override
+  /*  @Override
         public void actionPerformed(ActionEvent ae) {
         if (abmCliente.getArticulosComprados() == ae.getSource()) {
             art.setLocationRelativeTo(abmCliente);
@@ -180,7 +185,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener 
                 Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
+    }*/
     
    
 }
