@@ -14,9 +14,9 @@ import java.sql.Connection;
 
 interface ABMInterface<T> {
   
-    void alta(T o);
+    boolean alta(T o);
     
-    void baja(T o);
+    boolean baja(T o);
     
-    void modificar(T o);
+    boolean modificar(T o);
 }

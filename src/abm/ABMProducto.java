@@ -5,6 +5,8 @@
 package abm;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelos.Producto;
 import modelos.Proveedor;
 
@@ -12,7 +14,7 @@ import modelos.Proveedor;
  *
  * @author joako
  */
-public class ABMProducto implements ABMInterface<Producto>{
+public class ABMProducto implements ABMInterface<Producto> {
 
     public boolean findProducto(Producto p){
         return (Producto.first("numero_producto = ?",p.get("numero_producto"))!= null);
@@ -20,36 +22,43 @@ public class ABMProducto implements ABMInterface<Producto>{
     
     
     @Override
-    public void alta(Producto p) {
+    public boolean alta(Producto p) {
         if (!findProducto(p)){
             Proveedor pr = Proveedor.first("cuil = ?", p.getCuilProveedor());
             if (pr!=null){
                 Producto nuevo = Producto.create("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca"));
                 nuevo.saveIt();
                 pr.add(nuevo);
+                return true;
             } else {
-                System.out.println("Proveedor inexistente, no se agrega el producto");
+                System.out.println("Error proveedor");
+                return false;
             }
         } else {
-            System.out.println("Producto existente");
+            System.out.println("Error producto");
+            return false;
         }
     }   
     
 
     @Override
-    public void baja(Producto p) {
+    public boolean baja(Producto p) {
         Producto viejo = Producto.first("numero_producto = ?", p.get("numero_producto"));
         if (findProducto(viejo)){
             viejo.delete();
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void modificar(Producto p) {
+    public boolean modificar(Producto p) {
        Producto viejo = Producto.findFirst("numero_producto = ?", p.get("numero_producto"));
        if (findProducto(viejo)){
             viejo.set("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca")).saveIt();
+            return true;
        }
+       return false;
     }
     
 }

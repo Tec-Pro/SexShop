@@ -21,7 +21,7 @@ public class ABMVenta implements ABMInterface<Venta> {
     }
 
     @Override
-    public void alta(Venta v) {
+    public boolean  alta(Venta v) {
         Integer idCliente = (Integer) v.get("idcliente");
         v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
         Venta venta = Venta.create("monto", v.get("monto"), "idcliente", idCliente, "fecha", v.get("fecha"));
@@ -30,15 +30,16 @@ public class ABMVenta implements ABMInterface<Venta> {
         cargarProductosVendidos(idVenta,v.getProductos());//guardo los productos vendidos
         actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
         actualizarAdquisicionCliente(idCliente,v.getProductos());//actualizo la tabla de productos adquiridos por clientes
+        return true;
     }
 
     @Override
-    public void baja(Venta v) {
+    public boolean baja(Venta v) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void modificar(Venta v) {
+    public boolean modificar(Venta v) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
