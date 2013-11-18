@@ -82,6 +82,7 @@ create table compras (
 create table adquiridos(
     idcliente integer not null,
     idproducto integer not null,
+	cantidad integer,
     constraint pkadquirio primary key(idproducto,idcliente),
     constraint fkadquiriocliente foreign key(idcliente) references clientes(id) ,
     constraint fkadquirioproducto foreign key(idproducto) references productos(numero_producto) 
