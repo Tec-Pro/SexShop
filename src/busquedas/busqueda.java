@@ -4,79 +4,51 @@
  */
 package busquedas;
 
-import abm.ConnectionDataBase;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+import java.util.List;
 import modelos.*;
+
 
 /**
  *
  * @author joako
  */
 public class busqueda {
+
     
     public busqueda(){
         
     }
     
-    public LinkedList<Object> filtro(String objeto, String campo, String filtro){
-        ResultSet rs = null;
-        LinkedList<Object> result = new LinkedList();
-        String query = "SELECT "+campo+" FROM "+objeto+" WHERE "+campo+filtro;
-        try {
-            Statement st = ConnectionDataBase.getConnection().createStatement();
-            rs = st.executeQuery(query);
-            result = procesar(rs, objeto);
-            rs.close();
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(busqueda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public List<Cliente> filtroCliente(String apellido, String codigo){
+        List<Cliente> result;
+        result = Cliente.where("apellido like ? and id like ?", "%"+apellido+"%","%"+codigo+"%");
         return result;
     }
     
-    public LinkedList<Object> procesar(ResultSet rs, String objeto){
-        LinkedList<Object> result = new LinkedList();
-        try {
-            if (objeto.equalsIgnoreCase("cliente")){
-                String nombre = null, apellido, telefono, mail, celular;
-                Integer id;
-                while (rs.next())
-                    nombre = rs.getString("nombre");
-                    apellido = rs.getString("apellido");
-                    telefono = rs.getString("telefono");
-                    mail = rs.getString("mail");
-                    celular = rs.getString("celular");
-                    id = rs.getInt("id");
-                    Cliente c = new Cliente(nombre, apellido, telefono, celular, mail, null);
-                    c.setId(id);
-                    result.addLast(c);       
-            } if (objeto.equalsIgnoreCase("producto")){
-                String nombre = null, marca, tipo;
-                Integer stock, numeroProducto;
-                Double precioCompra, precioVenta;
-                while (rs.next())
-                    nombre = rs.getString("nombre");
-                    marca = rs.getString("marca");
-                    tipo = rs.getString("tipo");
-                    numeroProducto = rs.getInt("numero_producto");
-                    stock = rs.getInt("stock");
-                    precioCompra = rs.getDouble("precio_compra");
-                    precioVenta = rs.getDouble("precio_venta");
-                    Producto p = new Producto(precioVenta, precioCompra, stock, numeroProducto, nombre, marca, tipo, null);
-                    result.addLast(p);       
-            }
-        
-            
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(busqueda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public List<Producto> filtroProducto(String codigo, String nombre, String marca){
+        List<Producto> result;
+        result = Producto.where("codigo_producto like ? and nombre like ? and marca like ?", "%"+codigo+"%","%"+nombre+"%","%"+marca+"%");
+        return result;
+    }
+
+    public List<Venta> filtroVenta(String idcliente, String fecha){
+        List<Venta> result;
+        result = Venta.where("idcliente like ? and fecha like ?", "%"+idcliente+"%","%"+fecha+"%");
+        return result;
+    }
+    
+   /* public List<Compra> filtroCompra(String idproveedor, String fecha){
+        List<Compra> result;
+        result = Compra.where("idproveedor like ? and fecha like ?", "%"+idproveedor+"%","%"+fecha+"%");
+        return result;
+    }*/
+    
+    public List<Proveedor> filtroProveedor(String cuil, String apellido) {
+        List<Proveedor> result;
+        result = Proveedor.where("cuil like ? and apellido like ?", "%"+cuil+"%","%"+apellido+"%");
+        return result;
     }
 }
+

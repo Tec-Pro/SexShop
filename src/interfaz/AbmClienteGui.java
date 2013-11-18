@@ -6,6 +6,7 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,6 +37,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
     }
    
     
+    
     public JButton getAnterior() {
         return anterior;
     }
@@ -64,6 +66,10 @@ public class AbmClienteGui extends javax.swing.JPanel {
         return siguiente;
     }
     
+    public JTable getTabla(){
+        return tabla;
+    }
+    
     public DefaultTableModel getTablaClientes(){
         return tablaClientes;
     }
@@ -72,7 +78,6 @@ public class AbmClienteGui extends javax.swing.JPanel {
         apellido.setEditable(b);
         celular.setEditable(b);
         email.setEditable(b);
-        idCliente.setEditable(b);
         nombre.setEditable(b);
         telFijo.setEditable(b); 
     }
