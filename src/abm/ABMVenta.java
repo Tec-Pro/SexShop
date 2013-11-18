@@ -35,6 +35,9 @@ public class ABMVenta implements ABMInterface<Venta> {
         return resultOp;
     }
 
+    /*Elimino una venta y los productos ligados a ella, sin hacer devolucion de stock,
+     * ni actualizacion de tablas de adquisicion ni tabla de productos_vendidos
+     */
     @Override
         public boolean baja(Venta v) {
          Integer idVenta = v.getInteger("id");//saco el idVenta
@@ -112,11 +115,18 @@ public class ABMVenta implements ABMInterface<Venta> {
         Iterator itr = productos.iterator();
         Producto prod;
         Pair par;
+        Integer cant;
         while (itr.hasNext()) {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
-            if (!Adquirido.exists(prod)){ //si existe no lo agrego a la tabla
-                Adquirido prodAdquirido = Adquirido.create("idcliente",idCliente,"idproducto",prod.get("numero_producto"));
+            cant = (Integer) par.second();//saco la cantidad del par
+            Adquirido prodAdquirido = Adquirido.findFirst("idcliente = ? AND idproducto = ?", idCliente, prod.get("numero_producto"));
+            if (Adquirido.exists(prodAdquirido)){ //si existe modifico la cantidad
+                cant = prodAdquirido.getInteger("cantidad") + cant;//asigno a cant el valor nuevo de cantidad
+                Adquirido.update("cantidad = ?", "idcliente =? AND idproducto = ?", cant, idCliente, prod.get("numero_producto"));
+            }
+            else { // sino lo agrego a la tabla
+                prodAdquirido = Adquirido.create("idcliente",idCliente,"idproducto",prod.get("numero_producto"),"cantidad",cant);
                 resultOp = resultOp && prodAdquirido.saveIt();
             }
         }
