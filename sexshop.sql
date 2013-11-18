@@ -8,13 +8,13 @@ drop table if exists productosvendidos;
 drop table if exists adquirio;
 drop table if exists ventas;
 drop table if exists compras;
-drop table if exists proveedores;
+drop table if exists proveedors;
 drop table if exists clientes;
 drop table if exists productos;
 
 
 
-create table proveedores (
+create table proveedors (
     id integer not null auto_increment,
     nombre varchar(50),
     apellido varchar(50),
@@ -44,16 +44,16 @@ create table clientes (
 
 
 create table productos (
+    id integer not null auto_increment,
     precio_venta float,
 	precio_compra float,
     stock integer,
-    numero_producto integer not null,
+    numero_producto integer not null unique,
     nombre varchar(50),
     tipo varchar(50),
     marca varchar(50),
-    idproveedor integer,
-    constraint fkproveedorproducto foreign key (idproveedor) references proveedores(id),
-    constraint pkproducto primary key(numero_producto)
+    proveedor_id integer,
+    constraint pkproducto primary key(id)
 );
 
 
@@ -73,17 +73,8 @@ create table compras (
     idproveedor integer not null,
     fecha date,
     constraint pkcompra primary key(id),
-    constraint fkcompraproveedor foreign key(idproveedor) references proveedores(id)
+    constraint fkcompraproveedor foreign key(idproveedor) references proveedors(id)
 
-);
-
-
-create table provee(
-    idproveedor integer not null,
-    idproducto integer not null,
-    constraint pkprovee primary key(idproveedor,idproducto),
-    constraint fkproveeproducto foreign key(idproducto) references productos(numero_producto),
-    constraint fkproveeproveedor foreign key(idproveedor) references proveedores(id)
 );
 
 
