@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import modelos.Compra;
 import modelos.Producto;
 import modelos.ProductosComprado;
-import modelos.Venta;
 import net.sf.jasperreports.engine.util.Pair;
 
 /**
@@ -34,7 +33,10 @@ public class ABMCompra implements ABMInterface<Compra> {
     }
     @Override
     public boolean baja(Compra c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer idCompra = c.getInteger("id");//saco el idCompra
+         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
+         compra.deleteCascade();//elimino la compra y todos los registros que la referencian
+         return true;
     }
 
     @Override
