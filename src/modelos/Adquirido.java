@@ -6,12 +6,12 @@ package modelos;
 
 import org.javalite.activejdbc.Model;
 
-
 /**
  *
  * @author eze
  */
-public class Compra extends Model{
-    
-    
+public class Adquirido extends Model{
+    static{
+        validatePresenceOf("idproducto","idcliente");
+    }
 }

@@ -4,27 +4,30 @@
  */
 package abm;
 
+import modelos.Compra;
+
 /**
  *
  * @author eze
  */
-public class ABMCompra implements ABMInterface {
+public class ABMCompra implements ABMInterface<Compra> {
 
     public ABMCompra(){}
-    
+
     @Override
-    public void alta(Object o) {
+    public boolean alta(Compra c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void baja(Object o) {
+    public boolean baja(Compra c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void modificar(Object o) {
+    public boolean modificar(Compra c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+   
     
 }
