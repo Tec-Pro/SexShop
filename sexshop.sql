@@ -79,7 +79,7 @@ create table compras (
 
 
 
-create table adquirio(
+create table adquiridos(
     idcliente integer not null,
     idproducto integer not null,
     constraint pkadquirio primary key(idproducto,idcliente),
