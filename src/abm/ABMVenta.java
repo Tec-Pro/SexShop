@@ -4,15 +4,12 @@
  */
 package abm;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.Producto;
+import modelos.ProductosVendido;
 import modelos.Venta;
+import net.sf.jasperreports.engine.util.Pair;
 
 /**
  *
@@ -25,38 +22,14 @@ public class ABMVenta implements ABMInterface<Venta> {
 
     @Override
     public void alta(Venta v) {
-        ResultSet claveGenerada;
-        PreparedStatement statement;
-        v.setMonto(calcularMonto(v.getProductos())); //Calculo el monto de la venta
-        try {
-            //inserto venta en base de datos
-            statement = ConnectionDataBase.getConnection().prepareStatement("INSERT INTO venta VALUES (null,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            statement.setDouble(1, v.getMonto());
-            statement.setString(2, v.getCliente().getId().toString());
-            statement.executeUpdate();
-
-            // Se obtiene la clave de la venta generada por la base de datos (idVenta)
-            claveGenerada = statement.getGeneratedKeys();
-            if (claveGenerada.next()) {
-                int idVenta = claveGenerada.getInt(1);
-
-                //inserto los productos vendidos en una venta en base de datos 
-                Iterator itr = v.getProductos().iterator();
-                Producto prod;
-                while (itr.hasNext()) {
-                    prod = (Producto) itr.next();
-                    statement = ConnectionDataBase.getConnection().prepareStatement("INSERT INTO productosvendidos VALUES (?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-                    statement.setInt(1, idVenta);
-                    statement.setInt(2, prod.getNumeroProducto());
-                    statement.executeUpdate();
-                }
-            } else {
-                throw new SQLException("Error al crear venta, no se obtuvo la clave generada (idVenta).");
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ABMVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Integer idCliente = (Integer) v.get("idcliente");
+        v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
+        Venta venta = Venta.create("monto", v.get("monto"), "idcliente", idCliente, "fecha", v.get("fecha"));
+        venta.saveIt();//guardo la venta
+        int idVenta = venta.getInteger("id");
+        cargarProductosVendidos(idVenta,v.getProductos());//guardo los productos vendidos
+        actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
+        actualizarAdquisicionCliente(idCliente,v.getProductos());//actualizo la tabla de productos adquiridos por clientes
     }
 
     @Override
@@ -69,14 +42,60 @@ public class ABMVenta implements ABMInterface<Venta> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private Double calcularMonto(LinkedList<Producto> productos) {
+    /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos
+    los productos de la lista, multiplicados por su cantidad correspondiente*/
+    private Double calcularMonto(LinkedList<Pair> productos) {
         Iterator itr = productos.iterator();
+        Pair par;
         Producto prod;
         Double acumMonto = 0.0;
+        Double cant;
         while (itr.hasNext()) {
-            prod = (Producto) itr.next();
-            acumMonto += prod.getPrecioVenta();
+            par = (Pair) itr.next(); //saco el par de la lista
+            prod = (Producto) par.first(); //saco el producto del par
+            cant = (Double) par.second();//saco la cantidad del par
+            acumMonto += (prod.getDouble("precio_venta") * cant); //multiplico el precio del producto por la cantidad del mismo
         }
         return acumMonto;
     }
+    
+    
+    //Carga los productos y cantidades en la tabla productos_vendidos
+    private void cargarProductosVendidos(int idVenta, LinkedList<Pair> productos){
+        Iterator itr = productos.iterator();
+        Producto prod;
+        Pair par;
+        Integer cant;
+        while (itr.hasNext()) {
+            par = (Pair) itr.next(); //saco el par de la lista
+            prod = (Producto) par.first(); //saco el producto del par
+            cant = (Integer) par.second();//saco la cantidad del par
+            ProductosVendido prodVendido = ProductosVendido.create("idventa",idVenta,"idproducto",prod.get("numero_producto"),"cantidad",cant);
+            prodVendido.saveIt();
+        } 
+    }
+    
+    //Actualiza el stock de los productos vendidos
+    private void actualizarStock(LinkedList<Pair> productos){
+        Iterator itr = productos.iterator();
+        Producto prodViejo;
+        Pair par;
+        Integer cant;
+        ABMProducto abmProd = new ABMProducto();
+        while (itr.hasNext()) {
+            par = (Pair) itr.next(); //saco el par de la lista
+            prodViejo = (Producto) par.first(); //saco el producto del par
+            cant = (Integer) par.second();//saco la cantidad del par
+            cant = prodViejo.getInteger("stock") - cant;//asigno a cant el valor nuevo del stock
+            prodViejo.set("stock", cant);//actualizo el stock del producto
+            abmProd.modificar(prodViejo);//actualizo el producto en la BD
+            
+        }
+    }
+    
+    //Agrego los productos adquiridos por el cliente a la tabla adquirio
+    private void actualizarAdquisicionCliente(int idCliente, LinkedList<Pair> productos){
+        
+    }
+
 }

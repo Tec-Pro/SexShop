@@ -5,69 +5,31 @@
 package modelos;
 
 import java.util.LinkedList;
+import net.sf.jasperreports.engine.util.Pair;
+import org.javalite.activejdbc.Model;
 
 /**
  *
  * @author eze
  */
-public class Venta {
-    private Cliente cliente;
-    private LinkedList<Producto> productos;
-    private Double monto;
-
-    public Venta(){
-        cliente = null;
-        productos = null;
-        monto = null;
+public class Venta extends Model{
+    static{
+        validatePresenceOf("monto","idcliente","fecha");
     }
 
-    public Venta(Cliente cliente, LinkedList<Producto> productos, Double monto) {
-        this.cliente = cliente;
-        this.productos = productos;
-        this.monto = monto;
+    public Venta() {
+        this.productos = null;
     }
-    
-  
-    /**
-     * @return the cliente
-     */
-    public Cliente getCliente() {
-        return cliente;
-    }
+   
+    //Lista de pares <Producto,cantidad>
+    private LinkedList<Pair> productos;
 
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    /**
-     * @return the productos
-     */
-    public LinkedList<Producto> getProductos() {
+    public LinkedList<Pair> getProductos() {
         return productos;
     }
 
-    /**
-     * @param productos the productos to set
-     */
-    public void setProductos(LinkedList<Producto> productos) {
+    public void setProductos(LinkedList<Pair> productos) {
         this.productos = productos;
-    }
-
-    /**
-     * @return the monto
-     */
-    public Double getMonto() {
-        return monto;
-    }
-
-    /**
-     * @param monto the monto to set
-     */
-    public void setMonto(Double monto) {
-        this.monto = monto;
     }
     
     
