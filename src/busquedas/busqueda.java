@@ -23,7 +23,7 @@ public class busqueda {
         
     }
     
-    public LinkedList<Object> filtro(String objeto, String campo, String filtro){
+   /* public LinkedList<Object> filtro(String objeto, String campo, String filtro){
         ResultSet rs = null;
         LinkedList<Object> result = new LinkedList();
         String query = "SELECT "+campo+" FROM "+objeto+" WHERE "+campo+filtro;
@@ -37,9 +37,9 @@ public class busqueda {
             Logger.getLogger(busqueda.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
-    }
+    }*/
     
-    public LinkedList<Object> procesar(ResultSet rs, String objeto){
+   /* public LinkedList<Object> procesar(ResultSet rs, String objeto){
         LinkedList<Object> result = new LinkedList();
         try {
             if (objeto.equalsIgnoreCase("cliente")){
@@ -78,5 +78,5 @@ public class busqueda {
             Logger.getLogger(busqueda.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
+    }*/
 }
