@@ -4,13 +4,8 @@
  */
 package abm;
 
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import modelos.Producto;
-import modelos.Proveedor;
 
 /**
  *
@@ -18,53 +13,36 @@ import modelos.Proveedor;
  */
 public class ABMProducto implements ABMInterface<Producto>{
 
+    public boolean findCliente(Producto p){
+        return (Producto.first("numero_producto",p.get("numero_producto"))!= null);
+    }
+    
+    
     @Override
     public void alta(Producto p) {
-        try {
-            if(p.getProveedor() != null){
-                Statement st = ConnectionDataBase.getConnection().createStatement();
-                st.executeUpdate("INSERT INTO producto VALUES('"+p.getPrecioVenta()+","+p.getPrecioCompra()+  "','"+p.getStock()+"','"+p.getNumeroProducto()+"','"+p.getNombre()+"','"+p.getTipo()+"','"+p.getMarca()+"')");
-                st.close();
-            } 
-        } catch (SQLException ex) {
-            Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
+        if (!findCliente(p)){
+            Producto nuevo = Producto.create("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca"));
+            nuevo.saveIt();
+        } else {
+            System.out.println("Producto existente");
         }
-    }
+    }   
+    
 
     @Override
     public void baja(Producto p) {
-        try {
-            Statement st = ConnectionDataBase.getConnection().createStatement();
-            st.executeUpdate("DELETE FROM producto WHERE numero_producto = '"+p.getNumeroProducto()+"'");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
+        Producto viejo = Producto.findFirst("numero_producto", p.get("numero_producto"));
+        if (findCliente(viejo)){
+            viejo.delete();
         }
     }
 
     @Override
     public void modificar(Producto p) {
-        try {
-            Statement st = ConnectionDataBase.getConnection().createStatement();
-            if (p.getPrecioVenta()!= null){
-                st.executeUpdate("UPDATE producto SET precio_venta ='"+p.getPrecioVenta()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }if (p.getPrecioCompra()!= null){
-                st.executeUpdate("UPDATE producto SET precio_compra ='"+p.getPrecioCompra()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }if (p.getStock()!= null){
-                st.executeUpdate("UPDATE producto SET stock ='"+p.getStock()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }if (p.getNumeroProducto()!= null){
-                st.executeUpdate("UPDATE producto SET numero_producto ='"+p.getNumeroProducto()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }if (p.getNombre()!= null){
-                st.executeUpdate("UPDATE producto SET nombre ='"+p.getNombre()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }if (p.getTipo()!= null){
-                st.executeUpdate("UPDATE producto SET tipo ='"+p.getTipo()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }if (p.getMarca()!= null){
-                st.executeUpdate("UPDATE producto SET marca ='"+p.getMarca()+"' WHERE numero_producto ='"+p.getNumeroProducto()+"'");
-            }
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       Producto viejo = Producto.findFirst("numero_producto", p.get("numero_producto"));
+       if (findCliente(viejo)){
+            viejo.set("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca")).saveIt();
+       }
     }
     
 }

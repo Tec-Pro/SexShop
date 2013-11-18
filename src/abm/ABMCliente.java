@@ -4,11 +4,6 @@
  */
 package abm;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.Cliente;
 
 /**
@@ -25,25 +20,28 @@ public class ABMCliente implements ABMInterface<Cliente>{
     
     @Override
     public void alta(Cliente c) {
-        Cliente nuevo = Cliente.create("nombre",c.get("nombre"),"apellido",c.get("apellido"),"telefono",c.get("telefono"),"celular",c.get("celular"),"mail",c.get("mail"));
-        nuevo.saveIt();          
+        if (!findCliente(c)){
+            Cliente nuevo = Cliente.create("nombre",c.get("nombre"),"apellido",c.get("apellido"),"telefono",c.get("telefono"),"celular",c.get("celular"),"mail",c.get("mail"));
+            nuevo.saveIt();  
+        } else{
+            System.out.println("Cliente ya existente");
+        }
     }   
     
 
     @Override
     public void baja(Cliente c) {
-        try {
-            Statement st = ConnectionDataBase.getConnection().createStatement();
-            st.executeUpdate("DELETE FROM cliente WHERE id = '"+c.getId()+"'");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ABMCliente.class.getName()).log(Level.SEVERE, null, ex);
+        Cliente viejo = Cliente.findFirst("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
+        if (findCliente(viejo)){
+            viejo.delete();
         }
     }
 
     @Override
     public void modificar(Cliente c) {
-       
+       Cliente viejo = Cliente.findFirst("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
+       if (findCliente(viejo)){
+            viejo.set("nombre",c.get("nombre"),"apellido",c.get("apellido"),"telefono",c.get("telefono"),"celular",c.get("celular"),"mail",c.get("mail")).saveIt();
+       }
     }
-    
 }
