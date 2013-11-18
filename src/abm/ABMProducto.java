@@ -43,9 +43,8 @@ public class ABMProducto implements ABMInterface<Producto> {
 
     @Override
     public boolean baja(Producto p) {
-        Producto viejo = Producto.first("numero_producto = ?", p.get("numero_producto"));
-        if (findProducto(viejo)){
-            viejo.delete();
+        if (findProducto(p)){
+            p.delete();
             return true;
         }
         return false;
@@ -54,7 +53,7 @@ public class ABMProducto implements ABMInterface<Producto> {
     @Override
     public boolean modificar(Producto p) {
        Producto viejo = Producto.findFirst("numero_producto = ?", p.get("numero_producto"));
-       if (findProducto(viejo)){
+       if (viejo!=null){
             viejo.set("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca")).saveIt();
             return true;
        }
