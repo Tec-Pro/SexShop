@@ -120,10 +120,11 @@ public class ABMVenta implements ABMInterface<Venta> {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
-            Adquirido prodAdquirido = Adquirido.findFirst("idcliente = ? AND idproducto = ?", idCliente, prod.get("numero_producto"));
+            Adquirido prodAdquirido = null;
+            prodAdquirido = Adquirido.findFirst("idcliente = ? AND idproducto = ?", idCliente, prod.get("numero_producto"));
             if (Adquirido.exists(prodAdquirido)){ //si existe modifico la cantidad
                 cant = prodAdquirido.getInteger("cantidad") + cant;//asigno a cant el valor nuevo de cantidad
-                Adquirido.update("cantidad = ?", "idcliente =? AND idproducto = ?", cant, idCliente, prod.get("numero_producto"));
+                resultOp = resultOp && prodAdquirido.setInteger("cantidad", cant).saveIt();
             }
             else { // sino lo agrego a la tabla
                 prodAdquirido = Adquirido.create("idcliente",idCliente,"idproducto",prod.get("numero_producto"),"cantidad",cant);

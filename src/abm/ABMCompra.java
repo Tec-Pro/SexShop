@@ -31,6 +31,10 @@ public class ABMCompra implements ABMInterface<Compra> {
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos vendidos
         return resultOp;
     }
+    
+    /*Elimino una compra y los productos ligados a ella, sin hacer devolucion de stock,
+     * ni actualizacion de tablas de productos_comprados
+     */
     @Override
     public boolean baja(Compra c) {
         Integer idCompra = c.getInteger("id");//saco el idCompra
