@@ -44,7 +44,7 @@ public class ABMVenta implements ABMInterface<Venta> {
      */
     @Override
     public boolean baja(Venta v) {
-        Integer idVenta = 18;//v.getInteger("id");//saco el idVenta
+        Integer idVenta = v.getInteger("id");//saco el idVenta
         Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
         ProductosVendido.delete("idventa = ?", idVenta);//elimino todos los productosvendidos
         return venta.delete(); //elimino la venta
@@ -54,7 +54,7 @@ public class ABMVenta implements ABMInterface<Venta> {
     @Override
     public boolean modificar(Venta v) {
         boolean resultOp = true;
-        Integer idCliente = (Integer) v.get("idcliente");
+        Integer idCliente = v.getInteger("idcliente");
         Integer idVenta = v.getInteger("id");
         Venta.update("monto = ? AND fecha = ? AND idcliente =?", "id = ?", v.get("monto"), v.get("fecha"),idCliente,idVenta);//actualizo la venta por su id
         LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
