@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelos.Cliente;
 
 /**
  *
@@ -72,6 +73,16 @@ public class AbmClienteGui extends javax.swing.JPanel {
     
     public DefaultTableModel getTablaClientes(){
         return tablaClientes;
+    }
+    
+    /*setea los campos con los datos del cliente*/
+    public void CargarCampos(Cliente c){
+        idCliente.setText(c.getId().toString());
+        nombre.setText(c.get("nombre").toString());
+        apellido.setText(c.get("apellido").toString());
+        telFijo.setText(c.get("telefono").toString());
+        email.setText(c.get("mail").toString());
+        celular.setText(c.get("celular").toString());
     }
     
     public void habilitarCampos(boolean b){

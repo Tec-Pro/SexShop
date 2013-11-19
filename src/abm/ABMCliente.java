@@ -13,6 +13,10 @@ import modelos.Cliente;
 public class ABMCliente implements ABMInterface<Cliente>{
 
     
+    public Cliente getCliente(Cliente c){
+        return Cliente.first("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
+    }
+    
     public boolean findCliente(Cliente c){
         return (Cliente.first("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"))!= null);
     }
@@ -25,7 +29,6 @@ public class ABMCliente implements ABMInterface<Cliente>{
             nuevo.saveIt();  
             return true;
         } else{
-            System.out.println("Cliente ya existente");
             return false;
         }
     }   
@@ -33,8 +36,8 @@ public class ABMCliente implements ABMInterface<Cliente>{
 
     @Override
     public boolean baja(Cliente c) {
-        Cliente viejo = Cliente.findFirst("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
-        if (findCliente(viejo)){
+        Cliente viejo = Cliente.findById(c.getId());
+        if (viejo!=null){
             viejo.delete();
             return true;
         }
@@ -43,8 +46,8 @@ public class ABMCliente implements ABMInterface<Cliente>{
 
     @Override
     public boolean modificar(Cliente c) {
-       Cliente viejo = Cliente.findFirst("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
-       if (findCliente(viejo)){
+       Cliente viejo = Cliente.findById(c.getId());
+       if (viejo!=null){
             viejo.set("nombre",c.get("nombre"),"apellido",c.get("apellido"),"telefono",c.get("telefono"),"celular",c.get("celular"),"mail",c.get("mail")).saveIt();
             return true;
        }
