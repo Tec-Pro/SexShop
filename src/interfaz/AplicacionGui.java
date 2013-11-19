@@ -4,26 +4,26 @@
  */
 package interfaz;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.awt.image.ImageObserver.WIDTH;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
 
+
 /**
  *
  * @author nico
  */
-public class AplicacionGui extends javax.swing.JFrame{
+public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
 
     private AbmClienteGui abmCliente; //Panel abmCliente
     private AbmProductoGui abmProducto; //Panel abmProducto
     private VentaGui venta;//panel venta
     private VentasRealizadas ventasRealizadas;
+    private AbmProveedorGui abmProveedor;
     //estos deben estar en el controlador
     ArticulosCompradosGui art;
     ModificarPrecioPorcentajeGui modificarPrecioGui;
@@ -31,7 +31,6 @@ public class AplicacionGui extends javax.swing.JFrame{
     ControladorJReport reporteArticulos;
     ControladorJReport reporteFactura;
 
-    static Connection connection;
 
     /**
      * Creates new form AplicacionGui
@@ -41,16 +40,19 @@ public class AplicacionGui extends javax.swing.JFrame{
         abmCliente = new AbmClienteGui(); //creo el panel de abmClente
         abmProducto = new AbmProductoGui();//creo panel abmProducto
         ventasRealizadas= new VentasRealizadas();
+        abmProveedor= new AbmProveedorGui();
         venta= new VentaGui();
         //venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
         tab.add("Venta nueva", venta);
         tab.add("ventas realizadas", ventasRealizadas);
+        tab.add("Proveedor", abmProveedor);
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");
         tab.setToolTipTextAt(1, "Alta baja y modificacion de productos");
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
         tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");       
+        tab.setToolTipTextAt(4, "Alta baja y modificación de proveedores");
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
         reporteFactura = new ControladorJReport(("factura.jasper"));
@@ -86,6 +88,7 @@ public class AplicacionGui extends javax.swing.JFrame{
         setExtendedState(6);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
+        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
@@ -123,7 +126,7 @@ public class AplicacionGui extends javax.swing.JFrame{
     //borrar después
     private void listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClientesActionPerformed
         try {
-            reporteClientes.mostrarReporte(connection);
+            reporteClientes.mostrarReporte();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -136,7 +139,7 @@ public class AplicacionGui extends javax.swing.JFrame{
     //borrar después
     private void listarArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarArticulosActionPerformed
         try {
-            reporteArticulos.mostrarReporte(connection);
+            reporteArticulos.mostrarReporte();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -144,7 +147,6 @@ public class AplicacionGui extends javax.swing.JFrame{
         } catch (JRException ex) {
             Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
     }//GEN-LAST:event_listarArticulosActionPerformed
 /**
  * @param args the command line arguments
@@ -160,9 +162,8 @@ public class AplicacionGui extends javax.swing.JFrame{
     // End of variables declaration//GEN-END:variables
 
     //borrar después, son pruebas
-  /*  @Override
         public void actionPerformed(ActionEvent ae) {
-        if (abmCliente.getArticulosComprados() == ae.getSource()) {
+        /*if (abmCliente.getArticulosComprados() == ae.getSource()) {
             art.setLocationRelativeTo(abmCliente);
             art.setVisible(true);
         }
@@ -173,10 +174,10 @@ public class AplicacionGui extends javax.swing.JFrame{
                 System.out.println(abmProducto.getTablaArticulos().getValueAt(seleccionados[i], 0).toString());
             }
 
-        }
+        }*/
         if(venta.getImprimir()==ae.getSource()){
             try {
-                reporteFactura.mostrarFactura(connection, 1);
+                reporteFactura.mostrarFactura(1);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -185,7 +186,7 @@ public class AplicacionGui extends javax.swing.JFrame{
                 Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }*/
+    }
     
    
 }

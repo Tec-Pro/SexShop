@@ -8,9 +8,21 @@
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="logo" class="java.io.InputStream"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT * FROM sexshop.producto;]]>
+	<queryString>
+		<![CDATA[SELECT * FROM sexshop.productos;]]>
 	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_venta" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_compra" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stock" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="numero_producto" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -23,7 +35,7 @@
 	<field name="marca" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="precio_venta" class="java.lang.Float">
+	<field name="proveedor_id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -37,25 +49,29 @@
 			</image>
 			<staticText>
 				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="ee4a3639-05fd-4b69-b2c5-276a06172012"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<text><![CDATA[A MEDIA LUZ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="SubTitle" x="63" y="46" width="200" height="22" uuid="478ebb10-1e76-44ac-b1fe-f7cb14539fd7"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Listado de clientes]]></text>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Listado de productos]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="347" y="68" width="52" height="28" uuid="ae3947cd-df90-4c3a-a8a1-cf781cccf7a5"/>
 				<textElement>
-					<font fontName="Century Schoolbook L" size="18"/>
+					<font fontName="DejaVu Sans" size="18"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="414" y="68" width="139" height="28" uuid="c448f710-f6bb-4d3c-b605-d837f76b33df"/>
 				<textElement>
-					<font fontName="Century Schoolbook L" size="18"/>
+					<font fontName="DejaVu Sans" size="18"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
@@ -74,22 +90,37 @@
 			</line>
 			<staticText>
 				<reportElement style="Column header" x="0" y="19" width="73" height="15" uuid="8f6461b7-5af3-48a0-9264-6cb533b929c1"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<text><![CDATA[Id producto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="86" y="19" width="126" height="15" uuid="a7a5d5c4-aa2f-4be6-ba5a-bb44474b47f3"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<text><![CDATA[nombre]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="222" y="19" width="100" height="15" uuid="501eff26-49c5-47e5-be00-37e2582b5201"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<text><![CDATA[tipo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="333" y="19" width="111" height="15" uuid="2b413a7b-b9a8-42e1-a2d4-4e46a505703a"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<text><![CDATA[marca]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="444" y="19" width="111" height="15" uuid="8ebe47aa-5c9a-4dfe-8b50-1fb3d1f71be3"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<text><![CDATA[precio venta ($)]]></text>
 			</staticText>
 		</band>
@@ -104,22 +135,37 @@
 			</line>
 			<textField>
 				<reportElement style="Detail" x="222" y="0" width="100" height="28" uuid="559639a2-96df-4f18-a042-0c4c86759a63"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="333" y="0" width="100" height="28" uuid="bf4485bf-bacf-487b-861b-c4a2e17b5449"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="444" y="0" width="111" height="28" uuid="129af631-8003-4c0e-8b63-96a8ccb60711"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{precio_venta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="0" y="0" width="73" height="30" uuid="a459c6e0-f73f-48de-bf21-43bbddc03b5d"/>
+				<reportElement style="Detail" x="0" y="0" width="73" height="28" uuid="a459c6e0-f73f-48de-bf21-43bbddc03b5d"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_producto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="86" y="0" width="126" height="30" uuid="638e44a4-019d-44c0-b9e7-2bed999cd356"/>
+				<reportElement style="Detail" x="86" y="0" width="126" height="28" uuid="638e44a4-019d-44c0-b9e7-2bed999cd356"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -132,21 +178,21 @@
 			<textField>
 				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="fef51315-d196-4c34-8527-a81598ca37d8"/>
 				<textElement textAlignment="Right">
-					<font size="10" isBold="false"/>
+					<font fontName="DejaVu Sans" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="2cb13b9a-7f5f-457d-a7e7-d185858ee531"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font fontName="DejaVu Sans" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="6d894511-16e5-4d36-948e-28ed3f3fb297"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font fontName="DejaVu Sans" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>

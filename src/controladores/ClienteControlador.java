@@ -132,7 +132,9 @@ public class ClienteControlador implements ActionListener {
     
     
     public void tablaMouseClicked(java.awt.event.MouseEvent evt){
+        if(!Base.hasConnection()){
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        }
         clienteGui.habilitarCampos(false);
         nuevoPulsado = false;
         modificarPulsado = false;
