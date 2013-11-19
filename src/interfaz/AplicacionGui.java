@@ -53,9 +53,12 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
         tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");       
         tab.setToolTipTextAt(4, "Alta baja y modificación de proveedores");
+        
+        //controlador
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
         reporteFactura = new ControladorJReport(("factura.jasper"));
+        venta.getImprimir().addActionListener(this);
     }
 
     public AbmClienteGui getAbmClienteGui(){

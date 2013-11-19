@@ -143,6 +143,7 @@ public class ClienteControlador implements ActionListener {
         Cliente c = Cliente.findById(tabla.getValueAt(r, 0));
         clienteGui.CargarCampos(c);
         Base.close();
+        clienteGui.repaint();
     }
     
     @Override
