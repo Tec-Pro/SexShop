@@ -30,8 +30,6 @@ public class MainControlador implements ActionListener{
      
      @SuppressWarnings("CallToThreadDumpStack")
      public MainControlador() throws ClassNotFoundException, JRException, SQLException{
-        cdb = new ConnectionDataBase();
-        cdb.createConnection();
         JFrame.setDefaultLookAndFeelDecorated(true); //Le agrego un tema lindo al programa
         try {
             JFrame.setDefaultLookAndFeelDecorated(true);

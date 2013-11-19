@@ -11,7 +11,7 @@ import modelos.Producto;
  *
  * @author joako
  */
-public class ABMProveedor implements ABMInterface<Proveedor> {
+/*public class ABMProveedor implements ABMInterface<Proveedor> {
     
     public boolean findProveedor(Proveedor p){
         return (Proveedor.first("cuil = ?", p.get("cuil"))!=null);
@@ -48,4 +48,4 @@ public class ABMProveedor implements ABMInterface<Proveedor> {
        else return false;
     }
     
-}
+}*/

@@ -8,8 +8,8 @@
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="logo" class="java.io.InputStream"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT * FROM sexshop.cliente;]]>
+	<queryString>
+		<![CDATA[SELECT * FROM sexshop.clientes;]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -40,25 +40,29 @@
 			</image>
 			<staticText>
 				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="cbe4cc4f-e82b-4415-a4a5-154292bc66ab"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
 				<text><![CDATA[A MEDIA LUZ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="63" y="46" width="200" height="22" uuid="9c043d30-ac34-4995-b8d7-559f5aa012f5"/>
-				<textElement textAlignment="Right"/>
+				<reportElement x="63" y="46" width="200" height="22" uuid="9c043d30-ac34-4995-b8d7-559f5aa012f5"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Listado de clientes]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="416" y="71" width="139" height="28" uuid="514a8a8f-1146-4374-a46d-7fc9b59810e0"/>
+				<reportElement x="403" y="71" width="152" height="28" uuid="514a8a8f-1146-4374-a46d-7fc9b59810e0"/>
 				<textElement>
-					<font fontName="Century Schoolbook L" size="18"/>
+					<font fontName="SansSerif" size="18"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="349" y="71" width="52" height="28" uuid="ec767c17-b2c9-40ce-bc14-c492c8526916"/>
+				<reportElement x="336" y="71" width="65" height="28" uuid="ec767c17-b2c9-40ce-bc14-c492c8526916"/>
 				<textElement>
-					<font fontName="Century Schoolbook L" size="18"/>
+					<font fontName="SansSerif" size="18"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
@@ -76,55 +80,91 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="19" width="36" height="15" uuid="29bb99d4-27dd-4856-b0d0-51e9c5ac31c6"/>
-				<text><![CDATA[id]]></text>
+				<reportElement x="0" y="13" width="46" height="15" uuid="f539db8b-a73c-4d77-aca9-311164b94b22"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="46" y="20" width="72" height="15" uuid="95c1b226-7b96-438d-9ca5-42173d26d06e"/>
-				<text><![CDATA[nombre]]></text>
+				<reportElement x="46" y="13" width="57" height="15" uuid="98a44071-a02a-416c-9136-02b522ca46ab"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="129" y="18" width="134" height="15" uuid="c0df163b-0e86-4645-98a3-dbdafa5d43c0"/>
-				<text><![CDATA[apellido]]></text>
+				<reportElement x="129" y="13" width="134" height="15" uuid="ba9919e3-77b4-42e9-904d-409369abed1c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="275" y="19" width="61" height="15" uuid="299f46ad-d0f2-4313-98c9-19ee9d28c30c"/>
-				<text><![CDATA[telefono]]></text>
+				<reportElement x="275" y="13" width="61" height="15" uuid="f3c66a0b-cae0-4897-9717-219ca464ad37"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="349" y="19" width="52" height="15" uuid="a0007f98-7a56-4943-9f18-52dd7769f0ae"/>
-				<text><![CDATA[celular]]></text>
+				<reportElement x="349" y="13" width="54" height="15" uuid="ec54493c-b94e-496f-9b93-bcd3c5e44fc5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CELULAR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="416" y="19" width="136" height="15" uuid="0a9d0e4e-bdc9-4e6b-b63f-6fd2f9cf0273"/>
-				<text><![CDATA[mail]]></text>
+				<reportElement x="416" y="13" width="100" height="15" uuid="90998def-742a-4e29-b221-4599827945cb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-MAIL]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="37" splitType="Stretch">
+		<band height="34" splitType="Stretch">
 			<textField>
 				<reportElement style="Detail" x="0" y="0" width="36" height="30" uuid="89500673-8714-4b93-9e64-a53f87fecfba"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="">
 				<reportElement style="Detail" x="46" y="1" width="72" height="29" uuid="11fb830c-0e39-42cf-b115-ef540778bca1"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="275" y="0" width="61" height="30" uuid="24f56401-e5b5-423c-a57d-c0b40ceed96d"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="416" y="0" width="136" height="30" uuid="0ef6bd5f-2840-472d-ad18-4627d19438f5"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{mail}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="349" y="0" width="52" height="30" uuid="6f752d92-76d3-45dc-888f-db21dc4ec3fe"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{celular}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="129" y="0" width="134" height="30" uuid="cc1b4a25-e120-4911-9d3c-bb735a1e9433"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -143,21 +183,21 @@
 			<textField>
 				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="8f411266-8cb1-4c44-bb23-5c0dcec63320"/>
 				<textElement textAlignment="Right">
-					<font size="10" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="d279dfc0-362e-4dc8-ac7d-4138d307a8be"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="d952cb9b-4637-42b9-bc9a-bcfdab3f748b"/>
 				<textElement>
-					<font size="10" isBold="false"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>

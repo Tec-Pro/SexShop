@@ -3,14 +3,8 @@ create database sexshop;
 
 use sexshop;
 
-drop table if exists productoscomprados;
-drop table if exists productosvendidos;
-drop table if exists adquirio;
-drop table if exists ventas;
-drop table if exists compras;
-drop table if exists proveedors;
-drop table if exists clientes;
-drop table if exists productos;
+
+
 
 
 
@@ -46,7 +40,7 @@ create table clientes (
 create table productos (
     id integer not null auto_increment,
     precio_venta float,
-	precio_compra float,
+        precio_compra float,
     stock integer,
     numero_producto integer not null unique,
     nombre varchar(50),
@@ -82,27 +76,27 @@ create table compras (
 create table adquiridos(
     idcliente integer not null,
     idproducto integer not null,
-	cantidad integer,
+        cantidad integer,
     constraint pkadquirio primary key(idproducto,idcliente),
     constraint fkadquiriocliente foreign key(idcliente) references clientes(id) ,
     constraint fkadquirioproducto foreign key(idproducto) references productos(numero_producto) 
 );
 
 
-create table productosvendidos (
+create table productos_vendidos (
     idventa integer not null,
     idproducto integer not null,
-	cantidad integer,
+        cantidad integer,
     primary key(idventa,idproducto),
     foreign key (idventa) references ventas(id),
     foreign key(idproducto) references productos(numero_producto)
 );
 
 
-create table productoscomprados (
+create table productos_comprados (
     idcompra integer not null,
     idproducto integer not null,
-	cantidad integer,
+        cantidad integer,
     primary key(idcompra,idproducto),
     foreign key (idcompra) references compras(id),
     foreign key(idproducto) references productos(numero_producto)

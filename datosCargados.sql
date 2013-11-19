@@ -21,15 +21,15 @@ INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `idcliente`, `fecha`) VALUES (2, 
 INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `idcliente`, `fecha`) VALUES (3, 31.15, 2, '17-1-13');
 INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `idcliente`) VALUES (4, 81.1, 4);
 
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 1, 12);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 2, 1);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 4, 7);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 3, 1);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (2, 8, 5);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (3, 8, 7);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (4, 1, 1);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (3, 4, 4);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (3, 5, 5);
-INSERT INTO `sexshop`.`productosvendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (4, 5, 5);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 1, 12);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 2, 1);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 4, 7);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (1, 3, 1);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (2, 8, 5);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (3, 8, 7);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (4, 1, 1);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (3, 4, 4);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (3, 5, 5);
+INSERT INTO `sexshop`.`productos_vendidos` (`idventa`, `idproducto`, `cantidad`) VALUES (4, 5, 5);
 
 

@@ -100,7 +100,7 @@ public class LoginGui extends javax.swing.JFrame {
         salir.setText("Salir");
         panelButton.add(salir);
 
-        jLabel3.setText("usuario");
+        jLabel3.setText("Usuario");
 
         jLabel4.setText("Contraseña");
 

@@ -6,8 +6,10 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelos.Cliente;
 
 /**
  *
@@ -35,6 +37,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
         this.articulosComprados.addActionListener(lis);
     }
    
+    
     
     public JButton getAnterior() {
         return anterior;
@@ -64,15 +67,28 @@ public class AbmClienteGui extends javax.swing.JPanel {
         return siguiente;
     }
     
+    public JTable getTabla(){
+        return tabla;
+    }
+    
     public DefaultTableModel getTablaClientes(){
         return tablaClientes;
+    }
+    
+    /*setea los campos con los datos del cliente*/
+    public void CargarCampos(Cliente c){
+        idCliente.setText(c.getId().toString());
+        nombre.setText(c.get("nombre").toString());
+        apellido.setText(c.get("apellido").toString());
+        telFijo.setText(c.get("telefono").toString());
+        email.setText(c.get("mail").toString());
+        celular.setText(c.get("celular").toString());
     }
     
     public void habilitarCampos(boolean b){
         apellido.setEditable(b);
         celular.setEditable(b);
         email.setEditable(b);
-        idCliente.setEditable(b);
         nombre.setEditable(b);
         telFijo.setEditable(b); 
     }
@@ -392,6 +408,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(tabla);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(0).setMaxWidth(80);
