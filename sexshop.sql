@@ -3,14 +3,8 @@ create database sexshop;
 
 use sexshop;
 
-drop table if exists productoscomprados;
-drop table if exists productosvendidos;
-drop table if exists adquirio;
-drop table if exists ventas;
-drop table if exists compras;
-drop table if exists proveedors;
-drop table if exists clientes;
-drop table if exists productos;
+
+
 
 
 
@@ -89,7 +83,7 @@ create table adquiridos(
 );
 
 
-create table productosvendidos (
+create table productos_vendidos (
     idventa integer not null,
     idproducto integer not null,
 	cantidad integer,
@@ -99,7 +93,7 @@ create table productosvendidos (
 );
 
 
-create table productoscomprados (
+create table productos_comprados (
     idcompra integer not null,
     idproducto integer not null,
 	cantidad integer,
