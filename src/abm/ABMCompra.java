@@ -65,11 +65,11 @@ public class ABMCompra implements ABMInterface<Compra> {
         Pair par;
         Producto prod;
         Double acumMonto = 0.0;
-        Double cant;
+        Integer cant;
         while (itr.hasNext()) {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
-            cant = (Double) par.second();//saco la cantidad del par
+            cant = (Integer) par.second();//saco la cantidad del par
             acumMonto += (prod.getDouble("precio_compra") * cant); //multiplico el precio del producto por la cantidad del mismo
         }
         return acumMonto;
@@ -105,7 +105,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         Iterator itr = productos.iterator();
         while (itr.hasNext()) {
             prodComprado = (ProductosComprado) itr.next(); //saco el modelo de la lista
-            prod = (Producto) prodComprado.get("idproducto");//saco el producto del modelo
+            prod = Producto.findFirst("numero_producto = ?", prodComprado.getInteger("idproducto"));//saco el producto del modelo
             cant = (Integer) prodComprado.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares
