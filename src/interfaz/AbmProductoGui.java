@@ -7,7 +7,6 @@ package interfaz;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
@@ -35,15 +34,31 @@ public class AbmProductoGui extends javax.swing.JPanel {
         tabla.setComponentPopupMenu(popUpMenuTabla);//agrego el popUp a la tabla
     }
 
-    //especie de constructor del popUp
+    /**
+     * Constructor para el menu emergente que se encuentra en la tabla al hacer
+     * click derecho
+     *
+     * @param
+     * @return void
+     * @exception
+     */
     private void popUpMenu() {
         popUpMenuTabla = new JPopupMenu();
         modificarPrecioPorcentaje = new JMenuItem("Modificar precio de venta en %");
         popUpMenuTabla.add(modificarPrecioPorcentaje);
-        modificarPrecioPesos= new JMenuItem("Modificar precio de venta en $");
+        modificarPrecioPesos = new JMenuItem("Modificar precio de venta en $");
         popUpMenuTabla.add(modificarPrecioPesos);
     }
 
+    /**
+     * Setea los actionListener para los botones guardar, borrar, nuevo,
+     * siguiente, anterior, modificar, modificarPrecioPorcentaje,
+     * modificarPrecioPesos
+     *
+     * @param ActionListener lis
+     * @return void
+     * @exception
+     */
     public void setActionListener(ActionListener lis) {
         this.guardar.addActionListener(lis);
         this.borrar.addActionListener(lis);
@@ -55,7 +70,14 @@ public class AbmProductoGui extends javax.swing.JPanel {
         this.modificarPrecioPesos.addActionListener(lis);
     }
 
-    public void habilitarCampos(boolean b){
+    /**
+     * Habilita los campos para la edicion de un producto
+     *
+     * @param boolean habilitado
+     * @return void
+     * @exception
+     */
+    public void habilitarCampos(boolean b) {
         marca.setEditable(b);
         stock.setEditable(b);
         tipo.setEditable(b);
@@ -65,8 +87,15 @@ public class AbmProductoGui extends javax.swing.JPanel {
         precioVenta.setEditable(b);
         proveedores.setEditable(b);
     }
-    
-    public void limpiarCampos(){
+
+    /**
+     * Limpia los campos de la ventana
+     *
+     * @param
+     * @return void
+     * @exception
+     */
+    public void limpiarCampos() {
         marca.setText("");
         stock.setText("");
         tipo.setText("");
@@ -75,97 +104,243 @@ public class AbmProductoGui extends javax.swing.JPanel {
         precioCompra.setText("");
         precioVenta.setText("");
     }
-    
-    //retorno la tabla default de los articulos
+
+    /**
+     * Retorna la tabla Articulos de tipo DefaultTableModel para poder realizar
+     * inserciones y eliminaciones de filas facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaArticulos() {
         return tablaArticulos;
     }
 
+    /**
+     * Retorna el campo busquedacodigo para filtrar las busquedas por codigo del
+     * producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaCodigo() {
         return busquedaCodigo;
     }
 
+    /**
+     * Retorno el campo busquedaMarca para filtrar las busquedas por marca del
+     * producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaMarca() {
         return busquedaMarca;
     }
 
+    /**
+     * retorno el campo busquedaNombre para poder filtrar busquedas por nombre
+     * del procuto
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public JTextField getBusquedaNombre() {
         return busquedaNombre;
     }
 
+    /**
+     * retorno el campo idArticulo
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getIdArticulo() {
         return idArticulo;
     }
 
+    /**
+     * retorno el campo marca de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getMarca() {
         return marca;
     }
 
+    /**
+     * Retorno el campo nombre de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getNombre() {
         return nombre;
     }
 
-
+    /**
+     * retorno combo proveedores para obtener el proveedor seleccionado de un
+     * producto
+     *
+     * @param
+     * @return JtextField
+     * @exception
+     */
     public JComboBox getProveedores() {
         return proveedores;
     }
 
+    /**
+     * Retorno el campo stock de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getStock() {
         return stock;
     }
 
+    /**
+     * Retorno el campo tipo de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getTipo() {
         return tipo;
     }
 
+    /**
+     * Retorno el boton anterior
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getAnterior() {
         return anterior;
     }
 
+    /**
+     * Retorno el boton borrar
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getBorrar() {
         return borrar;
     }
 
+    /**
+     * Retorno el boton guardar
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getGuardar() {
         return guardar;
     }
 
+    /**
+     * Retorno el boton modificar
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getModificar() {
         return modificar;
     }
 
+    /**
+     * Retorno el boton nuevo
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getNuevo() {
         return nuevo;
     }
 
+    /**
+     * Retorno el boton siguiente
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getSiguiente() {
         return siguiente;
     }
 
+    /**
+     * Retorno el menuItem modificarPrecioPorcentaje del popUpMenu
+     *
+     * @param
+     * @return JMenuItem
+     * @exception
+     */
     public JMenuItem getModificarPrecioPorcentaje() {
         return modificarPrecioPorcentaje;
     }
-    
-        public JMenuItem getModificarPrecioPesos() {
+
+    /**
+     * Retorno el menuItem modificarPrecioPesos del popUpMenu
+     *
+     * @param
+     * @return JMenuItem
+     * @exception
+     */
+    public JMenuItem getModificarPrecioPesos() {
         return modificarPrecioPesos;
     }
 
+    /**
+     * Retorno el campo precioCompra
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getPrecioCompra() {
         return precioCompra;
     }
 
+    /**
+     * Retorno el campo precioVenta
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getPrecioVenta() {
         return precioVenta;
     }
-        
-        
 
-    //retorno la tabla original (se usa solo para ver los seleccionados, en otros casos se debe usar la default)
+    /**
+     * retorno la tabla original (se usa solo para ver los seleccionados, en
+     * otros casos se debe usar la default)
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTabla() {
         return tabla;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

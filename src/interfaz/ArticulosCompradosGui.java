@@ -24,6 +24,14 @@ public class ArticulosCompradosGui extends javax.swing.JDialog {
         tablaProductosComprados = (DefaultTableModel) tabla.getModel();
     }
 
+        /**
+     * Retorna la tablaProductosComprados con tipo DefaultTableModel para poder
+     * realizar inserciones y eliminaciones de columnas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaProductosComprados() {
         return tablaProductosComprados;
     }

@@ -22,29 +22,62 @@ public class LoginGui extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public void setActionListener(ActionListener lis){
+
+    /**
+     * Seteo ActionListener a los botones salir y login
+     *
+     * @param ActionListener listener
+     * @return void
+     * @exception
+     */
+    public void setActionListener(ActionListener lis) {
         login.addActionListener(lis);
         salir.addActionListener(lis);
     }
 
+    /**
+     * Retorno el botonLogin (boton ingresar)
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getLogin() {
         return login;
     }
 
+    /**
+     * Retorno el campo de la contraseña
+     *
+     * @param
+     * @return JPasswordField
+     * @exception
+     */
     public JPasswordField getPassword() {
         return password;
     }
 
+    /**
+     * Retorno el boton salir
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getSalir() {
         return salir;
     }
 
+    /**
+     * Retorno el campo usuario
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getUsuario() {
         return usuario;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,8 +186,6 @@ public class LoginGui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

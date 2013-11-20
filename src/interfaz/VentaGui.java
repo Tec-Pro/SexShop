@@ -11,7 +11,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author nico
@@ -32,104 +31,279 @@ public class VentaGui extends javax.swing.JPanel {
         tablaClientesDefault = (DefaultTableModel) tablaClientes.getModel();
     }
 
+    /**
+     * Seteo el actionListener para los botones articulosALafactura,
+     * clienteALafactura, facturaNueva, imprimir realizarVenta,
+     * borrarArticulosSeleccionados, modificar
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public void setActionListener(ActionListener lis) {
         this.articulosALaFactura.addActionListener(lis);
         this.clienteALaFactura.addActionListener(lis);
         this.facturaNueva.addActionListener(lis);
         this.imprimir.addActionListener(lis);
         this.realizarVenta.addActionListener(lis);
-
-
+        this.borrarArticulosSeleccionados.addActionListener(lis);
+        this.modificar.addActionListener(lis);
     }
 
+    /**
+     * Retorno la tabla Articulos con tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return defaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaArticulosDefault() {
         return tablaArticulosDefault;
     }
 
+    /**
+     * Retorno la tabla Clientes con tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaclientesDefault() {
         return tablaArticulosDefault;
     }
 
+    /**
+     * Retorno la tabla factura con tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaFacturaDefault() {
         return tablaFacturaDefault;
     }
 
+    /**
+     * Retorno boton articulosALaFactura para enviar los articulos seleccionados
+     * en la tabla articulos a la tabla factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getArticulosALaFactura() {
         return articulosALaFactura;
     }
 
+    /**
+     * Retorno el campo busqeudaApellido para poder filtrar las busquedas dado
+     * el apellido de un cliente
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaApellido() {
         return busquedaApellido;
     }
 
+    /**
+     * Retorno el campo busquedaCodigoArticulo para poder filtrar las busquedas
+     * dado el codigo de un articulo
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaCodigoArticulo() {
         return busquedaCodigoArticulo;
     }
 
+    /**
+     * Retorno la tabla clientescon tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaClientesDefault() {
         return tablaClientesDefault;
     }
 
+    /**
+     * Retorno boton borrarArticulosSeleccionados para borrar los articulos
+     * seleccionados en la tabla factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getBorrarArticulosSeleccionados() {
         return borrarArticulosSeleccionados;
     }
 
+    /**
+     * Retorno boton modificar para confirmar cambios realizados en una factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getModificar() {
         return modificar;
     }
 
+    /**
+     * Retorno el campo busquedaCodigoCliente para poder filtrar las busquedas
+     * dado el id de un cliente
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaCodigoCliente() {
         return busquedaCodigoCliente;
     }
 
+    /**
+     * Retorno el campo busquedaMarca para poder filtrar las busquedas dado la
+     * marca de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaMarca() {
         return busquedaMarca;
     }
 
+    /**
+     * Retorno el campo busquedaCodigoNombre para poder filtrar las busquedas
+     * dado el nombre de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaNombre() {
         return busquedaNombre;
     }
 
+    /**
+     * Retorno boton clienteALafacutra para enviar el cliente seleccionado al
+     * campo cliente en el panel de la factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getClienteALaFactura() {
         return clienteALaFactura;
     }
 
+    /**
+     * Retorno el campo del cliente de la factura
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getClienteFactura() {
         return clienteFactura;
     }
 
+    /**
+     * Retorno boton facturaNueva en donde limpia los campos de la factura para
+     * iniciar una nueva venta
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getFacturaNueva() {
         return facturaNueva;
     }
 
+    /**
+     * Retorno la tabla clientes con tipo JTable
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTablaClientes() {
         return tablaClientes;
     }
 
-    public JButton getRealizarEImprimir() {
-        return imprimir;
-    }
-
+    /**
+     * Retorno boton realizar venta para confirmar la venta, se debe guardar los
+     * datos en la base de datos
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getRealizarVenta() {
         return realizarVenta;
     }
 
+    /**
+     * Retorno tabla articulos con tipo JTable
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTablaArticulos() {
         return tablaArticulos;
     }
 
+    /**
+     * Retorno tabla factura con tipo JTable
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTablaFactura() {
         return tablaFactura;
     }
 
+    /**
+     * Retorno el campo totalFactura que contiene el resultado final del a
+     * factura
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getTotalFactura() {
         return totalFactura;
     }
 
+    /**
+     * Retorno el calendario que contiene la fecha de la factura
+     *
+     * @param
+     * @return JDateChooser
+     * @exception
+     */
     public JDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
 
+    /**
+     * Retorno el boton imprimir para que se abra el dialo de impresion de
+     * jasperReport
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getImprimir() {
         return imprimir;
     }

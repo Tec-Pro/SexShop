@@ -22,16 +22,35 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
         initComponents();
     }
 
+    /**
+     * Seteo actionListener al boton aceptar
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public void setActionListener(ActionListener lis) {
         this.aceptar.addActionListener(lis);
     }
 
-    //retorno boton aceptar
+    /**
+     * Retorno boton aceptar
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public JButton getAceptar() {
         return aceptar;
     }
 
-    //retorno spinner que contiene el porcentaje
+    /**
+     * retorno spinner que contiene la cantidad en porcentaje
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public JSpinner getPorcentaje() {
         return porcentaje;
     }
@@ -112,7 +131,6 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;
     private javax.swing.JButton cancelar;

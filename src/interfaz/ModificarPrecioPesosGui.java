@@ -6,7 +6,6 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 /**
@@ -23,16 +22,35 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
         initComponents();
     }
 
+    /**
+     * Seteo actionListener al boton aceptar
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public void setActionListener(ActionListener lis) {
         this.aceptar.addActionListener(lis);
     }
 
-    //retorno boton aceptar
+    /**
+     * Retorno boton aceptar
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public JButton getAceptar() {
         return aceptar;
     }
 
-    //retorno spinner que contiene el porcentaje
+    /**
+     * retorno campo que contiene la cantidad en pesos
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public JTextField getPesos() {
         return pesos;
     }
@@ -115,8 +133,6 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;
     private javax.swing.JButton cancelar;

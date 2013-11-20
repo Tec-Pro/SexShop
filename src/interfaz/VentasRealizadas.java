@@ -6,16 +6,10 @@ package interfaz;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import org.freixas.jcalendar.DateEvent;
-import org.freixas.jcalendar.DateListener;
-
 
 /**
  *
@@ -33,18 +27,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
         initComponents();
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();//conveirto la tabla
         tablaFacturasDefault = (DefaultTableModel) tablaFacturas.getModel();
-        calendarioDesde.getJCalendar().addPropertyChangeListener("calendar", new PropertyChangeListener() {
-    @Override
-    public void propertyChange(PropertyChangeEvent e) {
-        final Calendar c = (Calendar) e.getNewValue();   
-        //aca tenés el formato de la fecha, así tal cual te imprime el formato de sql
-        System.out.println(c.get(Calendar.YEAR)+"-" +c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE));   
     }
-});
-    }
-    
-
-  
 
     public void setActionListener(ActionListener lis) {
         this.imprimir.addActionListener(lis); //boton imprimir
@@ -52,7 +35,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
         this.modificar.addActionListener(lis); //boton modificar
         this.eliminar.addActionListener(lis); //boton eliminar
     }
-    
+
     public JTextField getFiltroApellido() {
         return filtroApellido;
     }
@@ -61,7 +44,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
         return filtroNombre;
     }
 
-    public  JDateChooser getCalendarioFactura() {
+    public JDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
 
@@ -76,8 +59,6 @@ public class VentasRealizadas extends javax.swing.JPanel {
     public JButton getModificar() {
         return modificar;
     }
-
-
 
     public JTextField getClienteFactura() {
         return clienteFactura;
@@ -118,7 +99,6 @@ public class VentasRealizadas extends javax.swing.JPanel {
     public JDateChooser getCalendarioHasta() {
         return calendarioHasta;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -423,7 +403,6 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser calendarioDesde;
     private com.toedter.calendar.JDateChooser calendarioFactura;
@@ -457,24 +436,4 @@ public class VentasRealizadas extends javax.swing.JPanel {
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField totalFactura;
     // End of variables declaration//GEN-END:variables
-
-
-private class MyDateListener
-      implements DateListener
-{
-
-public void
-dateChanged(
-    DateEvent e)
-{
-    Calendar c = e.getSelectedDate();
-    if (c != null) {
-	System.out.println(c.getTime());
-    }
-    else {
-	System.out.println("No se selecciono nada");
-    }
-}
-
-}
 }
