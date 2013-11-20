@@ -11,6 +11,7 @@ import modelos.Producto;
 import modelos.ProductosComprado;
 import modelos.Proveedor;
 import net.sf.jasperreports.engine.util.Pair;
+import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.LazyList;
 
 /**
@@ -25,6 +26,8 @@ public class ABMCompra implements ABMInterface<Compra> {
     //LISTA PARA PROBAR
     @Override
     public boolean alta(Compra c) {
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        Base.openTransaction();
         boolean resultOp = true;
         Integer idProveedor = (Integer) c.get("idproveedor");
         c.set("monto", calcularMonto(c.getProductos()));//seteo el monto de la venta total en el modelo
@@ -33,6 +36,8 @@ public class ABMCompra implements ABMInterface<Compra> {
         int idCompra = compra.getInteger("id");
         resultOp = resultOp && cargarProductosComprados(idCompra, c.getProductos());//guardo los productos vendidos
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos vendidos
+        Base.commitTransaction();
+        Base.close();
         return resultOp;
     }
 
@@ -43,9 +48,13 @@ public class ABMCompra implements ABMInterface<Compra> {
      */
     @Override
     public boolean baja(Compra c) {
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        Base.openTransaction();
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
         ProductosComprado.delete("idcompra = ?", idCompra);//elimino todos los productoscomprados
+        Base.commitTransaction();
+        Base.close();
         return compra.delete();//elimino la compra y todos los registros que la referencian
     }
 
@@ -53,6 +62,8 @@ public class ABMCompra implements ABMInterface<Compra> {
     //LISTA PARA PROBAR
     @Override
     public boolean modificar(Compra c) {
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        Base.openTransaction();
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");
         Integer idProveedor = c.getInteger("idproveedor");
@@ -61,11 +72,15 @@ public class ABMCompra implements ABMInterface<Compra> {
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
         resultOp = resultOp && cargarProductosComprados(idCompra, c.getProductos());//guardo los productos nuevos
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos comprados
+        Base.commitTransaction();
+        Base.close();
         return resultOp;
     }
 
     //PROBAR
     public boolean bajaConDevolucion(Compra c){
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        Base.openTransaction();
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
@@ -73,6 +88,8 @@ public class ABMCompra implements ABMInterface<Compra> {
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
         ProductosComprado.delete("idcompra = ?", idCompra);//elimino todos los productosvendidos
         resultOp = resultOp && compra.delete(); //elimino la venta
+        Base.commitTransaction();
+        Base.close();
         return resultOp;
     }
     
