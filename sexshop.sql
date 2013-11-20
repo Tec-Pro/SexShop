@@ -87,6 +87,7 @@ create table productos_vendidos (
     idventa integer not null,
     idproducto integer not null,
     cantidad integer not null,
+    precio_final float not null,
     primary key(idventa,idproducto),
     foreign key (idventa) references ventas(id),
     foreign key(idproducto) references productos(numero_producto)
