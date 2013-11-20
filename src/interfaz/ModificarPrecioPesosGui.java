@@ -7,6 +7,7 @@ package interfaz;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
     }
 
     //retorno spinner que contiene el porcentaje
-    public JSpinner getPesos() {
+    public JTextField getPesos() {
         return pesos;
     }
 
@@ -51,7 +52,7 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
         panelImage2 = new org.edisoncor.gui.panel.PanelImage();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        pesos = new javax.swing.JSpinner();
+        pesos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificación de precios");
@@ -80,6 +81,8 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Century Schoolbook L", 1, 18)); // NOI18N
         jLabel1.setText("$");
 
+        pesos.setToolTipText("Ingrese el monto en numero real ");
+
         javax.swing.GroupLayout panelImage2Layout = new javax.swing.GroupLayout(panelImage2);
         panelImage2.setLayout(panelImage2Layout);
         panelImage2Layout.setHorizontalGroup(
@@ -101,7 +104,7 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
                     .addComponent(pesos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelImage2, java.awt.BorderLayout.CENTER);
@@ -121,6 +124,6 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private org.edisoncor.gui.panel.PanelImage panelImage1;
     private org.edisoncor.gui.panel.PanelImage panelImage2;
-    private javax.swing.JSpinner pesos;
+    private javax.swing.JTextField pesos;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,39 +19,58 @@ public class VentasRealizadas extends javax.swing.JPanel {
 
     private DefaultTableModel tablaFacturaDefault;//tabla default de los clientes
     private DefaultTableModel tablaFacturasDefault;
+
     /**
      * Creates new form AbmClienteGui
      */
     public VentasRealizadas() {
         initComponents();
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();//conveirto la tabla
-        tablaFacturasDefault= (DefaultTableModel) tablaFacturas.getModel();
+        tablaFacturasDefault = (DefaultTableModel) tablaFacturas.getModel();
 
     }
-    
+
     public void setActionListener(ActionListener lis) {
-        this.imprimir.addActionListener(lis);
-        this.guardarCambios.addActionListener(lis);
+        this.imprimir.addActionListener(lis); //boton imprimir
+        this.devolucion.addActionListener(lis); //boton devolucion
+        this.modificar.addActionListener(lis); //boton modificar
+        this.eliminar.addActionListener(lis); //boton eliminar
     }
     
-    public DBDateChooser getCalendarioBusqueda() {
-        return calendarioBusqueda;
+    public JTextField getFiltroApellido() {
+        return filtroApellido;
+    }
+
+    public JTextField getFiltroNombre() {
+        return filtroNombre;
     }
 
     public DBDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
 
+    public JButton getDevolucion() {
+        return devolucion;
+    }
+
+    public JButton getEliminar() {
+        return eliminar;
+    }
+
+    public JButton getModificar() {
+        return modificar;
+    }
+
+    public DBDateChooser getCalendarioBusquedaDesde() {
+        return calendarioBusquedaDesde;
+    }
+
+    public DBDateChooser getCalendarioBusquedaHasta() {
+        return calendarioBusquedaHasta;
+    }
+
     public JTextField getClienteFactura() {
         return clienteFactura;
-    }
-
-    public JTextField getFiltroClientes() {
-        return filtroClientes;
-    }
-
-    public JButton getGuardarCambios() {
-        return guardarCambios;
     }
 
     public JButton getImprimir() {
@@ -66,6 +85,10 @@ public class VentasRealizadas extends javax.swing.JPanel {
         return tablaFacturasDefault;
     }
 
+    public JTextField getFiltroId() {
+        return filtroId;
+    }
+
     public JTable getTablaFactura() {
         return tablaFactura;
     }
@@ -77,9 +100,6 @@ public class VentasRealizadas extends javax.swing.JPanel {
     public JTextField getTotalFactura() {
         return totalFactura;
     }
-
-   
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,15 +124,23 @@ public class VentasRealizadas extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         calendarioFactura = new com.gui.DBDateChooser();
         panelControlFactura = new org.edisoncor.gui.panel.PanelImage();
-        guardarCambios = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        devolucion = new javax.swing.JButton();
         imprimir = new javax.swing.JButton();
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaFacturas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        filtroClientes = new javax.swing.JTextField();
-        calendarioBusqueda = new com.gui.DBDateChooser();
+        filtroNombre = new javax.swing.JTextField();
+        calendarioBusquedaDesde = new com.gui.DBDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        calendarioBusquedaHasta = new com.gui.DBDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        filtroApellido = new javax.swing.JTextField();
+        filtroId = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(825, 448));
 
@@ -133,6 +161,8 @@ public class VentasRealizadas extends javax.swing.JPanel {
         labelCliente.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelCliente.setText("Cliente");
 
+        clienteFactura.setEditable(false);
+
         tablaFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -145,7 +175,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -176,14 +206,14 @@ public class VentasRealizadas extends javax.swing.JPanel {
         panelFactura.setLayout(panelFacturaLayout);
         panelFacturaLayout.setHorizontalGroup(
             panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
             .addGroup(panelFacturaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFacturaLayout.createSequentialGroup()
                         .addComponent(labelCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                        .addComponent(clienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,16 +244,25 @@ public class VentasRealizadas extends javax.swing.JPanel {
 
         panelControlFactura.setLayout(new java.awt.GridLayout(1, 0));
 
-        guardarCambios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/guardar.png"))); // NOI18N
-        guardarCambios.setToolTipText("Guardar cambios realizados en la factura");
-        panelControlFactura.add(guardarCambios);
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/modificar.png"))); // NOI18N
+        modificar.setToolTipText("Modificar factura");
+        panelControlFactura.add(modificar);
+
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrar.png"))); // NOI18N
+        eliminar.setToolTipText("Eliminar el registro de la venta de la base de datos");
+        panelControlFactura.add(eliminar);
+
+        devolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/devolver.png"))); // NOI18N
+        devolucion.setToolTipText("Factura cancelada (Se borrará)");
+        panelControlFactura.add(devolucion);
 
         imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/imprimir.png"))); // NOI18N
-        imprimir.setToolTipText("RAbrir dialogo de impresion o exportarción");
+        imprimir.setToolTipText("Abrir dialogo de impresion o exportarción");
         panelControlFactura.add(imprimir);
 
         panelImage1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas realizadas", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
+        tablaFacturas.setAutoCreateRowSorter(true);
         tablaFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -247,13 +286,37 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaFacturas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(tablaFacturas);
 
         jLabel1.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
-        jLabel1.setText("Fecha");
+        jLabel1.setText("Desde");
 
         jLabel2.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
-        jLabel2.setText("Cliente");
+        jLabel2.setText("Nombre");
+
+        filtroNombre.setToolTipText("filtrar facturas por nombre del cliente");
+
+        calendarioBusquedaDesde.setToolTipText("Filtrar busqueda de ventas realizadas desde la fecha");
+
+        jLabel4.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
+        jLabel4.setText("Hasta");
+
+        calendarioBusquedaHasta.setToolTipText("Filtrar busqueda de ventas realizadas hasta la fecha");
+
+        jLabel5.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
+        jLabel5.setText("Apellido");
+
+        filtroApellido.setToolTipText("Filtrar facturas por apellido del cliente");
+
+        filtroId.setToolTipText("Filtrar facturas por ID del cliente");
+        filtroId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtroIdActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("ID");
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -261,30 +324,51 @@ public class VentasRealizadas extends javax.swing.JPanel {
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(panelImage1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(calendarioBusquedaHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(calendarioBusquedaDesde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(2, 2, 2)
+                .addComponent(jLabel6)
+                .addGap(1, 1, 1)
+                .addComponent(filtroId, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage1Layout.createSequentialGroup()
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtroClientes)
-                    .addGroup(panelImage1Layout.createSequentialGroup()
-                        .addComponent(calendarioBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 78, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(filtroNombre)
+                    .addComponent(filtroApellido)))
         );
         panelImage1Layout.setVerticalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage1Layout.createSequentialGroup()
+            .addGroup(panelImage1Layout.createSequentialGroup()
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(filtroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filtroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(filtroApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendarioBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(filtroId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6))
+                    .addGroup(panelImage1Layout.createSequentialGroup()
+                        .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(calendarioBusquedaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(9, 9, 9)
+                        .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(calendarioBusquedaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout fondoImagenLayout = new javax.swing.GroupLayout(fondoImagen);
@@ -330,22 +414,35 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void filtroIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtroIdActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.gui.DBDateChooser calendarioBusqueda;
+    private com.gui.DBDateChooser calendarioBusquedaDesde;
+    private com.gui.DBDateChooser calendarioBusquedaHasta;
     private com.gui.DBDateChooser calendarioFactura;
     private javax.swing.JTextField clienteFactura;
-    private javax.swing.JTextField filtroClientes;
+    private javax.swing.JButton devolucion;
+    private javax.swing.JButton eliminar;
+    private javax.swing.JTextField filtroApellido;
+    private javax.swing.JTextField filtroId;
+    private javax.swing.JTextField filtroNombre;
     private org.edisoncor.gui.panel.PanelImage fondoImagen;
-    private javax.swing.JButton guardarCambios;
     private javax.swing.JButton imprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel labelCliente;
     private javax.swing.JLabel labelTotal;
+    private javax.swing.JButton modificar;
     private org.edisoncor.gui.panel.PanelImage panelControlFactura;
     private org.edisoncor.gui.panel.PanelImage panelFactura;
     private org.edisoncor.gui.panel.PanelImage panelImage1;

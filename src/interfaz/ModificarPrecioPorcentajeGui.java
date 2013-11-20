@@ -78,6 +78,8 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Century Schoolbook L", 1, 18)); // NOI18N
         jLabel1.setText("%");
 
+        porcentaje.setToolTipText("Ingrese la cantidad medida en porcentaje");
+
         javax.swing.GroupLayout panelImage2Layout = new javax.swing.GroupLayout(panelImage2);
         panelImage2.setLayout(panelImage2Layout);
         panelImage2Layout.setHorizontalGroup(
