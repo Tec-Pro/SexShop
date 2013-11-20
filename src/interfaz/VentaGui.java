@@ -6,11 +6,14 @@ package interfaz;
 
 import com.gui.DBDateChooser;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import org.freixas.jcalendar.JCalendarCombo;
 
 /**
  *
@@ -30,6 +33,7 @@ public class VentaGui extends javax.swing.JPanel {
         tablaArticulosDefault = (DefaultTableModel) tablaArticulos.getModel();//conveirto la tabla
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();
         tablaClientesDefault = (DefaultTableModel) tablaClientes.getModel();
+        calendarioFactura.setDateFormat(DateFormat.getDateInstance(DateFormat.DEFAULT));
 
     }
 
@@ -115,7 +119,7 @@ public class VentaGui extends javax.swing.JPanel {
         return totalFactura;
     }
 
-    public DBDateChooser getCalendarioFactura() {
+    public JCalendarCombo getCalendarioFactura() {
         return calendarioFactura;
     }
 
@@ -164,9 +168,9 @@ public class VentaGui extends javax.swing.JPanel {
         tablaFactura = new javax.swing.JTable();
         labelTotal = new javax.swing.JLabel();
         totalFactura = new javax.swing.JTextField();
-        calendarioFactura = new com.gui.DBDateChooser();
         jLabel3 = new javax.swing.JLabel();
         borrarArticulosSeleccionados = new javax.swing.JButton();
+        calendarioFactura = new org.freixas.jcalendar.JCalendarCombo();
         panelControlFactura = new org.edisoncor.gui.panel.PanelImage();
         facturaNueva = new javax.swing.JButton();
         realizarVenta = new javax.swing.JButton();
@@ -431,6 +435,8 @@ public class VentaGui extends javax.swing.JPanel {
         borrarArticulosSeleccionados.setText("Borrar articulos seleccionados");
         borrarArticulosSeleccionados.setToolTipText("Borrar articulos seleccionados en la factura");
 
+        calendarioFactura.setDate(new Date());
+
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
         panelFacturaLayout.setHorizontalGroup(
@@ -444,7 +450,7 @@ public class VentaGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturaLayout.createSequentialGroup()
                 .addComponent(borrarArticulosSeleccionados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -460,11 +466,11 @@ public class VentaGui extends javax.swing.JPanel {
                     .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelCliente)
                         .addComponent(clienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(calendarioFactura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)))
+                    .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(borrarArticulosSeleccionados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -543,7 +549,7 @@ public class VentaGui extends javax.swing.JPanel {
     private javax.swing.JTextField busquedaCodigoCliente;
     private javax.swing.JTextField busquedaMarca;
     private javax.swing.JTextField busquedaNombre;
-    private com.gui.DBDateChooser calendarioFactura;
+    private org.freixas.jcalendar.JCalendarCombo calendarioFactura;
     private javax.swing.JButton clienteALaFactura;
     private javax.swing.JTextField clienteFactura;
     private javax.swing.JButton facturaNueva;

@@ -493,7 +493,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="calendarioFactura" min="-2" max="-2" attributes="0"/>
+                          <Component id="calendarioFactura" min="-2" pref="144" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -513,13 +513,13 @@
                                   <Component id="labelCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="clienteFactura" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="calendarioFactura" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="calendarioFactura" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPane8" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane8" pref="168" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="borrarArticulosSeleccionados" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
@@ -610,8 +610,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="com.gui.DBDateChooser" name="calendarioFactura">
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -627,6 +625,16 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Borrar articulos seleccionados"/>
                     <Property name="toolTipText" type="java.lang.String" value="Borrar articulos seleccionados en la factura"/>
+                  </Properties>
+                </Component>
+                <Component class="org.freixas.jcalendar.JCalendarCombo" name="calendarioFactura">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                    <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new Date()" type="code"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>

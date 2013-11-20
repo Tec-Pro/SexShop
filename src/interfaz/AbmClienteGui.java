@@ -6,6 +6,7 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
