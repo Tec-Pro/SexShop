@@ -104,6 +104,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="porcentaje">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese la cantidad medida en porcentaje"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

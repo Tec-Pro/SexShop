@@ -408,6 +408,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(tabla);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(75);

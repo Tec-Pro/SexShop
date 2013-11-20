@@ -45,7 +45,7 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         //venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
-        tab.add("Venta nueva", venta);
+        tab.add("Venta", venta);
         tab.add("ventas realizadas", ventasRealizadas);
         tab.add("Proveedor", abmProveedor);
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");

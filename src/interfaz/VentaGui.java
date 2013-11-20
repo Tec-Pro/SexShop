@@ -20,16 +20,19 @@ public class VentaGui extends javax.swing.JPanel {
 
     private DefaultTableModel tablaArticulosDefault;//tabla default de los clientes
     private DefaultTableModel tablaFacturaDefault;
+    private DefaultTableModel tablaClientesDefault;
+
     /**
      * Creates new form AbmClienteGui
      */
     public VentaGui() {
         initComponents();
         tablaArticulosDefault = (DefaultTableModel) tablaArticulos.getModel();//conveirto la tabla
-        tablaFacturaDefault= (DefaultTableModel) tablaFactura.getModel();
+        tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();
+        tablaClientesDefault = (DefaultTableModel) tablaClientes.getModel();
 
     }
-    
+
     public void setActionListener(ActionListener lis) {
         this.articulosALaFactura.addActionListener(lis);
         this.clienteALaFactura.addActionListener(lis);
@@ -41,6 +44,10 @@ public class VentaGui extends javax.swing.JPanel {
     }
 
     public DefaultTableModel getTablaArticulosDefault() {
+        return tablaArticulosDefault;
+    }
+
+    public DefaultTableModel getTablaclientesDefault() {
         return tablaArticulosDefault;
     }
 
@@ -84,8 +91,8 @@ public class VentaGui extends javax.swing.JPanel {
         return facturaNueva;
     }
 
-    public JList getListaClientes() {
-        return listaClientes;
+    public JTable getTablaClientes() {
+        return tablaClientes;
     }
 
     public JButton getRealizarEImprimir() {
@@ -115,10 +122,6 @@ public class VentaGui extends javax.swing.JPanel {
     public JButton getImprimir() {
         return imprimir;
     }
-    
-
- 
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,8 +151,8 @@ public class VentaGui extends javax.swing.JPanel {
         labelCodigo = new javax.swing.JLabel();
         busquedaApellido = new javax.swing.JTextField();
         labelApellido = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaClientes = new javax.swing.JList();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         clienteALaFactura = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -163,9 +166,11 @@ public class VentaGui extends javax.swing.JPanel {
         totalFactura = new javax.swing.JTextField();
         calendarioFactura = new com.gui.DBDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        borrarArticulosSeleccionados = new javax.swing.JButton();
         panelControlFactura = new org.edisoncor.gui.panel.PanelImage();
         facturaNueva = new javax.swing.JButton();
         realizarVenta = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
         imprimir = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(825, 448));
@@ -210,6 +215,7 @@ public class VentaGui extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaArticulos.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane6.setViewportView(tablaArticulos);
 
         labelBusquedaCodigo.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
@@ -239,7 +245,7 @@ public class VentaGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(busquedaCodigoArticulo)
+                    .addComponent(busquedaCodigoArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(busquedaMarca)
                     .addComponent(busquedaNombre)))
             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -259,7 +265,7 @@ public class VentaGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaMarca)
                     .addComponent(busquedaMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         panelClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
@@ -274,22 +280,46 @@ public class VentaGui extends javax.swing.JPanel {
         labelApellido.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelApellido.setText("Apellido");
 
-        listaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(listaClientes);
+        tablaClientes.setAutoCreateRowSorter(true);
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cod.", "Nombre", "Apellido"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane7.setViewportView(tablaClientes);
 
         javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
         panelClientes.setLayout(panelClientesLayout);
         panelClientesLayout.setHorizontalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelApellido)
                     .addComponent(labelCodigo))
                 .addGap(17, 17, 17)
                 .addGroup(panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(busquedaApellido)
+                    .addComponent(busquedaApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                     .addComponent(busquedaCodigoCliente)))
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelClientesLayout.setVerticalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,19 +332,21 @@ public class VentaGui extends javax.swing.JPanel {
                     .addComponent(busquedaCodigoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(null);
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         clienteALaFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/enviar.png"))); // NOI18N
+        clienteALaFactura.setToolTipText("Cargar cliente a la factura");
         jPanel1.add(clienteALaFactura);
 
         jPanel3.setBorder(null);
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         articulosALaFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/enviar.png"))); // NOI18N
+        articulosALaFactura.setToolTipText("Cargar articulos a la factura");
         jPanel3.add(articulosALaFactura);
 
         javax.swing.GroupLayout panelClientesAarticulosLayout = new javax.swing.GroupLayout(panelClientesAarticulos);
@@ -334,23 +366,26 @@ public class VentaGui extends javax.swing.JPanel {
         panelClientesAarticulosLayout.setVerticalGroup(
             panelClientesAarticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesAarticulosLayout.createSequentialGroup()
-                .addGroup(panelClientesAarticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(panelClientesAarticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelClientesAarticulosLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
+                .addGroup(panelClientesAarticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelClientesAarticulosLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelClientesAarticulosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelClientesAarticulosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(panelArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         panelFactura.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Factura", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         labelCliente.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelCliente.setText("Cliente");
+
+        clienteFactura.setEditable(false);
 
         tablaFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -375,6 +410,7 @@ public class VentaGui extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tablaFactura.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane8.setViewportView(tablaFactura);
         tablaFactura.getColumnModel().getColumn(0).setPreferredWidth(75);
         tablaFactura.getColumnModel().getColumn(0).setMaxWidth(75);
@@ -391,28 +427,31 @@ public class VentaGui extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
 
+        borrarArticulosSeleccionados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrarSeleccionado.png"))); // NOI18N
+        borrarArticulosSeleccionados.setText("Borrar articulos seleccionados");
+        borrarArticulosSeleccionados.setToolTipText("Borrar articulos seleccionados en la factura");
+
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
         panelFacturaLayout.setHorizontalGroup(
             panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
             .addGroup(panelFacturaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelFacturaLayout.createSequentialGroup()
-                        .addComponent(labelCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clienteFactura)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(panelFacturaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(labelTotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(labelCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clienteFactura)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturaLayout.createSequentialGroup()
+                .addComponent(borrarArticulosSeleccionados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelFacturaLayout.setVerticalGroup(
             panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,9 +466,11 @@ public class VentaGui extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTotal)))
+                .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(borrarArticulosSeleccionados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(totalFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelTotal))))
         );
 
         panelControlFactura.setLayout(new java.awt.GridLayout(1, 0));
@@ -441,6 +482,11 @@ public class VentaGui extends javax.swing.JPanel {
         realizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/vender.png"))); // NOI18N
         realizarVenta.setToolTipText("Solo registrar la venta");
         panelControlFactura.add(realizarVenta);
+
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/guardar.png"))); // NOI18N
+        modificar.setToolTipText("Guardar cambios realizados en la edición de la factura");
+        modificar.setEnabled(false);
+        panelControlFactura.add(modificar);
 
         imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/imprimir.png"))); // NOI18N
         imprimir.setToolTipText("Abrir dialogo de impresión o exportarción");
@@ -489,9 +535,9 @@ public class VentaGui extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton articulosALaFactura;
+    private javax.swing.JButton borrarArticulosSeleccionados;
     private javax.swing.JTextField busquedaApellido;
     private javax.swing.JTextField busquedaCodigoArticulo;
     private javax.swing.JTextField busquedaCodigoCliente;
@@ -507,8 +553,8 @@ public class VentaGui extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelBusquedaCodigo;
@@ -517,7 +563,7 @@ public class VentaGui extends javax.swing.JPanel {
     private javax.swing.JLabel labelCliente;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelTotal;
-    private javax.swing.JList listaClientes;
+    private javax.swing.JButton modificar;
     private org.edisoncor.gui.panel.PanelImage panelArticulos;
     private org.edisoncor.gui.panel.PanelImage panelClientes;
     private org.edisoncor.gui.panel.PanelImage panelClientesAarticulos;
@@ -526,6 +572,7 @@ public class VentaGui extends javax.swing.JPanel {
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JButton realizarVenta;
     private javax.swing.JTable tablaArticulos;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaFactura;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField totalFactura;
