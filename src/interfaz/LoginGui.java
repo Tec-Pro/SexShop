@@ -57,10 +57,10 @@ public class LoginGui extends javax.swing.JFrame {
 
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         jLabel1 = new javax.swing.JLabel();
-        panelButton = new org.edisoncor.gui.panel.PanelImage();
+        panelButton = new javax.swing.JPanel();
         login = new javax.swing.JButton();
         salir = new javax.swing.JButton();
-        panelImage3 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
@@ -160,8 +160,8 @@ public class LoginGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton login;
-    private org.edisoncor.gui.panel.PanelImage panelButton;
-    private org.edisoncor.gui.panel.PanelImage panelImage3;
+    private javax.swing.JPanel panelButton;
+    private javax.swing.JPanel panelImage3;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JPasswordField password;
     private javax.swing.JButton salir;

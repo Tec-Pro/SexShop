@@ -81,7 +81,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="panelButton">
+    <Container class="org.edisoncor.gui.panel.PanelImage" name="panelButton">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
         <Property name="columns" type="int" value="0"/>
@@ -100,7 +100,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="panelImage3">
+    <Container class="org.edisoncor.gui.panel.PanelImage" name="panelImage3">
 
       <Layout>
         <DimensionLayout dim="0">

@@ -37,7 +37,7 @@ public class ArticulosCompradosGui extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imagenFondo = new org.edisoncor.gui.panel.PanelImage();
+        imagenFondo = new javax.swing.JPanel();
         aceptar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -98,7 +98,7 @@ public class ArticulosCompradosGui extends javax.swing.JDialog {
     }//GEN-LAST:event_aceptarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;
-    private org.edisoncor.gui.panel.PanelImage imagenFondo;
+    private javax.swing.JPanel imagenFondo;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

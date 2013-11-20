@@ -178,17 +178,17 @@ public class AbmProductoGui extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        fondoImagen = new org.edisoncor.gui.panel.PanelImage();
+        fondoImagen = new javax.swing.JPanel();
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         titulo = new javax.swing.JLabel();
-        panelControlArticulo = new org.edisoncor.gui.panel.PanelImage();
+        panelControlArticulo = new javax.swing.JPanel();
         nuevo = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
         borrar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         anterior = new javax.swing.JButton();
         siguiente = new javax.swing.JButton();
-        panelArticulo = new org.edisoncor.gui.panel.PanelImage();
+        panelArticulo = new javax.swing.JPanel();
         labelCodigo = new javax.swing.JLabel();
         idArticulo = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
@@ -205,7 +205,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
         stock = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         precioVenta = new javax.swing.JTextField();
-        panelArticulos = new org.edisoncor.gui.panel.PanelImage();
+        panelArticulos = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         labelBusquedaCodigo = new javax.swing.JLabel();
@@ -584,7 +584,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
     private javax.swing.JTextField busquedaCodigo;
     private javax.swing.JTextField busquedaMarca;
     private javax.swing.JTextField busquedaNombre;
-    private org.edisoncor.gui.panel.PanelImage fondoImagen;
+    private javax.swing.JPanel fondoImagen;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField idArticulo;
     private javax.swing.JLabel jLabel1;
@@ -604,9 +604,9 @@ public class AbmProductoGui extends javax.swing.JPanel {
     private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevo;
-    private org.edisoncor.gui.panel.PanelImage panelArticulo;
-    private org.edisoncor.gui.panel.PanelImage panelArticulos;
-    private org.edisoncor.gui.panel.PanelImage panelControlArticulo;
+    private javax.swing.JPanel panelArticulo;
+    private javax.swing.JPanel panelArticulos;
+    private javax.swing.JPanel panelControlArticulo;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JTextField precioCompra;
     private javax.swing.JTextField precioVenta;

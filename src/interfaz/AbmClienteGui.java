@@ -148,10 +148,10 @@ public class AbmClienteGui extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        fondoImagen = new org.edisoncor.gui.panel.PanelImage();
+        fondoImagen = new javax.swing.JPanel();
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         titulo = new javax.swing.JLabel();
-        panelCliente = new org.edisoncor.gui.panel.PanelImage();
+        panelCliente = new JPanel();
         labelCodigo = new javax.swing.JLabel();
         idCliente = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
@@ -165,14 +165,14 @@ public class AbmClienteGui extends javax.swing.JPanel {
         apellido = new javax.swing.JTextField();
         labelApellido = new javax.swing.JLabel();
         labelCelular = new javax.swing.JLabel();
-        panelControlCliente = new org.edisoncor.gui.panel.PanelImage();
+        panelControlCliente = new javax.swing.JPanel();
         nuevo = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
         borrar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         anterior = new javax.swing.JButton();
         siguiente = new javax.swing.JButton();
-        panelClientes = new org.edisoncor.gui.panel.PanelImage();
+        panelClientes = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         busquedaCodigo = new javax.swing.JTextField();
@@ -504,7 +504,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
     private javax.swing.JTextField busquedaCodigo;
     private javax.swing.JTextField celular;
     private javax.swing.JTextField email;
-    private org.edisoncor.gui.panel.PanelImage fondoImagen;
+    private javax.swing.JPanel fondoImagen;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField idCliente;
     private javax.swing.JLabel jLabel1;
@@ -520,9 +520,9 @@ public class AbmClienteGui extends javax.swing.JPanel {
     private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevo;
-    private org.edisoncor.gui.panel.PanelImage panelCliente;
-    private org.edisoncor.gui.panel.PanelImage panelClientes;
-    private org.edisoncor.gui.panel.PanelImage panelControlCliente;
+    private javax.swing.JPanel panelCliente;
+    private javax.swing.JPanel panelClientes;
+    private javax.swing.JPanel panelControlCliente;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JButton siguiente;
     private javax.swing.JTable tabla;

@@ -4,19 +4,18 @@
  */
 package interfaz;
 
-import com.gui.DBDateChooser;
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Calendar;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.freixas.jcalendar.DateEvent;
 import org.freixas.jcalendar.DateListener;
-import org.freixas.jcalendar.JCalendarCombo;
-import org.javalite.activejdbc.Base;
+
 
 /**
  *
@@ -34,14 +33,17 @@ public class VentasRealizadas extends javax.swing.JPanel {
         initComponents();
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();//conveirto la tabla
         tablaFacturasDefault = (DefaultTableModel) tablaFacturas.getModel();
-        MyDateListener dateListener= new MyDateListener();
-        calendarioDesde.setDateFormat(DateFormat.getDateInstance(DateFormat.DEFAULT));
-        calendarioHasta.setDateFormat(DateFormat.getDateInstance(DateFormat.DEFAULT));
-        calendarioFactura.setDateFormat(DateFormat.getDateInstance(DateFormat.DEFAULT));
-        calendarioDesde.addDateListener(dateListener);
-        calendarioHasta.addDateListener(dateListener);
+        calendarioDesde.getJCalendar().addPropertyChangeListener("calendar", new PropertyChangeListener() {
+    @Override
+    public void propertyChange(PropertyChangeEvent e) {
+        final Calendar c = (Calendar) e.getNewValue();   
+        //aca tenés el formato de la fecha, así tal cual te imprime el formato de sql
+        System.out.println(c.get(Calendar.YEAR)+"-" +c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE));   
+    }
+});
     }
     
+
   
 
     public void setActionListener(ActionListener lis) {
@@ -59,7 +61,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
         return filtroNombre;
     }
 
-    public  JCalendarCombo getCalendarioFactura() {
+    public  JDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
 
@@ -109,6 +111,15 @@ public class VentasRealizadas extends javax.swing.JPanel {
         return totalFactura;
     }
 
+    public JDateChooser getCalendarioDesde() {
+        return calendarioDesde;
+    }
+
+    public JDateChooser getCalendarioHasta() {
+        return calendarioHasta;
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,10 +130,10 @@ public class VentasRealizadas extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        fondoImagen = new org.edisoncor.gui.panel.PanelImage();
+        fondoImagen = new javax.swing.JPanel();
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         titulo = new javax.swing.JLabel();
-        panelFactura = new org.edisoncor.gui.panel.PanelImage();
+        panelFactura = new javax.swing.JPanel();
         labelCliente = new javax.swing.JLabel();
         clienteFactura = new javax.swing.JTextField();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -130,13 +141,13 @@ public class VentasRealizadas extends javax.swing.JPanel {
         labelTotal = new javax.swing.JLabel();
         totalFactura = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        calendarioFactura = new org.freixas.jcalendar.JCalendarCombo();
-        panelControlFactura = new org.edisoncor.gui.panel.PanelImage();
+        calendarioFactura = new com.toedter.calendar.JDateChooser();
+        panelControlFactura = new javax.swing.JPanel();
         modificar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         devolucion = new javax.swing.JButton();
         imprimir = new javax.swing.JButton();
-        panelImage1 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaFacturas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -147,8 +158,8 @@ public class VentasRealizadas extends javax.swing.JPanel {
         filtroApellido = new javax.swing.JTextField();
         filtroId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        calendarioDesde = new org.freixas.jcalendar.JCalendarCombo();
-        calendarioHasta = new org.freixas.jcalendar.JCalendarCombo();
+        calendarioDesde = new com.toedter.calendar.JDateChooser();
+        calendarioHasta = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(825, 448));
 
@@ -210,8 +221,6 @@ public class VentasRealizadas extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
 
-        calendarioFactura.setDate(new Date());
-
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
         panelFacturaLayout.setHorizontalGroup(
@@ -227,8 +236,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelFacturaLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(labelTotal)
@@ -238,11 +246,12 @@ public class VentasRealizadas extends javax.swing.JPanel {
         panelFacturaLayout.setVerticalGroup(
             panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFacturaLayout.createSequentialGroup()
-                .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCliente)
-                    .addComponent(clienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelCliente)
+                        .addComponent(clienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,11 +327,6 @@ public class VentasRealizadas extends javax.swing.JPanel {
 
         jLabel6.setText("ID");
 
-        calendarioDesde.setDate(new Date(113,1,1));
-        calendarioDesde.setPreferredSize(new java.awt.Dimension(30, 40));
-
-        calendarioHasta.setDate(new Date());
-
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
         panelImage1Layout.setHorizontalGroup(
@@ -340,12 +344,12 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelImage1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(calendarioHasta, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calendarioHasta, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
                     .addGroup(panelImage1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(calendarioDesde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calendarioDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(2, 2, 2)
                 .addComponent(jLabel6)
                 .addGap(1, 1, 1)
@@ -364,13 +368,13 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGap(7, 7, 7)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(filtroId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(filtroId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6))
-                    .addComponent(calendarioDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(calendarioDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(calendarioHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(calendarioHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -421,16 +425,16 @@ public class VentasRealizadas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.freixas.jcalendar.JCalendarCombo calendarioDesde;
-    private org.freixas.jcalendar.JCalendarCombo calendarioFactura;
-    private org.freixas.jcalendar.JCalendarCombo calendarioHasta;
+    private com.toedter.calendar.JDateChooser calendarioDesde;
+    private com.toedter.calendar.JDateChooser calendarioFactura;
+    private com.toedter.calendar.JDateChooser calendarioHasta;
     private javax.swing.JTextField clienteFactura;
     private javax.swing.JButton devolucion;
     private javax.swing.JButton eliminar;
     private javax.swing.JTextField filtroApellido;
     private javax.swing.JTextField filtroId;
     private javax.swing.JTextField filtroNombre;
-    private org.edisoncor.gui.panel.PanelImage fondoImagen;
+    private javax.swing.JPanel fondoImagen;
     private javax.swing.JButton imprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -444,9 +448,9 @@ public class VentasRealizadas extends javax.swing.JPanel {
     private javax.swing.JLabel labelCliente;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JButton modificar;
-    private org.edisoncor.gui.panel.PanelImage panelControlFactura;
-    private org.edisoncor.gui.panel.PanelImage panelFactura;
-    private org.edisoncor.gui.panel.PanelImage panelImage1;
+    private javax.swing.JPanel panelControlFactura;
+    private javax.swing.JPanel panelFactura;
+    private javax.swing.JPanel panelImage1;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JTable tablaFactura;
     private javax.swing.JTable tablaFacturas;

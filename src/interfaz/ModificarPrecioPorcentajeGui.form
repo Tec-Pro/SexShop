@@ -24,7 +24,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="org.edisoncor.gui.panel.PanelImage" name="panelImage1">
+    <Container class="javax.swing.JPanel" name="panelImage1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Last"/>
@@ -51,7 +51,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="org.edisoncor.gui.panel.PanelImage" name="panelImage2">
+    <Container class="javax.swing.JPanel" name="panelImage2">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>

@@ -45,10 +45,10 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelImage1 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage1 = new javax.swing.JPanel();
         aceptar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        panelImage2 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         porcentaje = new javax.swing.JSpinner();
@@ -118,8 +118,8 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
     private javax.swing.JButton cancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private org.edisoncor.gui.panel.PanelImage panelImage1;
-    private org.edisoncor.gui.panel.PanelImage panelImage2;
+    private javax.swing.JPanel panelImage1;
+    private javax.swing.JPanel panelImage2;
     private javax.swing.JSpinner porcentaje;
     // End of variables declaration//GEN-END:variables
 }
