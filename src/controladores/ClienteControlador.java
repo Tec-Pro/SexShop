@@ -7,6 +7,8 @@ package controladores;
 import busquedas.busqueda;
 import abm.ABMCliente;
 import interfaz.AbmClienteGui;
+import interfaz.AplicacionGui;
+import interfaz.ArticulosCompradosGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
@@ -18,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelos.Cliente;
+import modelos.Producto;
 import org.javalite.activejdbc.Base;
 /**
  *
@@ -25,6 +28,7 @@ import org.javalite.activejdbc.Base;
  */
 public class ClienteControlador implements ActionListener {
     
+    private AplicacionGui apliGui;
     private busqueda cb;
     private AbmClienteGui clienteGui;
     private ABMCliente abmCliente;
@@ -35,13 +39,16 @@ public class ClienteControlador implements ActionListener {
     private JTextField bc;
     private DefaultTableModel tablaClientes;
     private JTable tabla;
+    private ArticulosCompradosGui artCom;
+    private List prodComprados;
     List<Cliente> cl;
 
-    public ClienteControlador(AbmClienteGui c){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+    public ClienteControlador(AplicacionGui apg){
+
+        apliGui = apg;
         cl = new LinkedList<Cliente>();
         cb = new busqueda();
-        clienteGui = c; //new AbmClienteGui();
+        clienteGui = apg.getAbmClienteGui(); //new AbmClienteGui();
         abmCliente = new ABMCliente();
         clienteGui.setActionListener(this);
         nuevoPulsado = false;
@@ -63,17 +70,18 @@ public class ClienteControlador implements ActionListener {
         tabla = clienteGui.getTabla();
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
             }
         });
         tablaClientes = clienteGui.getTablaClientes();  
-        cl = cb.filtroCliente("","");
-        actualizarLista();
-        Base.close();    
+        cl = cb.filtroCliente("","","");
+        //actualizarLista();
+
     }
     
     private void actualizarLista(){
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         tablaClientes.setRowCount(0);
         Iterator<Cliente> it = cl.iterator();
         while(it.hasNext()){
@@ -84,6 +92,7 @@ public class ClienteControlador implements ActionListener {
             row[1] = a.getString("apellido");
             tablaClientes.addRow(row);
         }
+        Base.close();   
     }
     
     private void agregarFila(Cliente c){
@@ -91,50 +100,36 @@ public class ClienteControlador implements ActionListener {
         row[0] = c.getId().toString();
         row[2] = c.getString("nombre");
         row[1] = c.getString("apellido");
-        tablaClientes.addRow(row);
-    }
-    
-    private void quitarFila(){
-        int r = tabla.getSelectedRow();
-        tablaClientes.removeRow(r);
-    }
-    
-    private void modificarFila(Cliente c){
-        int r = tabla.getSelectedRow();
-        tablaClientes.setValueAt(c.getId().toString(), r, 0);
-        tablaClientes.setValueAt(c.get("apellido").toString(), r, 1);
-        tablaClientes.setValueAt(c.get("nombre").toString(), r, 2);
+        tablaClientes.addRow(row);  
     }
     
     /*setea un cliente con los datos de los campos*/
     private void cargarDatosCliente(Cliente c, boolean id){
-        c.set("apellido",clienteGui.getApellido().getText());
-        c.set("nombre",clienteGui.getNombre().getText());
-        c.set("celular",clienteGui.getCelular().getText());
-        c.set("telefono",clienteGui.getTelFijo().getText());
-        c.set("mail",clienteGui.getEmail().getText());
-        if(id) c.setId(clienteGui.getIdCliente().getText());
+        c.set("apellido",TratamientoString.eliminarTildes(clienteGui.getApellido().getText()).toUpperCase());
+        c.set("nombre",TratamientoString.eliminarTildes(clienteGui.getNombre().getText()).toUpperCase());
+        c.set("celular",TratamientoString.eliminarTildes(clienteGui.getCelular().getText()).toUpperCase());
+        c.set("telefono",TratamientoString.eliminarTildes(clienteGui.getTelFijo().getText()).toUpperCase());
+        c.set("mail",TratamientoString.eliminarTildes(clienteGui.getEmail().getText()).toUpperCase());
+        if(id) c.setId(TratamientoString.eliminarTildes(clienteGui.getIdCliente().getText()).toUpperCase());
     }
     
     public void busquedaApellidoKeyReleased(java.awt.event.KeyEvent evt){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-        cl = cb.filtroCliente(ba.getText(),bc.getText());
+
+        cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
-        Base.close();      
+    
     }
     
      public void busquedaCodigoKeyReleased(java.awt.event.KeyEvent evt){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-        cl = cb.filtroCliente(ba.getText(),bc.getText());
+
+        cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
-        Base.close();      
+    
     }
     
     
     public void tablaMouseClicked(java.awt.event.MouseEvent evt){
-        if(!Base.hasConnection()){
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-        }
         clienteGui.habilitarCampos(false);
         nuevoPulsado = false;
         modificarPulsado = false;
@@ -143,13 +138,45 @@ public class ClienteControlador implements ActionListener {
         Cliente c = Cliente.findById(tabla.getValueAt(r, 0));
         clienteGui.CargarCampos(c);
         Base.close();
-        clienteGui.repaint();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        
         JButton b = (JButton)e.getSource();
+        if(b.equals(clienteGui.getArticulosComprados())){
+            artCom = new ArticulosCompradosGui(apliGui ,true);
+            prodComprados = cb.productosAdquiridos(clienteGui.getIdCliente().getText());
+            Iterator it = prodComprados.iterator();
+            String row[] = new String[4];
+            while(it.hasNext()){
+                Producto p = (Producto)it.next();
+                row[0] = p.get("id").toString();
+                row[1] = p.get("nombre").toString();
+                row[3] = p.get("marca").toString();
+                row[4] = p.get("tipo").toString();
+                artCom.getTablaProductosComprados().addRow(row);
+            }
+            artCom.setVisible(true);
+        }
+        if(b.equals(clienteGui.getSiguiente())){ //permite avanzar al siguiente cliente de la lista
+            int r = tabla.getSelectedRow();
+            if(tablaClientes.getRowCount()-1>r){
+                tabla.changeSelection(r+1,0, false, false);
+                r++;
+                Cliente c = Cliente.findById(tabla.getValueAt(r, 0));
+                clienteGui.CargarCampos(c);
+            }
+        }
+        if(b.equals(clienteGui.getAnterior())){////permite retroceder al cliente anterior de la lista
+            int r = tabla.getSelectedRow();
+            if(r>0){
+                tabla.changeSelection(tabla.getSelectedRow()-1,0, false, false);
+                r--;
+                Cliente c = Cliente.findById(tabla.getValueAt(r, 0));
+                clienteGui.CargarCampos(c);
+            }
+        }
         if(b.equals(clienteGui.getNuevo())){ //permite crear un nuevo cliente
             System.out.println("nuevo pulsado");
             clienteGui.limpiarCampos();
@@ -161,7 +188,13 @@ public class ClienteControlador implements ActionListener {
             System.out.println("pulsado guardar crear");
             Cliente c = new Cliente();
             cargarDatosCliente(c,false);
+            if(c.getString("nombre").equals("") || c.getString("apellido").equals("")){
+                JOptionPane.showMessageDialog(clienteGui,"Un cliente debe tener nombre y apellido");
+                Base.close();
+                return;
+            }
             if(abmCliente.alta(c)){
+                
                 JOptionPane.showMessageDialog(clienteGui,"Cliente registrado exitosamente");
                 c = abmCliente.getCliente(c);
                 agregarFila(c);
@@ -179,7 +212,8 @@ public class ClienteControlador implements ActionListener {
             cargarDatosCliente(cliente,true);
             if(abmCliente.modificar(cliente)){
                 JOptionPane.showMessageDialog(clienteGui,"Modificacion realizada con exito");
-                modificarFila(cliente);
+                cl = cb.filtroCliente("","","");
+                actualizarLista();
             }   
             else
                 JOptionPane.showMessageDialog(clienteGui,"No hay ningun cliente seleccionado");
@@ -201,12 +235,13 @@ public class ClienteControlador implements ActionListener {
                  cargarDatosCliente(cliente,true);
                  if(abmCliente.baja(cliente)){
                      JOptionPane.showMessageDialog(clienteGui,"Cliente borrado exitosamente");
-                     quitarFila();
+                     cl = cb.filtroCliente("","","");
+                     actualizarLista();
+                     clienteGui.limpiarCampos();
                  }
                  else
                      JOptionPane.showMessageDialog(clienteGui,"No hay ningun cliente seleccionado");
             }     
         }
-        Base.close();
     }  
 }
