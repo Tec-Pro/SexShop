@@ -102,5 +102,9 @@ public class busqueda {
         Base.close();
         return result;
     }
+     
+    public List<Proveedor> proveedores(){
+        return Proveedor.findAll();
+    }
 }
 
