@@ -64,6 +64,17 @@ public class ABMCompra implements ABMInterface<Compra> {
         return resultOp;
     }
 
+    //PROBAR
+    public boolean bajaConDevolucion(Compra c){
+        boolean resultOp = true;
+        Integer idCompra = c.getInteger("id");//saco el idCompra
+        Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
+        LinkedList<Pair> viejosProductos = buscarProductosComprados(idCompra); //saco los viejos productos de la venta
+        resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
+        ProductosComprado.delete("idcompra = ?", idCompra);//elimino todos los productosvendidos
+        resultOp = resultOp && compra.delete(); //elimino la venta
+        return resultOp;
+    }
     
     //LISTA PARA PROBAR
     /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos

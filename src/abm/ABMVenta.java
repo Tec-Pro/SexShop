@@ -65,6 +65,21 @@ public class ABMVenta implements ABMInterface<Venta> {
         resultOp = resultOp && actualizarAdquisicionCliente(idCliente, v.getProductos());//actualizo la tabla de productos adquiridos por clientes con los nuevos productos
         return resultOp;
     }
+    
+    //PROBAR
+    public boolean bajaConDevolucion(Venta v){
+        boolean resultOp = true;
+        Integer idCliente = (Integer) v.get("idcliente");
+        Integer idVenta = v.getInteger("id");//saco el idVenta
+        Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
+        LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
+        resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
+        resultOp = resultOp && eliminarAdquisicionCliente(idCliente, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
+        ProductosVendido.delete("idventa = ?", idVenta);//elimino todos los productosvendidos
+        resultOp = resultOp && venta.delete(); //elimino la venta
+        
+        return resultOp;
+    }
 
     //FUNCIONA CORRECTAMENTE
     /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos
