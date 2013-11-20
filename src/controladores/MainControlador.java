@@ -26,6 +26,7 @@ public class MainControlador implements ActionListener{
      private ConnectionDataBase cdb;
      private PantallaBienvenida pb;
      private AplicacionGui app;
+     //private VentasRealizadasControlador vtasRealiz;
      private  ClienteControlador cl;
      
      @SuppressWarnings("CallToThreadDumpStack")
@@ -42,7 +43,8 @@ public class MainControlador implements ActionListener{
         log = new LoginGui();
         app = new AplicacionGui();
         log.setActionListener(this);
-        cl = new ClienteControlador(app.getAbmClienteGui());
+        //vtasRealiz = new VentasRealizadasControlador(app);
+        cl = new ClienteControlador(app);
         log.setVisible(true);
         pb.dispose();
       
