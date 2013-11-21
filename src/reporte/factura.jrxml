@@ -9,7 +9,7 @@
 v.id as numVenta,v.monto as montoVenta,v.fecha,
 c.id as id_clien ,c.nombre,c.apellido,c.telefono,c.celular,
 pv.cantidad,
-p.precio_venta,p.numero_producto,p.nombre as descr,p.tipo,p.marca
+pv.precio_final,p.numero_producto,p.nombre as descr,p.tipo,p.marca
 from
 ventas v
 inner join clientes c on v.idcliente=c.id
@@ -39,7 +39,7 @@ where v.id=$P{numFactura}]]>
 	<field name="cantidad" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="precio_venta" class="java.lang.Float">
+	<field name="precio_final" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="numero_producto" class="java.lang.Integer">
@@ -249,12 +249,12 @@ where v.id=$P{numFactura}]]>
 			<textField>
 				<reportElement x="382" y="3" width="73" height="14" uuid="4f8b1ad5-41fd-43ec-8e73-191753df1a21"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{precio_venta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{precio_final}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
 				<reportElement x="472" y="3" width="83" height="14" uuid="c4f83180-55b3-4d6d-a59c-db3810f34336"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{precio_venta}*$F{cantidad}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{precio_final}*$F{cantidad}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="8" y="0" width="1" height="20" uuid="df1dac5a-c5a4-4583-b3cb-40000a0b0650"/>
