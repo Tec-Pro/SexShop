@@ -24,7 +24,14 @@ public class busqueda {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
     }
     
-     public List<Cliente> filtroCliente(String nombre, String apellido, String codigo){
+    public Cliente buscarCliente(Object id){
+        abrirBase();
+        Cliente result = Cliente.findById(id);
+        Base.close();
+        return result;
+    }   
+    
+    public List<Cliente> filtroCliente(String nombre, String apellido, String codigo){
         abrirBase(); 
         List<Cliente> result;
         result = Cliente.where("nombre like ? and apellido like ? and id like ?","%"+nombre+"%", "%"+apellido+"%","%"+codigo+"%");
@@ -41,10 +48,10 @@ public class busqueda {
     }
 
     public List<Venta> filtroVenta(String idcliente, String desde, String hasta){
-        abrirBase(); 
+       // abrirBase(); //perdon por esto :)
         List<Venta> result;
         result = Venta.where("idcliente like ? and fecha between ? and ?", idcliente+"%",desde, hasta);
-        Base.close();
+        //Base.close();
         return result;
     }
     
