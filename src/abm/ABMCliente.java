@@ -13,14 +13,9 @@ import org.javalite.activejdbc.Base;
  */
 public class ABMCliente implements ABMInterface<Cliente>{
 
-    public void abrirBase(){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
-    }
     
     public Cliente getCliente(Cliente c){
-        if (!Base.hasConnection()){
-            abrirBase();
-        }
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Cliente r = Cliente.first("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
         Base.close();
         return r;
@@ -33,9 +28,7 @@ public class ABMCliente implements ABMInterface<Cliente>{
     
     @Override
     public boolean alta(Cliente c) {
-        if (!Base.hasConnection()){
-            abrirBase();
-        }
+           Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         if (!findCliente(c)){
             Base.openTransaction();
             Cliente nuevo = Cliente.create("nombre",c.get("nombre"),"apellido",c.get("apellido"),"telefono",c.get("telefono"),"celular",c.get("celular"),"mail",c.get("mail"));
@@ -52,9 +45,7 @@ public class ABMCliente implements ABMInterface<Cliente>{
 
     @Override
     public boolean baja(Cliente c) {
-        if (!Base.hasConnection()){
-            abrirBase();
-        }
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Cliente viejo = Cliente.findById(c.getId());
         if (viejo!=null){
             Base.openTransaction();
@@ -69,9 +60,7 @@ public class ABMCliente implements ABMInterface<Cliente>{
 
     @Override
     public boolean modificar(Cliente c) {
-       if (!Base.hasConnection()){
-            abrirBase();
-        } 
+       Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root"); 
        Cliente viejo = Cliente.findById(c.getId());
        if (viejo!=null){
             Base.openTransaction();
