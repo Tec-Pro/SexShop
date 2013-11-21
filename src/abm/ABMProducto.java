@@ -69,4 +69,16 @@ public class ABMProducto implements ABMInterface<Producto> {
        return false;
     }
     
+    public boolean changeProveedor(Producto p) {
+        Producto viejo = Producto.findById(p.get("id"));
+        if (viejo != null){
+            Proveedor pr = Proveedor.first("cuil = ?", p.getCuilProveedor());
+            Base.openTransaction();
+            pr.add(viejo);
+            Base.commitTransaction();
+            return true;
+        }
+        return false;
+    }
+    
 }
