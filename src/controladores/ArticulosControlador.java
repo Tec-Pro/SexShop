@@ -20,6 +20,7 @@ import modelos.Cliente;
 import modelos.Producto;
 import modelos.Proveedor;
 import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.LazyList;
 import org.javalite.activejdbc.Model;
 
 /**
@@ -139,6 +140,7 @@ public class ArticulosControlador implements ActionListener{
     }
      
      public void tablaMouseClicked(java.awt.event.MouseEvent evt){
+         prodGui.getProveedores().removeAllItems();
         if(!Base.hasConnection()){
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         }
@@ -149,6 +151,11 @@ public class ArticulosControlador implements ActionListener{
         int r = tabla.getSelectedRow();
         Producto p = Producto.findById(tabla.getValueAt(r, 0));
         prodGui.CargarCampos(p);
+        Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
+        String nom = prov.getString("nombre");
+        String cuil = prov.getString("cuil");
+        String pr = nom+"-"+cuil;
+        prodGui.getProveedores().addItem(pr);
         Base.close();
         prodGui.repaint();
     }
@@ -159,8 +166,8 @@ public class ArticulosControlador implements ActionListener{
         c.set("precio_compra",TratamientoString.eliminarTildes(prodGui.getPrecioCompra().getText()).toUpperCase());
         c.set("precio_venta",TratamientoString.eliminarTildes(prodGui.getPrecioVenta().getText()).toUpperCase());
         c.set("stock", TratamientoString.eliminarTildes(prodGui.getStock().getText()).toUpperCase());
-      //  c.set("");
-        if(id) c.setId(TratamientoString.eliminarTildes(prodGui.getIdArticulo().getText()).toUpperCase());
+        c.set("numero_producto", prodGui.getIdArticulo().getText());
+        //if(id) c.setId(TratamientoString.eliminarTildes(prodGui.getIdArticulo().getText()).toUpperCase());
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -168,20 +175,41 @@ public class ArticulosControlador implements ActionListener{
             modificarPulsado=true;
             nuevoPulsado=false;
             prodGui.habilitarCampos(true);
+            prodGui.getProveedores().removeAllItems();
+            if(!Base.hasConnection()){
+                 Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+             }
+            LazyList<Proveedor> l =  Proveedor.findAll();
+           // Base.close();
+            Iterator<Proveedor> it = l.iterator();
+             while(it.hasNext()){
+                 Proveedor prov = it.next();
+                 String nom = prov.getString("nombre");
+                 String cuil = prov.getString("cuil");
+                 String prove = nom+"-"+cuil;
+                prodGui.getProveedores().addItem(prove);
+             }
+             Base.close();
+             
             //Agregar al combo todos los proveedores!
         }
         if(e.getSource() == prodGui.getNuevo()){
             nuevoPulsado=true;
             prodGui.limpiarCampos();
             prodGui.habilitarCampos(true);
+            prodGui.getProveedores().removeAllItems();
             if(!Base.hasConnection()){
                  Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
              }
-            List l =  pb.proveedores();
+            LazyList<Proveedor> l =  Proveedor.findAll();
+           // Base.close();
             Iterator<Proveedor> it = l.iterator();
              while(it.hasNext()){
-                 String nom = it.next().getString("nombre");
-                prodGui.getProveedores().addItem(nom);
+                 Proveedor prov = it.next();
+                 String nom = prov.getString("nombre");
+                 String cuil = prov.getString("cuil");
+                 String prove = nom+"-"+cuil;
+                prodGui.getProveedores().addItem(prove);
              }
              Base.close();
             //Agregar al combo todos los proveedores
@@ -200,10 +228,14 @@ public class ArticulosControlador implements ActionListener{
             p.set("nombre", prodGui.getNombre().getText());
             p.set("tipo", prodGui.getTipo().getText());
             p.set("marca", prodGui.getMarca().getText());
+            String prov = (String) prodGui.getProveedores().getSelectedItem();
+            String[] proveedor = prov.split("-");
+            p.setCuilProveedor(proveedor[1]);
             if(abmProd.modificar(p)){
                 JOptionPane.showMessageDialog(apgui, "Producto modificado exitosamente.");
                 pl = pb.filtroProducto("","","");
                 actualizarLista();
+                prodGui.repaint();
             }   
             else{
                 JOptionPane.showMessageDialog(prodGui,"No hay ningun producto seleccionado");
@@ -216,8 +248,13 @@ public class ArticulosControlador implements ActionListener{
             System.out.println("pulsado guardar crear");
             Producto p = new Producto();
             cargarDatosProd(p,false);
-            p.set("numero_producto", Integer.valueOf(prodGui.getIdArticulo().getText()));
-            p.setCuilProveedor("33333");
+          //  p.set("numero_producto", Integer.valueOf(prodGui.getIdArticulo().getText()));
+            //p.setCuilProveedor("33333");
+            String prov = (String) prodGui.getProveedores().getSelectedItem();
+            String[] proveedor = prov.split("-");
+            p.setCuilProveedor(proveedor[1]);
+            System.out.println (proveedor[0]);
+            System.out.println (proveedor[1]);
             if(p.getString("nombre").equals("") || p.getString("marca").equals("")){
                 JOptionPane.showMessageDialog(prodGui,"Un producto debe tener nombre y marca");
             }
@@ -229,7 +266,7 @@ public class ArticulosControlador implements ActionListener{
                 agregarFila(p);
             }    
             else{
-                JOptionPane.showMessageDialog(prodGui,"Cliente ya existente");  
+                JOptionPane.showMessageDialog(prodGui,"producto ya existente");  
             }
             nuevoPulsado = false;
             prodGui.habilitarCampos(false);
@@ -261,6 +298,7 @@ public class ArticulosControlador implements ActionListener{
             }
         }
         if(e.getSource() == prodGui.getAnterior()){
+            prodGui.getProveedores().removeAllItems();
             int r = tabla.getSelectedRow();
             if(r>0){
                 tabla.changeSelection(tabla.getSelectedRow()-1,0, false, false);
@@ -269,12 +307,21 @@ public class ArticulosControlador implements ActionListener{
                     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
                }
                 Producto c = Producto.findById(tabla.getValueAt(r, 0));
+                Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
                 Base.close();
+                
                 prodGui.CargarCampos(c);
+                String nom = p.getString("nombre");
+                String cuil = p.getString("cuil");
+                String pr = nom+"-"+cuil;
+                prodGui.getProveedores().addItem(pr);
+                prodGui.repaint();
+                
             }
         }
         
         if(e.getSource()== prodGui.getSiguiente()){ //permite avanzar al siguiente cliente de la lista
+            prodGui.getProveedores().removeAllItems();
             int r = tabla.getSelectedRow();
             if(tablaProductos.getRowCount()-1>r){
                 tabla.changeSelection(r+1,0, false, false);
@@ -282,9 +329,15 @@ public class ArticulosControlador implements ActionListener{
                 if(!Base.hasConnection()){
                     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
                }
-                Producto p = Producto.findById(tabla.getValueAt(r, 0));
+                Producto c = Producto.findById(tabla.getValueAt(r, 0));
+                Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
                 Base.close();
-                prodGui.CargarCampos(p);
+                prodGui.CargarCampos(c);
+                String nom = p.getString("nombre");
+                String cuil = p.getString("cuil");
+                String pr = nom+"-"+cuil;
+                prodGui.getProveedores().addItem(pr);
+                prodGui.repaint();
             }
         }
         
