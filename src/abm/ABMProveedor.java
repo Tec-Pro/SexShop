@@ -17,10 +17,7 @@ import org.javalite.activejdbc.Base;
 public class ABMProveedor implements ABMInterface<Proveedor> {
     
     public boolean findProveedor(Proveedor p){
-        abrirBase();
-        boolean result = (Proveedor.first("cuil = ?", p.get("cuil"))!=null);
-        Base.close();
-        return result;
+        return (Proveedor.first("cuil = ?", p.get("cuil"))!=null);
     }
     
     public void abrirBase(){

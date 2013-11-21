@@ -8,10 +8,8 @@ import org.javalite.activejdbc.Model;
 
 /**
  *
- * @author eze
+ * @author luciano
  */
-public class ProductosComprado extends Model {
-    static{
-        validatePresenceOf("idcompra","idproducto","cantidad");
-    }
+public class Usuario extends Model{
+    
 }

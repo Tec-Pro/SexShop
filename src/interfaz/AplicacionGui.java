@@ -68,6 +68,12 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
     public AbmProductoGui getAbmProductoGui(){
         return abmProducto;
     } 
+
+    public VentaGui getVenta() {
+        return venta;
+    }
+    
+    
     
     public VentasRealizadas  getVentasRealizadas(){
         return ventasRealizadas;
