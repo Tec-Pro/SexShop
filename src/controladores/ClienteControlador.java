@@ -44,7 +44,7 @@ public class ClienteControlador implements ActionListener {
     List<Cliente> cl;
 
     public ClienteControlador(AplicacionGui apg){
-
+        abrirBase();
         apliGui = apg;
         cl = new LinkedList<Cliente>();
         cb = new busqueda();
@@ -77,11 +77,18 @@ public class ClienteControlador implements ActionListener {
         tablaClientes = clienteGui.getTablaClientes();  
         cl = cb.filtroCliente("","","");
         actualizarLista();
+        Base.close();
 
     }
     
+    private void abrirBase(){
+        if (!Base.hasConnection()){
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
+        }
+    }
+    
     private void actualizarLista(){
-        cb.abrirBase();
+
         tablaClientes.setRowCount(0);
         Iterator<Cliente> it = cl.iterator();
         while(it.hasNext()){
@@ -92,7 +99,7 @@ public class ClienteControlador implements ActionListener {
             row[1] = a.getString("apellido");
             tablaClientes.addRow(row);
         }
-        Base.close();   
+
     }
     
     private void agregarFila(Cliente c){
@@ -114,34 +121,34 @@ public class ClienteControlador implements ActionListener {
     }
     
     public void busquedaApellidoKeyReleased(java.awt.event.KeyEvent evt){
-
+        abrirBase();
         cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
-    
+        Base.close();
     }
     
      public void busquedaCodigoKeyReleased(java.awt.event.KeyEvent evt){
-
+        abrirBase();
         cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
-    
+        Base.close();
     }
     
     
     public void tablaMouseClicked(java.awt.event.MouseEvent evt){
+        abrirBase();
         clienteGui.habilitarCampos(false);
         nuevoPulsado = false;
         modificarPulsado = false;
-        System.out.println("tabla pulsada");
         int r = tabla.getSelectedRow();
         Cliente c = cb.buscarCliente(tabla.getValueAt(r, 0));
         clienteGui.CargarCampos(c);
-
+        Base.close();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        abrirBase();
         JButton b = (JButton)e.getSource();
         if(b.equals(clienteGui.getArticulosComprados())){
             artCom = new ArticulosCompradosGui(apliGui ,true);
@@ -243,5 +250,6 @@ public class ClienteControlador implements ActionListener {
                      JOptionPane.showMessageDialog(clienteGui,"No hay ningun cliente seleccionado");
             }     
         }
+        Base.close();
     }  
 }
