@@ -5,7 +5,12 @@ use sexshop;
 
 
 
-
+create table usuarios (
+	id integer not null auto_increment,
+	nombre varchar(50) default 'dueño',
+	pass varchar(50) default 'dueño',
+	constraint pkusuarios primary key(id)
+)
 
 
 create table proveedors (
@@ -46,7 +51,7 @@ create table productos (
     nombre varchar(50),
     tipo varchar(50),
     marca varchar(50),
-    proveedor_id integer not null,
+    proveedor_id integer,
     constraint pkproducto primary key(id)
 );
 
@@ -54,51 +59,43 @@ create table productos (
 create table ventas (
     id integer not null auto_increment,
     monto float,
-    idcliente integer not null,
+    cliente_id integer not null,
     fecha date not null,
-    constraint pkventa primary key(id),
-    constraint fkventacliente foreign key(idcliente) references clientes(id)
+    constraint pkventa primary key(id)
 );
     
 
 create table compras (
     id integer not null auto_increment,
     monto float,
-    idproveedor integer not null,
+    proveedor_id integer not null,
     fecha date not null,
-    constraint pkcompra primary key(id),
-    constraint fkcompraproveedor foreign key(idproveedor) references proveedors(id)
+    constraint pkcompra primary key(id)
 
 );
 
 
 
-create table adquiridos(
-    idcliente integer not null,
-    idproducto integer not null,
+create table clientes_productos( /*adquiridos*/
+    cliente_id integer not null,
+    producto_id integer not null,
     cantidad integer not null,
-    constraint pkadquirio primary key(idproducto,idcliente),
-    constraint fkadquiriocliente foreign key(idcliente) references clientes(id) ,
-    constraint fkadquirioproducto foreign key(idproducto) references productos(numero_producto) 
+    constraint pkadquirio primary key(producto_id,cliente_id)
 );
 
 
-create table productos_vendidos (
-    idventa integer not null,
-    idproducto integer not null,
+create table productos_ventas (
+    venta_id integer not null,
+    producto_id integer not null,
     cantidad integer not null,
     precio_final float not null,
-    primary key(idventa,idproducto),
-    foreign key (idventa) references ventas(id),
-    foreign key(idproducto) references productos(numero_producto)
+    primary key(venta_id,producto_id)
 );
 
 
-create table productos_comprados (
-    idcompra integer not null,
-    idproducto integer not null,
+create table productos_compras (
+    compra_id integer not null,
+    producto_id integer not null,
     cantidad integer not null,
-    primary key(idcompra,idproducto),
-    foreign key (idcompra) references compras(id),
-    foreign key(idproducto) references productos(numero_producto)
+    primary key(compra_id,producto_id)
 );
