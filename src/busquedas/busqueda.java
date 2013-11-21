@@ -22,11 +22,7 @@ public class busqueda {
     /*
      * No hace falta distinguir entre mayúsculas y minúsculas.
      */
-    public void abrirBase(){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
-    }
-    
-    
+
     
     /**
      *
@@ -34,9 +30,7 @@ public class busqueda {
      * @return Cliente asociado a esa id.
      */
     public Cliente buscarCliente(Object id){
-        abrirBase();
         Cliente result = Cliente.findById(id);
-        Base.close();
         return result;
     }   
     
@@ -47,12 +41,8 @@ public class busqueda {
      * @return lista filtrada de clientes.
      */
      public List<Cliente> filtroCliente(String nombre, String apellido, String codigo){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        }
         List<Cliente> result;
         result = Cliente.where("nombre like ? and apellido like ? and id like ?","%"+nombre+"%", "%"+apellido+"%", codigo+"%");
-        Base.close();
         return result;
     }
     
@@ -62,12 +52,8 @@ public class busqueda {
      * @return lista filtrada de productos
      */
     public List<Producto> filtroProducto(String codigo, String nombre, String marca){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        } 
         List<Producto> result;
         result = Producto.where("numero_producto like ? and nombre like ? and marca like ?", codigo+"%","%"+nombre+"%","%"+marca+"%");
-        Base.close();
         return result;
     }
 
@@ -77,12 +63,8 @@ public class busqueda {
      * @return lista filtrada de ventas.
      */
     public List<Venta> filtroVenta(String idcliente, String desde, String hasta){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        } 
         List<Venta> result;
         result = Venta.where("cliente_id like ? and fecha between ? and ?", idcliente+"%",desde, hasta);
-        Base.close();
         return result;
     }
     
@@ -93,12 +75,8 @@ public class busqueda {
      */
     
    public List<Compra> filtroCompra(String idproveedor, String desde, String hasta){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        }  
         List<Compra> result;
         result = Compra.where("proveedor_id like ? and fecha between ? and ?", idproveedor+"%",desde,hasta);
-        Base.close();
         return result;
     }
     /**
@@ -107,12 +85,8 @@ public class busqueda {
      * @return lista filtrada de proveedores.
      */
     public List<Proveedor> filtroProveedor(String cuil, String nombre, String apellido) {
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        } 
         List<Proveedor> result;
         result = Proveedor.where("cuil like ? and nombre like ? and apellido like ?", "%"+cuil+"%","%"+nombre+"%","%"+apellido+"%");
-        Base.close();
         return result;
     }
     
@@ -122,12 +96,8 @@ public class busqueda {
      * @returns lista filtrada de productos comprados.
      */
     public List<ProductosCompras> filtroComprados(String idcompra, String idproducto){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        } 
         List<ProductosCompras> result;
         result = ProductosCompras.where("compra_id like ? and producto_id like ?", idcompra+"%",idproducto+"%");
-        Base.close();
         return result;
     }
      /**
@@ -136,12 +106,8 @@ public class busqueda {
      * @returns lista filtrada de productos vendidos.
      */
     public List<ProductosVentas> filtroVendidos(String idventa, String idproducto){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        }
         List<ProductosVentas> result;
         result = ProductosVentas.where("venta_id like ? and producto_id like ?", idventa+"%",idproducto+"%");
-        Base.close();
         return result;
     }
     /**
@@ -150,12 +116,8 @@ public class busqueda {
      * @returns lista filtrada de productos adquiridos.
      */
      public List<ClientesProductos> filtroAdquiridos(String idcliente, String idproducto){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        }
         List<ClientesProductos> result;
         result = ClientesProductos.where("cliente_id like ? and producto_id like ?", idcliente+"%",idproducto+"%");
-        Base.close();
         return result;
     }
 
@@ -165,9 +127,6 @@ public class busqueda {
      * @returns lista filtrada de productos.
      */
      public List<Producto> productosAdquiridos(String idcliente){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        }
         List<ClientesProductos> adquiridos;
         List<Producto> result = new LinkedList<Producto>();
         adquiridos = ClientesProductos.where("cliente_id like ?", "%"+idcliente+"%");
@@ -177,7 +136,6 @@ public class busqueda {
             Producto p = Producto.first("numero_producto = ?", a.get("idproducto"));
             result.add(p);
         }
-        Base.close();
         return result;
     }
      /**
