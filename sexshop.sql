@@ -46,7 +46,7 @@ create table productos (
     nombre varchar(50),
     tipo varchar(50),
     marca varchar(50),
-    proveedor_id integer,
+    proveedor_id integer not null,
     constraint pkproducto primary key(id)
 );
 

@@ -23,7 +23,7 @@ public class ABMCompra implements ABMInterface<Compra> {
     public ABMCompra() {
     }
 
-    //LISTA PARA PROBAR
+    //FUNCIONA CORRECTAMENTE
     @Override
     public boolean alta(Compra c) {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
@@ -42,20 +42,22 @@ public class ABMCompra implements ABMInterface<Compra> {
     }
 
     
-    //LISTA PARA PROBAR
+    //fUNCIONA CORRECTAMENTE
     /*Elimino una compra y los productos ligados a ella, sin hacer devolucion de stock,
      * ni actualizacion de tablas de productos_comprados
      */
     @Override
     public boolean baja(Compra c) {
+        boolean resultOp = true;
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
         ProductosComprado.delete("idcompra = ?", idCompra);//elimino todos los productoscomprados
+        resultOp = resultOp && compra.delete();//elimino la compra y todos los registros que la referencian
         Base.commitTransaction();
         Base.close();
-        return compra.delete();//elimino la compra y todos los registros que la referencian
+        return resultOp;
     }
 
     
@@ -77,7 +79,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         return resultOp;
     }
 
-    //PROBAR
+    //FUNCIONA CORRECTAMENTE
     public boolean bajaConDevolucion(Compra c){
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
@@ -93,7 +95,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         return resultOp;
     }
     
-    //LISTA PARA PROBAR
+    //FUNCIONA CORRECTAMENTE
     /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos
      los productos de la lista, multiplicados por su cantidad correspondiente*/
     private Double calcularMonto(LinkedList<Pair> productos) {
@@ -112,7 +114,7 @@ public class ABMCompra implements ABMInterface<Compra> {
     }
 
     
-    //LISTA PARA PROBAR
+    //FUNCIONA CORRECTAMENTE
     //Carga los productos y cantidades en la tabla productos_comprados
     private boolean cargarProductosComprados(int idCompra, LinkedList<Pair> productos) {
        boolean resultOp = true;
@@ -131,7 +133,7 @@ public class ABMCompra implements ABMInterface<Compra> {
     }
 
     
-    //LISTA PARA PROBAR
+    //FUNCIONA CORRECTAMENTE
     /*Retorna una lista de pares producto-cantidad de una compra(la busca en
      * productos_comprados y a su vez
      * elimina estos productos de la base de la misma tabla
@@ -149,13 +151,13 @@ public class ABMCompra implements ABMInterface<Compra> {
             cant = (Integer) prodComprado.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares
-            prodComprado.delete();//elimino el modelo de la base de datos
+            ProductosComprado.delete("idcompra = ? AND idproducto = ?",prodComprado.getInteger("idcompra"),prodComprado.getInteger("idproducto"));//elimino el modelo de la base de datos
         }
         return listaDePares;
     }
 
     
-    //LISTA PARA PROBAR
+    //FUNCIONA CORRECTAMENTE
     //Actualiza el stock de los productos comprados (incrementandolo)
     private boolean actualizarStock(LinkedList<Pair> productos) {
         boolean resultOp = true;
@@ -169,14 +171,13 @@ public class ABMCompra implements ABMInterface<Compra> {
             prodViejo = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
             cant = prodViejo.getInteger("stock") + cant;//asigno a cant el valor nuevo del stock
-            prodViejo.set("stock", cant);//actualizo el stock del producto
-            resultOp = resultOp && abmProd.modificar(prodViejo);//actualizo el producto en la BD
+            resultOp = resultOp && prodViejo.setInteger("stock", cant).saveIt();//actualizo el stock del producto
             Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
         }
         return resultOp;
     }
 
-    //LISTA PARA PROBAR
+    //FUNCIONA CORRECTAMENTE
     //actualiza el stock (decrementandolo) cuando se elimina una venta o se modifica los productos comprados
     private boolean devolucionStock(LinkedList<Pair> productos) {
         boolean resultOp = true;
