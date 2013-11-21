@@ -68,8 +68,8 @@ public class VentasRealizadasControlador implements ActionListener {
         vl = new LinkedList<Venta>();
         tablaFacturas = ventasGui.getTablaFacturas();
         facturasDefault = ventasGui.getTablaFacturasDefault();
-        dateDesde = "0-0-0";
-        dateHasta = "9999-0-0";
+        dateDesde = "0000-01-01";
+        dateHasta = "9999-01-01";
         buscar = new busqueda();
         cl = buscar.filtroCliente("","","");
         factDefault = ventasGui.getTablaFacturaDefault();
@@ -85,7 +85,7 @@ public class VentasRealizadasControlador implements ActionListener {
         calenDesdeText.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                if(calenDesdeText.getText().equals("")) dateDesde="0-0-0";
+                if(calenDesdeText.getText().equals("")) dateDesde="0000-01-01";
                 else  dateDesde =calenDesdeText.getText();   
                 actualizarListaFacturas();
             }
@@ -94,7 +94,7 @@ public class VentasRealizadasControlador implements ActionListener {
         calenHastaText.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                if(calenHastaText.getText().equals("")) dateHasta="9999-0-0";
+                if(calenHastaText.getText().equals("")) dateHasta="9999-01-01";
                 else  dateHasta =calenHastaText.getText();  
                 actualizarListaFacturas();
             }
@@ -143,7 +143,7 @@ public class VentasRealizadasControlador implements ActionListener {
             //Base.close();
             vl = buscar.filtroVenta(c.getId().toString(),dateDesde,dateHasta);
             
-           //buscar.abrirBase();
+           buscar.abrirBase();
             for (Venta v : vl) {
                 String row[] = new String[3];
                 row[0] = v.getId().toString();
@@ -163,7 +163,7 @@ public class VentasRealizadasControlador implements ActionListener {
             
             Object row[] = new Object[4];
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
-            Producto p = Producto.findById(pv.get("idproducto"));
+            Producto p = Producto.findById(pv.get("producto_id"));
             row[1] = p.get("nombre") +", "+ p.get("marca");
             Float a = Float.parseFloat(pv.get("precio_final").toString());
             row[2] = a;

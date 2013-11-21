@@ -21,13 +21,13 @@ public class ABMCliente implements ABMInterface<Cliente>{
         if (!Base.hasConnection()){
             abrirBase();
         }
-        Cliente r = Cliente.first("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"));
+        Cliente r = Cliente.first("nombre = ? and apellido = ?", c.get("nombre"));
         Base.close();
         return r;
     }
     
     public boolean findCliente(Cliente c){
-        return (Cliente.first("nombre = ? and apellido = ? and telefono = ?", c.get("nombre"), c.get("apellido"), c.get("telefono"))!= null);
+        return (Cliente.first("nombre = ? and apellido = ?", c.get("nombre"), c.get("apellido"))!= null);
     }
     
     
