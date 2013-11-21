@@ -215,8 +215,9 @@ public class ClienteControlador implements ActionListener {
                 cl = cb.filtroCliente("","","");
                 actualizarLista();
             }   
-            else
+            else{
                 JOptionPane.showMessageDialog(clienteGui,"No hay ningun cliente seleccionado");
+            }
             clienteGui.limpiarCampos();
             modificarPulsado = false;
             clienteGui.habilitarCampos(false);
