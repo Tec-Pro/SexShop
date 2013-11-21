@@ -14,50 +14,27 @@ import javax.swing.JSpinner;
  */
 public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
 
+    Integer cantPorcentaje;
+    Integer valorVentana;
+    
+    
     /**
      * Creates new form ModificarPrecioPorcentajeGui
      */
     public ModificarPrecioPorcentajeGui(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cantPorcentaje=1;
+        valorVentana=1;
     }
+                                     
 
-    /**
-     * Seteo actionListener al boton aceptar
-     *
-     * @param
-     * @return
-     * @exception
-     */
-    public void setActionListener(ActionListener lis) {
-        this.aceptar.addActionListener(lis);
-    }
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {                                        
+       valorVentana=0;
+       cantPorcentaje=(Integer) porcentaje.getValue();
+       this.dispose();
+    }                                       
 
-    /**
-     * Retorno boton aceptar
-     *
-     * @param
-     * @return
-     * @exception
-     */
-    public JButton getAceptar() {
-        return aceptar;
-    }
-    
-    public JButton getCancelar() {
-        return cancelar;
-    }
-
-    /**
-     * retorno spinner que contiene la cantidad en porcentaje
-     *
-     * @param
-     * @return
-     * @exception
-     */
-    public JSpinner getPorcentaje() {
-        return porcentaje;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,7 +110,8 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        this.dispose();
+         valorVentana=1;
+         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;

@@ -6,6 +6,7 @@ package interfaz;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -29,6 +30,7 @@ public class VentaGui extends javax.swing.JPanel {
         tablaArticulosDefault = (DefaultTableModel) tablaArticulos.getModel();//conveirto la tabla
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();
         tablaClientesDefault = (DefaultTableModel) tablaClientes.getModel();
+        calendarioFactura.setDate(Date.valueOf("2012-12-12"));
     }
 
     /**

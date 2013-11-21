@@ -50,7 +50,8 @@ public class VentasRealizadasControlador implements ActionListener {
     private String dateDesde;
     private String dateHasta;
     private List<ProductosVendido> prodVendidos;
-    
+    private JTextField calenDesdeText;
+    private JTextField calenHastaText;
     
     public VentasRealizadasControlador(AplicacionGui app){
         
@@ -61,6 +62,8 @@ public class VentasRealizadasControlador implements ActionListener {
         filtId = ventasGui.getFiltroId();
         calenDesde = ventasGui.getCalendarioDesde();
         calenHasta = ventasGui.getCalendarioHasta();
+        calenDesdeText= ventasGui.getCalenDesdeText();
+        calenHastaText= ventasGui.getCalenHastaText();
         cl = new LinkedList<Cliente>();
         vl = new LinkedList<Venta>();
         tablaFacturas = ventasGui.getTablaFacturas();
@@ -79,7 +82,23 @@ public class VentasRealizadasControlador implements ActionListener {
                 tablaFacturasMouseReleased(evt);
             }
         });
+        calenDesdeText.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                if(calenDesdeText.getText().equals("")) dateDesde="0-0-0";
+                else  dateDesde =calenDesdeText.getText();   
+                actualizarListaFacturas();
+            }
+        });
         
+        calenHastaText.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                if(calenHastaText.getText().equals("")) dateHasta="9999-0-0";
+                else  dateHasta =calenHastaText.getText();  
+                actualizarListaFacturas();
+            }
+        });
         
         filtNomb.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -111,6 +130,7 @@ public class VentasRealizadasControlador implements ActionListener {
                 calenHastaPropertyChange(e);
             }
         });
+        
         
         actualizarListaFacturas();
         

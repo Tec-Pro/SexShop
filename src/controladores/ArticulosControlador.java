@@ -290,7 +290,7 @@ public class ArticulosControlador implements ActionListener{
             mpp.setVisible(true);
             
         }
-        if(e.getSource() == mpp.getAceptar()){
+        /*if(e.getSource() == mpp.getAceptar()){
             int srow = prodGui.getTabla().getSelectedRow();
             Object id = prodGui.getTablaArticulos().getValueAt(srow, 0);
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
@@ -305,7 +305,7 @@ public class ArticulosControlador implements ActionListener{
         if(e.getSource() == mpp.getCancelar()){
             mpp.dispose();
         }
-        
+        */
         if(e.getSource()== prodGui.getModificarPrecioPorcentaje()){
             
         }

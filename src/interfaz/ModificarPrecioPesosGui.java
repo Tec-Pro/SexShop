@@ -14,49 +14,19 @@ import javax.swing.JTextField;
  */
 public class ModificarPrecioPesosGui extends javax.swing.JDialog {
 
+    Double cantPesos;
+    Integer valorVentana;
     /**
      * Creates new form ModificarPrecioGui
      */
     public ModificarPrecioPesosGui(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cantPesos=1.0;
+        valorVentana=1;
     }
 
-    /**
-     * Seteo actionListener al boton aceptar
-     *
-     * @param
-     * @return
-     * @exception
-     */
-    public void setActionListener(ActionListener lis) {
-        this.aceptar.addActionListener(lis);
-    }
 
-    /**
-     * Retorno boton aceptar
-     *
-     * @param
-     * @return
-     * @exception
-     */
-    public JButton getAceptar() {
-        return aceptar;
-    }
-    public JButton getCancelar() {
-        return cancelar;
-    }
-    
-    /**
-     * retorno campo que contiene la cantidad en pesos
-     *
-     * @param
-     * @return
-     * @exception
-     */
-    public JTextField getPesos() {
-        return pesos;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +52,11 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
         panelImage1.setLayout(new java.awt.GridLayout(1, 0));
 
         aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
         panelImage1.add(aceptar);
 
         cancelar.setText("Cancelar");
@@ -134,8 +109,17 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        this.dispose();
+         valorVentana=1;
+         this.dispose();
+        
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+       valorVentana=0;
+       cantPesos=Double.parseDouble(pesos.getText());
+       this.dispose();
+    }//GEN-LAST:event_aceptarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptar;
     private javax.swing.JButton cancelar;

@@ -6,6 +6,8 @@ package interfaz;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.sql.Date;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -39,6 +41,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
      public JDateChooser getClendarioDesde(){
         return calendarioDesde;
     }
+
     
     public JDateChooser getClendarioHasta(){
         return calendarioHasta;
@@ -88,6 +91,14 @@ public class VentasRealizadas extends javax.swing.JPanel {
         return filtroId;
     }
 
+    public JTextField getCalenDesdeText(){
+        return ((JTextField)calendarioDesde.getDateEditor().getUiComponent());
+    }
+    
+    public JTextField getCalenHastaText(){
+        return ((JTextField)calendarioHasta.getDateEditor().getUiComponent());
+    }
+        
     public JTable getTablaFactura() {
         return tablaFactura;
     }
@@ -209,18 +220,20 @@ public class VentasRealizadas extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
 
+        calendarioFactura.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
         panelFacturaLayout.setHorizontalGroup(
             panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
             .addGroup(panelFacturaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelFacturaLayout.createSequentialGroup()
                         .addComponent(labelCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(clienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -315,6 +328,10 @@ public class VentasRealizadas extends javax.swing.JPanel {
 
         jLabel6.setText("ID");
 
+        calendarioDesde.setDateFormatString("yyyy-MM-dd");
+
+        calendarioHasta.setDateFormatString("yyyy-MM-dd");
+
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
         panelImage1Layout.setHorizontalGroup(
@@ -333,7 +350,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelImage1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calendarioHasta, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                        .addComponent(calendarioHasta, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
                     .addGroup(panelImage1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,7 +358,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel6)
                 .addGap(1, 1, 1)
-                .addComponent(filtroId, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                .addComponent(filtroId, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
         );
         panelImage1Layout.setVerticalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,8 +381,8 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(calendarioHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout fondoImagenLayout = new javax.swing.GroupLayout(fondoImagen);
@@ -411,6 +428,7 @@ public class VentasRealizadas extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser calendarioDesde;
     private com.toedter.calendar.JDateChooser calendarioFactura;
