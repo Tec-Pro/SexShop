@@ -22,29 +22,62 @@ public class LoginGui extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public void setActionListener(ActionListener lis){
+
+    /**
+     * Seteo ActionListener a los botones salir y login
+     *
+     * @param ActionListener listener
+     * @return void
+     * @exception
+     */
+    public void setActionListener(ActionListener lis) {
         login.addActionListener(lis);
         salir.addActionListener(lis);
     }
 
+    /**
+     * Retorno el botonLogin (boton ingresar)
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getLogin() {
         return login;
     }
 
+    /**
+     * Retorno el campo de la contraseña
+     *
+     * @param
+     * @return JPasswordField
+     * @exception
+     */
     public JPasswordField getPassword() {
         return password;
     }
 
+    /**
+     * Retorno el boton salir
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getSalir() {
         return salir;
     }
 
+    /**
+     * Retorno el campo usuario
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getUsuario() {
         return usuario;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,10 +90,10 @@ public class LoginGui extends javax.swing.JFrame {
 
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         jLabel1 = new javax.swing.JLabel();
-        panelButton = new org.edisoncor.gui.panel.PanelImage();
+        panelButton = new javax.swing.JPanel();
         login = new javax.swing.JButton();
         salir = new javax.swing.JButton();
-        panelImage3 = new org.edisoncor.gui.panel.PanelImage();
+        panelImage3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
@@ -153,15 +186,13 @@ public class LoginGui extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton login;
-    private org.edisoncor.gui.panel.PanelImage panelButton;
-    private org.edisoncor.gui.panel.PanelImage panelImage3;
+    private javax.swing.JPanel panelButton;
+    private javax.swing.JPanel panelImage3;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JPasswordField password;
     private javax.swing.JButton salir;

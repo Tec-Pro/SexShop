@@ -19,65 +19,140 @@ import modelos.Cliente;
 public class AbmClienteGui extends javax.swing.JPanel {
 
     private DefaultTableModel tablaClientes;//tabla default de los clientes
+
     /**
      * Creates new form AbmClienteGui
      */
     public AbmClienteGui() {
         initComponents();
-        tablaClientes = (DefaultTableModel) tabla.getModel(); //conveirto la tabla
+        tablaClientes = (DefaultTableModel) tabla.getModel(); //convierto la tabla
 
     }
-    
+
+    /**
+     * Setea el actionListener a los botones guardar,borrar,nuevo, suigiente,
+     * anterior, modificar, articulosComprados
+     *
+     * @param lis ActionListener
+     * @return void
+     */
     public void setActionListener(ActionListener lis) {
-        this.guardar.addActionListener(lis);
-        this.borrar.addActionListener(lis);
-        this.nuevo.addActionListener(lis);
-        this.siguiente.addActionListener(lis);
-        this.anterior.addActionListener(lis);
-        this.modificar.addActionListener(lis);
-        this.articulosComprados.addActionListener(lis);
+        this.guardar.addActionListener(lis); //boton guardar
+        this.borrar.addActionListener(lis); //boton borrar
+        this.nuevo.addActionListener(lis); //boton nuevo
+        this.siguiente.addActionListener(lis); //boton siguiente
+        this.anterior.addActionListener(lis); //boton anterior
+        this.modificar.addActionListener(lis); // boton modificar
+        this.articulosComprados.addActionListener(lis); //boton articulosComprados
     }
-   
-    
-    
+
+    /**
+     * Retorna el boton anterior
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getAnterior() {
         return anterior;
     }
 
+    /**
+     * Retorna el boton articulosComprados
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getArticulosComprados() {
         return articulosComprados;
     }
 
+    /**
+     * Retorna el boton borrar
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getBorrar() {
         return borrar;
     }
 
+    /**
+     * Retorna el boton guardar
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getGuardar() {
         return guardar;
     }
 
+    /**
+     * Retorna el botonModificar
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getModificar() {
         return modificar;
     }
 
+    /**
+     * Retorna el boton nuevo
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getNuevo() {
         return nuevo;
     }
 
+    /**
+     * Retorna el boton siguiente
+     *
+     * @param
+     * @return value JButton
+     * @exception
+     */
     public JButton getSiguiente() {
         return siguiente;
     }
-    
-    public JTable getTabla(){
+
+    /**
+     * Retorna la tabla de clientes de tipo JTable
+     *
+     * @param
+     * @return value JTable
+     * @exception
+     */
+    public JTable getTabla() {
         return tabla;
     }
-    
-    public DefaultTableModel getTablaClientes(){
+
+    /**
+     * Retorna la tabala de clientes con un formato defaultTableModel
+     *
+     * @param
+     * @return value DefaultTableModel
+     * @exception
+     */
+    public DefaultTableModel getTablaClientes() {
         return tablaClientes;
     }
-    
-    /*setea los campos con los datos del cliente*/
-    public void CargarCampos(Cliente c){
+
+    /**
+     * Cargo los datos de un cliente en la ventana
+     *
+     * @param Cliente c
+     * @return void
+     * @exception
+     */
+    public void CargarCampos(Cliente c) {
         idCliente.setText(c.getId().toString());
         nombre.setText(c.get("nombre").toString());
         apellido.setText(c.get("apellido").toString());
@@ -85,16 +160,30 @@ public class AbmClienteGui extends javax.swing.JPanel {
         email.setText(c.get("mail").toString());
         celular.setText(c.get("celular").toString());
     }
-    
-    public void habilitarCampos(boolean b){
+
+    /**
+     * Habilita o deshabilita los campos para la edición de un cliente
+     *
+     * @param boolean habilitado
+     * @return void
+     * @exception
+     */
+    public void habilitarCampos(boolean b) {
         apellido.setEditable(b);
         celular.setEditable(b);
         email.setEditable(b);
         nombre.setEditable(b);
-        telFijo.setEditable(b); 
+        telFijo.setEditable(b);
     }
-    
-    public void limpiarCampos(){
+
+    /**
+     * Vacío los campos de edición
+     *
+     * @param
+     * @return void
+     * @exception
+     */
+    public void limpiarCampos() {
         apellido.setText("");
         celular.setText("");
         email.setText("");
@@ -103,39 +192,95 @@ public class AbmClienteGui extends javax.swing.JPanel {
         telFijo.setText("");
     }
 
+    /**
+     * Retorno JTextField apellido
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getApellido() {
         return apellido;
     }
 
+    /**
+     * Retorno JTextField buesquedaApellido para realizar busqueda filtrando por
+     * apellido
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getBusquedaApellido() {
         return busquedaApellido;
     }
 
+    /**
+     * Retorno JTextField BusquedaCodigo para realizar busqueda filtrando por
+     * codigo de cliente
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getBusquedaCodigo() {
         return busquedaCodigo;
     }
 
+    /**
+     * Retorno el campo celular
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getCelular() {
         return celular;
     }
 
+    /**
+     * Retorno el campo email
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getEmail() {
         return email;
     }
 
+    /**
+     * Retorno el campo ID del cliente
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getIdCliente() {
         return idCliente;
     }
 
+    /**
+     * Retorno el campo nombre
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getNombre() {
         return nombre;
     }
 
+    /**
+     * Retorno el campo telFijo
+     *
+     * @param
+     * @return value JTextField
+     * @exception
+     */
     public JTextField getTelFijo() {
         return telFijo;
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,10 +293,10 @@ public class AbmClienteGui extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        fondoImagen = new org.edisoncor.gui.panel.PanelImage();
+        fondoImagen = new javax.swing.JPanel();
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         titulo = new javax.swing.JLabel();
-        panelCliente = new org.edisoncor.gui.panel.PanelImage();
+        panelCliente = new JPanel();
         labelCodigo = new javax.swing.JLabel();
         idCliente = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
@@ -165,14 +310,14 @@ public class AbmClienteGui extends javax.swing.JPanel {
         apellido = new javax.swing.JTextField();
         labelApellido = new javax.swing.JLabel();
         labelCelular = new javax.swing.JLabel();
-        panelControlCliente = new org.edisoncor.gui.panel.PanelImage();
+        panelControlCliente = new javax.swing.JPanel();
         nuevo = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
         borrar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         anterior = new javax.swing.JButton();
         siguiente = new javax.swing.JButton();
-        panelClientes = new org.edisoncor.gui.panel.PanelImage();
+        panelClientes = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         busquedaCodigo = new javax.swing.JTextField();
@@ -504,7 +649,7 @@ public class AbmClienteGui extends javax.swing.JPanel {
     private javax.swing.JTextField busquedaCodigo;
     private javax.swing.JTextField celular;
     private javax.swing.JTextField email;
-    private org.edisoncor.gui.panel.PanelImage fondoImagen;
+    private javax.swing.JPanel fondoImagen;
     private javax.swing.JButton guardar;
     private javax.swing.JTextField idCliente;
     private javax.swing.JLabel jLabel1;
@@ -520,9 +665,9 @@ public class AbmClienteGui extends javax.swing.JPanel {
     private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevo;
-    private org.edisoncor.gui.panel.PanelImage panelCliente;
-    private org.edisoncor.gui.panel.PanelImage panelClientes;
-    private org.edisoncor.gui.panel.PanelImage panelControlCliente;
+    private javax.swing.JPanel panelCliente;
+    private javax.swing.JPanel panelClientes;
+    private javax.swing.JPanel panelControlCliente;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JButton siguiente;
     private javax.swing.JTable tabla;

@@ -4,16 +4,12 @@
  */
 package interfaz;
 
-import com.gui.DBDateChooser;
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.util.Date;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import org.freixas.jcalendar.JCalendarCombo;
 
 /**
  *
@@ -33,96 +29,281 @@ public class VentaGui extends javax.swing.JPanel {
         tablaArticulosDefault = (DefaultTableModel) tablaArticulos.getModel();//conveirto la tabla
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();
         tablaClientesDefault = (DefaultTableModel) tablaClientes.getModel();
-        calendarioFactura.setDateFormat(DateFormat.getDateInstance(DateFormat.DEFAULT));
-
     }
 
+    /**
+     * Seteo el actionListener para los botones articulosALafactura,
+     * clienteALafactura, facturaNueva, imprimir realizarVenta,
+     * borrarArticulosSeleccionados, modificar
+     *
+     * @param
+     * @return
+     * @exception
+     */
     public void setActionListener(ActionListener lis) {
         this.articulosALaFactura.addActionListener(lis);
         this.clienteALaFactura.addActionListener(lis);
         this.facturaNueva.addActionListener(lis);
         this.imprimir.addActionListener(lis);
         this.realizarVenta.addActionListener(lis);
-
-
+        this.borrarArticulosSeleccionados.addActionListener(lis);
+        this.modificar.addActionListener(lis);
     }
 
+    /**
+     * Retorno la tabla Articulos con tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return defaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaArticulosDefault() {
         return tablaArticulosDefault;
     }
 
+    /**
+     * Retorno la tabla Clientes con tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaclientesDefault() {
         return tablaArticulosDefault;
     }
 
+    /**
+     * Retorno la tabla factura con tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
     public DefaultTableModel getTablaFacturaDefault() {
         return tablaFacturaDefault;
     }
 
+    /**
+     * Retorno boton articulosALaFactura para enviar los articulos seleccionados
+     * en la tabla articulos a la tabla factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getArticulosALaFactura() {
         return articulosALaFactura;
     }
 
+    /**
+     * Retorno el campo busqeudaApellido para poder filtrar las busquedas dado
+     * el apellido de un cliente
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaApellido() {
         return busquedaApellido;
     }
 
+    /**
+     * Retorno el campo busquedaCodigoArticulo para poder filtrar las busquedas
+     * dado el codigo de un articulo
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaCodigoArticulo() {
         return busquedaCodigoArticulo;
     }
 
+    /**
+     * Retorno la tabla clientescon tipo TableModelDefault para pdoer realizar
+     * inserciones y eliminaciones de filas más facilmente
+     *
+     * @param
+     * @return DefaultTableModel
+     * @exception
+     */
+    public DefaultTableModel getTablaClientesDefault() {
+        return tablaClientesDefault;
+    }
+
+    /**
+     * Retorno boton borrarArticulosSeleccionados para borrar los articulos
+     * seleccionados en la tabla factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
+    public JButton getBorrarArticulosSeleccionados() {
+        return borrarArticulosSeleccionados;
+    }
+
+    /**
+     * Retorno boton modificar para confirmar cambios realizados en una factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
+    public JButton getModificar() {
+        return modificar;
+    }
+
+    /**
+     * Retorno el campo busquedaCodigoCliente para poder filtrar las busquedas
+     * dado el id de un cliente
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaCodigoCliente() {
         return busquedaCodigoCliente;
     }
 
+    /**
+     * Retorno el campo busquedaMarca para poder filtrar las busquedas dado la
+     * marca de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaMarca() {
         return busquedaMarca;
     }
 
+    /**
+     * Retorno el campo busquedaCodigoNombre para poder filtrar las busquedas
+     * dado el nombre de un producto
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getBusquedaNombre() {
         return busquedaNombre;
     }
 
+    /**
+     * Retorno boton clienteALafacutra para enviar el cliente seleccionado al
+     * campo cliente en el panel de la factura
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getClienteALaFactura() {
         return clienteALaFactura;
     }
 
+    /**
+     * Retorno el campo del cliente de la factura
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getClienteFactura() {
         return clienteFactura;
     }
 
+    /**
+     * Retorno boton facturaNueva en donde limpia los campos de la factura para
+     * iniciar una nueva venta
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getFacturaNueva() {
         return facturaNueva;
     }
 
+    /**
+     * Retorno la tabla clientes con tipo JTable
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTablaClientes() {
         return tablaClientes;
     }
 
-    public JButton getRealizarEImprimir() {
-        return imprimir;
-    }
-
+    /**
+     * Retorno boton realizar venta para confirmar la venta, se debe guardar los
+     * datos en la base de datos
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getRealizarVenta() {
         return realizarVenta;
     }
 
+    /**
+     * Retorno tabla articulos con tipo JTable
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTablaArticulos() {
         return tablaArticulos;
     }
 
+    /**
+     * Retorno tabla factura con tipo JTable
+     *
+     * @param
+     * @return JTable
+     * @exception
+     */
     public JTable getTablaFactura() {
         return tablaFactura;
     }
 
+    /**
+     * Retorno el campo totalFactura que contiene el resultado final del a
+     * factura
+     *
+     * @param
+     * @return JTextField
+     * @exception
+     */
     public JTextField getTotalFactura() {
         return totalFactura;
     }
 
-    public JCalendarCombo getCalendarioFactura() {
+    /**
+     * Retorno el calendario que contiene la fecha de la factura
+     *
+     * @param
+     * @return JDateChooser
+     * @exception
+     */
+    public JDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
 
+    /**
+     * Retorno el boton imprimir para que se abra el dialo de impresion de
+     * jasperReport
+     *
+     * @param
+     * @return JButton
+     * @exception
+     */
     public JButton getImprimir() {
         return imprimir;
     }
@@ -137,11 +318,11 @@ public class VentaGui extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        fondoImagen = new org.edisoncor.gui.panel.PanelImage();
+        fondoImagen = new javax.swing.JPanel();
         panelTitulo = new org.edisoncor.gui.panel.PanelImage();
         titulo = new javax.swing.JLabel();
-        panelClientesAarticulos = new org.edisoncor.gui.panel.PanelImage();
-        panelArticulos = new org.edisoncor.gui.panel.PanelImage();
+        panelClientesAarticulos = new javax.swing.JPanel();
+        panelArticulos = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tablaArticulos = new javax.swing.JTable();
         labelBusquedaCodigo = new javax.swing.JLabel();
@@ -150,7 +331,7 @@ public class VentaGui extends javax.swing.JPanel {
         busquedaCodigoArticulo = new javax.swing.JTextField();
         busquedaNombre = new javax.swing.JTextField();
         busquedaMarca = new javax.swing.JTextField();
-        panelClientes = new org.edisoncor.gui.panel.PanelImage();
+        panelClientes = new javax.swing.JPanel();
         busquedaCodigoCliente = new javax.swing.JTextField();
         labelCodigo = new javax.swing.JLabel();
         busquedaApellido = new javax.swing.JTextField();
@@ -161,7 +342,7 @@ public class VentaGui extends javax.swing.JPanel {
         clienteALaFactura = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         articulosALaFactura = new javax.swing.JButton();
-        panelFactura = new org.edisoncor.gui.panel.PanelImage();
+        panelFactura = new javax.swing.JPanel();
         labelCliente = new javax.swing.JLabel();
         clienteFactura = new javax.swing.JTextField();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -170,8 +351,8 @@ public class VentaGui extends javax.swing.JPanel {
         totalFactura = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         borrarArticulosSeleccionados = new javax.swing.JButton();
-        calendarioFactura = new org.freixas.jcalendar.JCalendarCombo();
-        panelControlFactura = new org.edisoncor.gui.panel.PanelImage();
+        calendarioFactura = new com.toedter.calendar.JDateChooser();
+        panelControlFactura = new javax.swing.JPanel();
         facturaNueva = new javax.swing.JButton();
         realizarVenta = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
@@ -435,8 +616,6 @@ public class VentaGui extends javax.swing.JPanel {
         borrarArticulosSeleccionados.setText("Borrar articulos seleccionados");
         borrarArticulosSeleccionados.setToolTipText("Borrar articulos seleccionados en la factura");
 
-        calendarioFactura.setDate(new Date());
-
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
         panelFacturaLayout.setHorizontalGroup(
@@ -449,9 +628,8 @@ public class VentaGui extends javax.swing.JPanel {
                 .addComponent(clienteFactura)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(4, 4, 4)
+                .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFacturaLayout.createSequentialGroup()
                 .addComponent(borrarArticulosSeleccionados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -465,12 +643,11 @@ public class VentaGui extends javax.swing.JPanel {
                 .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelCliente)
-                        .addComponent(clienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(clienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addComponent(calendarioFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(borrarArticulosSeleccionados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,11 +726,11 @@ public class VentaGui extends javax.swing.JPanel {
     private javax.swing.JTextField busquedaCodigoCliente;
     private javax.swing.JTextField busquedaMarca;
     private javax.swing.JTextField busquedaNombre;
-    private org.freixas.jcalendar.JCalendarCombo calendarioFactura;
+    private com.toedter.calendar.JDateChooser calendarioFactura;
     private javax.swing.JButton clienteALaFactura;
     private javax.swing.JTextField clienteFactura;
     private javax.swing.JButton facturaNueva;
-    private org.edisoncor.gui.panel.PanelImage fondoImagen;
+    private javax.swing.JPanel fondoImagen;
     private javax.swing.JButton imprimir;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -570,11 +747,11 @@ public class VentaGui extends javax.swing.JPanel {
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JButton modificar;
-    private org.edisoncor.gui.panel.PanelImage panelArticulos;
-    private org.edisoncor.gui.panel.PanelImage panelClientes;
-    private org.edisoncor.gui.panel.PanelImage panelClientesAarticulos;
-    private org.edisoncor.gui.panel.PanelImage panelControlFactura;
-    private org.edisoncor.gui.panel.PanelImage panelFactura;
+    private javax.swing.JPanel panelArticulos;
+    private javax.swing.JPanel panelClientes;
+    private javax.swing.JPanel panelClientesAarticulos;
+    private javax.swing.JPanel panelControlFactura;
+    private javax.swing.JPanel panelFactura;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JButton realizarVenta;
     private javax.swing.JTable tablaArticulos;
