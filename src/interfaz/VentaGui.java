@@ -579,14 +579,14 @@ public class VentaGui extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Cantidad", "Articulo", "Precio", "importe"
+                "ID", "Cantidad", "Articulo", "Precio", "importe"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                false, true, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -599,12 +599,14 @@ public class VentaGui extends javax.swing.JPanel {
         });
         tablaFactura.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jScrollPane8.setViewportView(tablaFactura);
-        tablaFactura.getColumnModel().getColumn(0).setPreferredWidth(75);
-        tablaFactura.getColumnModel().getColumn(0).setMaxWidth(75);
-        tablaFactura.getColumnModel().getColumn(2).setPreferredWidth(75);
-        tablaFactura.getColumnModel().getColumn(2).setMaxWidth(75);
+        tablaFactura.getColumnModel().getColumn(0).setPreferredWidth(70);
+        tablaFactura.getColumnModel().getColumn(0).setMaxWidth(70);
+        tablaFactura.getColumnModel().getColumn(1).setPreferredWidth(75);
+        tablaFactura.getColumnModel().getColumn(1).setMaxWidth(75);
         tablaFactura.getColumnModel().getColumn(3).setPreferredWidth(75);
         tablaFactura.getColumnModel().getColumn(3).setMaxWidth(75);
+        tablaFactura.getColumnModel().getColumn(4).setPreferredWidth(75);
+        tablaFactura.getColumnModel().getColumn(4).setMaxWidth(75);
 
         labelTotal.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelTotal.setText("Total");
