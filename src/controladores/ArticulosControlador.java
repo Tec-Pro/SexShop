@@ -217,7 +217,7 @@ public class ArticulosControlador implements ActionListener{
             Producto p = new Producto();
             cargarDatosProd(p,false);
             p.set("numero_producto", Integer.valueOf(prodGui.getIdArticulo().getText()));
-            p.setCuilProveedor("1");
+            p.setCuilProveedor("33333");
             if(p.getString("nombre").equals("") || p.getString("marca").equals("")){
                 JOptionPane.showMessageDialog(prodGui,"Un producto debe tener nombre y marca");
             }
@@ -242,11 +242,14 @@ public class ArticulosControlador implements ActionListener{
             confirmarBorrar = JOptionPane.showConfirmDialog(prodGui,"¿borrar producto?","Confirmar Borrado",JOptionPane.YES_NO_OPTION);
             if (JOptionPane.OK_OPTION == confirmarBorrar){
                  System.out.println("confirmado");
-                 Producto p = new Producto();
-                 cargarDatosProd(p,true);
-                 int row = tabla.getSelectedRow();
-                 
-                 p.set("id",tabla.getValueAt(row, 0) );
+                 if(!Base.hasConnection()){
+                    Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+               }
+                 Producto p = Producto.first("numero_producto = ?" ,prodGui.getIdArticulo().getText());
+                 //cargarDatosProd(p,true);
+                 //int row = tabla.getSelectedRow();
+                 Base.close();
+                // p.set("numero_producto",prodGui.getIdArticulo().getText() );
                  if(abmProd.baja(p)){
                      JOptionPane.showMessageDialog(prodGui,"Producto borrado exitosamente");
                      pl = pb.filtroProducto("","","");
