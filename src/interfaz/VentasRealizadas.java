@@ -36,6 +36,14 @@ public class VentasRealizadas extends javax.swing.JPanel {
         this.eliminar.addActionListener(lis); //boton eliminar
     }
 
+     public JDateChooser getClendarioDesde(){
+        return calendarioDesde;
+    }
+    
+    public JDateChooser getClendarioHasta(){
+        return calendarioHasta;
+    }
+    
     public JTextField getFiltroApellido() {
         return filtroApellido;
     }

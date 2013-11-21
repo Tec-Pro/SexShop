@@ -75,7 +75,10 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
     
     
     
-
+    public VentasRealizadas  getVentasRealizadas(){
+        return ventasRealizadas;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
