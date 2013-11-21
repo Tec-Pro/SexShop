@@ -68,6 +68,12 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
     public AbmProductoGui getAbmProductoGui(){
         return abmProducto;
     } 
+
+    public VentaGui getVenta() {
+        return venta;
+    }
+    
+    
     
 
     /**
@@ -91,7 +97,6 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         setExtendedState(6);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
-        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
