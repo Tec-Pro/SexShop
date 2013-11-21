@@ -5,7 +5,7 @@ INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celul
 INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (5, 'Agustin', 'Bauer', '1921312', '', '');
 INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (6, 'Alan', 'Gonzalez', '', '', '');
 INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (7, 'Jacinto', 'Jaimez', '1299192', '', 'Jacinto@yahoo.com.ar');
-INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (8, 'Max', 'Cejuela', '', '','');
+INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`) VALUES (8, 'Max', 'Cejuela', '', '');
 
 INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `celular`, `mail`, `cuil`, `nombre_banco`, `sucursal`, `tipo_cuenta`, `cuenta`, `compra_minima`) VALUES ('prov1', 'ap1', '-', '-', '-', 'prov1@prov', '11111', 'banco1', 'suc1', 'tipo1', 11111, 1);
 INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `celular`, `mail`, `cuil`, `nombre_banco`, `sucursal`, `tipo_cuenta`, `cuenta`, `compra_minima`) VALUES ('prov2', 'ap2', '-', '-', '-', 'prov2@prov', '22222', 'banco2', 'suc2', 'tipo2', 22222, 1);

@@ -26,6 +26,14 @@ public class busqueda {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
     }
     
+    
+     public Cliente buscarCliente(Object id){
+        abrirBase();
+        Cliente result = Cliente.findById(id);
+        Base.close();
+        return result;
+     }   
+    
     /*
      * @params nombre, apellido e id del cliente.
      * Filtra los que tienen nombre y apellido similar a los pasados y 
@@ -63,12 +71,12 @@ public class busqueda {
      * @returns lista filtrada de ventas.
      */
     public List<Venta> filtroVenta(String idcliente, String desde, String hasta){
-        if (!Base.hasConnection()){
-            abrirBase(); 
-        } 
+       // if (!Base.hasConnection()){ //perdon por estooo!!!!
+       //     abrirBase(); 
+       // } 
         List<Venta> result;
         result = Venta.where("idcliente like ? and fecha between ? and ?", idcliente+"%",desde, hasta);
-        Base.close();
+       // Base.close();
         return result;
     }
     
