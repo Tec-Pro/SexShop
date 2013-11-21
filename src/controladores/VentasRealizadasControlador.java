@@ -4,6 +4,7 @@
  */
 package controladores;
 
+import abm.ABMVenta;
 import busquedas.busqueda;
 import com.toedter.calendar.JDateChooser;
 import interfaz.AplicacionGui;
@@ -17,6 +18,7 @@ import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -49,56 +51,41 @@ public class VentasRealizadasControlador implements ActionListener {
     private JTable tablaFact;
     private String dateDesde;
     private String dateHasta;
-    private List<ProductosVentas> prodVendidos;
-    private JTextField calenDesdeText;
-    private JTextField calenHastaText;
+    private List<ProductosVentas> prodVentas;
+    private ABMVenta abmventa;
+    
     
     public VentasRealizadasControlador(AplicacionGui app){
-        
+        abrirBase();
         apliGui = app;
         ventasGui = apliGui.getVentasRealizadas();
+        ventasGui.setActionListener(this);
         filtNomb = ventasGui.getFiltroNombre();
         filtApe = ventasGui.getFiltroApellido();
         filtId = ventasGui.getFiltroId();
         calenDesde = ventasGui.getCalendarioDesde();
         calenHasta = ventasGui.getCalendarioHasta();
-        calenDesdeText= ventasGui.getCalenDesdeText();
-        calenHastaText= ventasGui.getCalenHastaText();
         cl = new LinkedList<Cliente>();
         vl = new LinkedList<Venta>();
         tablaFacturas = ventasGui.getTablaFacturas();
         facturasDefault = ventasGui.getTablaFacturasDefault();
-        dateDesde = "0000-01-01";
-        dateHasta = "9999-01-01";
+        dateDesde = "0-0-0";
+        dateHasta = "9999-0-0";
         buscar = new busqueda();
         cl = buscar.filtroCliente("","","");
         factDefault = ventasGui.getTablaFacturaDefault();
         tablaFact = ventasGui.getTablaFactura();
-        prodVendidos =  new LinkedList<ProductosVentas>();
+        prodVentas =  new LinkedList<ProductosVentas>();
+        abmventa = new ABMVenta();
         
+        Base.close();
         tablaFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tablaFacturasMouseReleased(evt);
             }
         });
-        calenDesdeText.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                if(calenDesdeText.getText().equals("")) dateDesde="0000-01-01";
-                else  dateDesde =calenDesdeText.getText();   
-                actualizarListaFacturas();
-            }
-        });
         
-        calenHastaText.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                if(calenHastaText.getText().equals("")) dateHasta="9999-01-01";
-                else  dateHasta =calenHastaText.getText();  
-                actualizarListaFacturas();
-            }
-        });
         
         filtNomb.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -131,19 +118,22 @@ public class VentasRealizadasControlador implements ActionListener {
             }
         });
         
-        
         actualizarListaFacturas();
         
     }
     
+    private void abrirBase(){
+        if (!Base.hasConnection()){
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
+        }
+    }
+    
     private void actualizarListaFacturas(){
          facturasDefault.setRowCount(0);
-         buscar.abrirBase();
+         abrirBase();
          for (Cliente c : cl){
-            //Base.close();
             vl = buscar.filtroVenta(c.getId().toString(),dateDesde,dateHasta);
-            
-           buscar.abrirBase();
+
             for (Venta v : vl) {
                 String row[] = new String[3];
                 row[0] = v.getId().toString();
@@ -157,10 +147,8 @@ public class VentasRealizadasControlador implements ActionListener {
     }
     
     private void actualizarFactura(){
-        buscar.abrirBase();
         factDefault.setRowCount(0);
-        for(ProductosVentas pv: prodVendidos){
-            
+        for(ProductosVentas pv: prodVentas){
             Object row[] = new Object[4];
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
             Producto p = Producto.findById(pv.get("producto_id"));
@@ -170,9 +158,14 @@ public class VentasRealizadasControlador implements ActionListener {
             row[3] = Integer.parseInt(pv.get("cantidad").toString()) * a; 
             factDefault.addRow(row);
         }
-        Base.close();
+        setTotal();
     }
     
+    private void limpiarFactura(){
+        factDefault.setRowCount(0);
+        ventasGui.getClienteFactura().setText("");
+        ventasGui.getCalendarioFactura().setDate(Date.valueOf("0000-1-1"));
+    }
     
     public void calenDesdePropertyChange(PropertyChangeEvent e){
         final Calendar c = (Calendar) e.getNewValue();   
@@ -187,8 +180,10 @@ public class VentasRealizadasControlador implements ActionListener {
         actualizarListaFacturas();
     }
     
-    public void filtroNombreKeyReleased(java.awt.event.KeyEvent evt){        
+    public void filtroNombreKeyReleased(java.awt.event.KeyEvent evt){   
+        abrirBase();
         cl = buscar.filtroCliente(filtNomb.getText(),filtApe.getText(),filtId.getText());
+        Base.close();
         actualizarListaFacturas();
     }
     
@@ -198,31 +193,83 @@ public class VentasRealizadasControlador implements ActionListener {
     }
     
     public void filtroIdKeyReleased(java.awt.event.KeyEvent evt){
-        cl = buscar.filtroCliente(filtApe.getText(),filtApe.getText(),filtId.getText());
+        abrirBase();
+        cl = buscar.filtroCliente(filtNomb.getText(),filtApe.getText(),filtId.getText());
+        Base.close();
         actualizarListaFacturas();
     }
  
     public void tablaFacturasMouseReleased(java.awt.event.MouseEvent evt){
+        abrirBase();
         int r = tablaFacturas.getSelectedRow();
         Cliente c = buscar.buscarCliente(tablaFacturas.getValueAt(r, 0));
         ventasGui.getClienteFactura().setText(tablaFacturas.getValueAt(r, 1).toString());
         ventasGui.getCalendarioFactura().setDate(Date.valueOf(tablaFacturas.getValueAt(r, 2).toString()));
         if(c!=null){
-            prodVendidos = buscar.filtroVendidos(c.getId().toString(),"");
+            prodVentas = buscar.filtroVendidos(c.getId().toString(),"");
+
         }
         actualizarFactura();
-       
+        Base.close();
         
+    }
+    
+    private void setTotal(){
+        Float total = Float.parseFloat("0.0");
+        
+        for(int i=0;i<tablaFact.getRowCount();i++){
+            total += Float.parseFloat(factDefault.getValueAt(i, 3).toString());
+        }
+        ventasGui.getTotalFactura().setText(total.toString());
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        abrirBase();
         JButton b = (JButton)e.getSource();
         if(b.equals(ventasGui.getModificar())){
             
         }
-       
+        if(b.equals(ventasGui.getEliminar())){
+            int r = tablaFacturas.getSelectedRow();
+            if(r<0){
+                JOptionPane.showMessageDialog(ventasGui,"No hay ninguna factura seleccionada");
+                return;
+            }
+            int confirmarBorrar = JOptionPane.showConfirmDialog(ventasGui,"¿borrar factura?","Confirmar Borrado",JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.OK_OPTION == confirmarBorrar){
+                Venta v = new Venta();
+                v.setId(facturasDefault.getValueAt(r, 0));
+                abmventa.baja(v);
+                actualizarListaFacturas();  
+                limpiarFactura();
+                JOptionPane.showMessageDialog(ventasGui,"Factura borrada exitosamente");
+            }  
+        }
+        if(b.equals(ventasGui.getDevolucion())){
+            int r = tablaFacturas.getSelectedRow();
+            if(r<0){
+                JOptionPane.showMessageDialog(ventasGui,"No hay ninguna factura seleccionada");
+                return;
+            }
+            int confirmarBorrar = JOptionPane.showConfirmDialog(ventasGui,"¿cancelar factura?","Confirmar Borrado",JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.OK_OPTION == confirmarBorrar){
+                Venta v = new Venta();
+                v.setId(facturasDefault.getValueAt(r, 0));
+                if(abmventa.bajaConDevolucion(v)){
+                    JOptionPane.showMessageDialog(ventasGui,"Factura cancelada exitosamente");
+                    limpiarFactura();
+                    actualizarListaFacturas();
+                }
+                else{
+                    JOptionPane.showMessageDialog(ventasGui,"Error al cancelar factura");
+                }
+            }           
+        }
+        if(b.equals(ventasGui.getImprimir())){
+            
+        }
+        Base.close();
     }
     
     
