@@ -5,8 +5,6 @@
 package abm;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelos.Producto;
 import modelos.Proveedor;
 import org.javalite.activejdbc.Base;
@@ -17,6 +15,10 @@ import org.javalite.activejdbc.Base;
  */
 public class ABMProducto implements ABMInterface<Producto> {
 
+    public void abrirBase(){
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
+    }
+    
     public boolean findProducto(Producto p){
         return (Producto.first("numero_producto = ?",p.get("numero_producto"))!= null);
     }
@@ -24,7 +26,9 @@ public class ABMProducto implements ABMInterface<Producto> {
     
     @Override
     public boolean alta(Producto p) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        if (!Base.hasConnection()){
+            abrirBase();
+        }
         if (!findProducto(p)){
             Proveedor pr = Proveedor.first("cuil = ?", p.getCuilProveedor());
             if (pr!=null){
@@ -50,7 +54,9 @@ public class ABMProducto implements ABMInterface<Producto> {
 
     @Override
     public boolean baja(Producto p) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        if (!Base.hasConnection()){
+            abrirBase();
+        }
         if (findProducto(p)){
             Base.openTransaction();
             p.delete();
@@ -64,7 +70,9 @@ public class ABMProducto implements ABMInterface<Producto> {
 
     @Override
     public boolean modificar(Producto p) {
-       Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+       if (!Base.hasConnection()){
+            abrirBase();
+        }
        Producto viejo = Producto.findFirst("numero_producto = ?", p.get("numero_producto"));
        if (viejo!=null){
             Base.openTransaction();
