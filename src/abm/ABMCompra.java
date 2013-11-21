@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import modelos.Compra;
 import modelos.Producto;
-import modelos.ProductosComprado;
+import modelos.ProductosCompras;
 import modelos.Proveedor;
 import net.sf.jasperreports.engine.util.Pair;
 import org.javalite.activejdbc.Base;
@@ -34,7 +34,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         Compra compra = Compra.create("monto", c.get("monto"), "idproveedor", idProveedor, "fecha", c.get("fecha"));
         resultOp = resultOp && compra.saveIt();//guardo la venta
         int idCompra = compra.getInteger("id");
-        resultOp = resultOp && cargarProductosComprados(idCompra, c.getProductos());//guardo los productos vendidos
+        resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos vendidos
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos vendidos
         Base.commitTransaction();
         Base.close();
@@ -53,7 +53,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         Base.openTransaction();
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
-        ProductosComprado.delete("idcompra = ?", idCompra);//elimino todos los productoscomprados
+        ProductosCompras.delete("idcompra = ?", idCompra);//elimino todos los productoscomprados
         resultOp = resultOp && compra.delete();//elimino la compra y todos los registros que la referencian
         Base.commitTransaction();
         Base.close();
@@ -79,9 +79,9 @@ public class ABMCompra implements ABMInterface<Compra> {
         compra.set("fecha", c.get("fecha"));
         compra.set("idproveedor", idProveedorNuevo);
         compra.saveIt();
-        LinkedList<Pair> viejosProductos = buscarProductosComprados(idCompra); //saco los viejos productos de la compra y los elimino de la misma
+        LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la compra y los elimino de la misma
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        resultOp = resultOp && cargarProductosComprados(idCompra, c.getProductos());//guardo los productos nuevos
+        resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos nuevos
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos comprados
         Base.commitTransaction();
         Base.close();
@@ -95,9 +95,9 @@ public class ABMCompra implements ABMInterface<Compra> {
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
-        LinkedList<Pair> viejosProductos = buscarProductosComprados(idCompra); //saco los viejos productos de la venta
+        LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la venta
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        ProductosComprado.delete("idcompra = ?", idCompra);//elimino todos los productosvendidos
+        ProductosCompras.delete("idcompra = ?", idCompra);//elimino todos los productosvendidos
         resultOp = resultOp && compra.delete(); //elimino la venta
         Base.commitTransaction();
         Base.close();
@@ -125,7 +125,7 @@ public class ABMCompra implements ABMInterface<Compra> {
     
     //FUNCIONA CORRECTAMENTE
     //Carga los productos y cantidades en la tabla productos_comprados
-    private boolean cargarProductosComprados(int idCompra, LinkedList<Pair> productos) {
+    private boolean cargarProductosComprass(int idCompra, LinkedList<Pair> productos) {
        boolean resultOp = true;
         Iterator itr = productos.iterator();
         Producto prod;
@@ -135,7 +135,7 @@ public class ABMCompra implements ABMInterface<Compra> {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
-            ProductosComprado prodComprado = ProductosComprado.create("idcompra", idCompra, "idproducto", prod.get("numero_producto"), "cantidad", cant);
+            ProductosCompras prodComprado = ProductosCompras.create("idcompra", idCompra, "idproducto", prod.get("numero_producto"), "cantidad", cant);
             resultOp = resultOp && prodComprado.saveIt();
         }
         return resultOp;
@@ -147,20 +147,20 @@ public class ABMCompra implements ABMInterface<Compra> {
      * productos_comprados y a su vez
      * elimina estos productos de la base de la misma tabla
      */
-    private LinkedList<Pair> buscarProductosComprados(int idCompra) {
+    private LinkedList<Pair> buscarProductosComprass(int idCompra) {
        Integer cant;
-        ProductosComprado prodComprado;
+        ProductosCompras prodComprado;
         Producto prod;
         LinkedList<Pair> listaDePares = new LinkedList<Pair>();
-        LazyList<ProductosComprado> productos = ProductosComprado.find("idcompra = ?", idCompra);
+        LazyList<ProductosCompras> productos = ProductosCompras.find("idcompra = ?", idCompra);
         Iterator itr = productos.iterator();
         while (itr.hasNext()) {
-            prodComprado = (ProductosComprado) itr.next(); //saco el modelo de la lista
+            prodComprado = (ProductosCompras) itr.next(); //saco el modelo de la lista
             prod = Producto.findFirst("numero_producto = ?", prodComprado.getInteger("idproducto"));//saco el producto del modelo
             cant = (Integer) prodComprado.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares
-            ProductosComprado.delete("idcompra = ? AND idproducto = ?",prodComprado.getInteger("idcompra"),prodComprado.getInteger("idproducto"));//elimino el modelo de la base de datos
+            ProductosCompras.delete("idcompra = ? AND idproducto = ?",prodComprado.getInteger("idcompra"),prodComprado.getInteger("idproducto"));//elimino el modelo de la base de datos
         }
         return listaDePares;
     }

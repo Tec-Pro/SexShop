@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelos.Cliente;
 import modelos.Producto;
-import modelos.ProductosVendido;
+import modelos.ProductosVentas;
 import modelos.Venta;
 import org.javalite.activejdbc.Base;
 
@@ -49,7 +49,7 @@ public class VentasRealizadasControlador implements ActionListener {
     private JTable tablaFact;
     private String dateDesde;
     private String dateHasta;
-    private List<ProductosVendido> prodVendidos;
+    private List<ProductosVentas> prodVendidos;
     private JTextField calenDesdeText;
     private JTextField calenHastaText;
     
@@ -74,7 +74,7 @@ public class VentasRealizadasControlador implements ActionListener {
         cl = buscar.filtroCliente("","","");
         factDefault = ventasGui.getTablaFacturaDefault();
         tablaFact = ventasGui.getTablaFactura();
-        prodVendidos =  new LinkedList<ProductosVendido>();
+        prodVendidos =  new LinkedList<ProductosVentas>();
         
         tablaFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -159,7 +159,7 @@ public class VentasRealizadasControlador implements ActionListener {
     private void actualizarFactura(){
         buscar.abrirBase();
         factDefault.setRowCount(0);
-        for(ProductosVendido pv: prodVendidos){
+        for(ProductosVentas pv: prodVendidos){
             
             Object row[] = new Object[4];
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
