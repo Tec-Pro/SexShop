@@ -26,7 +26,6 @@ public class ABMCompra implements ABMInterface<Compra> {
     //FUNCIONA CORRECTAMENTE
     @Override
     public boolean alta(Compra c) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
         Integer idProveedor = (Integer) c.get("idproveedor");
@@ -37,11 +36,9 @@ public class ABMCompra implements ABMInterface<Compra> {
         resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos vendidos
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos vendidos
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
 
-    
     //fUNCIONA CORRECTAMENTE
     /*Elimino una compra y los productos ligados a ella, sin hacer devolucion de stock,
      * ni actualizacion de tablas de productos_comprados
@@ -49,18 +46,15 @@ public class ABMCompra implements ABMInterface<Compra> {
     @Override
     public boolean baja(Compra c) {
         boolean resultOp = true;
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
         ProductosCompras.delete("idcompra = ?", idCompra);//elimino todos los productoscomprados
         resultOp = resultOp && compra.delete();//elimino la compra y todos los registros que la referencian
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
 
-    
     //FUNCIONA CORRECTAMENTE
     /*Setear el id de la compra a modificar, la lista de productos nuevos, el idproveedor nuevo 
      * y la fecha nueva, busca la venta vieja y modifica todos sus atributos calculando el nuevo 
@@ -68,12 +62,11 @@ public class ABMCompra implements ABMInterface<Compra> {
      */
     @Override
     public boolean modificar(Compra c) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");
         Integer idProveedorNuevo = c.getInteger("proveedor_id");
-        c.set("monto",calcularMonto(c.getProductos()));//calculo nuevo monto
+        c.set("monto", calcularMonto(c.getProductos()));//calculo nuevo monto
         Compra compra = Compra.findById(idCompra);
         compra.set("monto", c.get("monto"));
         compra.set("fecha", c.get("fecha"));
@@ -84,13 +77,11 @@ public class ABMCompra implements ABMInterface<Compra> {
         resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos nuevos
         resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos comprados
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
 
     //FUNCIONA CORRECTAMENTE
-    public boolean bajaConDevolucion(Compra c){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+    public boolean bajaConDevolucion(Compra c) {
         Base.openTransaction();
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");//saco el idCompra
@@ -100,10 +91,9 @@ public class ABMCompra implements ABMInterface<Compra> {
         ProductosCompras.delete("compra_id = ?", idCompra);//elimino todos los productosvendidos
         resultOp = resultOp && compra.delete(); //elimino la venta
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
-    
+
     //FUNCIONA CORRECTAMENTE
     /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos
      los productos de la lista, multiplicados por su cantidad correspondiente*/
@@ -122,11 +112,10 @@ public class ABMCompra implements ABMInterface<Compra> {
         return acumMonto;
     }
 
-    
     //FUNCIONA CORRECTAMENTE
     //Carga los productos y cantidades en la tabla productos_comprados
     private boolean cargarProductosComprass(int idCompra, LinkedList<Pair> productos) {
-       boolean resultOp = true;
+        boolean resultOp = true;
         Iterator itr = productos.iterator();
         Producto prod;
         Pair par;
@@ -141,14 +130,13 @@ public class ABMCompra implements ABMInterface<Compra> {
         return resultOp;
     }
 
-    
     //FUNCIONA CORRECTAMENTE
     /*Retorna una lista de pares producto-cantidad de una compra(la busca en
      * productos_comprados y a su vez
      * elimina estos productos de la base de la misma tabla
      */
     private LinkedList<Pair> buscarProductosComprass(int idCompra) {
-       Integer cant;
+        Integer cant;
         ProductosCompras prodComprado;
         Producto prod;
         LinkedList<Pair> listaDePares = new LinkedList<Pair>();
@@ -160,12 +148,11 @@ public class ABMCompra implements ABMInterface<Compra> {
             cant = (Integer) prodComprado.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares
-            ProductosCompras.delete("compra_id = ? AND producto_id = ?",prodComprado.getInteger("compra_id"),prodComprado.getInteger("producto_id"));//elimino el modelo de la base de datos
+            ProductosCompras.delete("compra_id = ? AND producto_id = ?", prodComprado.getInteger("compra_id"), prodComprado.getInteger("producto_id"));//elimino el modelo de la base de datos
         }
         return listaDePares;
     }
 
-    
     //FUNCIONA CORRECTAMENTE
     //Actualiza el stock de los productos comprados (incrementandolo)
     private boolean actualizarStock(LinkedList<Pair> productos) {
