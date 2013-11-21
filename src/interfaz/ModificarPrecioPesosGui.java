@@ -43,7 +43,10 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
     public JButton getAceptar() {
         return aceptar;
     }
-
+    public JButton getCancelar() {
+        return cancelar;
+    }
+    
     /**
      * retorno campo que contiene la cantidad en pesos
      *
@@ -142,4 +145,6 @@ public class ModificarPrecioPesosGui extends javax.swing.JDialog {
     private javax.swing.JPanel panelImage2;
     private javax.swing.JTextField pesos;
     // End of variables declaration//GEN-END:variables
+
+    
 }

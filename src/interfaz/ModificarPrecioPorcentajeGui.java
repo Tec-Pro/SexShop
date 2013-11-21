@@ -43,6 +43,10 @@ public class ModificarPrecioPorcentajeGui extends javax.swing.JDialog {
     public JButton getAceptar() {
         return aceptar;
     }
+    
+    public JButton getCancelar() {
+        return cancelar;
+    }
 
     /**
      * retorno spinner que contiene la cantidad en porcentaje

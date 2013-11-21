@@ -35,7 +35,7 @@ public class busqueda {
     public List<Producto> filtroProducto(String codigo, String nombre, String marca){
         abrirBase(); 
         List<Producto> result;
-        result = Producto.where("codigo_producto like ? and nombre like ? and marca like ?", codigo+"%","%"+nombre+"%","%"+marca+"%");
+        result = Producto.where("numero_producto like ? and nombre like ? and marca like ?", codigo+"%","%"+nombre+"%","%"+marca+"%");
         Base.close();
         return result;
     }
@@ -104,7 +104,9 @@ public class busqueda {
     }
      
     public List<Proveedor> proveedores(){
+       // abrirBase(); 
         return Proveedor.findAll();
+        
     }
 }
 

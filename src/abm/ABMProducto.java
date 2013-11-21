@@ -18,9 +18,15 @@ import org.javalite.activejdbc.Base;
 public class ABMProducto implements ABMInterface<Producto> {
 
     public boolean findProducto(Producto p){
-        return (Producto.first("numero_producto = ?",p.get("numero_producto"))!= null);
+        return (Producto.first("id = ?",p.get("id"))!= null);
     }
     
+    public Producto getProducto(Producto p){
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+        Producto prod = Producto.first("nombre = ? and marca = ?", p.get("nombre"), p.get("marca"));
+        Base.close();
+        return prod;
+    }
     
     @Override
     public boolean alta(Producto p) {
@@ -51,7 +57,7 @@ public class ABMProducto implements ABMInterface<Producto> {
     @Override
     public boolean baja(Producto p) {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-        if (findProducto(p)){
+       if (findProducto(p)){
             Base.openTransaction();
             p.delete();
             Base.commitTransaction();

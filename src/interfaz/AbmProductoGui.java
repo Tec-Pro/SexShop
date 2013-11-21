@@ -12,6 +12,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelos.Producto;
 
 /**
  *
@@ -103,6 +104,16 @@ public class AbmProductoGui extends javax.swing.JPanel {
         nombre.setText("");
         precioCompra.setText("");
         precioVenta.setText("");
+    }
+    
+    public void CargarCampos(Producto p) {
+        marca.setText(p.getString("marca"));
+        stock.setText(p.getString("stock"));
+        tipo.setText(p.getString("tipo"));
+        idArticulo.setText(p.getString("numero_producto"));
+        nombre.setText(p.getString("nombre"));
+        precioCompra.setText(p.getString("precio_compra"));
+        precioVenta.setText(p.getString("precio_venta"));
     }
 
     /**
