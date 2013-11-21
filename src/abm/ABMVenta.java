@@ -51,12 +51,14 @@ public class ABMVenta implements ABMInterface<Venta> {
     public boolean baja(Venta v) {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
+        boolean resultOp = true;
         Integer idVenta = v.getInteger("id");//saco el idVenta
         Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
         ProductosVendido.delete("idventa = ?", idVenta);//elimino todos los productosvendidos
+        resultOp = resultOp && venta.delete();//elimino la venta
         Base.commitTransaction();
         Base.close();
-        return venta.delete(); //elimino la venta
+        return resultOp;
     }
 
     //FUNCIONA CORRECTAMENTE
