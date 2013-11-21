@@ -19,6 +19,15 @@ public class ABMProducto implements ABMInterface<Producto> {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
     }
     
+    
+    public Producto getProducto(Producto p){
+        if (!Base.hasConnection()){
+            abrirBase();
+        }
+        Producto r = Producto.first("numero_producto =?", p.get("numero_producto"));
+        Base.close();
+        return r;
+    }
     public boolean findProducto(Producto p){
         return (Producto.first("numero_producto = ?",p.get("numero_producto"))!= null);
     }
