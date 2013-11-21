@@ -26,9 +26,9 @@ public class ABMVenta implements ABMInterface<Venta> {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idCliente = (Integer) v.get("idcliente");
+        Integer idCliente = (Integer) v.get("cliente_id");
         v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
-        Venta venta = Venta.create("monto", v.get("monto"), "idcliente", idCliente, "fecha", v.get("fecha"));
+        Venta venta = Venta.create("monto", v.get("monto"), "cliente_id", idCliente, "fecha", v.get("fecha"));
         resultOp = resultOp && venta.saveIt();//guardo la venta
         int idVenta = venta.getInteger("id");
         resultOp = resultOp && cargarProductosVendidos(idVenta, v.getProductos());//guardo los productos vendidos
@@ -50,7 +50,7 @@ public class ABMVenta implements ABMInterface<Venta> {
         boolean resultOp = true;
         Integer idVenta = v.getInteger("id");//saco el idVenta
         Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
-        ProductosVentas.delete("idventa = ?", idVenta);//elimino todos los productosvendidos
+        ProductosVentas.delete("venta_id = ?", idVenta);//elimino todos los productosvendidos
         resultOp = resultOp && venta.delete();//elimino la venta
         Base.commitTransaction();
         Base.close();
@@ -67,14 +67,14 @@ public class ABMVenta implements ABMInterface<Venta> {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idClienteNuevo = v.getInteger("idcliente");
+        Integer idClienteNuevo = v.getInteger("cliente_id");
         v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
         Integer idVenta = v.getInteger("id");
         Venta venta = Venta.findById(idVenta);//saco la venta
         Integer idVentaVieja = (Integer) venta.getId();
         venta.set("monto", v.get("monto"));
         venta.set("fecha", v.get("fecha"));
-        venta.set("idcliente", idClienteNuevo);
+        venta.set("cliente_id", idClienteNuevo);
         venta.saveIt();
         LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
@@ -92,13 +92,13 @@ public class ABMVenta implements ABMInterface<Venta> {
         Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idCliente = (Integer) v.get("idcliente");
+        Integer idCliente = (Integer) v.get("cliente_id");
         Integer idVenta = v.getInteger("id");//saco el idVenta
         Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
         LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
         resultOp = resultOp && eliminarAdquisicionCliente(idCliente, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
-        ProductosVentas.delete("idventa = ?", idVenta);//elimino todos los productosvendidos
+        ProductosVentas.delete("venta_id = ?", idVenta);//elimino todos los productosvendidos
         resultOp = resultOp && venta.delete(); //elimino la venta
         Base.commitTransaction();
         Base.close();
@@ -135,7 +135,7 @@ public class ABMVenta implements ABMInterface<Venta> {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
-            ProductosVentas prodVendido = ProductosVentas.create("idventa", idVenta, "idproducto", prod.get("numero_producto"), "cantidad", cant, "precio_final", 0);
+            ProductosVentas prodVendido = ProductosVentas.create("venta_id", idVenta, "producto_id", prod.get("numero_producto"), "cantidad", cant, "precio_final", 0);
             resultOp = resultOp && prodVendido.saveIt();
         }
         return resultOp;
@@ -200,13 +200,13 @@ public class ABMVenta implements ABMInterface<Venta> {
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
             ClientesProductos prodAdquirido;
-            prodAdquirido = ClientesProductos.findFirst("idcliente = ? AND idproducto = ?", idCliente, prod.get("numero_producto"));
+            prodAdquirido = ClientesProductos.findFirst("cliente_id = ? AND producto_id = ?", idCliente, prod.get("numero_producto"));
             if (prodAdquirido == null) { // sino lo agrego a la tabla
-                prodAdquirido = ClientesProductos.create("idcliente", idCliente, "idproducto", prod.get("numero_producto"), "cantidad", cant);
+                prodAdquirido = ClientesProductos.create("cliente_id", idCliente, "producto_id", prod.get("numero_producto"), "cantidad", cant);
                 resultOp = resultOp && prodAdquirido.saveIt();
             } else { //si existe modifico la cantidad
                 cant = prodAdquirido.getInteger("cantidad") + cant;//asigno a cant el valor nuevo de cantidad
-                ClientesProductos.update("cantidad = ?", "idcliente = ? AND idproducto = ?", cant,idCliente, prod.get("numero_producto"));
+                ClientesProductos.update("cantidad = ?", "cliente_id = ? AND producto_id = ?", cant,idCliente, prod.get("numero_producto"));
             }
         }
         return resultOp;
@@ -229,18 +229,18 @@ public class ABMVenta implements ABMInterface<Venta> {
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
             ClientesProductos prodAdquirido;
-            prodAdquirido = ClientesProductos.findFirst("idcliente = ? AND idproducto = ?", idCliente, prod.get("numero_producto"));
+            prodAdquirido = ClientesProductos.findFirst("cliente_id = ? AND producto_id = ?", idCliente, prod.get("numero_producto"));
             if (prodAdquirido == null) { //si existe modifico la cantidad
                 System.out.println("ERROR - PRODUCTO NO ENCONTRADO EN TABLA DE ADQUISICIONES DE CLIENTE");
             }
             else{
                 if (prodAdquirido.getInteger("cantidad") - cant > 0) {
                     cant = prodAdquirido.getInteger("cantidad") - cant;//asigno a cant el valor nuevo de cantidad
-                    ClientesProductos.update("cantidad = ?", "idcliente = ? AND idproducto = ?", cant,idCliente, prod.get("numero_producto"));
+                    ClientesProductos.update("cantidad = ?", "cliente_id = ? AND producto_id = ?", cant,idCliente, prod.get("numero_producto"));
                 }
                 else {
                     if (prodAdquirido.getInteger("cantidad") - cant == 0) {
-                        ClientesProductos.delete("idcliente = ? AND idproducto = ?",idCliente, prod.get("numero_producto"));
+                        ClientesProductos.delete("cliente_id = ? AND producto_id = ?",idCliente, prod.get("numero_producto"));
                     }
                     else {
                         resultOp = false;
@@ -264,15 +264,15 @@ public class ABMVenta implements ABMInterface<Venta> {
         ProductosVentas prodVendido;
         Producto prod;
         LinkedList<Pair> listaDePares = new LinkedList<Pair>();
-        LazyList<ProductosVentas> productos = ProductosVentas.find("idventa = ?", idVenta);
+        LazyList<ProductosVentas> productos = ProductosVentas.find("venta_id = ?", idVenta);
         Iterator itr = productos.iterator();
         while (itr.hasNext()) {
             prodVendido = (ProductosVentas) itr.next(); //saco el modelo de la lista
-            prod = Producto.findFirst("numero_producto = ?", prodVendido.getInteger("idproducto"));//saco el producto del modelo
+            prod = Producto.findFirst("numero_producto = ?", prodVendido.getInteger("producto_id"));//saco el producto del modelo
             cant = (Integer) prodVendido.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares
-            ProductosVentas.delete("idventa = ? AND idproducto = ?",prodVendido.getInteger("idventa"),prodVendido.getInteger("idproducto"));//elimino el modelo de la base de datos
+            ProductosVentas.delete("venta_id = ? AND producto_id = ?",prodVendido.getInteger("venta_id"),prodVendido.getInteger("producto_id"));//elimino el modelo de la base de datos
         }
         return listaDePares;
     }
@@ -284,11 +284,11 @@ public class ABMVenta implements ABMInterface<Venta> {
         ProductosVentas prodVendido;
         Producto prod;
         LinkedList<Pair> listaDePares = new LinkedList<Pair>();
-        LazyList<ProductosVentas> productos = ProductosVentas.find("idventa = ?", idVenta);
+        LazyList<ProductosVentas> productos = ProductosVentas.find("venta_id = ?", idVenta);
         Iterator itr = productos.iterator();
         while (itr.hasNext()) {
             prodVendido = (ProductosVentas) itr.next(); //saco el modelo de la lista
-            prod = Producto.findFirst("numero_producto = ?", prodVendido.getInteger("idproducto"));//saco el producto del modelo
+            prod = Producto.findFirst("numero_producto = ?", prodVendido.getInteger("producto_id"));//saco el producto del modelo
             cant = (Integer) prodVendido.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares

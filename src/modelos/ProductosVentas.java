@@ -12,6 +12,6 @@ import org.javalite.activejdbc.Model;
  */
 public class ProductosVentas extends Model {
     static {
-        validatePresenceOf("idventa","idproducto","cantidad");
+        validatePresenceOf("venta_id","producto_id","cantidad","precio_final");
     }
 }

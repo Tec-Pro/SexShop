@@ -72,12 +72,12 @@ public class ABMCompra implements ABMInterface<Compra> {
         Base.openTransaction();
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");
-        Integer idProveedorNuevo = c.getInteger("idproveedor");
+        Integer idProveedorNuevo = c.getInteger("proveedor_id");
         c.set("monto",calcularMonto(c.getProductos()));//calculo nuevo monto
         Compra compra = Compra.findById(idCompra);
         compra.set("monto", c.get("monto"));
         compra.set("fecha", c.get("fecha"));
-        compra.set("idproveedor", idProveedorNuevo);
+        compra.set("proveedor_id", idProveedorNuevo);
         compra.saveIt();
         LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la compra y los elimino de la misma
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
@@ -97,7 +97,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
         LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la venta
         resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        ProductosCompras.delete("idcompra = ?", idCompra);//elimino todos los productosvendidos
+        ProductosCompras.delete("compra_id = ?", idCompra);//elimino todos los productosvendidos
         resultOp = resultOp && compra.delete(); //elimino la venta
         Base.commitTransaction();
         Base.close();
@@ -135,7 +135,7 @@ public class ABMCompra implements ABMInterface<Compra> {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
-            ProductosCompras prodComprado = ProductosCompras.create("idcompra", idCompra, "idproducto", prod.get("numero_producto"), "cantidad", cant);
+            ProductosCompras prodComprado = ProductosCompras.create("compra_id", idCompra, "producto_id", prod.get("numero_producto"), "cantidad", cant);
             resultOp = resultOp && prodComprado.saveIt();
         }
         return resultOp;
@@ -156,11 +156,11 @@ public class ABMCompra implements ABMInterface<Compra> {
         Iterator itr = productos.iterator();
         while (itr.hasNext()) {
             prodComprado = (ProductosCompras) itr.next(); //saco el modelo de la lista
-            prod = Producto.findFirst("numero_producto = ?", prodComprado.getInteger("idproducto"));//saco el producto del modelo
+            prod = Producto.findFirst("numero_producto = ?", prodComprado.getInteger("producto_id"));//saco el producto del modelo
             cant = (Integer) prodComprado.getInteger("cantidad");//saco la cantidad del modelo
             Pair par = new Pair(prod, cant); //creo el par producto-cantidad
             listaDePares.add(par);//agrego el par a la lista de pares
-            ProductosCompras.delete("idcompra = ? AND idproducto = ?",prodComprado.getInteger("idcompra"),prodComprado.getInteger("idproducto"));//elimino el modelo de la base de datos
+            ProductosCompras.delete("compra_id = ? AND producto_id = ?",prodComprado.getInteger("compra_id"),prodComprado.getInteger("producto_id"));//elimino el modelo de la base de datos
         }
         return listaDePares;
     }

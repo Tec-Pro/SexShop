@@ -14,7 +14,7 @@ import org.javalite.activejdbc.Model;
  */
 public class Venta extends Model{
     static{
-        validatePresenceOf("monto","idcliente","fecha");
+        validatePresenceOf("monto","cliente_id","fecha");
     }
 
     public Venta() {
