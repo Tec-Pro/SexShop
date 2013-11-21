@@ -10,7 +10,7 @@ create table usuarios (
 	nombre varchar(50) default 'dueño',
 	pass varchar(50) default 'dueño',
 	constraint pkusuarios primary key(id)
-)
+);
 
 
 create table proveedors (
