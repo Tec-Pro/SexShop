@@ -21,7 +21,7 @@ public class ABMCliente implements ABMInterface<Cliente>{
         if (!Base.hasConnection()){
             abrirBase();
         }
-        Cliente r = Cliente.first("nombre = ? and apellido = ?", c.get("nombre"));
+        Cliente r = Cliente.first("nombre = ? and apellido = ?", c.get("nombre"), c.get("apellido"));
         Base.close();
         return r;
     }
