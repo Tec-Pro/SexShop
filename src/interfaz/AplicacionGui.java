@@ -5,6 +5,7 @@
 package interfaz;
 
 
+import controladores.ControladorJReport;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -69,6 +70,9 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         return abmProducto;
     } 
     
+    public VentasRealizadas getVentasRealizadas(){
+        return ventasRealizadas;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +95,6 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         setExtendedState(6);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
-        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");

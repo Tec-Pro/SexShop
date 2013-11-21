@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
+
 /**
  *
  * @author agustin
@@ -26,7 +27,7 @@ public class MainControlador implements ActionListener{
      private ConnectionDataBase cdb;
      private PantallaBienvenida pb;
      private AplicacionGui app;
-     //private VentasRealizadasControlador vtasRealiz;
+     private VentasRealizadasControlador vtasRealiz;
      private  ClienteControlador cl;
      private ArticulosControlador ac;
      
@@ -44,7 +45,7 @@ public class MainControlador implements ActionListener{
         log = new LoginGui();
         app = new AplicacionGui();
         log.setActionListener(this);
-        //vtasRealiz = new VentasRealizadasControlador(app);
+        vtasRealiz = new VentasRealizadasControlador(app);
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         log.setVisible(true);
@@ -53,8 +54,7 @@ public class MainControlador implements ActionListener{
      }
     
      public static void main(String[] args) throws InterruptedException, ClassNotFoundException, SQLException, JRException {
-         MainControlador mainControlador = new MainControlador();       
-
+            MainControlador mainControlador = new MainControlador(); 
     }
 
     @Override
