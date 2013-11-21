@@ -69,7 +69,10 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         return abmProducto;
     } 
     
-
+    public VentasRealizadas  getVentasRealizadas(){
+        return ventasRealizadas;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +94,6 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         setExtendedState(6);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
-        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");

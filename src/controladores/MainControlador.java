@@ -26,7 +26,7 @@ public class MainControlador implements ActionListener{
      private ConnectionDataBase cdb;
      private PantallaBienvenida pb;
      private AplicacionGui app;
-     //private VentasRealizadasControlador vtasRealiz;
+     private VentasRealizadasControlador vtasRealiz;
      private  ClienteControlador cl;
      private ArticulosControlador ac;
      
@@ -44,7 +44,7 @@ public class MainControlador implements ActionListener{
         log = new LoginGui();
         app = new AplicacionGui();
         log.setActionListener(this);
-        //vtasRealiz = new VentasRealizadasControlador(app);
+        vtasRealiz = new VentasRealizadasControlador(app);
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         log.setVisible(true);
