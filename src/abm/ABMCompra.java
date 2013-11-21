@@ -28,13 +28,17 @@ public class ABMCompra implements ABMInterface<Compra> {
     public boolean alta(Compra c) {
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idProveedor = (Integer) c.get("idproveedor");
-        c.set("monto", calcularMonto(c.getProductos()));//seteo el monto de la venta total en el modelo
-        Compra compra = Compra.create("monto", c.get("monto"), "idproveedor", idProveedor, "fecha", c.get("fecha"));
-        resultOp = resultOp && compra.saveIt();//guardo la venta
-        int idCompra = compra.getInteger("id");
-        resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos vendidos
-        resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos vendidos
+        if (c == null) {
+            resultOp = false;
+        } else {
+            Integer idProveedor = (Integer) c.get("proveedor_id");
+            c.set("monto", calcularMonto(c.getProductos()));//seteo el monto de la venta total en el modelo
+            Compra compra = Compra.create("monto", c.get("monto"), "proveedor_id", idProveedor, "fecha", c.get("fecha"));
+            resultOp = resultOp && compra.saveIt();//guardo la venta
+            int idCompra = compra.getInteger("id");
+            resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos vendidos
+            resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos vendidos
+        }
         Base.commitTransaction();
         return resultOp;
     }
@@ -49,8 +53,12 @@ public class ABMCompra implements ABMInterface<Compra> {
         Base.openTransaction();
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
-        ProductosCompras.delete("idcompra = ?", idCompra);//elimino todos los productoscomprados
-        resultOp = resultOp && compra.delete();//elimino la compra y todos los registros que la referencian
+        if (compra == null) {
+            resultOp = false;
+        } else {
+            ProductosCompras.delete("compra_id = ?", idCompra);//elimino todos los productoscomprados
+            resultOp = resultOp && compra.delete();//elimino la compra y todos los registros que la referencian
+        }
         Base.commitTransaction();
         return resultOp;
     }
@@ -64,18 +72,22 @@ public class ABMCompra implements ABMInterface<Compra> {
     public boolean modificar(Compra c) {
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idCompra = c.getInteger("id");
-        Integer idProveedorNuevo = c.getInteger("proveedor_id");
-        c.set("monto", calcularMonto(c.getProductos()));//calculo nuevo monto
-        Compra compra = Compra.findById(idCompra);
-        compra.set("monto", c.get("monto"));
-        compra.set("fecha", c.get("fecha"));
-        compra.set("proveedor_id", idProveedorNuevo);
-        compra.saveIt();
-        LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la compra y los elimino de la misma
-        resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos nuevos
-        resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos comprados
+        if (c == null) {
+            resultOp = false;
+        } else {
+            Integer idCompra = c.getInteger("id");
+            Integer idProveedorNuevo = c.getInteger("proveedor_id");
+            c.set("monto", calcularMonto(c.getProductos()));//calculo nuevo monto
+            Compra compra = Compra.findById(idCompra);
+            compra.set("monto", c.get("monto"));
+            compra.set("fecha", c.get("fecha"));
+            compra.set("proveedor_id", idProveedorNuevo);
+            compra.saveIt();
+            LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la compra y los elimino de la misma
+            resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
+            resultOp = resultOp && cargarProductosComprass(idCompra, c.getProductos());//guardo los productos nuevos
+            resultOp = resultOp && actualizarStock(c.getProductos());//actualizo el stock de productos comprados
+        }
         Base.commitTransaction();
         return resultOp;
     }
@@ -86,10 +98,14 @@ public class ABMCompra implements ABMInterface<Compra> {
         boolean resultOp = true;
         Integer idCompra = c.getInteger("id");//saco el idCompra
         Compra compra = Compra.findById(idCompra);//la busco en BD y la traigo
-        LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la venta
-        resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        ProductosCompras.delete("compra_id = ?", idCompra);//elimino todos los productosvendidos
-        resultOp = resultOp && compra.delete(); //elimino la venta
+        if (compra == null) {
+            resultOp = false;
+        } else {
+            LinkedList<Pair> viejosProductos = buscarProductosComprass(idCompra); //saco los viejos productos de la venta
+            resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
+            ProductosCompras.delete("compra_id = ?", idCompra);//elimino todos los productosvendidos
+            resultOp = resultOp && compra.delete(); //elimino la venta
+        }
         Base.commitTransaction();
         return resultOp;
     }
@@ -98,18 +114,22 @@ public class ABMCompra implements ABMInterface<Compra> {
     /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos
      los productos de la lista, multiplicados por su cantidad correspondiente*/
     private Double calcularMonto(LinkedList<Pair> productos) {
-        Iterator itr = productos.iterator();
-        Pair par;
-        Producto prod;
         Double acumMonto = 0.0;
-        Integer cant;
-        while (itr.hasNext()) {
-            par = (Pair) itr.next(); //saco el par de la lista
-            prod = (Producto) par.first(); //saco el producto del par
-            cant = (Integer) par.second();//saco la cantidad del par
-            acumMonto += (prod.getDouble("precio_compra") * cant); //multiplico el precio del producto por la cantidad del mismo
+        if (productos.isEmpty()) {
+            return acumMonto;
+        } else {
+            Iterator itr = productos.iterator();
+            Pair par;
+            Producto prod;
+            Integer cant;
+            while (itr.hasNext()) {
+                par = (Pair) itr.next(); //saco el par de la lista
+                prod = (Producto) par.first(); //saco el producto del par
+                cant = (Integer) par.second();//saco la cantidad del par
+                acumMonto += (prod.getDouble("precio_compra") * cant); //multiplico el precio del producto por la cantidad del mismo
+            }
+            return acumMonto;
         }
-        return acumMonto;
     }
 
     //FUNCIONA CORRECTAMENTE
@@ -140,7 +160,7 @@ public class ABMCompra implements ABMInterface<Compra> {
         ProductosCompras prodComprado;
         Producto prod;
         LinkedList<Pair> listaDePares = new LinkedList<Pair>();
-        LazyList<ProductosCompras> productos = ProductosCompras.find("idcompra = ?", idCompra);
+        LazyList<ProductosCompras> productos = ProductosCompras.find("compra_id = ?", idCompra);
         Iterator itr = productos.iterator();
         while (itr.hasNext()) {
             prodComprado = (ProductosCompras) itr.next(); //saco el modelo de la lista
