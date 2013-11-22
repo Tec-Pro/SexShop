@@ -6,8 +6,6 @@ package interfaz;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.sql.Date;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -32,7 +30,6 @@ public class ComprasRealizadas extends javax.swing.JPanel {
     }
 
     public void setActionListener(ActionListener lis) {
-        this.imprimir.addActionListener(lis); //boton imprimir
         this.devolucion.addActionListener(lis); //boton devolucion
         this.modificar.addActionListener(lis); //boton modificar
         this.eliminar.addActionListener(lis); //boton eliminar
@@ -72,10 +69,6 @@ public class ComprasRealizadas extends javax.swing.JPanel {
 
     public JTextField getProveedorCompra() {
         return proveedorCompra;
-    }
-
-    public JButton getImprimir() {
-        return imprimir;
     }
 
     public DefaultTableModel getTablaCompraDefault() {
@@ -144,7 +137,6 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         modificar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         devolucion = new javax.swing.JButton();
-        imprimir = new javax.swing.JButton();
         comprasRealizadas = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaCompras = new javax.swing.JTable();
@@ -273,10 +265,6 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         devolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/devolver.png"))); // NOI18N
         devolucion.setToolTipText("Compra cancelada (Se borrará)");
         panelControlFactura.add(devolucion);
-
-        imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/imprimir.png"))); // NOI18N
-        imprimir.setToolTipText("Abrir dialogo de impresion o exportarción");
-        panelControlFactura.add(imprimir);
 
         comprasRealizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compras realizadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
@@ -439,7 +427,6 @@ public class ComprasRealizadas extends javax.swing.JPanel {
     private javax.swing.JTextField filtroId;
     private javax.swing.JTextField filtroNombre;
     private javax.swing.JPanel fondoImagen;
-    private javax.swing.JButton imprimir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane8;

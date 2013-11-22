@@ -599,14 +599,6 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="imprimir">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/interfaz/Icons/imprimir.png"/>
-                    </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Abrir dialogo de impresi&#xf3;n o exportarci&#xf3;n"/>
-                  </Properties>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
