@@ -64,6 +64,8 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         this.ventaGui = ventaGui;
         this.ventasRealizadasGui = ventasRealizadas;
         ventaGui.setActionListener(this);
+        ventasRealizadasGui.getModificar().addActionListener(this);
+
 
         textap = ventaGui.getBusquedaApellido();
         textap.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -115,7 +117,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         actualizarListaCliente();
         actualizarListaProd();
         reporteFactura = new ControladorJReport(("factura.jasper"));
-        ventasRealizadasGui.getModificar().addActionListener(this);
     }
 
     public void tablafacMouseClicked(java.awt.event.MouseEvent evt) {
@@ -262,10 +263,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             }
             if (e.getSource() == ventaGui.getFacturaNueva()) {
                 ventaGui.limpiarVentana();
-            }
-            if (e.getSource() == ventasRealizadasGui.getModificar()) {
-                ventaGui.getClienteFactura().setText(ventasRealizadasGui.getClienteFactura().getText());
-
             }
         }
     }

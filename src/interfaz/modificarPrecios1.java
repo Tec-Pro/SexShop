@@ -95,6 +95,7 @@ public class modificarPrecios1 extends javax.swing.JDialog {
         });
 
         okButton.setText("Guardar cambios");
+        okButton.setToolTipText("Guardar los cambios registrados");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -102,6 +103,7 @@ public class modificarPrecios1 extends javax.swing.JDialog {
         });
 
         cancelButton.setText("Cancelar");
+        cancelButton.setToolTipText("Cancelar modificacion");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -144,6 +146,7 @@ public class modificarPrecios1 extends javax.swing.JDialog {
         jLabel2.setText("%");
 
         jButton1.setText("Ok");
+        jButton1.setToolTipText("confirmar valor en %");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

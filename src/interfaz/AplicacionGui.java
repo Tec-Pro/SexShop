@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTabbedPane;
 import net.sf.jasperreports.engine.JRException;
 
 
@@ -18,7 +19,7 @@ import net.sf.jasperreports.engine.JRException;
  *
  * @author nico
  */
-public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
+public class AplicacionGui extends javax.swing.JFrame {
 
     private AbmClienteGui abmCliente; //Panel abmCliente
     private AbmProductoGui abmProducto; //Panel abmProducto
@@ -190,23 +191,14 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JMenuItem listarArticulos;
     private javax.swing.JMenuItem listarClientes;
     private javax.swing.JTabbedPane tab;
+
     // End of variables declaration//GEN-END:variables
-
-    //borrar después, son pruebas
-        public void actionPerformed(ActionEvent ae) {
-        /*if (abmCliente.getArticulosComprados() == ae.getSource()) {
-            art.setLocationRelativeTo(abmCliente);
-            art.setVisible(true);
-        }
-        if (abmProducto.getModificarPrecioPorcentaje() == ae.getSource()) {
-            modificarPrecioGui.setVisible(true);
-            int[] seleccionados = abmProducto.getTabla().getSelectedRows();
-            for (int i = 0; i < seleccionados.length; i++) {
-                System.out.println(abmProducto.getTablaArticulos().getValueAt(seleccionados[i], 0).toString());
-            }
-
-        }*/
+    public JTabbedPane getTab() {
+        return tab;
     }
+
+
+  
     
    
 }

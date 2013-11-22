@@ -14,10 +14,24 @@ import abm.ConnectionDataBase;
 import abm.ManejoUsuario;
 import interfaz.ComprasRealizadas;
 import interfaz.LoginGui;
+import interfaz.VentaGui;
+import interfaz.VentasRealizadas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.Cliente;
+import modelos.Producto;
+import modelos.ProductosVentas;
+import modelos.Venta;
+import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.LazyList;
+import org.javalite.activejdbc.Model;
 
 /**
  *
@@ -64,6 +78,7 @@ public class MainControlador implements ActionListener{
         log.setVisible(true);
         pb.dispose();
         mu = new ManejoUsuario();
+        app.getVentasRealizadas().getModificar().addActionListener(this);
       
      }
     
@@ -88,6 +103,51 @@ public class MainControlador implements ActionListener{
         } 
         if(b.equals(log.getSalir())){
             System.exit(0);
+        }
+        if(b.equals(app.getVentasRealizadas().getModificar())){
+            System.out.println("entre");
+            app.getTab().setSelectedIndex(2);
+            VentaGui v= app.getVenta();
+            VentasRealizadas vr= app.getVentasRealizadas();
+            Integer idFac= Integer.valueOf((String)vr.getTablaFacturas().getValueAt( vr.getTablaFacturas().getSelectedRow(),0));
+            
+            System.out.println("factura:"+idFac);
+            abrirBase();
+            Venta factura= Venta.findById(idFac);
+            Object idCliente= factura.get("cliente_id");
+            DefaultTableModel tablita=v.getTablaFacturaDefault();
+            tablita.setRowCount(0);
+                Cliente cliente= Cliente.findById(idCliente);
+                String nombreYApellido= idCliente +" "+ cliente.getString("nombre")+" "+cliente.getString("apellido");
+                v.getClienteFactura().setText(nombreYApellido);
+                LazyList<ProductosVentas> pr= ProductosVentas.find("venta_id = ?", idFac);
+                Iterator<ProductosVentas> it= pr.iterator();
+                while(it.hasNext()){
+                    ProductosVentas prod= it.next();
+                    Object idProducto=prod.get("producto_id");
+                    Producto producto= Producto.findById(idProducto);
+                    Integer numeroProducto= (Integer)producto.getInteger("numero_producto");
+                    String nombre= producto.getString("nombre") + " "+ producto.getString("marca");
+                    Float precio= prod.getFloat("precio_final");
+                    Integer cantidad= prod.getInteger("cantidad");
+                    Object cols[] = new Object[5];
+                        cols[0] = numeroProducto;
+                        cols[1] = cantidad;
+                        cols[2] = nombre;
+                        cols[3] = BigDecimal.valueOf(precio).setScale(2, RoundingMode.CEILING);
+                        cols[4] = BigDecimal.valueOf(precio*cantidad).setScale(2, RoundingMode.CEILING);
+                        v.getTablaFacturaDefault().addRow(cols);
+                    }
+                v.getTotalFactura().setText(String.valueOf(factura.getFloat("monto")));
+                Base.close();
+       
+    }
+    }
+        
+            
+    private void abrirBase(){
+        if (!Base.hasConnection()){
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
         }
     }
 }
