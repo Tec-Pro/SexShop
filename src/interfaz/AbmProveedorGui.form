@@ -98,10 +98,10 @@
                   <Component id="panelTitulo" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="panelBusqueda" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelControlArticulo" alignment="1" min="-2" pref="529" max="-2" attributes="0"/>
-                          <Component id="panelDatosProveedor" alignment="1" min="-2" pref="530" max="-2" attributes="0"/>
+                          <Component id="panelDatosProveedor" alignment="1" min="-2" pref="529" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -110,17 +110,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="panelTitulo" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="panelControlArticulo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="panelBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="panelDatosProveedor" alignment="3" min="-2" pref="272" max="-2" attributes="0"/>
+                              <Component id="panelBusqueda" alignment="3" max="32767" attributes="0"/>
+                              <Group type="102" alignment="3" attributes="0">
+                                  <Component id="panelDatosProveedor" alignment="1" pref="272" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -325,7 +328,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="14" max="32767" attributes="0"/>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -653,11 +656,6 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="busquedaNombre" min="-2" pref="183" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="labelBusquedaArticulo" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="busquedaArticulo" min="-2" pref="183" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -680,12 +678,7 @@
                               <Component id="busquedaNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labelBusquedaArticulo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="busquedaArticulo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jScrollPane6" min="-2" pref="215" max="-2" attributes="0"/>
+                          <Component id="jScrollPane6" pref="0" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -697,7 +690,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Schoolbook L" size="15" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Dni"/>
+                    <Property name="text" type="java.lang.String" value="Cuil"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="labelBusquedaNombre">
@@ -761,19 +754,6 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="labelBusquedaArticulo">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Century Schoolbook L" size="15" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Articulo"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="busquedaArticulo">
-                  <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="Filtrar por nombre"/>
-                  </Properties>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

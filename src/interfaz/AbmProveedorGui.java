@@ -197,8 +197,6 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         busquedaNombre = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
-        labelBusquedaArticulo = new javax.swing.JLabel();
-        busquedaArticulo = new javax.swing.JTextField();
 
         tabla.setAutoCreateRowSorter(true);
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -442,7 +440,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                             .addComponent(labelSucursal)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(campoSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         panelDatosProveedorLayout.setVerticalGroup(
             panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -492,7 +490,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         panelBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         labelBusquedaDni.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
-        labelBusquedaDni.setText("Dni");
+        labelBusquedaDni.setText("Cuil");
 
         labelBusquedaNombre.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelBusquedaNombre.setText("Nombre");
@@ -527,11 +525,6 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(tabla1);
 
-        labelBusquedaArticulo.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
-        labelBusquedaArticulo.setText("Articulo");
-
-        busquedaArticulo.setToolTipText("Filtrar por nombre");
-
         javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
         panelBusqueda.setLayout(panelBusquedaLayout);
         panelBusquedaLayout.setHorizontalGroup(
@@ -548,11 +541,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                             .addGroup(panelBusquedaLayout.createSequentialGroup()
                                 .addComponent(labelBusquedaNombre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelBusquedaLayout.createSequentialGroup()
-                                .addComponent(labelBusquedaArticulo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(busquedaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -568,11 +557,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaNombre)
                     .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelBusquedaArticulo)
-                    .addComponent(busquedaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -586,20 +571,22 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelControlArticulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelDatosProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelDatosProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         fondoImagenLayout.setVerticalGroup(
             fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoImagenLayout.createSequentialGroup()
                 .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoImagenLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panelControlArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                        .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(fondoImagenLayout.createSequentialGroup()
+                            .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 272, Short.MAX_VALUE)
+                            .addGap(81, 81, 81))))
+                .addGap(3, 3, 3))
         );
 
         jScrollPane1.setViewportView(fondoImagen);
@@ -636,7 +623,6 @@ public class AbmProveedorGui extends javax.swing.JPanel {
     private javax.swing.JLabel LabelDni;
     private javax.swing.JButton anterior;
     private javax.swing.JButton borrar;
-    private javax.swing.JTextField busquedaArticulo;
     private javax.swing.JTextField busquedaDni;
     private javax.swing.JTextField busquedaNombre;
     private javax.swing.JButton buttonArticulos;
@@ -659,7 +645,6 @@ public class AbmProveedorGui extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelBanco;
-    private javax.swing.JLabel labelBusquedaArticulo;
     private javax.swing.JLabel labelBusquedaDni;
     private javax.swing.JLabel labelBusquedaNombre;
     private javax.swing.JLabel labelCelular;
