@@ -62,7 +62,7 @@ public class ABMProducto implements ABMInterface<Producto> {
        Producto viejo = Producto.findFirst("numero_producto = ?", p.get("numero_producto"));
        if (viejo!=null){
             Base.openTransaction();
-            viejo.set("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca")).saveIt();
+            viejo.set("precio_venta",p.get("precio_venta"),"precio_compra",p.get("precio_compra"),"stock",p.get("stock"),"numero_producto",p.get("numero_producto"),"nombre",p.get("nombre"),"tipo",p.get("tipo"),"marca",p.get("marca"),"proveedor_id",p.get("proveedor_id")).saveIt();
             Base.commitTransaction();
             return true;
        }

@@ -231,18 +231,25 @@ public class ArticulosControlador implements ActionListener{
             String prov = (String) prodGui.getProveedores().getSelectedItem();
             String[] proveedor = prov.split("-");
             p.setCuilProveedor(proveedor[1]);
+           // p.set("priveedor_id");
+            if(!Base.hasConnection()){
+                    Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+               }
+            Proveedor proveed = Proveedor.first("cuil = ?", proveedor[1]);
+            p.set("proveedor_id", proveed.get("id"));
             if(abmProd.modificar(p)){
                 JOptionPane.showMessageDialog(apgui, "Producto modificado exitosamente.");
                 pl = pb.filtroProducto("","","");
                 actualizarLista();
                 prodGui.repaint();
+                
             }   
             else{
                 JOptionPane.showMessageDialog(prodGui,"No hay ningun producto seleccionado");
             }
             modificarPulsado=false;
             prodGui.habilitarCampos(false);
-            
+          //  Base.close();
         }
         if(e.getSource() == prodGui.getGuardar() && nuevoPulsado){
             System.out.println("pulsado guardar crear");
@@ -258,7 +265,9 @@ public class ArticulosControlador implements ActionListener{
             if(p.getString("nombre").equals("") || p.getString("marca").equals("")){
                 JOptionPane.showMessageDialog(prodGui,"Un producto debe tener nombre y marca");
             }
-            
+            if(!Base.hasConnection()){
+                    Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+               }
             if(abmProd.alta(p)){
                 
                 JOptionPane.showMessageDialog(prodGui,"Producto registrado exitosamente");
@@ -270,7 +279,7 @@ public class ArticulosControlador implements ActionListener{
             }
             nuevoPulsado = false;
             prodGui.habilitarCampos(false);
-           
+           Base.close();
           
         }
         
@@ -285,17 +294,19 @@ public class ArticulosControlador implements ActionListener{
                  Producto p = Producto.first("numero_producto = ?" ,prodGui.getIdArticulo().getText());
                  //cargarDatosProd(p,true);
                  //int row = tabla.getSelectedRow();
-                 Base.close();
+                 
                 // p.set("numero_producto",prodGui.getIdArticulo().getText() );
                  if(abmProd.baja(p)){
                      JOptionPane.showMessageDialog(prodGui,"Producto borrado exitosamente");
                      pl = pb.filtroProducto("","","");
                      actualizarLista();
                      prodGui.limpiarCampos();
+                     
                  }
                  else
                      JOptionPane.showMessageDialog(prodGui,"No hay ningun producto seleccionado");
             }
+            
         }
         if(e.getSource() == prodGui.getAnterior()){
             prodGui.getProveedores().removeAllItems();
