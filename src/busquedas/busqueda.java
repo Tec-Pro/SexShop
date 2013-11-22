@@ -133,7 +133,20 @@ public class busqueda {
         Iterator<ClientesProductos> it = adquiridos.iterator();
         while(it.hasNext()){
             ClientesProductos a = it.next();
-            Producto p = Producto.first("numero_producto = ?", a.get("idproducto"));
+            Producto p = Producto.first("numero_producto = ?", a.get("producto_id"));
+            result.add(p);
+        }
+        return result;
+    }
+     
+    public List<Producto> productosVendidos(String idventa){
+        List<ProductosVentas> vendidos;
+        List<Producto> result = new LinkedList<Producto>();
+        vendidos = ProductosVentas.where("venta_id like ?", "%"+idventa+"%");
+        Iterator<ProductosVentas> it = vendidos.iterator();
+        while(it.hasNext()){
+            ProductosVentas pv = it.next();
+            Producto p = Producto.first("numero_producto = ?", pv.get("producto_id"));
             result.add(p);
         }
         return result;
