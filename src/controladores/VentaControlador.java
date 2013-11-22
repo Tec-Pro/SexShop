@@ -20,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelos.Cliente;
 import modelos.Producto;
+
+import modelos.Venta;
+import net.sf.jasperreports.engine.util.Pair;
 import org.javalite.activejdbc.Base;
 
 /**
@@ -191,11 +194,12 @@ public class VentaControlador implements ActionListener{
                   Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
               }
             Producto p = Producto.findById(tablaProd.getValueAt(row, 0));
-            Object rows[] = new Object[4];
-             rows[0] = 1;
-             rows[1] = nom+", "+marc;
-             rows[2] = p.getFloat("precio_venta");
+            Object rows[] = new Object[5];
+             rows[0] = p.getInteger("id");
+             rows[1] = 1;
+             rows[2] = nom+", "+marc;
              rows[3] = p.getFloat("precio_venta");
+             rows[4] = p.getFloat("precio_venta");
              Base.close();
             ventaGui.getTablaFacturaDefault().addRow(rows);
         }
@@ -210,6 +214,32 @@ public class VentaControlador implements ActionListener{
                 i++;
             }
             
+        }
+        if(e.getSource() == ventaGui.getRealizarVenta()){
+            int rows = ventaGui.getTablaFactura().getRowCount();
+            int i=0;
+            LinkedList<Pair> prods = new LinkedList();
+            Pair par;
+            while(i<=rows){
+                Object id = ventaGui.getTablaFacturaDefault().getValueAt(i, 0);
+                if(!Base.hasConnection()){
+                     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+                }
+                Producto p = Producto.findById(id);
+                Base.close();
+                Object cant = ventaGui.getTablaFacturaDefault().getValueAt(i, 1);
+                par = new Pair(p,cant);
+                prods.addFirst(par);
+                i++;
+            }
+            Venta v = new Venta();
+            v.set("fecha", ventaGui.getCalendarioFactura().getDate());
+            v.setProductos(prods);
+            if(!Base.hasConnection()){
+                     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
+                }
+         //   Cliente
+           // v.set("cliente_id", )
         }
     }
     
