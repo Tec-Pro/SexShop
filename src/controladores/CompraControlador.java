@@ -91,6 +91,13 @@ public class CompraControlador implements ActionListener,CellEditorListener{
             }
         });
         
+        tablafac = compraGui.getTablaCompra();
+        tablafac.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablafacMouseClicked(evt);
+            }
+        });
        
         
         tablaProveedores = compraGui.getTablaProveedoresDefault();
@@ -163,7 +170,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
             int[] rows = compraGui.getTablaArticulos().getSelectedRows();
             if (rows.length > 0) {
                 for (int i = 0; i < rows.length; i++) {
-                   // abrirBase();
+                    abrirBase();
                     if (!existeProdFacc(Integer.valueOf((String) tablaProd.getValueAt(rows[i], 0)))) {
                         Producto p = Producto.findFirst("numero_producto = ?", (tablaProd.getValueAt(rows[i], 0)));
                         Object cols[] = new Object[5];
@@ -228,6 +235,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                 v.set("fecha", laFecha);
                 v.set("proveedor_id", idCliente);
                 v.setProductos(parDeProductos);
+                abrirBase();
                 if (abmCompra.alta(v)) {
                     JOptionPane.showMessageDialog(apgui, "Compra realizada con exito.");
     
@@ -237,6 +245,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                     JOptionPane.showMessageDialog(apgui, "Ocurrió un error inesperado, compra no realizada");
                 }
             }
+            Base.close();
          }
          
           if (e.getSource() == compraGui.getCompraNueva()) {
@@ -287,13 +296,14 @@ public class CompraControlador implements ActionListener,CellEditorListener{
     }
 
     @Override
-    public void editingStopped(ChangeEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void editingStopped(ChangeEvent ce) {
+        actualizarPrecio();
+
     }
 
     @Override
     public void editingCanceled(ChangeEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
