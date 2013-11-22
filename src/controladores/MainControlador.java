@@ -126,7 +126,7 @@ public class MainControlador implements ActionListener{
                 while(it.hasNext()){
                     ProductosVentas prod= it.next();
                     Object idProducto=prod.get("producto_id");
-                    Producto producto= Producto.findById(idProducto);
+                    Producto producto = Producto.findFirst("numero_producto = ?",prod.get("producto_id"));
                     Integer numeroProducto= (Integer)producto.getInteger("numero_producto");
                     String nombre= producto.getString("nombre") + " "+ producto.getString("marca");
                     Float precio= prod.getFloat("precio_final");
