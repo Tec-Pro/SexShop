@@ -8,8 +8,8 @@ use sexshop;
 
 create table usuarios (
 	id integer not null auto_increment,
-	nombre varchar(50) default 'dueño',
-	pass varchar(50) default 'dueño',
+	nombre varchar(50) default 'amedialuz',
+	pass varchar(50) default 'amedialuz',
 	constraint pkusuarios primary key(id)
 );
 
@@ -27,6 +27,7 @@ create table proveedors (
     tipo_cuenta varchar(50),
     cuenta integer,
     compra_minima integer,
+	check (compra_minima>=0),
     constraint pkproveedor primary key(id)    
 );
 
@@ -52,6 +53,10 @@ create table productos (
     tipo varchar(50),
     marca varchar(50),
     proveedor_id integer,
+	check (precio_venta>0),
+	check (precio_compra>0),
+	check (stock>=0),
+	check (numero_producto>=0),
     constraint pkproducto primary key(id),
 	constraint fkproductoproveedor foreign key(proveedor_id) references proveedors(id) on delete set null
 );
@@ -62,6 +67,7 @@ create table ventas (
     monto float,
     cliente_id integer,
     fecha date not null,
+	check (monto>0),
     constraint pkventa primary key(id),
     constraint fkventacliente foreign key(cliente_id) references clientes(id) on delete set null
 );
@@ -72,6 +78,7 @@ create table compras (
     monto float,
     proveedor_id integer,
     fecha date not null,
+	check (monto>0),
     constraint pkcompra primary key(id),
     constraint fkcompraproveedor foreign key(proveedor_id) references proveedors(id) on delete set null
 
@@ -84,6 +91,7 @@ create table clientes_productos(
     cliente_id integer,
     producto_id integer,
     cantidad integer not null,
+	check (cantidad>0),
     constraint pkadquirio primary key(id),
     constraint fkadquiriocliente foreign key(cliente_id) references clientes(id) on delete set null ,
     constraint fkadquirioproducto foreign key(producto_id) references productos(numero_producto) on delete set null
@@ -96,6 +104,8 @@ create table productos_ventas (
     producto_id integer,
     cantidad integer not null,
     precio_final float not null,
+	check (cantidad>0),
+	check (precio_final>0),
     primary key(id),
     foreign key (venta_id) references ventas(id) on delete set null,
     foreign key(producto_id) references productos(numero_producto) on delete set null
@@ -107,6 +117,7 @@ create table productos_compras (
     compra_id integer,
     producto_id integer,
     cantidad integer not null,
+	check (cantidad>0),
     primary key(id),
     foreign key (compra_id) references compras(id) on delete set null,
     foreign key(producto_id) references productos(numero_producto) on delete set null
