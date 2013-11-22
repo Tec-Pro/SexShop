@@ -31,6 +31,7 @@ public class MainControlador implements ActionListener{
      private  ClienteControlador cl;
      private ArticulosControlador ac;
      private VentaControlador ventacont;
+     private ProveedoresControlador provContr;
      private ManejoUsuario mu;
      private char[] pass;
      private String user;
@@ -53,6 +54,7 @@ public class MainControlador implements ActionListener{
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         ventacont = new VentaControlador(app.getVenta());
+        provContr = new ProveedoresControlador(app);
         log.setVisible(true);
         pb.dispose();
         mu = new ManejoUsuario();
