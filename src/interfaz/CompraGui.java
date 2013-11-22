@@ -7,6 +7,7 @@ package interfaz;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -227,6 +228,25 @@ public class CompraGui extends javax.swing.JPanel {
         return tablaCompra;
     }
 
+     public JTextField getCalendarioFacturaText(){
+        return ((JTextField)calendarioCompra.getDateEditor().getUiComponent());
+    }
+     
+     public void limpiarVentana(){
+        tablaArticulos.clearSelection();
+        tablaProveedores.clearSelection();
+        tablaCompra.clearSelection();
+        while(tablaCompra.getRowCount()>0){
+            tablaCompraDefault.removeRow(0);
+        }
+        Calendar miCalendario = Calendar.getInstance();
+        java.util.Date eldia = miCalendario.getTime();
+        int diaHoy = miCalendario.get(Calendar.DAY_OF_MONTH);
+        int mes=miCalendario.get(Calendar.MONTH);
+        int anio =miCalendario.get(Calendar.YEAR);
+        calendarioCompra.setDate(Date.valueOf(anio+"-"+(mes+1)+"-"+diaHoy));
+
+    }
     /**
      * Retorno el campo totalCompra contiene el resultado final de
      * la compra

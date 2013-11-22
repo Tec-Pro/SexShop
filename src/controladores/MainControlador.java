@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import net.sf.jasperreports.engine.JRException;
 import abm.ConnectionDataBase;
 import abm.ManejoUsuario;
+import interfaz.ComprasRealizadas;
 import interfaz.LoginGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +34,8 @@ public class MainControlador implements ActionListener{
      private ArticulosControlador ac;
      private VentaControlador ventacont;
      private ProveedoresControlador provContr;
+     private CompraControlador compraControlador;
+     private ComprasRealizadas compraRelaRealizadas;
      private ManejoUsuario mu;
      private char[] pass;
      private String user;
@@ -54,8 +57,10 @@ public class MainControlador implements ActionListener{
         vtasRealiz = new VentasRealizadasControlador(app);
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
+        compraRelaRealizadas = new ComprasRealizadas();
         ventacont = new VentaControlador(app.getVenta(),app.getVentasRealizadas());
         provContr = new ProveedoresControlador(app);
+        compraControlador = new CompraControlador(app.getCompraGui(), app.getComprasRealizadas() );
         log.setVisible(true);
         pb.dispose();
         mu = new ManejoUsuario();

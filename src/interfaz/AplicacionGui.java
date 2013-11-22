@@ -24,7 +24,9 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
     private AbmProductoGui abmProducto; //Panel abmProducto
     private VentaGui venta;//panel venta
     private VentasRealizadas ventasRealizadas;
+    private ComprasRealizadas comprasRealizadas;
     private AbmProveedorGui abmProveedor;
+    private CompraGui compraGui;
     //estos deben estar en el controlador
     ArticulosCompradosGui art;
     ModificarPrecioPorcentajeGui modificarPrecioGui;
@@ -43,6 +45,8 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         ventasRealizadas= new VentasRealizadas();
         abmProveedor= new AbmProveedorGui();
         venta= new VentaGui();
+        compraGui = new CompraGui();
+        comprasRealizadas = new ComprasRealizadas();
         //venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
@@ -50,12 +54,15 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         
         tab.add("Ventas realizadas", ventasRealizadas);
         tab.add("Proveedor", abmProveedor);
+        tab.add("Compras",compraGui);
+        tab.add("Compras realizadas", comprasRealizadas);
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");
         tab.setToolTipTextAt(1, "Alta baja y modificacion de productos");
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
         tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");       
         tab.setToolTipTextAt(4, "Alta baja y modificación de proveedores");
-        
+        tab.setToolTipTextAt(5, "Realizar una compra");
+        tab.setToolTipTextAt(6, "Compras realizadas");
         //controlador
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
@@ -76,6 +83,14 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
 
     public VentaGui getVenta() {
         return venta;
+    }
+
+    public CompraGui getCompraGui() {
+        return compraGui;
+    }
+
+    public ComprasRealizadas getComprasRealizadas() {
+        return comprasRealizadas;
     }
     
     
