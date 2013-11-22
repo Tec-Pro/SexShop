@@ -151,7 +151,7 @@ public class VentasRealizadasControlador implements ActionListener {
         for(ProductosVentas pv: prodVentas){
             Object row[] = new Object[4];
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
-            Producto p = Producto.findById(pv.get("producto_id"));
+            Producto p = Producto.findFirst("numero_producto = ?",pv.get("producto_id"));
             row[1] = p.get("nombre") +", "+ p.get("marca");
             Float a = Float.parseFloat(pv.get("precio_final").toString());
             row[2] = a;
