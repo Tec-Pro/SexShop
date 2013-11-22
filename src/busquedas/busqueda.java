@@ -84,9 +84,9 @@ public class busqueda {
      * Filtra los proveedores que tienen lo pasado en cuil, dentro de su campo cuil, y contienen a nombre y apellido.
      * @return lista filtrada de proveedores.
      */
-    public List<Proveedor> filtroProveedor(String cuil, String nombre, String apellido) {
+    public List<Proveedor> filtroProveedor(String cuil, String nombre, String codigo) {
         List<Proveedor> result;
-        result = Proveedor.where("cuil like ? and nombre like ? and apellido like ?", "%"+cuil+"%","%"+nombre+"%","%"+apellido+"%");
+        result = Proveedor.where("cuil like ? and nombre like ? and id like ?", "%"+cuil+"%","%"+nombre+"%","%"+codigo+"%");
         return result;
     }
     
