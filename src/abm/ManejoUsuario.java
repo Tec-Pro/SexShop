@@ -37,4 +37,10 @@ public class ManejoUsuario {
         u.set("pass",pass);
         Base.close();
     }
+      
+    	public boolean login(String user, String pass){
+            abrirBase();
+            Usuario u = Usuario.findById(1);
+            if (user==u.getString("nombre") && pass==u.getString("pass")) return true; else return false;
+	}
 }
