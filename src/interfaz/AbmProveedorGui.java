@@ -6,9 +6,6 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +23,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
      */
     public AbmProveedorGui() {
         initComponents();
-        tablaProveedores = (DefaultTableModel) tabla.getModel(); //convierto la tabla
+        tablaProveedores = (DefaultTableModel) tabla1.getModel(); //convierto la tabla
     }
 
 
@@ -41,32 +38,33 @@ public class AbmProveedorGui extends javax.swing.JPanel {
     }   
 
     public void habilitarCampos(boolean b){
-        campoApellido.setEditable(b);
-        campoNombre.setEditable(b);
-        campoDni.setEditable(b);
-        campoTelefono.setEditable(b);
-        campoCelular.setEditable(b);
-        campoEmail.setEditable(b);
-        campoCuil.setEditable(b);
-        campoBanco.setEditable(b);
-        campoNumCuenta.setEditable(b);
-        campoTipoCuenta.setEditable(b);
-        campoSucursal.setEditable(b);
-        campoCompraMinima.setEditable(b);
+        apellido.setEditable(b);
+        nombre.setEditable(b);
+        dni.setEditable(b);
+        telefono.setEditable(b);
+        celular.setEditable(b);
+        email.setEditable(b);
+        cuil.setEditable(b);
+        banco.setEditable(b);
+        numDeCuenta.setEditable(b);
+        tipoCuenta.setEditable(b);
+        sucursal.setEditable(b);
+        compraMinima.setEditable(b);
     }
     
     public void limpiarCampos(){
-        campoApellido.setText("");
-        campoNombre.setText("");
-        campoDni.setText("");
-        campoTelefono.setText("");
-        campoCelular.setText("");
-        campoEmail.setText("");
-        campoCuil.setText("");
-        campoBanco.setText("");
-        campoNumCuenta.setText("");
-        campoSucursal.setText("");
-        campoCompraMinima.setText("");   
+        apellido.setText("");
+        nombre.setText("");
+        dni.setText("");
+        telefono.setText("");
+        celular.setText("");
+        email.setText("");
+        cuil.setText("");
+        banco.setText("");
+        numDeCuenta.setText("");
+        sucursal.setText("");
+        compraMinima.setText("");
+        tipoCuenta.setText("");  
     }
 
     public JButton getAnterior() {
@@ -81,10 +79,6 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         return tablaProveedores;
     }
 
-    public JTextField getBusquedaArticulo() {
-        return busquedaArticulo;
-    }
-
     public JTextField getBusquedaDni() {
         return busquedaDni;
     }
@@ -93,54 +87,49 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         return busquedaNombre;
     }
 
-    public JTextField getCampoApellido() {
-        return campoApellido;
+    public JTextField getApellido() {
+        return apellido;
     }
 
-    public JTextField getCampoBanco() {
-        return campoBanco;
+    public JTextField getBanco() {
+        return banco;
     }
 
-    public JTextField getCampoCelular() {
-        return campoCelular;
+    public JTextField getCelular() {
+        return celular;
     }
 
-    public JTextField getCampoCompraMinima() {
-        return campoCompraMinima;
+    public JTextField getCompraMinima() {
+        return compraMinima;
     }
 
-    public JTextField getCampoCuil() {
-        return campoCuil;
+    public JTextField getCuil() {
+        return cuil;
     }
 
-    public JTextField getCampoDni() {
-        return campoDni;
+    public JTextField getDni() {
+        return dni;
     }
 
-    public JTextField getCampoEmail() {
-        return campoEmail;
+    public JTextField getEmail() {
+        return email;
     }
 
-    public JTextField getCampoNombre() {
-        return campoNombre;
+    public JTextField getNombre() {
+        return nombre;
     }
 
-    public JTextField getCampoNumCuenta() {
-        return campoNumCuenta;
+    public JTextField getNumCuenta() {
+        return numDeCuenta;
     }
 
-    public JTextField getCampoSucursal() {
-        return campoSucursal;
+    public JTextField getSucursal() {
+        return sucursal;
     }
 
-    public JTextField getCampoTelefono() {
-        return campoTelefono;
+    public JTextField getTelefono() {
+        return telefono;
     }
-
-    public JComboBox getCampoTipoCuenta() {
-        return campoTipoCuenta;
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -166,30 +155,30 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         siguiente = new javax.swing.JButton();
         panelDatosProveedor = new javax.swing.JPanel();
         LabelDni = new javax.swing.JLabel();
-        campoDni = new javax.swing.JTextField();
-        campoEmail = new javax.swing.JTextField();
+        dni = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         labelNombre = new javax.swing.JLabel();
         labelTelefono = new javax.swing.JLabel();
-        campoTelefono = new javax.swing.JTextField();
+        telefono = new javax.swing.JTextField();
         labelEmail = new javax.swing.JLabel();
-        campoCelular = new javax.swing.JTextField();
+        celular = new javax.swing.JTextField();
         labelApellido = new javax.swing.JLabel();
         labelCelular = new javax.swing.JLabel();
         labelCuil = new javax.swing.JLabel();
-        campoNombre = new javax.swing.JTextField();
-        campoCuil = new javax.swing.JTextField();
-        campoApellido = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
+        cuil = new javax.swing.JTextField();
+        apellido = new javax.swing.JTextField();
         labelBanco = new javax.swing.JLabel();
-        campoBanco = new javax.swing.JTextField();
-        campoNumCuenta = new javax.swing.JTextField();
+        banco = new javax.swing.JTextField();
+        numDeCuenta = new javax.swing.JTextField();
         labelNumCuenta = new javax.swing.JLabel();
-        campoSucursal = new javax.swing.JTextField();
+        sucursal = new javax.swing.JTextField();
         labelSucursal = new javax.swing.JLabel();
         labelTipoCuenta = new javax.swing.JLabel();
-        campoTipoCuenta = new javax.swing.JComboBox();
         labelCompraMinima = new javax.swing.JLabel();
-        campoCompraMinima = new javax.swing.JTextField();
+        compraMinima = new javax.swing.JTextField();
         buttonArticulos = new javax.swing.JButton();
+        tipoCuenta = new javax.swing.JTextField();
         panelBusqueda = new javax.swing.JPanel();
         labelBusquedaDni = new javax.swing.JLabel();
         labelBusquedaNombre = new javax.swing.JLabel();
@@ -197,8 +186,8 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         busquedaNombre = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
-        labelBusquedaArticulo = new javax.swing.JLabel();
-        busquedaArticulo = new javax.swing.JTextField();
+        busquedaId = new javax.swing.JTextField();
+        labelBusquedaId = new javax.swing.JLabel();
 
         tabla.setAutoCreateRowSorter(true);
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -244,7 +233,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
 
         nuevo.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
         nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/agregar.png"))); // NOI18N
-        nuevo.setToolTipText("Articulo nuevo");
+        nuevo.setToolTipText("Proveedor nuevo");
         nuevo.setPreferredSize(new java.awt.Dimension(70, 70));
         nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,7 +243,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         panelControlArticulo.add(nuevo);
 
         modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/modificar.png"))); // NOI18N
-        modificar.setToolTipText("Modificar articulo");
+        modificar.setToolTipText("Modificar proveedor");
         modificar.setPreferredSize(new java.awt.Dimension(70, 70));
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,22 +253,22 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         panelControlArticulo.add(modificar);
 
         guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/guardar.png"))); // NOI18N
-        guardar.setToolTipText("Guardar articulo");
+        guardar.setToolTipText("Guardar proveedor");
         guardar.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(guardar);
 
         borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrar.png"))); // NOI18N
-        borrar.setToolTipText("Borrar articulo");
+        borrar.setToolTipText("Borrar proveedor");
         borrar.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(borrar);
 
         anterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/anterior.png"))); // NOI18N
-        anterior.setToolTipText("Articulo anterior");
+        anterior.setToolTipText("Proveedor anterior");
         anterior.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(anterior);
 
         siguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/siguiente.png"))); // NOI18N
-        siguiente.setToolTipText("Proximo articulo");
+        siguiente.setToolTipText("Proximo Proveedor");
         siguiente.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(siguiente);
 
@@ -291,14 +280,14 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         LabelDni.setText("Dni");
         LabelDni.setBorder(null);
 
-        campoDni.setToolTipText("Dni del proveedor");
-        campoDni.addActionListener(new java.awt.event.ActionListener() {
+        dni.setToolTipText("Dni del proveedor");
+        dni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDniActionPerformed(evt);
+                dniActionPerformed(evt);
             }
         });
 
-        campoEmail.setToolTipText("E-mail del proveedor");
+        email.setToolTipText("E-mail del proveedor");
 
         labelNombre.setBackground(new java.awt.Color(137, 98, 59));
         labelNombre.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
@@ -310,17 +299,17 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         labelTelefono.setText("Telefono");
         labelTelefono.setBorder(null);
 
-        campoTelefono.setToolTipText("Telefono Fijo");
+        telefono.setToolTipText("Telefono Fijo");
 
         labelEmail.setBackground(new java.awt.Color(137, 98, 59));
         labelEmail.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelEmail.setText("E-mail");
         labelEmail.setBorder(null);
 
-        campoCelular.setToolTipText("Telefono Móvil");
-        campoCelular.addActionListener(new java.awt.event.ActionListener() {
+        celular.setToolTipText("Telefono Móvil");
+        celular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCelularActionPerformed(evt);
+                celularActionPerformed(evt);
             }
         });
 
@@ -337,27 +326,27 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         labelCuil.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelCuil.setText("Cuil");
 
-        campoNombre.setToolTipText("Nombre del proveedor");
+        nombre.setToolTipText("Nombre del proveedor");
 
-        campoCuil.setToolTipText("Cuil del proveedor");
+        cuil.setToolTipText("Cuil del proveedor");
 
-        campoApellido.setToolTipText("Apellido del proveedor");
+        apellido.setToolTipText("Apellido del proveedor");
 
         labelBanco.setBackground(new java.awt.Color(137, 98, 59));
         labelBanco.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelBanco.setText("Banco");
         labelBanco.setBorder(null);
 
-        campoBanco.setToolTipText("Nombre del Banco");
+        banco.setToolTipText("Nombre del Banco");
 
-        campoNumCuenta.setToolTipText("Numero de cuenta del banco");
+        numDeCuenta.setToolTipText("Numero de cuenta del banco");
 
         labelNumCuenta.setBackground(new java.awt.Color(137, 98, 59));
         labelNumCuenta.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelNumCuenta.setText("Num de Cuenta");
         labelNumCuenta.setBorder(null);
 
-        campoSucursal.setToolTipText("Sucursal");
+        sucursal.setToolTipText("Sucursal");
 
         labelSucursal.setBackground(new java.awt.Color(137, 98, 59));
         labelSucursal.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
@@ -369,17 +358,17 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         labelTipoCuenta.setText("Tipo de Cuenta");
         labelTipoCuenta.setBorder(null);
 
-        campoTipoCuenta.setToolTipText("");
-
         labelCompraMinima.setBackground(new java.awt.Color(137, 98, 59));
         labelCompraMinima.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelCompraMinima.setText("Compra minima");
         labelCompraMinima.setBorder(null);
 
-        campoCompraMinima.setToolTipText("Compra Minima");
+        compraMinima.setToolTipText("Compra Minima");
 
         buttonArticulos.setText("Articulos");
         buttonArticulos.setToolTipText("Articulos que provee");
+
+        tipoCuenta.setToolTipText("Tipo de cuenta del banco");
 
         javax.swing.GroupLayout panelDatosProveedorLayout = new javax.swing.GroupLayout(panelDatosProveedor);
         panelDatosProveedor.setLayout(panelDatosProveedorLayout);
@@ -391,10 +380,9 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                     .addGroup(panelDatosProveedorLayout.createSequentialGroup()
                         .addComponent(labelCompraMinima)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoCompraMinima, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(compraMinima, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(buttonArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(12, 12, 12))
+                        .addComponent(buttonArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDatosProveedorLayout.createSequentialGroup()
                         .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelTelefono)
@@ -402,47 +390,47 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelDatosProveedorLayout.createSequentialGroup()
-                                .addComponent(campoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(labelCelular)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelDatosProveedorLayout.createSequentialGroup()
                                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labelNumCuenta)
                                     .addGroup(panelDatosProveedorLayout.createSequentialGroup()
-                                        .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelCuil))
                                     .addComponent(labelTipoCuenta))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(campoCuil, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campoNumCuenta)
-                                    .addComponent(campoTipoCuenta, 0, 150, Short.MAX_VALUE)))))
+                                .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cuil, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numDeCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panelDatosProveedorLayout.createSequentialGroup()
                         .addComponent(LabelDni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoDni, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dni, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelApellido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(panelDatosProveedorLayout.createSequentialGroup()
                             .addGap(6, 6, 6)
                             .addComponent(labelBanco)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(campoBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(banco, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosProveedorLayout.createSequentialGroup()
                             .addComponent(labelSucursal)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(campoSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addComponent(sucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         panelDatosProveedorLayout.setVerticalGroup(
             panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,41 +438,41 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelDni)
-                    .addComponent(campoDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelNombre)
                     .addComponent(labelApellido)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTelefono)
-                    .addComponent(campoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCelular)
-                    .addComponent(campoCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEmail)
-                    .addComponent(campoEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCuil)
-                    .addComponent(campoCuil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cuil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoNumCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numDeCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelNumCuenta)
-                    .addComponent(campoBanco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(banco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelBanco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelSucursal)
-                        .addComponent(campoSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(sucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelTipoCuenta)
-                        .addComponent(campoTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tipoCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelDatosProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCompraMinima)
-                    .addComponent(campoCompraMinima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(compraMinima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonArticulos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -492,7 +480,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         panelBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         labelBusquedaDni.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
-        labelBusquedaDni.setText("Dni");
+        labelBusquedaDni.setText("Cuil");
 
         labelBusquedaNombre.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelBusquedaNombre.setText("Nombre");
@@ -507,11 +495,11 @@ public class AbmProveedorGui extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Dni", "Nombre", "Telefono"
+                "Id", "Cuil", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -527,10 +515,10 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(tabla1);
 
-        labelBusquedaArticulo.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
-        labelBusquedaArticulo.setText("Articulo");
+        busquedaId.setToolTipText("Filtrar por dni");
 
-        busquedaArticulo.setToolTipText("Filtrar por nombre");
+        labelBusquedaId.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
+        labelBusquedaId.setText("Id");
 
         javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
         panelBusqueda.setLayout(panelBusquedaLayout);
@@ -539,7 +527,9 @@ public class AbmProveedorGui extends javax.swing.JPanel {
             .addGroup(panelBusquedaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBusquedaLayout.createSequentialGroup()
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBusquedaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelBusquedaLayout.createSequentialGroup()
                                 .addComponent(labelBusquedaDni)
@@ -548,18 +538,20 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                             .addGroup(panelBusquedaLayout.createSequentialGroup()
                                 .addComponent(labelBusquedaNombre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelBusquedaLayout.createSequentialGroup()
-                                .addComponent(labelBusquedaArticulo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(busquedaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelBusquedaLayout.createSequentialGroup()
+                        .addComponent(labelBusquedaId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(busquedaId)))
                 .addContainerGap())
         );
         panelBusquedaLayout.setVerticalGroup(
             panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBusquedaLayout.createSequentialGroup()
+                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelBusquedaId)
+                    .addComponent(busquedaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelBusquedaDni)
                     .addComponent(busquedaDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -568,11 +560,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaNombre)
                     .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelBusquedaArticulo)
-                    .addComponent(busquedaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -586,20 +574,22 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelControlArticulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelDatosProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelDatosProveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         fondoImagenLayout.setVerticalGroup(
             fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoImagenLayout.createSequentialGroup()
                 .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoImagenLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panelControlArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                        .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(fondoImagenLayout.createSequentialGroup()
+                            .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGap(81, 81, 81))))
+                .addGap(3, 3, 3))
         );
 
         jScrollPane1.setViewportView(fondoImagen);
@@ -616,13 +606,13 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDniActionPerformed
+    private void dniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dniActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoDniActionPerformed
+    }//GEN-LAST:event_dniActionPerformed
 
-    private void campoCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCelularActionPerformed
+    private void celularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_celularActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoCelularActionPerformed
+    }//GEN-LAST:event_celularActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
         // TODO add your handling code here:
@@ -635,23 +625,18 @@ public class AbmProveedorGui extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelDni;
     private javax.swing.JButton anterior;
+    private javax.swing.JTextField apellido;
+    private javax.swing.JTextField banco;
     private javax.swing.JButton borrar;
-    private javax.swing.JTextField busquedaArticulo;
     private javax.swing.JTextField busquedaDni;
+    private javax.swing.JTextField busquedaId;
     private javax.swing.JTextField busquedaNombre;
     private javax.swing.JButton buttonArticulos;
-    private javax.swing.JTextField campoApellido;
-    private javax.swing.JTextField campoBanco;
-    private javax.swing.JTextField campoCelular;
-    private javax.swing.JTextField campoCompraMinima;
-    private javax.swing.JTextField campoCuil;
-    private javax.swing.JTextField campoDni;
-    private javax.swing.JTextField campoEmail;
-    private javax.swing.JTextField campoNombre;
-    private javax.swing.JTextField campoNumCuenta;
-    private javax.swing.JTextField campoSucursal;
-    private javax.swing.JTextField campoTelefono;
-    private javax.swing.JComboBox campoTipoCuenta;
+    private javax.swing.JTextField celular;
+    private javax.swing.JTextField compraMinima;
+    private javax.swing.JTextField cuil;
+    private javax.swing.JTextField dni;
+    private javax.swing.JTextField email;
     private javax.swing.JPanel fondoImagen;
     private javax.swing.JButton guardar;
     private javax.swing.JScrollPane jScrollPane1;
@@ -659,8 +644,8 @@ public class AbmProveedorGui extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelBanco;
-    private javax.swing.JLabel labelBusquedaArticulo;
     private javax.swing.JLabel labelBusquedaDni;
+    private javax.swing.JLabel labelBusquedaId;
     private javax.swing.JLabel labelBusquedaNombre;
     private javax.swing.JLabel labelCelular;
     private javax.swing.JLabel labelCompraMinima;
@@ -672,14 +657,19 @@ public class AbmProveedorGui extends javax.swing.JPanel {
     private javax.swing.JLabel labelTelefono;
     private javax.swing.JLabel labelTipoCuenta;
     private javax.swing.JButton modificar;
+    private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevo;
+    private javax.swing.JTextField numDeCuenta;
     private javax.swing.JPanel panelBusqueda;
     private javax.swing.JPanel panelControlArticulo;
     private javax.swing.JPanel panelDatosProveedor;
     private org.edisoncor.gui.panel.PanelImage panelTitulo;
     private javax.swing.JButton siguiente;
+    private javax.swing.JTextField sucursal;
     private javax.swing.JTable tabla;
     private javax.swing.JTable tabla1;
+    private javax.swing.JTextField telefono;
+    private javax.swing.JTextField tipoCuenta;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
