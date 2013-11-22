@@ -7,9 +7,11 @@ package interfaz;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,8 +32,15 @@ public class VentaGui extends javax.swing.JPanel {
         tablaArticulosDefault = (DefaultTableModel) tablaArticulos.getModel();//conveirto la tabla
         tablaFacturaDefault = (DefaultTableModel) tablaFactura.getModel();
         tablaClientesDefault = (DefaultTableModel) tablaClientes.getModel();
-        calendarioFactura.setDate(Date.valueOf("2012-12-12"));
+        Calendar miCalendario = Calendar.getInstance();
+        java.util.Date eldia = miCalendario.getTime();
+        int diaHoy = miCalendario.get(Calendar.DAY_OF_MONTH);
+        int mes=miCalendario.get(Calendar.MONTH);
+        int anio =miCalendario.get(Calendar.YEAR);
+        calendarioFactura.setDate(Date.valueOf(anio+"-"+(mes+1)+"-"+diaHoy));
+       
     }
+
 
     /**
      * Seteo el actionListener para los botones articulosALafactura,
@@ -46,7 +55,6 @@ public class VentaGui extends javax.swing.JPanel {
         this.articulosALaFactura.addActionListener(lis);
         this.clienteALaFactura.addActionListener(lis);
         this.facturaNueva.addActionListener(lis);
-        this.imprimir.addActionListener(lis);
         this.realizarVenta.addActionListener(lis);
         this.borrarArticulosSeleccionados.addActionListener(lis);
         this.modificar.addActionListener(lis);
@@ -297,17 +305,27 @@ public class VentaGui extends javax.swing.JPanel {
     public JDateChooser getCalendarioFactura() {
         return calendarioFactura;
     }
+    
+    public void limpiarVentana(){
+        tablaArticulos.clearSelection();
+        tablaClientes.clearSelection();
+        tablaFactura.clearSelection();
+        while(tablaFactura.getRowCount()>0){
+            tablaFacturaDefault.removeRow(0);
+        }
+        Calendar miCalendario = Calendar.getInstance();
+        java.util.Date eldia = miCalendario.getTime();
+        int diaHoy = miCalendario.get(Calendar.DAY_OF_MONTH);
+        int mes=miCalendario.get(Calendar.MONTH);
+        int anio =miCalendario.get(Calendar.YEAR);
+        calendarioFactura.setDate(Date.valueOf(anio+"-"+(mes+1)+"-"+diaHoy));
 
-    /**
-     * Retorno el boton imprimir para que se abra el dialo de impresion de
-     * jasperReport
-     *
-     * @param
-     * @return JButton
-     * @exception
-     */
-    public JButton getImprimir() {
-        return imprimir;
+    }
+
+
+    
+       public JTextField getCalenFacturaText(){
+        return ((JTextField)calendarioFactura.getDateEditor().getUiComponent());
     }
 
     /**
@@ -358,7 +376,6 @@ public class VentaGui extends javax.swing.JPanel {
         facturaNueva = new javax.swing.JButton();
         realizarVenta = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
-        imprimir = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(825, 448));
 
@@ -583,7 +600,7 @@ public class VentaGui extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.math.BigDecimal.class, java.math.BigDecimal.class
             };
             boolean[] canEdit = new boolean [] {
                 false, true, false, true, false
@@ -619,6 +636,8 @@ public class VentaGui extends javax.swing.JPanel {
         borrarArticulosSeleccionados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrarSeleccionado.png"))); // NOI18N
         borrarArticulosSeleccionados.setText("Borrar articulos seleccionados");
         borrarArticulosSeleccionados.setToolTipText("Borrar articulos seleccionados en la factura");
+
+        calendarioFactura.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout panelFacturaLayout = new javax.swing.GroupLayout(panelFactura);
         panelFactura.setLayout(panelFacturaLayout);
@@ -674,10 +693,6 @@ public class VentaGui extends javax.swing.JPanel {
         modificar.setToolTipText("Guardar cambios realizados en la edición de la factura");
         modificar.setEnabled(false);
         panelControlFactura.add(modificar);
-
-        imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/imprimir.png"))); // NOI18N
-        imprimir.setToolTipText("Abrir dialogo de impresión o exportarción");
-        panelControlFactura.add(imprimir);
 
         javax.swing.GroupLayout fondoImagenLayout = new javax.swing.GroupLayout(fondoImagen);
         fondoImagen.setLayout(fondoImagenLayout);
@@ -735,7 +750,6 @@ public class VentaGui extends javax.swing.JPanel {
     private javax.swing.JTextField clienteFactura;
     private javax.swing.JButton facturaNueva;
     private javax.swing.JPanel fondoImagen;
-    private javax.swing.JButton imprimir;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

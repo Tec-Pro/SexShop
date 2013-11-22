@@ -16,6 +16,7 @@ import interfaz.LoginGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,7 +54,7 @@ public class MainControlador implements ActionListener{
         vtasRealiz = new VentasRealizadasControlador(app);
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
-        ventacont = new VentaControlador(app.getVenta());
+        ventacont = new VentaControlador(app.getVenta(),app.getVentasRealizadas());
         provContr = new ProveedoresControlador(app);
         log.setVisible(true);
         pb.dispose();
@@ -76,7 +77,7 @@ public class MainControlador implements ActionListener{
                 log.dispose();
                 app.setVisible(true);
             } else{
-                System.out.println("Error de usuario o contraseña.");
+                    JOptionPane.showMessageDialog(app, "INTENTE NUEVAMENTE", "¡DATOS INCORRECTOS!",JOptionPane.ERROR_MESSAGE);
             }
             
         } 

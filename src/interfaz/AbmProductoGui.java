@@ -361,7 +361,6 @@ public class AbmProductoGui extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         fondoImagen = new javax.swing.JPanel();
@@ -449,195 +448,149 @@ public class AbmProductoGui extends javax.swing.JPanel {
         panelControlArticulo.add(siguiente);
 
         panelArticulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del artículo", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
-        panelArticulo.setPreferredSize(new java.awt.Dimension(557, 279));
-        panelArticulo.setLayout(new java.awt.GridBagLayout());
+        panelArticulo.setPreferredSize(new java.awt.Dimension(549, 279));
 
         labelCodigo.setBackground(new java.awt.Color(137, 98, 59));
         labelCodigo.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelCodigo.setText("Código");
         labelCodigo.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(54, 15, 0, 0);
-        panelArticulo.add(labelCodigo, gridBagConstraints);
 
         idArticulo.setEditable(false);
         idArticulo.setToolTipText("ID articulo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 152;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(49, 11, 0, 0);
-        panelArticulo.add(idArticulo, gridBagConstraints);
 
         nombre.setEditable(false);
         nombre.setToolTipText("Nombre del articulo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 151;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 12, 0, 0);
-        panelArticulo.add(nombre, gridBagConstraints);
 
         labelNombre.setBackground(new java.awt.Color(137, 98, 59));
         labelNombre.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelNombre.setText("Nombre");
         labelNombre.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(23, 15, 0, 0);
-        panelArticulo.add(labelNombre, gridBagConstraints);
 
         labelMarca.setBackground(new java.awt.Color(137, 98, 59));
         labelMarca.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelMarca.setText("Marca");
         labelMarca.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 15, 0, 0);
-        panelArticulo.add(labelMarca, gridBagConstraints);
 
         marca.setEditable(false);
         marca.setToolTipText("Marca del articulo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 151;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(23, 10, 0, 0);
-        panelArticulo.add(marca, gridBagConstraints);
 
         labelProveedor.setBackground(new java.awt.Color(137, 98, 59));
         labelProveedor.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelProveedor.setText("Proveedor");
         labelProveedor.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 15, 0, 0);
-        panelArticulo.add(labelProveedor, gridBagConstraints);
 
         precioCompra.setEditable(false);
         precioCompra.setToolTipText("Precio del articulo para la compra(Numero real)");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 16;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 24);
-        panelArticulo.add(precioCompra, gridBagConstraints);
 
         tipo.setEditable(false);
         tipo.setToolTipText("Tipo del articulo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 12;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 189;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(49, 8, 0, 24);
-        panelArticulo.add(tipo, gridBagConstraints);
 
         labelTipo.setBackground(new java.awt.Color(137, 98, 59));
         labelTipo.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelTipo.setText("Tipo");
         labelTipo.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(55, 12, 0, 0);
-        panelArticulo.add(labelTipo, gridBagConstraints);
 
         labelPrecio.setBackground(new java.awt.Color(137, 98, 59));
         labelPrecio.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelPrecio.setText("Precio de compra");
         labelPrecio.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(24, 12, 0, 0);
-        panelArticulo.add(labelPrecio, gridBagConstraints);
 
         proveedores.setToolTipText("Proveedor del articulo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 97;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 12, 22, 0);
-        panelArticulo.add(proveedores, gridBagConstraints);
 
         labelStock.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelStock.setText("Stock");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(24, 16, 0, 0);
-        panelArticulo.add(labelStock, gridBagConstraints);
 
         stock.setEditable(false);
         stock.setToolTipText("Stock del articulo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 96;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 27, 22, 0);
-        panelArticulo.add(stock, gridBagConstraints);
 
         jLabel1.setText("Precio de venta");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 10, 0, 0);
-        panelArticulo.add(jLabel1, gridBagConstraints);
 
         precioVenta.setEditable(false);
         precioVenta.setToolTipText("Precio del producto para la venta");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 16;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(23, 18, 0, 24);
-        panelArticulo.add(precioVenta, gridBagConstraints);
+
+        javax.swing.GroupLayout panelArticuloLayout = new javax.swing.GroupLayout(panelArticulo);
+        panelArticulo.setLayout(panelArticuloLayout);
+        panelArticuloLayout.setHorizontalGroup(
+            panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelArticuloLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addComponent(labelCodigo)
+                        .addGap(18, 18, 18)
+                        .addComponent(idArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelTipo)
+                        .addGap(19, 19, 19)
+                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addComponent(labelNombre)
+                        .addGap(12, 12, 12)
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelPrecio)
+                        .addGap(18, 18, 18)
+                        .addComponent(precioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addComponent(labelMarca)
+                        .addGap(24, 24, 24)
+                        .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(precioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addComponent(labelProveedor)
+                        .addGap(12, 12, 12)
+                        .addComponent(proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(labelStock)
+                        .addGap(12, 12, 12)
+                        .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelArticuloLayout.setVerticalGroup(
+            panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelArticuloLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCodigo)
+                    .addComponent(idArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(labelTipo))
+                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(labelNombre))
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(labelPrecio))
+                    .addComponent(precioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(precioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelMarca)
+                            .addComponent(jLabel1))))
+                .addGap(18, 18, 18)
+                .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labelProveedor))
+                    .addComponent(proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelArticuloLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(labelStock))
+                    .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         panelArticulos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Artículos", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
@@ -694,15 +647,16 @@ public class AbmProductoGui extends javax.swing.JPanel {
                     .addGroup(panelArticulosLayout.createSequentialGroup()
                         .addComponent(labelBusquedaMarca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(busquedaMarca))
                     .addGroup(panelArticulosLayout.createSequentialGroup()
                         .addComponent(labelBusquedaCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(busquedaCodigo))
                     .addGroup(panelArticulosLayout.createSequentialGroup()
                         .addComponent(labelBusquedaNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(busquedaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
+                .addGap(38, 38, 38))
             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelArticulosLayout.setVerticalGroup(
@@ -720,22 +674,21 @@ public class AbmProductoGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaMarca)
                     .addComponent(busquedaMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout fondoImagenLayout = new javax.swing.GroupLayout(fondoImagen);
         fondoImagen.setLayout(fondoImagenLayout);
         fondoImagenLayout.setHorizontalGroup(
             fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(fondoImagenLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(1, 1, 1)
                 .addComponent(panelArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelControlArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                    .addComponent(panelControlArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         fondoImagenLayout.setVerticalGroup(
             fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,7 +697,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fondoImagenLayout.createSequentialGroup()
-                        .addComponent(panelArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 262, Short.MAX_VALUE)
+                        .addComponent(panelArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelControlArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -757,7 +710,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

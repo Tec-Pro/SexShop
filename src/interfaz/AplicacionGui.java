@@ -60,7 +60,6 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
         reporteFactura = new ControladorJReport(("factura.jasper"));
-        venta.getImprimir().addActionListener(this);
     }
 
     public AbmClienteGui getAbmClienteGui(){
@@ -192,17 +191,6 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
             }
 
         }*/
-        if(venta.getImprimir()==ae.getSource()){
-            try {
-                reporteFactura.mostrarFactura(1);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JRException ex) {
-                Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
     
    

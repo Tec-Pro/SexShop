@@ -12,9 +12,9 @@ pv.cantidad,
 pv.precio_final,p.numero_producto,p.nombre as descr,p.tipo,p.marca
 from
 ventas v
-inner join clientes c on v.idcliente=c.id
-inner join productos_vendidos pv on v.id=pv.idventa
-inner join productos p on pv.idproducto=p.numero_producto
+inner join clientes c on v.cliente_id=c.id
+inner join productos_ventas pv on v.id=pv.venta_id
+inner join productos p on pv.producto_id=p.numero_producto
 
 where v.id=$P{numFactura}]]>
 	</queryString>
