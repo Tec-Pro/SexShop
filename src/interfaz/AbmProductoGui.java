@@ -21,9 +21,9 @@ import modelos.Producto;
 public class AbmProductoGui extends javax.swing.JPanel {
 
     DefaultTableModel tablaArticulos; //Tabla Default para tener las opciones de instar y elimnar filas
-    JPopupMenu popUpMenuTabla;         //popUp sobre la tabla al hacer click derecho
-    JMenuItem modificarPrecioPorcentaje;          //menu del popUp
-    JMenuItem modificarPrecioPesos;
+   // JPopupMenu popUpMenuTabla;         //popUp sobre la tabla al hacer click derecho
+    //JMenuItem modificarPrecioPorcentaje;          //menu del popUp
+    //JMenuItem modificarPrecioPesos;
 
     /**
      * Creates new form AbmProductoGui
@@ -31,8 +31,8 @@ public class AbmProductoGui extends javax.swing.JPanel {
     public AbmProductoGui() {
         initComponents();
         tablaArticulos = (DefaultTableModel) tabla.getModel(); //convierto la tabla
-        popUpMenu();    //inicializo el  popUp
-        tabla.setComponentPopupMenu(popUpMenuTabla);//agrego el popUp a la tabla
+       // popUpMenu();    //inicializo el  popUp
+       // tabla.setComponentPopupMenu(popUpMenuTabla);//agrego el popUp a la tabla
     }
 
     /**
@@ -43,13 +43,13 @@ public class AbmProductoGui extends javax.swing.JPanel {
      * @return void
      * @exception
      */
-    private void popUpMenu() {
+  /*  private void popUpMenu() {
         popUpMenuTabla = new JPopupMenu();
         modificarPrecioPorcentaje = new JMenuItem("Modificar precio de venta en %");
         popUpMenuTabla.add(modificarPrecioPorcentaje);
         modificarPrecioPesos = new JMenuItem("Modificar precio de venta en $");
         popUpMenuTabla.add(modificarPrecioPesos);
-    }
+    }*/
 
     /**
      * Setea los actionListener para los botones guardar, borrar, nuevo,
@@ -67,8 +67,9 @@ public class AbmProductoGui extends javax.swing.JPanel {
         this.siguiente.addActionListener(lis);
         this.anterior.addActionListener(lis);
         this.modificar.addActionListener(lis);
-        this.modificarPrecioPorcentaje.addActionListener(lis);
-        this.modificarPrecioPesos.addActionListener(lis);
+        this.modificarPrecios.addActionListener(lis);
+        //this.modificarPrecioPorcentaje.addActionListener(lis);
+        //this.modificarPrecioPesos.addActionListener(lis);
     }
 
     /**
@@ -87,6 +88,10 @@ public class AbmProductoGui extends javax.swing.JPanel {
         precioCompra.setEditable(b);
         precioVenta.setEditable(b);
         proveedores.setEditable(b);
+    }
+
+    public JButton getModificarPrecios() {
+        return modificarPrecios;
     }
 
     /**
@@ -304,9 +309,9 @@ public class AbmProductoGui extends javax.swing.JPanel {
      * @return JMenuItem
      * @exception
      */
-    public JMenuItem getModificarPrecioPorcentaje() {
+    /*public JMenuItem getModificarPrecioPorcentaje() {
         return modificarPrecioPorcentaje;
-    }
+    }*/
 
     /**
      * Retorno el menuItem modificarPrecioPesos del popUpMenu
@@ -315,9 +320,9 @@ public class AbmProductoGui extends javax.swing.JPanel {
      * @return JMenuItem
      * @exception
      */
-    public JMenuItem getModificarPrecioPesos() {
+   /* public JMenuItem getModificarPrecioPesos() {
         return modificarPrecioPesos;
-    }
+    }*/
 
     /**
      * Retorno el campo precioCompra
@@ -399,6 +404,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
         busquedaCodigo = new javax.swing.JTextField();
         busquedaNombre = new javax.swing.JTextField();
         busquedaMarca = new javax.swing.JTextField();
+        modificarPrecios = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(825, 407));
 
@@ -637,6 +643,8 @@ public class AbmProductoGui extends javax.swing.JPanel {
 
         busquedaMarca.setToolTipText("Filtrar por marca");
 
+        modificarPrecios.setText("Modificar precios");
+
         javax.swing.GroupLayout panelArticulosLayout = new javax.swing.GroupLayout(panelArticulos);
         panelArticulos.setLayout(panelArticulosLayout);
         panelArticulosLayout.setHorizontalGroup(
@@ -655,9 +663,10 @@ public class AbmProductoGui extends javax.swing.JPanel {
                     .addGroup(panelArticulosLayout.createSequentialGroup()
                         .addComponent(labelBusquedaNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
+                        .addComponent(busquedaNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
                 .addGap(38, 38, 38))
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(modificarPrecios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelArticulosLayout.setVerticalGroup(
             panelArticulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,7 +683,9 @@ public class AbmProductoGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaMarca)
                     .addComponent(busquedaMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(modificarPrecios))
         );
 
         javax.swing.GroupLayout fondoImagenLayout = new javax.swing.GroupLayout(fondoImagen);
@@ -710,7 +721,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -741,6 +752,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
     private javax.swing.JLabel labelTipo;
     private javax.swing.JTextField marca;
     private javax.swing.JButton modificar;
+    private javax.swing.JButton modificarPrecios;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevo;
     private javax.swing.JPanel panelArticulo;
