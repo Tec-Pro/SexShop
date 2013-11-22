@@ -49,7 +49,7 @@ public class MainControlador implements ActionListener{
      private VentaControlador ventacont;
      private ProveedoresControlador provContr;
      private CompraControlador compraControlador;
-     private ComprasRealizadas compraRelaRealizadas;
+     private ComprasRealizadasControlador compraRealiz;
      private ManejoUsuario mu;
      private char[] pass;
      private String user;
@@ -71,7 +71,7 @@ public class MainControlador implements ActionListener{
         vtasRealiz = new VentasRealizadasControlador(app);
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
-        compraRelaRealizadas = new ComprasRealizadas();
+        compraRealiz = new ComprasRealizadasControlador(app);
         ventacont = new VentaControlador(app.getVenta(),app.getVentasRealizadas());
         provContr = new ProveedoresControlador(app);
         compraControlador = new CompraControlador(app.getCompraGui(), app.getComprasRealizadas() );
