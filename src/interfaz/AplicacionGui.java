@@ -28,6 +28,7 @@ public class AplicacionGui extends javax.swing.JFrame {
     private ComprasRealizadas comprasRealizadas;
     private AbmProveedorGui abmProveedor;
     private CompraGui compraGui;
+    private AcercaDe acercaDe;
     //estos deben estar en el controlador
     ArticulosCompradosGui art;
     ModificarPrecioPorcentajeGui modificarPrecioGui;
@@ -48,6 +49,7 @@ public class AplicacionGui extends javax.swing.JFrame {
         venta= new VentaGui();
         compraGui = new CompraGui();
         comprasRealizadas = new ComprasRealizadas();
+        acercaDe = new AcercaDe();
         //venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
@@ -57,6 +59,7 @@ public class AplicacionGui extends javax.swing.JFrame {
         tab.add("Proveedor", abmProveedor);
         tab.add("Compras",compraGui);
         tab.add("Compras realizadas", comprasRealizadas);
+        tab.add("Acerca de", acercaDe);
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");
         tab.setToolTipTextAt(1, "Alta baja y modificacion de productos");
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
@@ -64,6 +67,7 @@ public class AplicacionGui extends javax.swing.JFrame {
         tab.setToolTipTextAt(4, "Alta baja y modificación de proveedores");
         tab.setToolTipTextAt(5, "Realizar una compra");
         tab.setToolTipTextAt(6, "Compras realizadas");
+        tab.setToolTipTextAt(7, "Acerca de");
         //controlador
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
@@ -191,7 +195,6 @@ public class AplicacionGui extends javax.swing.JFrame {
     private javax.swing.JMenuItem listarArticulos;
     private javax.swing.JMenuItem listarClientes;
     private javax.swing.JTabbedPane tab;
-
     // End of variables declaration//GEN-END:variables
     public JTabbedPane getTab() {
         return tab;
