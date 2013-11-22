@@ -205,8 +205,8 @@ public class VentasRealizadasControlador implements ActionListener {
         Cliente c = buscar.buscarCliente(tablaFacturas.getValueAt(r, 0));
         ventasGui.getClienteFactura().setText(tablaFacturas.getValueAt(r, 1).toString());
         ventasGui.getCalendarioFactura().setDate(Date.valueOf(tablaFacturas.getValueAt(r, 2).toString()));
-        if(c!=null){
-            prodVentas = buscar.filtroVendidos(c.getId().toString(),"");
+        if(r>-1){
+            prodVentas = buscar.filtroVendidos(tablaFacturas.getValueAt(r, 0).toString(),"");
 
         }
         actualizarFactura();

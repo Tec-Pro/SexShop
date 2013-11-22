@@ -227,9 +227,9 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
                     Base.close();
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
-                    BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
-                    Pair parCantYPrecioFinal = new Pair(cantidad, precioFinal.doubleValue());
-                    Pair par = new Pair(producto, parCantYPrecioFinal); //creo el par
+                   // BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
+                   // Pair parCantYPrecioFinal = new Pair(cantidad, precioFinal.doubleValue());
+                    Pair par = new Pair(producto, cantidad); //creo el par
                     parDeProductos.add(par); //meto el par a la lista
                 }
                 v.set("fecha", laFecha);

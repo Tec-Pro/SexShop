@@ -62,8 +62,10 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         busqueda = new busqueda();
         abmVenta = new ABMVenta();
         this.ventaGui = ventaGui;
-        this.ventasRealizadasGui=ventasRealizadas;
+        this.ventasRealizadasGui = ventasRealizadas;
         ventaGui.setActionListener(this);
+        ventasRealizadasGui.getModificar().addActionListener(this);
+
 
         textap = ventaGui.getBusquedaApellido();
         textap.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -115,7 +117,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         actualizarListaCliente();
         actualizarListaProd();
         reporteFactura = new ControladorJReport(("factura.jasper"));
-        ventasRealizadasGui.getModificar().addActionListener(this);
     }
 
     public void tablafacMouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,7 +187,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                         cols[1] = 1;
                         cols[2] = p.get("nombre") + " " + p.get("marca");
                         cols[3] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);
-                        cols[4] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);;
+                        cols[4] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);
                         Base.close();
                         ventaGui.getTablaFacturaDefault().addRow(cols);
                         setCellEditor();
@@ -239,18 +240,21 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 v.set("fecha", laFecha);
                 v.set("cliente_id", idCliente);
                 v.setProductos(parDeProductos);
+                abrirBase();
                 if (abmVenta.alta(v)) {
-                    if (JOptionPane.showConfirmDialog(ventaGui, "¿Desea abrir el dialogo de impresión?", "¡Venta exitosa!", JOptionPane.YES_NO_OPTION) == 0);
-                    try {
-                        reporteFactura.mostrarFactura(abmVenta.getUltimoIdVenta());
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (JRException ex) {
-                        Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                    Base.close();
+                    if (JOptionPane.showConfirmDialog(ventaGui, "¿Desea abrir el dialogo de impresión?", "¡Venta exitosa!", JOptionPane.YES_NO_OPTION) == 0) {
+                        try {
+                            reporteFactura.mostrarFactura(abmVenta.getUltimoIdVenta());
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (JRException ex) {
+                            Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-    
+
                     ventaGui.limpiarVentana();
 
                 } else {
@@ -259,10 +263,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             }
             if (e.getSource() == ventaGui.getFacturaNueva()) {
                 ventaGui.limpiarVentana();
-            }
-            if(e.getSource()==ventasRealizadasGui.getModificar()){
-                ventaGui.getClienteFactura().setText(ventasRealizadasGui.getClienteFactura().getText());
-                
             }
         }
     }
