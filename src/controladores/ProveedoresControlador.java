@@ -261,6 +261,11 @@ public class ProveedoresControlador implements ActionListener {
             System.out.println("pulsado guardar modificar");
             Proveedor prov = new Proveedor();
             cargarDatosProv(prov,true);
+            if(prov.get("nombre").equals("")){
+                JOptionPane.showMessageDialog(provGui,"Un Proveedor debe tener nombre");
+                Base.close();
+                return;
+            }
             if(abmProv.modificar(prov)){
                 JOptionPane.showMessageDialog(provGui,"Modificacion realizada con exito");
                 provList = buscar.filtroProveedor("","","");

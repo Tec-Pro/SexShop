@@ -216,6 +216,11 @@ public class ClienteControlador implements ActionListener {
             System.out.println("pulsado guardar modificar");
             Cliente cliente = new Cliente();
             cargarDatosCliente(cliente,true);
+            if(cliente.getString("nombre").equals("") || cliente.getString("apellido").equals("")){
+                JOptionPane.showMessageDialog(clienteGui,"Un cliente debe tener nombre y apellido");
+                Base.close();
+                return;
+            }
             if(abmCliente.modificar(cliente)){
                 JOptionPane.showMessageDialog(clienteGui,"Modificacion realizada con exito");
                 cl = cb.filtroCliente("","","");
