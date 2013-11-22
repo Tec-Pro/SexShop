@@ -6,8 +6,10 @@ package interfaz;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelos.Proveedor;
 
 /**
  *
@@ -36,15 +38,40 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         this.modificar.addActionListener(lis);
         this.buttonArticulos.addActionListener(lis);
     }   
-
-    public void habilitarCampos(boolean b){
+    
+    public void CargarCampos(Proveedor c) {
+        cuil.setText(c.get("cuil").toString());
+        nombre.setText(c.get("nombre").toString());
+        if(c.get("apellido")==null){apellido.setText("");}
+        else{apellido.setText(c.get("apellido").toString());}
+        if(c.get("telefono")==null){telefono.setText("");}
+        else{telefono.setText(c.get("telefono").toString());}
+        if(c.get("mail")==null){email.setText("");}
+        else{email.setText(c.get("mail").toString());}
+        if(c.get("celular")==null){celular.setText("");}
+        else{celular.setText(c.get("celular").toString());}
+        if(c.get("dni")==null){dni.setText("");}
+        else{dni.setText(c.get("dni").toString());}
+        if(c.get("nombre_banco")==null){banco.setText("");}
+        else{banco.setText(c.get("nombre_banco").toString());}
+        if(c.get("cuenta")==null){numDeCuenta.setText("");}
+        else{numDeCuenta.setText(c.get("cuenta").toString());}
+        if(c.get("tipo_cuenta")==null){tipoCuenta.setText("");}
+        else{tipoCuenta.setText(c.get("tipo_cuenta").toString());}
+        if(c.get("sucursal")==null){sucursal.setText("");}
+        else{sucursal.setText(c.get("sucursal").toString());}
+        if(c.get("compra_minima")==null){compraMinima.setText("");}
+        else{compraMinima.setText(c.get("compra_minima").toString());}
+    }
+    
+    public void habilitarCampos(boolean b,boolean cui){
         apellido.setEditable(b);
         nombre.setEditable(b);
         dni.setEditable(b);
         telefono.setEditable(b);
         celular.setEditable(b);
         email.setEditable(b);
-        cuil.setEditable(b);
+        cuil.setEditable(cui);
         banco.setEditable(b);
         numDeCuenta.setEditable(b);
         tipoCuenta.setEditable(b);
@@ -67,6 +94,10 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         tipoCuenta.setText("");  
     }
 
+    public JButton getArticulos(){
+        return buttonArticulos;
+    }
+    
     public JButton getAnterior() {
         return anterior;
     }
@@ -75,12 +106,36 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         return siguiente;
     }
     
+    public JButton getNuevo() {
+        return nuevo;
+    }
+    
+    public JButton getModificar() {
+        return modificar;
+    }
+    
+    public JButton getGuardar() {
+        return guardar;
+    }
+    
+    public JButton getBorrar() {
+        return borrar;
+    }
+    
     public DefaultTableModel getTablaProveedores() {
         return tablaProveedores;
     }
-
-    public JTextField getBusquedaDni() {
+    
+    public JTable getTablaProv(){
+        return tabla1;
+    } 
+    
+    public JTextField getBusquedaCuil(){
         return busquedaDni;
+    }
+    
+    public JTextField getBusquedaId() {
+        return busquedaId;
     }
 
     public JTextField getBusquedaNombre() {
@@ -107,6 +162,10 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         return cuil;
     }
 
+    public JTextField getTipoCuenta(){
+        return tipoCuenta ;
+    }
+    
     public JTextField getDni() {
         return dni;
     }
@@ -584,11 +643,10 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoImagenLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panelControlArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(fondoImagenLayout.createSequentialGroup()
-                            .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGap(81, 81, 81))))
+                    .addGroup(fondoImagenLayout.createSequentialGroup()
+                        .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(81, 81, 81))
+                    .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3))
         );
 

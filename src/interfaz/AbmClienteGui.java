@@ -156,9 +156,12 @@ public class AbmClienteGui extends javax.swing.JPanel {
         idCliente.setText(c.getId().toString());
         nombre.setText(c.get("nombre").toString());
         apellido.setText(c.get("apellido").toString());
-        telFijo.setText(c.get("telefono").toString());
-        email.setText(c.get("mail").toString());
-        celular.setText(c.get("celular").toString());
+        if(c.get("telefono")==null){telFijo.setText("");}
+        else{telFijo.setText(c.get("telefono").toString());}
+        if(c.get("mail")==null){email.setText("");}
+        else{email.setText(c.get("mail").toString());}
+        if(c.get("celular")==null){celular.setText("");}
+        else{celular.setText(c.get("celular").toString());}
     }
 
     /**

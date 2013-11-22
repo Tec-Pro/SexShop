@@ -5,6 +5,7 @@
 package interfaz;
 
 
+import controladores.ControladorJReport;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -47,8 +48,8 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
         tab.add("Producto", abmProducto);
         tab.add("Venta", venta);
         
-        tab.add("Proveedor", abmProveedor);
         tab.add("Ventas realizadas", ventasRealizadas);
+        tab.add("Proveedor", abmProveedor);
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");
         tab.setToolTipTextAt(1, "Alta baja y modificacion de productos");
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
@@ -64,6 +65,10 @@ public class AplicacionGui extends javax.swing.JFrame implements ActionListener{
 
     public AbmClienteGui getAbmClienteGui(){
         return abmCliente;
+    }
+    
+    public AbmProveedorGui getAbmProveedorGui(){
+        return abmProveedor;
     }
     
     public AbmProductoGui getAbmProductoGui(){
