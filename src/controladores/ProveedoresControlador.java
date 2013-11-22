@@ -93,7 +93,7 @@ public class ProveedoresControlador implements ActionListener {
     
     private void abrirBase(){
         if (!Base.hasConnection()){
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "Pantera1.");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
         }
     }
     
