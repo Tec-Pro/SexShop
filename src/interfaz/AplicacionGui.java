@@ -112,6 +112,7 @@ public class AplicacionGui extends javax.swing.JFrame {
         tab = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        salir = new javax.swing.JMenuItem();
         listar = new javax.swing.JMenu();
         listarClientes = new javax.swing.JMenuItem();
         listarArticulos = new javax.swing.JMenuItem();
@@ -121,9 +122,19 @@ public class AplicacionGui extends javax.swing.JFrame {
         setExtendedState(6);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
+        getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
+
+        salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(salir);
+
         jMenuBar1.add(jMenu1);
 
         listar.setText("Listado");
@@ -180,6 +191,10 @@ public class AplicacionGui extends javax.swing.JFrame {
             Logger.getLogger(AplicacionGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_listarArticulosActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_salirActionPerformed
 /**
  * @param args the command line arguments
  */
@@ -190,8 +205,8 @@ public class AplicacionGui extends javax.swing.JFrame {
     private javax.swing.JMenu listar;
     private javax.swing.JMenuItem listarArticulos;
     private javax.swing.JMenuItem listarClientes;
+    private javax.swing.JMenuItem salir;
     private javax.swing.JTabbedPane tab;
-
     // End of variables declaration//GEN-END:variables
     public JTabbedPane getTab() {
         return tab;
