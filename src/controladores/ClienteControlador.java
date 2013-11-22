@@ -48,7 +48,7 @@ public class ClienteControlador implements ActionListener {
         apliGui = apg;
         cl = new LinkedList<Cliente>();
         cb = new busqueda();
-        clienteGui = apg.getAbmClienteGui(); //new AbmClienteGui();
+        clienteGui = apg.getAbmClienteGui();
         abmCliente = new ABMCliente();
         clienteGui.setActionListener(this);
         nuevoPulsado = false;
@@ -83,7 +83,7 @@ public class ClienteControlador implements ActionListener {
     
     private void abrirBase(){
         if (!Base.hasConnection()){
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "Pantera1.");
         }
     }
     
@@ -127,7 +127,7 @@ public class ClienteControlador implements ActionListener {
         Base.close();
     }
     
-     public void busquedaCodigoKeyReleased(java.awt.event.KeyEvent evt){
+    public void busquedaCodigoKeyReleased(java.awt.event.KeyEvent evt){
         abrirBase();
         cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
@@ -159,8 +159,8 @@ public class ClienteControlador implements ActionListener {
                 Producto p = (Producto)it.next();
                 row[0] = p.get("id").toString();
                 row[1] = p.get("nombre").toString();
-                row[3] = p.get("marca").toString();
-                row[4] = p.get("tipo").toString();
+                row[2] = p.get("marca").toString();
+                row[3] = p.get("tipo").toString();
                 artCom.getTablaProductosComprados().addRow(row);
             }
             artCom.setVisible(true);

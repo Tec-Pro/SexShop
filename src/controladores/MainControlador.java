@@ -30,6 +30,7 @@ public class MainControlador implements ActionListener{
      private  ClienteControlador cl;
      private ArticulosControlador ac;
      private VentaControlador ventacont;
+     private ProveedoresControlador provContr;
      
      @SuppressWarnings("CallToThreadDumpStack")
      public MainControlador() throws ClassNotFoundException, JRException, SQLException{
@@ -49,6 +50,7 @@ public class MainControlador implements ActionListener{
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         ventacont = new VentaControlador(app.getVenta());
+        provContr = new ProveedoresControlador(app);
         log.setVisible(true);
         pb.dispose();
       
