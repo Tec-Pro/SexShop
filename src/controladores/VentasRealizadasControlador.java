@@ -168,8 +168,7 @@ public class VentasRealizadasControlador implements ActionListener {
     }
     
     public void calenDesdePropertyChange(PropertyChangeEvent e){
-        final Calendar c = (Calendar) e.getNewValue();   
-        
+        final Calendar c = (Calendar) e.getNewValue();
         dateDesde = c.get(Calendar.YEAR)+"-" +c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE);  
         actualizarListaFacturas();
     }
