@@ -24,20 +24,22 @@ public class ABMVenta implements ABMInterface<Venta> {
     //FUNCIONA CORRECTAMENTE
     @Override
     public boolean alta(Venta v) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idCliente = (Integer) v.get("cliente_id");
-        v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
-        Venta venta = Venta.create("monto", v.get("monto"), "cliente_id", idCliente, "fecha", v.get("fecha"));
-        resultOp = resultOp && venta.saveIt();//guardo la venta
-        int idVenta = venta.getInteger("id");
-        ultimoIdVenta=idVenta;
-        resultOp = resultOp && cargarProductosVendidos(idVenta, v.getProductos());//guardo los productos vendidos
-        resultOp = resultOp && actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
-        resultOp = resultOp && actualizarAdquisicionCliente(idCliente, v.getProductos());//actualizo la tabla de productos adquiridos por clientes
+               if (v == null) {
+             resultOp = false;
+         } else {
+             Integer idCliente = (Integer) v.get("cliente_id");
+             v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
+             Venta venta = Venta.create("monto", v.get("monto"), "cliente_id", idCliente, "fecha", v.get("fecha"));
+             resultOp = resultOp && venta.saveIt();//guardo la venta
+             int idVenta = venta.getInteger("id");
+             ultimoIdVenta=idVenta;
+             resultOp = resultOp && cargarProductosVendidos(idVenta, v.getProductos());//guardo los productos vendidos
+             resultOp = resultOp && actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
+             resultOp = resultOp && actualizarAdquisicionCliente(idCliente, v.getProductos());//actualizo la tabla de productos adquiridos por clientes
+         }
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
 
@@ -53,15 +55,18 @@ public class ABMVenta implements ABMInterface<Venta> {
      */
     @Override
     public boolean baja(Venta v) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
         Integer idVenta = v.getInteger("id");//saco el idVenta
         Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
-        ProductosVentas.delete("venta_id = ?", idVenta);//elimino todos los productosvendidos
-        resultOp = resultOp && venta.delete();//elimino la venta
+        
+        if (venta == null) {
+             resultOp = false;
+         } else {
+             ProductosVentas.delete("venta_id = ?", idVenta);//elimino todos los productosvendidos
+             resultOp = resultOp && venta.delete();//elimino la venta
+         }
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
 
@@ -72,44 +77,48 @@ public class ABMVenta implements ABMInterface<Venta> {
      */
     @Override
     public boolean modificar(Venta v) {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idClienteNuevo = v.getInteger("cliente_id");
-        v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
-        Integer idVenta = v.getInteger("id");
-        Venta venta = Venta.findById(idVenta);//saco la venta
-        Integer idVentaVieja = (Integer) venta.getId();
-        venta.set("monto", v.get("monto"));
-        venta.set("fecha", v.get("fecha"));
-        venta.set("cliente_id", idClienteNuevo);
-        venta.saveIt();
-        LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
-        resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        resultOp = resultOp && eliminarAdquisicionCliente(idVentaVieja, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
-        resultOp = resultOp && cargarProductosVendidos(idVenta, v.getProductos());//guardo los productos nuevos
-        resultOp = resultOp && actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
-        resultOp = resultOp && actualizarAdquisicionCliente(idClienteNuevo, v.getProductos());//actualizo la tabla de productos adquiridos por clientes con los nuevos productos
+                if (v == null) {
+             resultOp = false;
+         } else {
+             Integer idVenta = v.getInteger("id");
+             Venta venta = Venta.findById(idVenta);//saco la venta
+             Integer idClienteNuevo = v.getInteger("cliente_id");
+             v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
+             Integer idVentaVieja = (Integer) venta.getId();
+             venta.set("monto", v.get("monto"));
+             venta.set("fecha", v.get("fecha"));
+             venta.set("cliente_id", idClienteNuevo);
+             venta.saveIt();
+             LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
+             resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
+             resultOp = resultOp && eliminarAdquisicionCliente(idVentaVieja, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
+             resultOp = resultOp && cargarProductosVendidos(idVenta, v.getProductos());//guardo los productos nuevos
+             resultOp = resultOp && actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
+             resultOp = resultOp && actualizarAdquisicionCliente(idClienteNuevo, v.getProductos());//actualizo la tabla de productos adquiridos por clientes con los nuevos productos
+         }
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
     
     //FUNCIONA CORRECTAMENTE
     public boolean bajaConDevolucion(Venta v){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         Base.openTransaction();
         boolean resultOp = true;
-        Integer idCliente = (Integer) v.get("cliente_id");
         Integer idVenta = v.getInteger("id");//saco el idVenta
         Venta venta = Venta.findById(idVenta);//la busco en BD y la traigo
-        LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
-        resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-        resultOp = resultOp && eliminarAdquisicionCliente(idCliente, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
-        ProductosVentas.delete("venta_id = ?", idVenta);//elimino todos los productosvendidos
-        resultOp = resultOp && venta.delete(); //elimino la venta
+        if (venta == null) {
+             resultOp = false;
+         } else {
+             Integer idCliente = (Integer) venta.get("cliente_id");//saco el idcliente de esa venta
+             LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
+             resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
+             resultOp = resultOp && eliminarAdquisicionCliente(idCliente, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
+             ProductosVentas.delete("venta_id = ?", idVenta);//elimino todos los productosvendidos
+             resultOp = resultOp && venta.delete(); //elimino la venta
+         }
         Base.commitTransaction();
-        Base.close();
         return resultOp;
     }
 
@@ -117,21 +126,25 @@ public class ABMVenta implements ABMInterface<Venta> {
     /*Recibe lista de pares <Producto,cantidad> retorna precio total de la venta de todos
      los productos de la lista, multiplicados por su cantidad correspondiente*/
     public Double calcularMonto(LinkedList<Pair> productos) {
-        Iterator itr = productos.iterator();
-        Pair par;
-        Producto prod;
         Double acumMonto = 0.0;
-        Integer cant;
-        Double precioFinal=0.0;
-        while (itr.hasNext()) {
-            par = (Pair) itr.next(); //saco el par de la lista
-            prod = (Producto) par.first(); //saco el producto del par
-            cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
-            precioFinal= (Double)((Pair) par.second()).second(); //saco el percio al que se vendio
-            acumMonto += (precioFinal * cant); //multiplico el precio del producto por la cantidad del mismo
+        if (productos.isEmpty()) {
+             return acumMonto;
+         } else {
+             Iterator itr = productos.iterator();
+             Pair par;
+             Producto prod;
+             Integer cant;
+             Double precioFinal=0.0;
+             while (itr.hasNext()) {
+                 par = (Pair) itr.next(); //saco el par de la lista
+                 prod = (Producto) par.first(); //saco el producto del par
+                 cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
+                 precioFinal= (Double)((Pair) par.second()).second(); //saco el percio al que se vendio
+                 acumMonto += (precioFinal * cant); //multiplico el precio del producto por la cantidad del mismo
+             }
+             return acumMonto;
         }
-        return acumMonto;
-    }
+        }
 
     //FUNCIONA CORRECTAMENTE
     //Carga los productos y cantidades en la tabla productos_vendidos
