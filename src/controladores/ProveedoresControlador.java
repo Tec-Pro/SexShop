@@ -279,6 +279,7 @@ public class ProveedoresControlador implements ActionListener {
                  System.out.println("confirmado");
                  Proveedor prov = new Proveedor();
                  cargarDatosProv(prov,true);
+                 prov = Proveedor.findFirst("cuil = ?", prov.get("cuil"));
                  if(abmProv.baja(prov)){
                      JOptionPane.showMessageDialog(provGui,"Proveedor borrado exitosamente");
                      provList = buscar.filtroProveedor("","","");
