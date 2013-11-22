@@ -8,7 +8,6 @@ import abm.ABMProveedor;
 import busquedas.busqueda;
 import interfaz.AbmProveedorGui;
 import interfaz.AplicacionGui;
-import interfaz.ArticulosCompradosGui;
 import interfaz.ArticulosDeProveedores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import modelos.Cliente;
 import modelos.Producto;
 import modelos.Proveedor;
 import org.javalite.activejdbc.Base;
@@ -118,7 +116,7 @@ public class ProveedoresControlador implements ActionListener {
         modelProv.addRow(row);  
     }
     
-    private boolean cargarDatosProv(Proveedor p, boolean id){
+    private boolean cargarDatosProv(Proveedor p){
         boolean result = true;
         p.set("apellido",TratamientoString.eliminarTildes(provGui.getApellido().getText()).toUpperCase());
         p.set("nombre",TratamientoString.eliminarTildes(provGui.getNombre().getText()).toUpperCase());
@@ -147,7 +145,6 @@ public class ProveedoresControlador implements ActionListener {
         }
         else{p.set("cuenta",null);} 
         return result;
-       // if(id) p.setId(TratamientoString.eliminarTildes(provGui.get).getText()).toUpperCase());
     }
     
     public void busquedaCuilKeyReleased(java.awt.event.KeyEvent evt){
@@ -229,7 +226,7 @@ public class ProveedoresControlador implements ActionListener {
         if(b.equals(provGui.getGuardar()) && nuevoPulsado){//intenta guardar el nuevo prov creado
             System.out.println("pulsado guardar crear");
             Proveedor c = new Proveedor();
-            if(!cargarDatosProv(c,false)){
+            if(!cargarDatosProv(c)){
                 Base.close();
                 return;
             }
@@ -260,7 +257,10 @@ public class ProveedoresControlador implements ActionListener {
         if(b.equals(provGui.getGuardar()) && modificarPulsado){  //intenta guardar la modificacion de un prov
             System.out.println("pulsado guardar modificar");
             Proveedor prov = new Proveedor();
-            cargarDatosProv(prov,true);
+            if(!cargarDatosProv(prov)){
+                Base.close();
+                return;
+            }
             if(prov.get("nombre").equals("")){
                 JOptionPane.showMessageDialog(provGui,"Un Proveedor debe tener nombre");
                 Base.close();
@@ -283,7 +283,7 @@ public class ProveedoresControlador implements ActionListener {
             if (JOptionPane.OK_OPTION == confirmarBorrar){
                  System.out.println("confirmado");
                  Proveedor prov = new Proveedor();
-                 cargarDatosProv(prov,true);
+                 cargarDatosProv(prov);
                  prov = Proveedor.findFirst("cuil = ?", prov.get("cuil"));
                  if(abmProv.baja(prov)){
                      JOptionPane.showMessageDialog(provGui,"Proveedor borrado exitosamente");
