@@ -20,6 +20,9 @@ public class ABMProveedor implements ABMInterface<Proveedor> {
         return (Proveedor.first("cuil = ?", p.get("cuil"))!=null);
     }
     
+    public Proveedor getProveedor(Proveedor c){
+        return Proveedor.first("nombre = ? and cuil = ?", c.get("nombre"), c.get("cuil"));
+    }
 
     @Override
     public boolean alta(Proveedor p) {
