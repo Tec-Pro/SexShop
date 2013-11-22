@@ -56,10 +56,10 @@
                   <Component id="panelTitulo" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="panelImage1" max="32767" attributes="0"/>
+                      <Component id="comprasRealizadas" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="panelFactura" max="32767" attributes="0"/>
+                          <Component id="panelCompra" max="32767" attributes="0"/>
                           <Component id="panelControlFactura" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -73,11 +73,11 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="panelFactura" max="32767" attributes="0"/>
+                              <Component id="panelCompra" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="panelControlFactura" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="panelImage1" max="32767" attributes="0"/>
+                          <Component id="comprasRealizadas" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -107,16 +107,16 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Schoolbook L" size="24" style="3"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="VENTAS REALIZADAS"/>
+                    <Property name="text" type="java.lang.String" value="COMPRAS REALIZADAS"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="panelFactura">
+            <Container class="javax.swing.JPanel" name="panelCompra">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Factura">
+                    <TitledBorder title="Compra">
                       <Font PropertyName="font" name="Century Schoolbook L" size="18" style="3"/>
                     </TitledBorder>
                   </Border>
@@ -126,24 +126,24 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane8" alignment="1" pref="526" max="32767" attributes="0"/>
+                      <Component id="jScrollPane8" alignment="1" pref="534" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="labelCliente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelProveedor" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="clienteFactura" pref="197" max="32767" attributes="0"/>
+                                  <Component id="proveedorCompra" pref="190" max="32767" attributes="0"/>
                                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelFecha" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="calendarioFactura" min="-2" pref="190" max="-2" attributes="0"/>
+                                  <Component id="calendarioCompra" min="-2" pref="190" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="labelTotal" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="totalFactura" min="-2" pref="106" max="-2" attributes="0"/>
+                                  <Component id="totalCompra" min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -154,17 +154,17 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="labelCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="clienteFactura" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="proveedorCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="calendarioFactura" min="-2" max="-2" attributes="0"/>
+                              <Component id="calendarioCompra" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane8" pref="184" max="32767" attributes="0"/>
+                          <Component id="jScrollPane8" pref="198" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="totalFactura" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="totalCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="labelTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -172,15 +172,15 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="labelCliente">
+                <Component class="javax.swing.JLabel" name="labelProveedor">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Schoolbook L" size="14" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Cliente"/>
+                    <Property name="text" type="java.lang.String" value="Proveedor"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="clienteFactura">
+                <Component class="javax.swing.JTextField" name="proveedorCompra">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
@@ -192,7 +192,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tablaFactura">
+                    <Component class="javax.swing.JTable" name="tablaCompra">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="0">
@@ -241,12 +241,12 @@
                     <Property name="text" type="java.lang.String" value="Total"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="totalFactura">
+                <Component class="javax.swing.JTextField" name="totalCompra">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="labelFecha">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Schoolbook L" size="14" style="0"/>
@@ -254,7 +254,7 @@
                     <Property name="text" type="java.lang.String" value="Fecha"/>
                   </Properties>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="calendarioFactura">
+                <Component class="com.toedter.calendar.JDateChooser" name="calendarioCompra">
                   <Properties>
                     <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
                   </Properties>
@@ -273,7 +273,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/interfaz/Icons/modificar.png"/>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Modificar factura"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Modificar compra"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="eliminar">
@@ -281,7 +281,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/interfaz/Icons/borrar.png"/>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Eliminar el registro de la venta de la base de datos"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Eliminar el registro de la compra de la base de datos"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="devolucion">
@@ -289,7 +289,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/interfaz/Icons/devolver.png"/>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="Factura cancelada (Se borrar&#xe1;)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Compra cancelada (Se borrar&#xe1;)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="imprimir">
@@ -302,11 +302,11 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="panelImage1">
+            <Container class="javax.swing.JPanel" name="comprasRealizadas">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Ventas realizadas">
+                    <TitledBorder title="Compras realizadas">
                       <Font PropertyName="font" name="Century Schoolbook L" size="18" style="3"/>
                     </TitledBorder>
                   </Border>
@@ -319,32 +319,32 @@
                       <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelBusquedaCuil" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelBusquedaNombre" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="filtroCuil" max="32767" attributes="0"/>
                               <Component id="filtroNombre" max="32767" attributes="0"/>
-                              <Component id="filtroApellido" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel4" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="labelBusquedaHasta" min="-2" pref="46" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Component id="calendarioHasta" pref="74" max="32767" attributes="0"/>
+                                  <Component id="calendarioHasta" pref="71" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="labelBusquedaDesde" min="-2" pref="46" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="calendarioDesde" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelbusquedaID" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Component id="filtroId" pref="92" max="32767" attributes="0"/>
+                          <Component id="filtroId" pref="89" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -352,27 +352,27 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="filtroNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelBusquedaCuil" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="filtroCuil" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="filtroApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelBusquedaNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="filtroNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelBusquedaDesde" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                                   <Component id="filtroId" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelbusquedaID" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="calendarioDesde" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="calendarioHasta" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelBusquedaHasta" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="jScrollPane4" pref="195" max="32767" attributes="0"/>
@@ -388,13 +388,13 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tablaFacturas">
+                    <Component class="javax.swing.JTable" name="tablaCompras">
                       <Properties>
                         <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="3" rowCount="0">
-                            <Column editable="false" title="Num Factura" type="java.lang.Integer"/>
-                            <Column editable="false" title="Cliente" type="java.lang.String"/>
+                            <Column editable="false" title="Num Compra" type="java.lang.Integer"/>
+                            <Column editable="false" title="Proveedor" type="java.lang.String"/>
                             <Column editable="false" title="fecha" type="java.lang.String"/>
                           </Table>
                         </Property>
@@ -427,7 +427,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="jLabel1">
+                <Component class="javax.swing.JLabel" name="labelBusquedaDesde">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Schoolbook L" size="14" style="0"/>
@@ -435,7 +435,28 @@
                     <Property name="text" type="java.lang.String" value="Desde"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel2">
+                <Component class="javax.swing.JLabel" name="labelBusquedaCuil">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Century Schoolbook L" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Cuil"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="filtroCuil">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="filtrar facturas por nombre del cliente"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="labelBusquedaHasta">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Century Schoolbook L" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Hasta"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="labelBusquedaNombre">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Schoolbook L" size="14" style="0"/>
@@ -445,27 +466,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="filtroNombre">
                   <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value="filtrar facturas por nombre del cliente"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel4">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Century Schoolbook L" size="14" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Hasta"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabel5">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Century Schoolbook L" size="14" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Apellido"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="filtroApellido">
-                  <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Filtrar facturas por apellido del cliente"/>
                   </Properties>
                 </Component>
@@ -474,7 +474,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Filtrar facturas por ID del cliente"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel6">
+                <Component class="javax.swing.JLabel" name="labelbusquedaID">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="ID"/>
                   </Properties>
