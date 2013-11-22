@@ -184,6 +184,10 @@ public class ProveedoresControlador implements ActionListener {
         abrirBase();
         JButton b = (JButton)e.getSource();
         if(b.equals(provGui.getArticulos())){
+            if(nuevoPulsado){
+                Base.close();
+                return;
+            }
             ArticulosDeProveedores art = new ArticulosDeProveedores(apliGui ,true);
             List<Producto> articulos = buscar.provee(provGui.getCuil().getText());
             Iterator it = articulos.iterator();

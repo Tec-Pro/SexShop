@@ -151,6 +151,10 @@ public class ClienteControlador implements ActionListener {
         abrirBase();
         JButton b = (JButton)e.getSource();
         if(b.equals(clienteGui.getArticulosComprados())){
+            if(nuevoPulsado){
+                Base.close();
+                return;
+            }
             artCom = new ArticulosCompradosGui(apliGui ,true);
             prodComprados = cb.productosAdquiridos(clienteGui.getIdCliente().getText());
             Iterator it = prodComprados.iterator();
