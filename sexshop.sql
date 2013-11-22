@@ -13,6 +13,8 @@ create table usuarios (
 	constraint pkusuarios primary key(id)
 );
 
+insert into usuarios values();
+
 create table proveedors (
     id integer not null auto_increment,
     nombre varchar(50) not null,

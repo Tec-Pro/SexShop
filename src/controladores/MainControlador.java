@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import net.sf.jasperreports.engine.JRException;
 import abm.ConnectionDataBase;
+import abm.ManejoUsuario;
 import interfaz.LoginGui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,9 @@ public class MainControlador implements ActionListener{
      private  ClienteControlador cl;
      private ArticulosControlador ac;
      private VentaControlador ventacont;
-     private ProveedoresControlador provContr;
+     private ManejoUsuario mu;
+     private char[] pass;
+     private String user;
      
      @SuppressWarnings("CallToThreadDumpStack")
      public MainControlador() throws ClassNotFoundException, JRException, SQLException{
@@ -50,9 +53,9 @@ public class MainControlador implements ActionListener{
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         ventacont = new VentaControlador(app.getVenta());
-        provContr = new ProveedoresControlador(app);
         log.setVisible(true);
         pb.dispose();
+        mu = new ManejoUsuario();
       
      }
     
@@ -65,8 +68,15 @@ public class MainControlador implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         JButton b = (JButton)e.getSource();
         if(b.equals(log.getLogin())){
-            log.dispose();
-            app.setVisible(true);
+            user = log.getUsuario().getText();
+            pass = log.getPassword().getPassword();
+            if (mu.login(user,pass)){
+                log.dispose();
+                app.setVisible(true);
+            } else{
+                System.out.println("Error de usuario o contraseña.");
+            }
+            
         } 
         if(b.equals(log.getSalir())){
             System.exit(0);

@@ -4,6 +4,7 @@
  */
 package abm;
 
+import java.util.Arrays;
 import modelos.Usuario;
 import org.javalite.activejdbc.Base;
 /**
@@ -38,9 +39,19 @@ public class ManejoUsuario {
         Base.close();
     }
       
-    	public boolean login(String user, String pass){
+    	public boolean login(String user, char[] pass){
             abrirBase();
-            Usuario u = Usuario.findById(1);
-            if (user==u.getString("nombre") && pass==u.getString("pass")) return true; else return false;
+            Usuario u = Usuario.first("nombre = ?",user);
+            if (u != null) {
+                char[] correct = u.getString("pass").toCharArray();
+                if (user.equals(u.getString("nombre")) && Arrays.equals(pass, correct)) {
+                    Base.close();
+                    return true;
+                }
+            }
+            Base.close();
+            return false;
 	}
+        
+        
 }
