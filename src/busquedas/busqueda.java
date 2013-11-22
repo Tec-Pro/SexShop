@@ -138,6 +138,11 @@ public class busqueda {
         }
         return result;
     }
+     
+    public List<Producto> provee(String cuil){
+        Proveedor p = Proveedor.findFirst("cuil= ?", cuil);
+        return Producto.where("proveedor_id = ?",p.getId() );
+    }
      /**
      * @param 
      * Devuelve todos los proveedores de la base de datos.

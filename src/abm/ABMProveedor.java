@@ -37,15 +37,14 @@ public class ABMProveedor implements ABMInterface<Proveedor> {
 
     @Override
     public boolean baja(Proveedor p) {
-        if (findProveedor(p)){
+        Proveedor viejo = Proveedor.findById(p.getId());
+        if (viejo!=null){
             Base.openTransaction();
-            p.delete();
+            viejo.delete();
             Base.commitTransaction();
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     @Override
@@ -61,5 +60,6 @@ public class ABMProveedor implements ABMInterface<Proveedor> {
            return false;
        }
     }
+    
     
 }
