@@ -78,6 +78,7 @@ public class MainControlador implements ActionListener{
         log.setVisible(true);
         pb.dispose();
         mu = new ManejoUsuario();
+        mu.crearUsuario();
         app.getVentasRealizadas().getModificar().addActionListener(this);
       
      }
