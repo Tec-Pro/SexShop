@@ -123,7 +123,7 @@ public class ArticulosControlador implements ActionListener{
         while(it.hasNext()){
             Producto a = it.next();
             String row[] = new String[3];
-            row[0] = a.getId().toString();
+            row[0] = a.getString("numero_producto");
             row[1] = a.getString("nombre");
             row[2] = a.getString("marca");
             tablaProductos.addRow(row);
@@ -149,7 +149,7 @@ public class ArticulosControlador implements ActionListener{
         modificarPulsado = false;
         System.out.println("tabla pulsada");
         int r = tabla.getSelectedRow();
-        Producto p = Producto.findById(tabla.getValueAt(r, 0));
+        Producto p = Producto.first("numero_producto = ?",tabla.getValueAt(r, 0));
         prodGui.CargarCampos(p);
         Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
         String nom = prov.getString("nombre");
@@ -317,7 +317,7 @@ public class ArticulosControlador implements ActionListener{
                 if(!Base.hasConnection()){
                     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
                }
-                Producto c = Producto.findById(tabla.getValueAt(r, 0));
+                Producto c = Producto.first("numero_producto =?",tabla.getValueAt(r, 0));
                 Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
                 Base.close();
                 
@@ -340,7 +340,7 @@ public class ArticulosControlador implements ActionListener{
                 if(!Base.hasConnection()){
                     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
                }
-                Producto c = Producto.findById(tabla.getValueAt(r, 0));
+                Producto c = Producto.first("numero_producto =?",tabla.getValueAt(r, 0));
                 Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
                 Base.close();
                 prodGui.CargarCampos(c);
