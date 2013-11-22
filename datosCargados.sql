@@ -5,7 +5,7 @@ INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celul
 INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (5, 'Agustin', 'Bauer', '1921312', '', '');
 INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (6, 'Alan', 'Gonzalez', '', '', '');
 INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (7, 'Jacinto', 'Jaimez', '1299192', '', 'Jacinto@yahoo.com.ar');
-INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`) VALUES (8, 'Max', 'Cejuela', '', '');
+INSERT INTO `sexshop`.`clientes` (`id`, `nombre`, `apellido`, `telefono`, `celular`, `mail`) VALUES (8, 'Max', 'Cejuela', '', '','');
 
 INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `celular`, `mail`, `cuil`, `nombre_banco`, `sucursal`, `tipo_cuenta`, `cuenta`, `compra_minima`) VALUES ('prov1', 'ap1', '-', '-', '-', 'prov1@prov', '11111', 'banco1', 'suc1', 'tipo1', 11111, 1);
 INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `celular`, `mail`, `cuil`, `nombre_banco`, `sucursal`, `tipo_cuenta`, `cuenta`, `compra_minima`) VALUES ('prov2', 'ap2', '-', '-', '-', 'prov2@prov', '22222', 'banco2', 'suc2', 'tipo2', 22222, 1);
@@ -23,18 +23,18 @@ INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `nu
 INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`, `fecha`) VALUES (1, 123, 1, '12-12-11');
 INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`, `fecha`) VALUES (2, 82.12, 1, '18-12-13');
 INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`, `fecha`) VALUES (3, 31.15, 2, '17-1-13');
-INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`) VALUES (4, 81.1, 4);
+INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`,`fecha`) VALUES (4, 81.1, 4,'17-1-13');
 
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (1, 1, 12);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (1, 2, 1);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (1, 4, 7);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (1, 3, 1);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (2, 8, 5);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (3, 8, 7);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (4, 1, 1);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (3, 4, 4);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (3, 5, 5);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`) VALUES (4, 5, 5);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 1, 12,2);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 2, 1,3);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 4, 7,4);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 3, 1,5);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (2, 8, 5,6);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (3, 8, 7,0);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (4, 1, 1,2);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (3, 4, 4,5);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (3, 5, 5,1);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (4, 5, 5,9);
 
 
 
