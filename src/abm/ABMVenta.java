@@ -84,16 +84,16 @@ public class ABMVenta implements ABMInterface<Venta> {
          } else {
              Integer idVenta = v.getInteger("id");
              Venta venta = Venta.findById(idVenta);//saco la venta
-             Integer idClienteNuevo = v.getInteger("cliente_id");
              v.set("monto", calcularMonto(v.getProductos()));//seteo el monto de la venta total en el modelo
-             Integer idVentaVieja = (Integer) venta.getId();
+             Integer idClienteViejo = venta.getInteger("cliente_id");
+             Integer idClienteNuevo = v.getInteger("cliente_id");
              venta.set("monto", v.get("monto"));
              venta.set("fecha", v.get("fecha"));
              venta.set("cliente_id", idClienteNuevo);
              venta.saveIt();
              LinkedList<Pair> viejosProductos = buscarProductosVendidos(idVenta); //saco los viejos productos de la venta
              resultOp = resultOp && devolucionStock(viejosProductos);//actualizo el stock por haber sacado los viejos productos
-             resultOp = resultOp && eliminarAdquisicionCliente(idVentaVieja, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
+             resultOp = resultOp && eliminarAdquisicionCliente(idClienteViejo, viejosProductos);//actualizo los productos adquiridos quitando los viejos productos
              resultOp = resultOp && cargarProductosVendidos(idVenta, v.getProductos());//guardo los productos nuevos
              resultOp = resultOp && actualizarStock(v.getProductos());//actualizo el stock de productos vendidos
              resultOp = resultOp && actualizarAdquisicionCliente(idClienteNuevo, v.getProductos());//actualizo la tabla de productos adquiridos por clientes con los nuevos productos
@@ -255,11 +255,11 @@ public class ABMVenta implements ABMInterface<Venta> {
             cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
             ClientesProductos prodAdquirido;
             prodAdquirido = ClientesProductos.findFirst("cliente_id = ? AND producto_id = ?", idCliente, prod.get("numero_producto"));
-            if (prodAdquirido == null) { //si existe modifico la cantidad
+            if (prodAdquirido == null) { //si no existe lo informo
                 System.out.println("ERROR - PRODUCTO NO ENCONTRADO EN TABLA DE ADQUISICIONES DE CLIENTE");
             }
             else{
-                if (prodAdquirido.getInteger("cantidad") - cant > 0) {
+                if (prodAdquirido.getInteger("cantidad") - cant > 0) { 
                     cant = prodAdquirido.getInteger("cantidad") - cant;//asigno a cant el valor nuevo de cantidad
                     ClientesProductos.update("cantidad = ?", "cliente_id = ? AND producto_id = ?", cant,idCliente, prod.get("numero_producto"));
                 }
