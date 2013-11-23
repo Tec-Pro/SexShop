@@ -11,30 +11,30 @@ INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `ce
 INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `celular`, `mail`, `cuil`, `nombre_banco`, `sucursal`, `tipo_cuenta`, `cuenta`, `compra_minima`) VALUES ('prov2', 'ap2', '-', '-', '-', 'prov2@prov', '22222', 'banco2', 'suc2', 'tipo2', 22222, 1);
 INSERT INTO `sexshop`.`proveedors` (`nombre`, `apellido`, `dni`, `telefono`, `celular`, `mail`, `cuil`, `nombre_banco`, `sucursal`, `tipo_cuenta`, `cuenta`, `compra_minima`) VALUES ('prov3', 'ap3', '-', '-', '-', 'prov3@prov', '33333', 'banco3', 'suc3', 'tipo3', 33333, 1);
 
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (10.12, 9.19, 19, 1, 'articulo1', 'tipo1', 'marca1',1);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (192.18, 190, 1, 2, 'articulo2', 'tipo1', 'marca1',1);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (123, 120.2, 87, 3, 'articulo3', 'tipo2', 'marca2',2);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (982.95, 980, 9, 4, 'articulo4', 'tipo4', 'marca4',2);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (82, 81, 821, 5, 'articulo5', 'tipo1', 'marca4',2);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (91, 81, 0, 6, 'articulo6', 'tipo3', 'marca1',3);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (18.1, 17, 9, 7, 'articulo7', 'tipo1', 'marca8',3);
-INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (9.19, 7, 8, 8, 'articulo8', 'tipo9', 'marca18',3);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (10.12, 9.19, 25, 11111, 'articulo1', 'tipo1', 'marca1',1);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (192.18, 190, 15, 22222, 'articulo2', 'tipo1', 'marca1',1);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (123, 120.2, 87, 33333, 'articulo3', 'tipo2', 'marca2',2);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (982.95, 980, 42, 44444, 'articulo4', 'tipo4', 'marca4',2);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (82, 81, 82, 55555, 'articulo5', 'tipo1', 'marca4',2);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (91, 81, 21, 66666, 'articulo6', 'tipo3', 'marca1',3);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (18.1, 17, 27, 77777, 'articulo7', 'tipo1', 'marca8',3);
+INSERT INTO `sexshop`.`productos` (`precio_venta`, `precio_compra`, `stock`, `numero_producto`, `nombre`, `tipo`, `marca`, `proveedor_id`) VALUES (9.19, 7, 18, 88888, 'articulo8', 'tipo9', 'marca18',3);
 
-INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`, `fecha`) VALUES (1, 123, 1, '12-12-11');
-INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`, `fecha`) VALUES (2, 82.12, 1, '18-12-13');
-INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`, `fecha`) VALUES (3, 31.15, 2, '17-1-13');
-INSERT INTO `sexshop`.`ventas` (`id`, `monto`, `cliente_id`,`fecha`) VALUES (4, 81.1, 4,'17-1-13');
+INSERT INTO `sexshop`.`ventas` (`monto`, `cliente_id`, `fecha`) VALUES (510.11, 5, '2013-11-23');
+INSERT INTO `sexshop`.`ventas` (`monto`, `cliente_id`, `fecha`) VALUES (1185.6, 7, '2013-11-23');
 
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 1, 12,2);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 2, 1,3);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 4, 7,4);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (1, 3, 1,5);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (2, 8, 5,6);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (3, 8, 7,0);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (4, 1, 1,2);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (3, 4, 4,5);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (3, 5, 5,1);
-INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`,`precio_final`) VALUES (4, 5, 5,9);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`, `precio_final`) VALUES (1, 33333, 2, 246);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`, `precio_final`) VALUES (1, 55555, 3, 246);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`, `precio_final`) VALUES (1, 77777, 1, 18.11);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`, `precio_final`) VALUES (2, 11111, 1, 10.12);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`, `precio_final`) VALUES (2, 22222, 1, 192.18);
+INSERT INTO `sexshop`.`productos_ventas` (`venta_id`, `producto_id`, `cantidad`, `precio_final`) VALUES (2, 44444, 1, 982.96);
 
+INSERT INTO `sexshop`.`clientes_productos` (`cliente_id`, `producto_id`, `cantidad`) VALUES (5, 33333, 2);
+INSERT INTO `sexshop`.`clientes_productos` (`cliente_id`, `producto_id`, `cantidad`) VALUES (5, 55555, 3);
+INSERT INTO `sexshop`.`clientes_productos` (`cliente_id`, `producto_id`, `cantidad`) VALUES (5, 77777, 1);
+INSERT INTO `sexshop`.`clientes_productos` (`cliente_id`, `producto_id`, `cantidad`) VALUES (7, 11111, 1);
+INSERT INTO `sexshop`.`clientes_productos` (`cliente_id`, `producto_id`, `cantidad`) VALUES (7, 22222, 1);
+INSERT INTO `sexshop`.`clientes_productos` (`cliente_id`, `producto_id`, `cantidad`) VALUES (7, 44444, 1);
 
 
