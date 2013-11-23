@@ -268,7 +268,8 @@ public class VentasRealizadasControlador implements ActionListener {
         if(b.equals(ventasGui.getImprimir())){
             
         }
-        Base.close();
+        if(Base.hasConnection())
+            Base.close();
     }
     
     

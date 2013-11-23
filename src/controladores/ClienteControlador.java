@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelos.Cliente;
+import modelos.ClientesProductos;
 import modelos.Producto;
 import org.javalite.activejdbc.Base;
 /**
@@ -41,6 +42,7 @@ public class ClienteControlador implements ActionListener {
     private JTable tabla;
     private ArticulosCompradosGui artCom;
     private List prodComprados;
+    
     List<Cliente> cl;
 
     public ClienteControlador(AplicacionGui apg){
@@ -156,15 +158,17 @@ public class ClienteControlador implements ActionListener {
                 return;
             }
             artCom = new ArticulosCompradosGui(apliGui ,true);
-            prodComprados = cb.productosAdquiridos(clienteGui.getIdCliente().getText());
+            prodComprados = cb.filtroAdquiridos(clienteGui.getIdCliente().getText(),"");
             Iterator it = prodComprados.iterator();
-            String row[] = new String[4];
-            while(it.hasNext()){
-                Producto p = (Producto)it.next();
-                row[0] = p.get("id").toString();
+            String row[] = new String[5];
+            while(it.hasNext()){     
+                ClientesProductos cp = (ClientesProductos)it.next();
+                Producto p = Producto.findById(cp.get("producto_id"));
+                row[0] = p.get("numero_producto").toString();
                 row[1] = p.get("nombre").toString();
                 row[2] = p.get("marca").toString();
                 row[3] = p.get("tipo").toString();
+                row[4] = cp.get("cantidad").toString();
                 artCom.getTablaProductosComprados().addRow(row);
             }
             artCom.setVisible(true);
