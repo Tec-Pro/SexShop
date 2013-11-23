@@ -109,6 +109,22 @@ public class VentasRealizadasControlador implements ActionListener {
                 filtroIdKeyReleased(evt);
             }
         });
+        ventasGui.getCalenDesdeText().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dateDesde=ventasGui.getCalenDesdeText().getText();
+                actualizarListaFacturas();
+                
+            }
+        });
+                ventasGui.getCalenHastaText().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dateHasta=ventasGui.getCalenHastaText().getText();
+                actualizarListaFacturas();
+                
+            }
+        });
         calenDesde.getJCalendar().addPropertyChangeListener("calendar", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent e) {
@@ -173,6 +189,7 @@ public class VentasRealizadasControlador implements ActionListener {
         factDefault.setRowCount(0);
         ventasGui.getClienteFactura().setText("");
         ventasGui.getCalendarioFactura().setDate(Date.valueOf("0000-1-1"));
+        ventasGui.getTotalFactura().setText("");
     }
 
     public void calenDesdePropertyChange(PropertyChangeEvent e) {

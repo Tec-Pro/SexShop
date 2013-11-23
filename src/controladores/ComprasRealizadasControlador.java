@@ -110,6 +110,30 @@ public class ComprasRealizadasControlador implements ActionListener {
                 calenHastaPropertyChange(e);
             }
         });
+                comprasGui.getCalenDesdeText().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dateDesde=comprasGui.getCalenDesdeText().getText();
+                abrirBase();
+                actualizarListaCompras();
+                if(Base.hasConnection()){
+                    Base.close();
+                }
+                
+            }
+        });
+                comprasGui.getCalenHastaText().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dateHasta=comprasGui.getCalenHastaText().getText();
+                abrirBase();
+                actualizarListaCompras();
+                if(Base.hasConnection()){
+                    Base.close();
+                }
+                
+            }
+        });
         provList = buscar.filtroProveedor("", "", "");
         actualizarListaCompras();
         Base.close();

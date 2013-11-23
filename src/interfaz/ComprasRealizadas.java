@@ -178,7 +178,7 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         titulo.setText("COMPRAS REALIZADAS");
         panelTitulo.add(titulo);
 
-        panelCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compra", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         labelProveedor.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelProveedor.setText("Proveedor");
@@ -194,7 +194,7 @@ public class ComprasRealizadas extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.math.BigDecimal.class, java.math.BigDecimal.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -279,7 +279,7 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         devolucion.setToolTipText("Compra cancelada (Se borrará)");
         panelControlFactura.add(devolucion);
 
-        comprasRealizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compras realizadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        comprasRealizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compras realizadas", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         tablaCompras.setAutoCreateRowSorter(true);
         tablaCompras.setModel(new javax.swing.table.DefaultTableModel(
@@ -389,7 +389,7 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         fondoImagen.setLayout(fondoImagenLayout);
         fondoImagenLayout.setHorizontalGroup(
             fondoImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
             .addGroup(fondoImagenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(comprasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
