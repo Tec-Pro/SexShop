@@ -76,14 +76,14 @@
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="117" width="86" height="15" uuid="cf76fc76-1164-4815-9c2e-079604bd6564"/>
+				<reportElement x="0" y="117" width="63" height="15" uuid="cf76fc76-1164-4815-9c2e-079604bd6564"/>
 				<textElement>
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ID PRODUCTO]]></text>
+				<text><![CDATA[ID PROD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="86" y="117" width="126" height="15" uuid="95c2ed6f-264b-4a8c-ab82-02ee064d7f86"/>
+				<reportElement x="74" y="117" width="138" height="15" uuid="95c2ed6f-264b-4a8c-ab82-02ee064d7f86"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -104,7 +104,7 @@
 				<text><![CDATA[MARCA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="444" y="117" width="109" height="15" uuid="c8a0a261-4207-44ec-a73f-dd77edaa9091"/>
+				<reportElement x="451" y="117" width="102" height="15" uuid="c8a0a261-4207-44ec-a73f-dd77edaa9091"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -126,35 +126,35 @@
 			<textField>
 				<reportElement style="Detail" x="222" y="0" width="100" height="28" uuid="559639a2-96df-4f18-a042-0c4c86759a63"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="333" y="0" width="100" height="28" uuid="bf4485bf-bacf-487b-861b-c4a2e17b5449"/>
+				<reportElement style="Detail" x="333" y="0" width="118" height="28" uuid="bf4485bf-bacf-487b-861b-c4a2e17b5449"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="444" y="0" width="111" height="28" uuid="129af631-8003-4c0e-8b63-96a8ccb60711"/>
+				<reportElement style="Detail" x="471" y="0" width="84" height="28" uuid="129af631-8003-4c0e-8b63-96a8ccb60711"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{precio_venta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="0" y="0" width="73" height="28" uuid="a459c6e0-f73f-48de-bf21-43bbddc03b5d"/>
+				<reportElement style="Detail" x="0" y="0" width="63" height="28" uuid="a459c6e0-f73f-48de-bf21-43bbddc03b5d"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numero_producto}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="86" y="0" width="126" height="28" uuid="638e44a4-019d-44c0-b9e7-2bed999cd356"/>
+				<reportElement style="Detail" x="74" y="0" width="138" height="28" uuid="638e44a4-019d-44c0-b9e7-2bed999cd356"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>

@@ -128,42 +128,42 @@
 			<textField>
 				<reportElement style="Detail" x="0" y="0" width="36" height="30" uuid="89500673-8714-4b93-9e64-a53f87fecfba"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement style="Detail" x="46" y="1" width="72" height="29" uuid="11fb830c-0e39-42cf-b115-ef540778bca1"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="275" y="0" width="61" height="30" uuid="24f56401-e5b5-423c-a57d-c0b40ceed96d"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="416" y="0" width="136" height="30" uuid="0ef6bd5f-2840-472d-ad18-4627d19438f5"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mail}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="349" y="0" width="52" height="30" uuid="6f752d92-76d3-45dc-888f-db21dc4ec3fe"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{celular}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="129" y="0" width="134" height="30" uuid="cc1b4a25-e120-4911-9d3c-bb735a1e9433"/>
 				<textElement>
-					<font fontName="SansSerif"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{apellido}]]></textFieldExpression>
 			</textField>
