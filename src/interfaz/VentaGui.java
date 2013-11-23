@@ -319,6 +319,7 @@ public class VentaGui extends javax.swing.JPanel {
         int mes=miCalendario.get(Calendar.MONTH);
         int anio =miCalendario.get(Calendar.YEAR);
         calendarioFactura.setDate(Date.valueOf(anio+"-"+(mes+1)+"-"+diaHoy));
+        clienteFactura.setText("");
 
     }
 

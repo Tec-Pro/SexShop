@@ -331,7 +331,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
         siguiente.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(siguiente);
 
-        panelDatosProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Proveedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelDatosProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Proveedor", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
         panelDatosProveedor.setPreferredSize(new java.awt.Dimension(557, 279));
 
         LabelDni.setBackground(new java.awt.Color(137, 98, 59));
@@ -536,7 +536,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         labelBusquedaDni.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelBusquedaDni.setText("Cuil");
@@ -573,6 +573,8 @@ public class AbmProveedorGui extends javax.swing.JPanel {
             }
         });
         jScrollPane6.setViewportView(tabla1);
+        tabla1.getColumnModel().getColumn(0).setPreferredWidth(70);
+        tabla1.getColumnModel().getColumn(0).setMaxWidth(70);
 
         busquedaId.setToolTipText("Filtrar por dni");
 
@@ -588,7 +590,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBusquedaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 1, Short.MAX_VALUE)
                         .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelBusquedaLayout.createSequentialGroup()
                                 .addComponent(labelBusquedaDni)
@@ -610,7 +612,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelBusquedaId)
                     .addComponent(busquedaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelBusquedaDni)
                     .addComponent(busquedaDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -619,7 +621,7 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                     .addComponent(labelBusquedaNombre)
                     .addComponent(busquedaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -644,9 +646,9 @@ public class AbmProveedorGui extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(panelControlArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoImagenLayout.createSequentialGroup()
-                        .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(panelDatosProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 291, Short.MAX_VALUE)
                         .addGap(81, 81, 81))
-                    .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(3, 3, 3))
         );
 

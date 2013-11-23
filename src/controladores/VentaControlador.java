@@ -52,9 +52,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
     private DefaultTableModel tablaProd;
     private JTable tablafac;
     private ControladorJReport reporteFactura;
-    private VentasRealizadas ventasRealizadasGui;
+    private Integer idFacturaAModificar;
 
-    public VentaControlador(VentaGui ventaGui, VentasRealizadas ventasRealizadas) throws JRException, ClassNotFoundException, SQLException {
+    public VentaControlador(VentaGui ventaGui) throws JRException, ClassNotFoundException, SQLException {
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         prodlista = new LinkedList<Producto>();
@@ -62,10 +62,8 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         busqueda = new busqueda();
         abmVenta = new ABMVenta();
         this.ventaGui = ventaGui;
-        this.ventasRealizadasGui = ventasRealizadas;
         ventaGui.setActionListener(this);
-        ventasRealizadasGui.getModificar().addActionListener(this);
-
+        tablap = ventaGui.getTablaArticulos();
 
         textap = ventaGui.getBusquedaApellido();
         textap.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -82,12 +80,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             }
         });
         tablafac = ventaGui.getTablaFactura();
-        tablafac.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablafacMouseClicked(evt);
-            }
-        });
 
         textnom = ventaGui.getBusquedaNombre();
         textnom.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -117,11 +109,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         actualizarListaCliente();
         actualizarListaProd();
         reporteFactura = new ControladorJReport(("factura.jasper"));
-    }
-
-    public void tablafacMouseClicked(java.awt.event.MouseEvent evt) {
-        if (tablafac.isEditing()) {
-        }
     }
 
     public void busquedaClienteKeyReleased(java.awt.event.KeyEvent evt) {
@@ -175,13 +162,14 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 ventaGui.getClienteFactura().setText(id + " " + nom + " " + ap);
             }
         }
+
         if (e.getSource() == ventaGui.getArticulosALaFactura()) {//Boton articulos a la factura
             int[] rows = ventaGui.getTablaArticulos().getSelectedRows();
             if (rows.length > 0) {
                 for (int i = 0; i < rows.length; i++) {
                     abrirBase();
-                    if (!existeProdFacc(Integer.valueOf((String) tablaProd.getValueAt(rows[i], 0)))) {
-                        Producto p = Producto.findFirst("numero_producto = ?", (tablaProd.getValueAt(rows[i], 0)));
+                    if (!existeProdFacc(Integer.valueOf((String) tablap.getValueAt(rows[i], 0)))) {
+                        Producto p = Producto.findFirst("numero_producto = ?", (tablap.getValueAt(rows[i], 0)));
                         Object cols[] = new Object[5];
                         cols[0] = p.get("numero_producto");
                         cols[1] = 1;
@@ -196,6 +184,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 }
             }
         }
+
         if (e.getSource() == ventaGui.getBorrarArticulosSeleccionados()) {//boton borrar articulos seleccionados
             int[] rows = ventaGui.getTablaFactura().getSelectedRows();
             if (rows.length > 0) {
@@ -218,6 +207,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 actualizarPrecio();
             }
         }
+
         if (e.getSource() == ventaGui.getRealizarVenta()) {//Boton realizar venta
             if (ventaGui.getClienteFactura().getText().equals("") || ventaGui.getCalenFacturaText().getText().equals("")) {
                 JOptionPane.showMessageDialog(ventaGui, "Fecha o cliente vacios", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -254,20 +244,72 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                             Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-
                     ventaGui.limpiarVentana();
-
                 } else {
                     JOptionPane.showMessageDialog(ventaGui, "Ocurrió un error inesperado, venta no realizada");
                 }
             }
-            if (e.getSource() == ventaGui.getFacturaNueva()) {
-                ventaGui.limpiarVentana();
+        }
+
+        if (e.getSource() == ventaGui.getFacturaNueva()) {
+            ventaGui.limpiarVentana();
+            ventaGui.getModificar().setEnabled(false);
+            ventaGui.getRealizarVenta().setEnabled(true);
+        }
+
+        if (e.getSource() == ventaGui.getModificar()) {
+            if (ventaGui.getClienteFactura().getText().equals("") || ventaGui.getCalenFacturaText().getText().equals("")) {
+                JOptionPane.showMessageDialog(ventaGui, "Fecha o cliente vacios", "Error!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Venta v = new Venta();
+                LinkedList<Pair> parDeProductos = new LinkedList();
+                String laFecha = ventaGui.getCalenFacturaText().getText(); //saco la fecha
+                String cliente = ventaGui.getClienteFactura().getText();
+                Integer idCliente = Integer.valueOf(cliente.split(" ")[0]); //saco el id cliente
+                for (int i = 0; i < ventaGui.getTablaFactura().getRowCount(); i++) {
+                    abrirBase();
+                    Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
+                    Base.close();
+                    Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
+                    BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
+                    Pair parCantYPrecioFinal = new Pair(cantidad, precioFinal.doubleValue());
+                    Pair par = new Pair(producto, parCantYPrecioFinal); //creo el par
+                    parDeProductos.add(par); //meto el par a la lista
+                }
+                v.set("fecha", laFecha);
+                v.set("cliente_id", idCliente);
+                v.setProductos(parDeProductos);
+                System.out.print(idFacturaAModificar);
+                v.set("id", idFacturaAModificar);
+                abrirBase();
+                if (abmVenta.modificar(v)) {
+                    Base.close();
+                    if (JOptionPane.showConfirmDialog(ventaGui, "¿Desea abrir el dialogo de impresión?", "¡Venta modificada!", JOptionPane.YES_NO_OPTION) == 0) {
+                        try {
+                            reporteFactura.mostrarFactura(idFacturaAModificar);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (JRException ex) {
+                            Logger.getLogger(VentaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                    ventaGui.limpiarVentana();
+                    ventaGui.getModificar().setEnabled(false);
+                    ventaGui.getRealizarVenta().setEnabled(true);
+
+                } else {
+                    JOptionPane.showMessageDialog(ventaGui, "Ocurrió un error inesperado, venta no realizada");
+                }
+                
             }
         }
+
     }
 
-    private void setCellEditor() {
+    public void setCellEditor() {
         for (int i = 0; i < tablafac.getRowCount(); i++) {
             tablafac.getCellEditor(i, 1).addCellEditorListener(this);
             tablafac.getCellEditor(i, 3).addCellEditorListener(this);
@@ -280,6 +322,10 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             ret = (Integer) tablafac.getValueAt(i, 0) == idProd;
         }
         return ret;
+    }
+
+    public Integer getIdFacturaAModificar() {
+        return idFacturaAModificar;
     }
 
     @Override
@@ -310,4 +356,10 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         }
     }
+
+    public void setIdFacturaAModificar(Integer idFacturaAModificar) {
+        this.idFacturaAModificar = idFacturaAModificar;
+    }
+    
+    
 }

@@ -115,13 +115,11 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="panelControlArticulo" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="panelBusqueda" alignment="3" max="32767" attributes="0"/>
-                              <Group type="102" alignment="3" attributes="0">
-                                  <Component id="panelDatosProveedor" alignment="1" pref="0" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="panelDatosProveedor" alignment="1" pref="291" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="panelBusqueda" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   </Group>
@@ -642,7 +640,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane6" pref="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="labelBusquedaDni" min="-2" max="-2" attributes="0"/>
@@ -673,7 +671,7 @@
                               <Component id="labelBusquedaId" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="busquedaId" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="labelBusquedaDni" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="busquedaDni" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -683,9 +681,9 @@
                               <Component id="labelBusquedaNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="busquedaNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane6" min="-2" pref="216" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane6" pref="216" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -736,7 +734,7 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                            <Column maxWidth="70" minWidth="-1" prefWidth="70" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>

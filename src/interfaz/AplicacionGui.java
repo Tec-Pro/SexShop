@@ -31,7 +31,6 @@ public class AplicacionGui extends javax.swing.JFrame {
     private AcercaDe acercaDe;
     //estos deben estar en el controlador
     ArticulosCompradosGui art;
-    ModificarPrecioPorcentajeGui modificarPrecioGui;
     ControladorJReport reporteClientes;
     ControladorJReport reporteArticulos;
     ControladorJReport reporteFactura;
@@ -116,7 +115,6 @@ public class AplicacionGui extends javax.swing.JFrame {
         tab = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        salir = new javax.swing.JMenuItem();
         listar = new javax.swing.JMenu();
         listarClientes = new javax.swing.JMenuItem();
         listarArticulos = new javax.swing.JMenuItem();
@@ -129,16 +127,7 @@ public class AplicacionGui extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.BorderLayout());
         getContentPane().add(tab, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("Archivo");
-
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(salir);
-
+        jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
         listar.setText("Listado");
@@ -209,7 +198,6 @@ public class AplicacionGui extends javax.swing.JFrame {
     private javax.swing.JMenu listar;
     private javax.swing.JMenuItem listarArticulos;
     private javax.swing.JMenuItem listarClientes;
-    private javax.swing.JMenuItem salir;
     private javax.swing.JTabbedPane tab;
     // End of variables declaration//GEN-END:variables
     public JTabbedPane getTab() {

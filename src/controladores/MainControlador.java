@@ -72,7 +72,7 @@ public class MainControlador implements ActionListener{
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         compraRealiz = new ComprasRealizadasControlador(app);
-        ventacont = new VentaControlador(app.getVenta(),app.getVentasRealizadas());
+        ventacont = new VentaControlador(app.getVenta());
         provContr = new ProveedoresControlador(app);
         compraControlador = new CompraControlador(app.getCompraGui(), app.getComprasRealizadas() );
         log.setVisible(true);
@@ -125,7 +125,6 @@ public class MainControlador implements ActionListener{
                 Iterator<ProductosVentas> it= pr.iterator();
                 while(it.hasNext()){
                     ProductosVentas prod= it.next();
-                    Object idProducto=prod.get("producto_id");
                     Producto producto = Producto.findFirst("numero_producto = ?",prod.get("producto_id"));
                     Integer numeroProducto= (Integer)producto.getInteger("numero_producto");
                     String nombre= producto.getString("nombre") + " "+ producto.getString("marca");
@@ -141,6 +140,11 @@ public class MainControlador implements ActionListener{
                     }
                 v.getTotalFactura().setText(String.valueOf(factura.getFloat("monto")));
                 Base.close();
+                ventacont.setIdFacturaAModificar(idFac);
+                v.getModificar().setEnabled(true);
+                v.getRealizarVenta().setEnabled(false);
+                ventacont.setCellEditor();
+                
        
     }
     }

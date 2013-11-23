@@ -163,7 +163,7 @@ public class ClienteControlador implements ActionListener {
             String row[] = new String[5];
             while(it.hasNext()){     
                 ClientesProductos cp = (ClientesProductos)it.next();
-                Producto p = Producto.findById(cp.get("producto_id"));
+                Producto p = Producto.findFirst("numero_producto = ?",cp.get("producto_id"));
                 row[0] = p.get("numero_producto").toString();
                 row[1] = p.get("nombre").toString();
                 row[2] = p.get("marca").toString();
