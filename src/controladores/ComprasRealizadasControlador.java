@@ -24,9 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import modelos.Compra;
 import modelos.Producto;
 import modelos.ProductosCompras;
-import modelos.ProductosVentas;
 import modelos.Proveedor;
-import modelos.Venta;
 import org.javalite.activejdbc.Base;
 
 /**
@@ -35,7 +33,6 @@ import org.javalite.activejdbc.Base;
  */
 public class ComprasRealizadasControlador implements ActionListener {
 
-    
     private AplicacionGui apliGui;
     private ComprasRealizadas comprasGui;
     private JTextField filtNomb;
@@ -55,9 +52,7 @@ public class ComprasRealizadasControlador implements ActionListener {
     private List<ProductosCompras> prodCompras;
     private ABMCompra abmCompra;
 
-     
-    
-    public ComprasRealizadasControlador(AplicacionGui app){
+    public ComprasRealizadasControlador(AplicacionGui app) {
         abrirBase();
         apliGui = app;
         comprasGui = apliGui.getComprasRealizadas();
@@ -75,16 +70,16 @@ public class ComprasRealizadasControlador implements ActionListener {
         dateHasta = "9999-0-0";
         buscar = new busqueda();
         abmCompra = new ABMCompra();
-        
-        
+
+
         tablaCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tablaComprasMouseReleased(evt);
             }
         });
-        
-        
+
+
         filtNomb.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -115,162 +110,151 @@ public class ComprasRealizadasControlador implements ActionListener {
                 calenHastaPropertyChange(e);
             }
         });
-        provList = buscar.filtroProveedor("","","");
+        provList = buscar.filtroProveedor("", "", "");
         actualizarListaCompras();
-        
+        Base.close();
+
     }
-    
-    private void actualizarListaCompras() {
+
+    public void actualizarListaCompras() {
         modelCompras.setRowCount(0);
-         abrirBase();
-         for (Proveedor p : provList){
-            compraList = buscar.filtroCompra(p.getId().toString(),dateDesde,dateHasta);
-            
+        for (Proveedor p : provList) {
+            compraList = buscar.filtroCompra(p.getId().toString(), dateDesde, dateHasta);
+
             for (Compra c : compraList) {
                 String row[] = new String[3];
                 row[0] = c.getId().toString();
-                row[1] = p.get("nombre") + " " +p.get("apellido");
+                row[1] = p.get("nombre") + " " + p.get("apellido");
                 row[2] = c.get("fecha").toString();
                 modelCompras.addRow(row);
             }
         }
-        Base.close();   
     }
-    
+
     private void actualizarCompra() {
         modelCompra.setRowCount(0);
-        for(ProductosCompras pv: prodCompras){
+        for (ProductosCompras pv : prodCompras) {
             Object row[] = new Object[4];
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
-            Producto p = Producto.findById(pv.get("producto_id"));
-            row[1] = p.get("nombre") +", "+ p.get("marca");
+            Producto p = Producto.findFirst("numero_producto = ?",pv.get("producto_id"));
+            row[1] = p.get("nombre") + ", " + p.get("marca");
             Float a = Float.parseFloat(p.get("precio_compra").toString());
             row[2] = a;
-            row[3] = Integer.parseInt(pv.get("cantidad").toString()) * a; 
+            row[3] = Integer.parseInt(pv.get("cantidad").toString()) * a;
             modelCompra.addRow(row);
         }
         setTotal();
     }
-    
-    private void setTotal(){
+
+    private void setTotal() {
         Float total = Float.parseFloat("0.0");
-        
-        for(int i=0;i<tablaCompra.getRowCount();i++){
+
+        for (int i = 0; i < tablaCompra.getRowCount(); i++) {
             total += Float.parseFloat(modelCompra.getValueAt(i, 3).toString());
         }
         comprasGui.getTotalCompra().setText(total.toString());
     }
-    
-    public void calenDesdePropertyChange(PropertyChangeEvent e){
-        final Calendar c = (Calendar) e.getNewValue();   
-        
-        dateDesde = c.get(Calendar.YEAR)+"-" +c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE);  
-        actualizarListaCompras();
-    }
-    
-    public void calenHastaPropertyChange(PropertyChangeEvent e){
-        final Calendar c = (Calendar) e.getNewValue();
-        dateHasta = c.get(Calendar.YEAR)+"-" +c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE);
-        actualizarListaCompras();
-    }
-    
-    public void filtroNombreKeyReleased(java.awt.event.KeyEvent evt){   
-        abrirBase();
-        provList = buscar.filtroProveedor(filtCuil.getText(),filtNomb.getText(),filtId.getText());
-        Base.close();
-        actualizarListaCompras();
-    }
-    
-    public void filtroCuilKeyReleased(java.awt.event.KeyEvent evt){
-        abrirBase();
-        provList = buscar.filtroProveedor(filtCuil.getText(),filtNomb.getText(),filtId.getText());
 
-        actualizarListaCompras();
-        Base.close();
-    }
-    
-    public void filtroIdKeyReleased(java.awt.event.KeyEvent evt){
+    public void calenDesdePropertyChange(PropertyChangeEvent e) {
+        final Calendar c = (Calendar) e.getNewValue();
+
+        dateDesde = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DATE);
         abrirBase();
-        provList = buscar.filtroProveedor(filtCuil.getText(),filtNomb.getText(),filtId.getText());
-        Base.close();
         actualizarListaCompras();
+        Base.close();
     }
-    
-    public void tablaComprasMouseReleased(java.awt.event.MouseEvent evt){
+
+    public void calenHastaPropertyChange(PropertyChangeEvent e) {
+        final Calendar c = (Calendar) e.getNewValue();
+        dateHasta = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DATE);
+        abrirBase();
+        actualizarListaCompras();
+        Base.close();
+    }
+
+    public void filtroNombreKeyReleased(java.awt.event.KeyEvent evt) {
+        abrirBase();
+        provList = buscar.filtroProveedor(filtCuil.getText(), filtNomb.getText(), filtId.getText());
+        actualizarListaCompras();
+        Base.close();
+    }
+
+    public void filtroCuilKeyReleased(java.awt.event.KeyEvent evt) {
+        abrirBase();
+        provList = buscar.filtroProveedor(filtCuil.getText(), filtNomb.getText(), filtId.getText());
+        actualizarListaCompras();
+        Base.close();
+    }
+
+    public void filtroIdKeyReleased(java.awt.event.KeyEvent evt) {
+        abrirBase();
+        provList = buscar.filtroProveedor(filtCuil.getText(), filtNomb.getText(), filtId.getText());
+        actualizarListaCompras();
+        Base.close();
+
+    }
+
+    public void tablaComprasMouseReleased(java.awt.event.MouseEvent evt) {
         abrirBase();
         int r = tablaCompras.getSelectedRow();
         //Proveedor  = Proveedor.findById(tablaCompras.getValueAt(r, 0));
         comprasGui.getProveedorCompra().setText(tablaCompras.getValueAt(r, 1).toString());
         comprasGui.getCalendarioCompra().setDate(Date.valueOf(tablaCompras.getValueAt(r, 2).toString()));
-        if(r>-1){
-            prodCompras = buscar.filtroComprados(tablaCompras.getValueAt(r, 0).toString(),"");
+        if (r > -1) {
+            prodCompras = buscar.filtroComprados(tablaCompras.getValueAt(r, 0).toString(), "");
         }
         actualizarCompra();
         Base.close();
-        
+
     }
-    
-    private void limpiarCompra() {
-        modelCompra.setRowCount(0);
-        comprasGui.getProveedorCompra().setText("");
-        comprasGui.getCalendarioCompra().setDate(Date.valueOf("0000-1-1"));
-    }
-    
-    
-    private void abrirBase(){
-        if (!Base.hasConnection()){
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
+
+    private void abrirBase() {
+        if (!Base.hasConnection()) {
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         }
     }
-    
-   
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        abrirBase();
-        JButton b = (JButton)e.getSource();
-        if(b.equals(comprasGui.getEliminar())){
+        JButton b = (JButton) e.getSource();
+        if (b.equals(comprasGui.getEliminar())) {
             int r = tablaCompras.getSelectedRow();
-            if(r<0){
-                JOptionPane.showMessageDialog(comprasGui,"No hay ninguna compra seleccionada");
-                Base.close();
+            if (r < 0) {
+                JOptionPane.showMessageDialog(comprasGui, "No hay ninguna compra seleccionada");
                 return;
             }
-            int confirmarBorrar = JOptionPane.showConfirmDialog(comprasGui,"¿borrar Compra?","Confirmar Borrado",JOptionPane.YES_NO_OPTION);
-            if (JOptionPane.OK_OPTION == confirmarBorrar){
+            int confirmarBorrar = JOptionPane.showConfirmDialog(comprasGui, "¿borrar Compra?", "Confirmar Borrado", JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.OK_OPTION == confirmarBorrar) {
+                abrirBase();
                 Compra c = new Compra();
                 c.setId(modelCompras.getValueAt(r, 0));
                 abmCompra.baja(c);
-                actualizarListaCompras();  
-                limpiarCompra();
-                JOptionPane.showMessageDialog(comprasGui,"Compra borrada exitosamente");
+                actualizarListaCompras();
+                comprasGui.limpiarCompra();
+                JOptionPane.showMessageDialog(comprasGui, "Compra borrada exitosamente");
+                Base.close();
             }
         }
-        if(b.equals(comprasGui.getDevolucion())){
+        if (b.equals(comprasGui.getDevolucion())) {
             int r = tablaCompras.getSelectedRow();
-            if(r<0){
-                JOptionPane.showMessageDialog(comprasGui,"No hay ninguna compra seleccionada");
+            if (r < 0) {
+                JOptionPane.showMessageDialog(comprasGui, "No hay ninguna compra seleccionada");
                 return;
             }
-            int confirmarBorrar = JOptionPane.showConfirmDialog(comprasGui,"¿cancelar compra?","Confirmar Borrado",JOptionPane.YES_NO_OPTION);
-            if (JOptionPane.OK_OPTION == confirmarBorrar){
+            int confirmarBorrar = JOptionPane.showConfirmDialog(comprasGui, "¿cancelar compra?", "Confirmar Borrado", JOptionPane.YES_NO_OPTION);
+            if (JOptionPane.OK_OPTION == confirmarBorrar) {
+                abrirBase();
                 Compra c = new Compra();
                 c.setId(modelCompras.getValueAt(r, 0));
-                if(abmCompra.bajaConDevolucion(c)){
-                    JOptionPane.showMessageDialog(comprasGui,"Compra cancelada exitosamente");
-                    limpiarCompra();
+                if (abmCompra.bajaConDevolucion(c)) {
+                    JOptionPane.showMessageDialog(comprasGui, "Compra cancelada exitosamente");
+                    comprasGui.limpiarCompra();
                     actualizarListaCompras();
+                } else {
+                    JOptionPane.showMessageDialog(comprasGui, "Error al cancelar compra");
                 }
-                else{
-                    JOptionPane.showMessageDialog(comprasGui,"Error al cancelar compra");
-                }
-            }           
+                Base.close();
+            }
         }
     }
-
-   
-
-   
-
-   
-    
 }

@@ -8,7 +8,6 @@ import abm.ABMCompra;
 import busquedas.busqueda;
 import interfaz.AplicacionGui;
 import interfaz.CompraGui;
-import interfaz.ComprasRealizadas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -17,23 +16,18 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
-import modelos.Cliente;
 import modelos.Compra;
 import modelos.Producto;
 import modelos.Proveedor;
-import modelos.Venta;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.util.Pair;
 import org.javalite.activejdbc.Base;
-import org.javalite.activejdbc.LazyList;
 
 /**
  *
@@ -56,9 +50,9 @@ public class CompraControlador implements ActionListener,CellEditorListener{
     private DefaultTableModel tablaProd;
     private JTable tablafac;
     private ControladorJReport reporteFactura;
-    private ComprasRealizadas compraRealizadaGui;
+    private ComprasRealizadasControlador controladorCompras;
 
-    public CompraControlador(CompraGui compraGui, ComprasRealizadas compra) throws JRException, ClassNotFoundException, SQLException{
+    public CompraControlador(CompraGui compraGui,ComprasRealizadasControlador controladorCompras) throws JRException, ClassNotFoundException, SQLException{
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         prodlista = new LinkedList<Producto>();
@@ -67,7 +61,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
         abmCompra = new ABMCompra();
         this.compraGui = compraGui;
         this.compraGui.setActionListener(this);
-        this.compraRealizadaGui = compra;
+        this.controladorCompras= controladorCompras;
         textcuil = compraGui.getBusquedaCuil();
         textcuil.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -163,6 +157,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                 String nom = (String) tablaprov.getValueAt(row, 1);
                 String ap = (String) tablaprov.getValueAt(row, 2);
                 compraGui.getProveedorCompra().setText(id + " " + nom + " " + ap);
+                compraGui.getTablaCompraDefault().setRowCount(0);
             }
         }
         if (e.getSource() == compraGui.getArticulosALaCompra()) {//Boton articulos a la factura
@@ -238,23 +233,21 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                 abrirBase();
                 if (abmCompra.alta(v)) {
                     JOptionPane.showMessageDialog(apgui, "Compra realizada con exito.");
-    
                     compraGui.limpiarVentana();
 
                 } else {
                     JOptionPane.showMessageDialog(apgui, "Ocurrió un error inesperado, compra no realizada");
                 }
             }
+            controladorCompras.actualizarListaCompras();
             Base.close();
+            
          }
          
           if (e.getSource() == compraGui.getCompraNueva()) {
                 compraGui.limpiarVentana();
             }
-            if(e.getSource()==compraRealizadaGui.getModificar()){
-                compraGui.getProveedorCompra().setText(compraRealizadaGui.getProveedorCompra().getText());
-                
-            }
+
         
         
         

@@ -265,18 +265,22 @@ public class VentasRealizadas extends javax.swing.JPanel {
 
         modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/modificar.png"))); // NOI18N
         modificar.setToolTipText("Modificar factura");
+        modificar.setEnabled(false);
         panelControlFactura.add(modificar);
 
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrar.png"))); // NOI18N
         eliminar.setToolTipText("Eliminar el registro de la venta de la base de datos");
+        eliminar.setEnabled(false);
         panelControlFactura.add(eliminar);
 
         devolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/devolver.png"))); // NOI18N
         devolucion.setToolTipText("Factura cancelada (Se borrará)");
+        devolucion.setEnabled(false);
         panelControlFactura.add(devolucion);
 
         imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/imprimir.png"))); // NOI18N
         imprimir.setToolTipText("Abrir dialogo de impresion o exportarción");
+        imprimir.setEnabled(false);
         panelControlFactura.add(imprimir);
 
         panelImage1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ventas realizadas", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N

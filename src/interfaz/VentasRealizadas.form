@@ -274,6 +274,7 @@
                       <Image iconType="3" name="/interfaz/Icons/modificar.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Modificar factura"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="eliminar">
@@ -282,6 +283,7 @@
                       <Image iconType="3" name="/interfaz/Icons/borrar.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Eliminar el registro de la venta de la base de datos"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="devolucion">
@@ -290,6 +292,7 @@
                       <Image iconType="3" name="/interfaz/Icons/devolver.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Factura cancelada (Se borrar&#xe1;)"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="imprimir">
@@ -298,6 +301,7 @@
                       <Image iconType="3" name="/interfaz/Icons/imprimir.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Abrir dialogo de impresion o exportarci&#xf3;n"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>

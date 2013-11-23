@@ -160,7 +160,7 @@ public class ABMVenta implements ABMInterface<Venta> {
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
             precioFinal= (Double)((Pair) par.second()).second(); //saco el percio al que se vendio
-            ProductosVentas prodVendido = ProductosVentas.create("venta_id", idVenta, "producto_id", prod.get("numero_producto"), "cantidad", cant, "precio_final", (cant * precioFinal));
+            ProductosVentas prodVendido = ProductosVentas.create("venta_id", idVenta, "producto_id", prod.get("numero_producto"), "cantidad", cant, "precio_final", (precioFinal));
             resultOp = resultOp && prodVendido.saveIt();
         }
         return resultOp;

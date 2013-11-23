@@ -72,9 +72,9 @@ public class MainControlador implements ActionListener{
         cl = new ClienteControlador(app);
         ac = new ArticulosControlador(app.getAbmProductoGui());
         compraRealiz = new ComprasRealizadasControlador(app);
-        ventacont = new VentaControlador(app.getVenta());
+        ventacont = new VentaControlador(app.getVenta(),vtasRealiz);
         provContr = new ProveedoresControlador(app);
-        compraControlador = new CompraControlador(app.getCompraGui(), app.getComprasRealizadas() );
+        compraControlador = new CompraControlador(app.getCompraGui(), compraRealiz );
         log.setVisible(true);
         pb.dispose();
         mu = new ManejoUsuario();

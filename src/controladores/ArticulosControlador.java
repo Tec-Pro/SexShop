@@ -10,6 +10,7 @@ import abm.*;
 import busquedas.busqueda;
 import interfaz.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -134,7 +135,7 @@ public class ArticulosControlador implements ActionListener {
 
     private void agregarFila(Producto c) {
         String row[] = new String[3];
-        row[0] = c.getId().toString();
+        row[0] = c.getString("numero_producto");
         row[1] = c.getString("nombre");
         row[2] = c.getString("marca");
         tablaProductos.addRow(row);
@@ -142,76 +143,124 @@ public class ArticulosControlador implements ActionListener {
 
     public void tablaMouseClicked(java.awt.event.MouseEvent evt) {
         prodGui.getProveedores().removeAllItems();
-        if (!Base.hasConnection()) {
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-        }
+        abrirBase();
         prodGui.habilitarCampos(false);
+        prodGui.getModificar().setEnabled(true);
+        prodGui.getBorrar().setEnabled(true);
+        prodGui.getGuardar().setEnabled(false);
         nuevoPulsado = false;
         modificarPulsado = false;
         System.out.println("tabla pulsada");
         int r = tabla.getSelectedRow();
         Producto p = Producto.first("numero_producto = ?", tabla.getValueAt(r, 0));
-        prodGui.CargarCampos(p);
-        Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
-        String nom = prov.getString("nombre");
-        String cuil = prov.getString("cuil");
-        String pr = nom + "-" + cuil;
-        prodGui.getProveedores().addItem(pr);
+        if (p != null) {
+            prodGui.CargarCampos(p);
+            Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
+            String nom = prov.getString("nombre");
+            String cuil = prov.getString("cuil");
+            String pr = nom + ";" + cuil;
+            prodGui.getProveedores().addItem(pr);
+        }
         Base.close();
-        prodGui.repaint();
     }
 
     private void cargarDatosProd(Producto c, boolean id) {
-        c.set("nombre", TratamientoString.eliminarTildes(prodGui.getNombre().getText()).toUpperCase());
-        c.set("marca", TratamientoString.eliminarTildes(prodGui.getMarca().getText()).toUpperCase());
-        c.set("tipo", TratamientoString.eliminarTildes(prodGui.getTipo().getText()).toUpperCase());
-        c.set("precio_compra", TratamientoString.eliminarTildes(prodGui.getPrecioCompra().getText()).toUpperCase());
-        c.set("precio_venta", TratamientoString.eliminarTildes(prodGui.getPrecioVenta().getText()).toUpperCase());
-        c.set("stock", TratamientoString.eliminarTildes(prodGui.getStock().getText()).toUpperCase());
-        c.set("numero_producto", prodGui.getIdArticulo().getText());
+        try {
+            String nombre = TratamientoString.eliminarTildes(prodGui.getNombre().getText()).toUpperCase();
+            c.set("nombre", nombre);
+        } catch (ClassCastException e) {
+            JOptionPane.showMessageDialog(prodGui, "Error en el nombre", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            String marca = TratamientoString.eliminarTildes(prodGui.getMarca().getText()).toUpperCase();
+            c.set("marca", marca);
+        } catch (ClassCastException e) {
+            JOptionPane.showMessageDialog(prodGui, "Error en la marca", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            String tipo = TratamientoString.eliminarTildes(prodGui.getTipo().getText()).toUpperCase();
+            c.set("tipo", tipo);
+        } catch (ClassCastException e) {
+            JOptionPane.showMessageDialog(prodGui, "Error en el tipo", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            Double precioCompra = Double.valueOf(TratamientoString.eliminarTildes(prodGui.getPrecioCompra().getText()).toUpperCase());
+            c.set("precio_compra", BigDecimal.valueOf(precioCompra).setScale(2, RoundingMode.CEILING));
+        } catch (NumberFormatException | ClassCastException e) {
+            JOptionPane.showMessageDialog(prodGui, "Error en precio de compra", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            Double precioVenta = Double.valueOf(TratamientoString.eliminarTildes(prodGui.getPrecioVenta().getText()).toUpperCase());
+            c.set("precio_venta", BigDecimal.valueOf(precioVenta).setScale(2, RoundingMode.CEILING));
+        } catch (NumberFormatException | ClassCastException e) {
+            JOptionPane.showMessageDialog(prodGui, "Error en precio de venta", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
+        c.set("stock", prodGui.getStock().getValue());
+
+        try {
+            Integer numeroProducto = Integer.valueOf(prodGui.getIdArticulo().getText());
+            c.set("numero_producto", numeroProducto);
+        } catch (NumberFormatException | ClassCastException e) {
+            JOptionPane.showMessageDialog(prodGui, "Error en el numero de producto", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+
         //if(id) c.setId(TratamientoString.eliminarTildes(prodGui.getIdArticulo().getText()).toUpperCase());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == prodGui.getModificar()) {
+            prodGui.getGuardar().setEnabled(true);
             modificarPulsado = true;
             nuevoPulsado = false;
             prodGui.habilitarCampos(true);
+            prodGui.getIdArticulo().setEditable(false);
             prodGui.getProveedores().removeAllItems();
-            if (!Base.hasConnection()) {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-            }
+            abrirBase();
+            int r = tabla.getSelectedRow();
+            if(r>-1){
+            Producto p = Producto.first("numero_producto = ?", tabla.getValueAt(r, 0));
+            
             LazyList<Proveedor> l = Proveedor.findAll();
-            // Base.close();
             Iterator<Proveedor> it = l.iterator();
             while (it.hasNext()) {
                 Proveedor prov = it.next();
                 String nom = prov.getString("nombre");
                 String cuil = prov.getString("cuil");
-                String prove = nom + "-" + cuil;
+                String prove = nom + ";" + cuil;
                 prodGui.getProveedores().addItem(prove);
             }
+            if (p != null) {
+                prodGui.CargarCampos(p);
+                Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
+                String nom = prov.getString("nombre");
+                String cuil = prov.getString("cuil");
+                String pr = nom + ";" + cuil;
+                prodGui.getProveedores().setSelectedItem(pr);
+            }
+        }
             Base.close();
 
             //Agregar al combo todos los proveedores!
         }
         if (e.getSource() == prodGui.getNuevo()) {
+            prodGui.getGuardar().setEnabled(true);
             nuevoPulsado = true;
+            modificarPulsado=false;
+            prodGui.getModificar().setEnabled(false);
+            prodGui.getBorrar().setEnabled(false);
             prodGui.limpiarCampos();
             prodGui.habilitarCampos(true);
             prodGui.getProveedores().removeAllItems();
-            if (!Base.hasConnection()) {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-            }
+            abrirBase();
             LazyList<Proveedor> l = Proveedor.findAll();
-            // Base.close();
             Iterator<Proveedor> it = l.iterator();
             while (it.hasNext()) {
                 Proveedor prov = it.next();
                 String nom = prov.getString("nombre");
                 String cuil = prov.getString("cuil");
-                String prove = nom + "-" + cuil;
+                String prove = nom + ";" + cuil;
                 prodGui.getProveedores().addItem(prove);
             }
             Base.close();
@@ -219,95 +268,72 @@ public class ArticulosControlador implements ActionListener {
         }
         if (e.getSource() == prodGui.getGuardar() && modificarPulsado) {
             String id = prodGui.getIdArticulo().getText();
-            if (!Base.hasConnection()) {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-            }
+            abrirBase();
             Producto p = Producto.first("numero_producto = ?", id);
+            cargarDatosProd(p, false);
             Base.close();
-            p.set("precio_venta", prodGui.getPrecioVenta().getText());
-            p.set("precio_compra", prodGui.getPrecioCompra().getText());
-            p.set("stock", prodGui.getStock().getText());
-            //    p.set("numero_producto", prodGui.getN);
-            p.set("nombre", prodGui.getNombre().getText());
-            p.set("tipo", prodGui.getTipo().getText());
-            p.set("marca", prodGui.getMarca().getText());
             String prov = (String) prodGui.getProveedores().getSelectedItem();
-            String[] proveedor = prov.split("-");
+            String[] proveedor = prov.split(";");
             p.setCuilProveedor(proveedor[1]);
             // p.set("priveedor_id");
-            if (!Base.hasConnection()) {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-            }
+            abrirBase();
             Proveedor proveed = Proveedor.first("cuil = ?", proveedor[1]);
             p.set("proveedor_id", proveed.get("id"));
             if (abmProd.modificar(p)) {
                 JOptionPane.showMessageDialog(apgui, "Producto modificado exitosamente.");
                 pl = pb.filtroProducto("", "", "");
                 actualizarLista();
-                prodGui.repaint();
-
+                modificarPulsado = false;
+                prodGui.habilitarCampos(false);
+                prodGui.getModificar().setEnabled(false);
+                prodGui.getGuardar().setEnabled(false);
             } else {
-                JOptionPane.showMessageDialog(prodGui, "No hay ningun producto seleccionado");
+                JOptionPane.showMessageDialog(prodGui, "El número de producto ya existe");
             }
-            modificarPulsado = false;
-            prodGui.habilitarCampos(false);
-            //  Base.close();
         }
         if (e.getSource() == prodGui.getGuardar() && nuevoPulsado) {
-            System.out.println("pulsado guardar crear");
             Producto p = new Producto();
             cargarDatosProd(p, false);
-            //  p.set("numero_producto", Integer.valueOf(prodGui.getIdArticulo().getText()));
-            //p.setCuilProveedor("33333");
             String prov = (String) prodGui.getProveedores().getSelectedItem();
-            String[] proveedor = prov.split("-");
+            String[] proveedor = prov.split(";");
             p.setCuilProveedor(proveedor[1]);
-            System.out.println(proveedor[0]);
-            System.out.println(proveedor[1]);
             if (p.getString("nombre").equals("") || p.getString("marca").equals("")) {
                 JOptionPane.showMessageDialog(prodGui, "Un producto debe tener nombre y marca");
             }
-            if (!Base.hasConnection()) {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-            }
+            abrirBase();
             if (abmProd.alta(p)) {
-
                 JOptionPane.showMessageDialog(prodGui, "Producto registrado exitosamente");
                 p = abmProd.getProducto(p);
                 agregarFila(p);
-            } else {
-                JOptionPane.showMessageDialog(prodGui, "producto ya existente");
-            }
-            nuevoPulsado = false;
-            prodGui.habilitarCampos(false);
-            Base.close();
+                nuevoPulsado = false;
+                prodGui.habilitarCampos(false);
+                prodGui.getGuardar().setEnabled(false);
 
+            } else {
+                JOptionPane.showMessageDialog(prodGui, "Producto existente");
+            }
+            Base.close();
         }
 
 
         if (e.getSource() == prodGui.getBorrar()) {
             confirmarBorrar = JOptionPane.showConfirmDialog(prodGui, "¿borrar producto?", "Confirmar Borrado", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.OK_OPTION == confirmarBorrar) {
-                System.out.println("confirmado");
-                if (!Base.hasConnection()) {
-                    Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-                }
+                abrirBase();
                 Producto p = Producto.first("numero_producto = ?", prodGui.getIdArticulo().getText());
-                //cargarDatosProd(p,true);
-                //int row = tabla.getSelectedRow();
-
-                // p.set("numero_producto",prodGui.getIdArticulo().getText() );
                 if (abmProd.baja(p)) {
                     JOptionPane.showMessageDialog(prodGui, "Producto borrado exitosamente");
                     pl = pb.filtroProducto("", "", "");
                     actualizarLista();
                     prodGui.limpiarCampos();
+                    prodGui.getBorrar().setEnabled(false);
+                    prodGui.getModificar().setEnabled(false);
+                    prodGui.getGuardar().setEnabled(false);
 
                 } else {
-                    JOptionPane.showMessageDialog(prodGui, "No hay ningun producto seleccionado");
+                    JOptionPane.showMessageDialog(prodGui, "No se ha borrado el producto");
                 }
             }
-
         }
         if (e.getSource() == prodGui.getAnterior()) {
             prodGui.getProveedores().removeAllItems();
@@ -315,9 +341,7 @@ public class ArticulosControlador implements ActionListener {
             if (r > 0) {
                 tabla.changeSelection(tabla.getSelectedRow() - 1, 0, false, false);
                 r--;
-                if (!Base.hasConnection()) {
-                    Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-                }
+                abrirBase();
                 Producto c = Producto.first("numero_producto =?", tabla.getValueAt(r, 0));
                 Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
                 Base.close();
@@ -325,7 +349,7 @@ public class ArticulosControlador implements ActionListener {
                 prodGui.CargarCampos(c);
                 String nom = p.getString("nombre");
                 String cuil = p.getString("cuil");
-                String pr = nom + "-" + cuil;
+                String pr = nom + ";" + cuil;
                 prodGui.getProveedores().addItem(pr);
                 prodGui.repaint();
 
@@ -338,29 +362,24 @@ public class ArticulosControlador implements ActionListener {
             if (tablaProductos.getRowCount() - 1 > r) {
                 tabla.changeSelection(r + 1, 0, false, false);
                 r++;
-                if (!Base.hasConnection()) {
-                    Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-                }
+                abrirBase();
                 Producto c = Producto.first("numero_producto =?", tabla.getValueAt(r, 0));
                 Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
                 Base.close();
                 prodGui.CargarCampos(c);
                 String nom = p.getString("nombre");
                 String cuil = p.getString("cuil");
-                String pr = nom + "-" + cuil;
+                String pr = nom + ";" + cuil;
                 prodGui.getProveedores().addItem(pr);
-                prodGui.repaint();
             }
         }
 
         if (e.getSource() == prodGui.getModificarPrecios()) {
             DefaultTableModel t = mpp.getTablaArticulos();
             t.setRowCount(0);
-            if (!Base.hasConnection()) {
-                Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
-            }
+            abrirBase();
             LazyList<Producto> prod = Producto.findAll();
-            Iterator<Producto> it= prod.iterator();
+            Iterator<Producto> it = prod.iterator();
             while (it.hasNext()) {
                 Producto a = it.next();
                 Object row[] = new Object[7];
@@ -381,14 +400,14 @@ public class ArticulosControlador implements ActionListener {
                 while (list.hasNext()) {
                     Pair par = list.next();
                     abrirBase();
-                    Producto p=Producto.findFirst("numero_producto =?",(String) par.first());
+                    Producto p = Producto.findFirst("numero_producto =?", (String) par.first());
                     p.set("precio_venta", par.second());
-                    if(p.saveIt()){
+                    if (p.saveIt()) {
                         JOptionPane.showMessageDialog(prodGui, "Precios modificados exitosamente", "Precios modificados", JOptionPane.INFORMATION_MESSAGE);
                     }
                     Base.close();
                 }
-                
+
             }
 
 
@@ -410,10 +429,10 @@ public class ArticulosControlador implements ActionListener {
          }
          */
     }
-    
-        private void abrirBase(){
-        if (!Base.hasConnection()){
-            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop","root", "root");
+
+    private void abrirBase() {
+        if (!Base.hasConnection()) {
+            Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         }
     }
 }

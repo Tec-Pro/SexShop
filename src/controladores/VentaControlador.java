@@ -53,8 +53,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
     private JTable tablafac;
     private ControladorJReport reporteFactura;
     private Integer idFacturaAModificar;
-
-    public VentaControlador(VentaGui ventaGui) throws JRException, ClassNotFoundException, SQLException {
+    private VentasRealizadasControlador ventasControlador;
+    
+    public VentaControlador(VentaGui ventaGui, VentasRealizadasControlador ventasControlador) throws JRException, ClassNotFoundException, SQLException {
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         prodlista = new LinkedList<Producto>();
@@ -62,6 +63,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         busqueda = new busqueda();
         abmVenta = new ABMVenta();
         this.ventaGui = ventaGui;
+        this.ventasControlador= ventasControlador;
         ventaGui.setActionListener(this);
         tablap = ventaGui.getTablaArticulos();
 
@@ -232,7 +234,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 v.setProductos(parDeProductos);
                 abrirBase();
                 if (abmVenta.alta(v)) {
-                    Base.close();
                     if (JOptionPane.showConfirmDialog(ventaGui, "¿Desea abrir el dialogo de impresión?", "¡Venta exitosa!", JOptionPane.YES_NO_OPTION) == 0) {
                         try {
                             reporteFactura.mostrarFactura(abmVenta.getUltimoIdVenta());
@@ -249,6 +250,8 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                     JOptionPane.showMessageDialog(ventaGui, "Ocurrió un error inesperado, venta no realizada");
                 }
             }
+            ventasControlador.actualizarListaFacturas();
+            Base.close();
         }
 
         if (e.getSource() == ventaGui.getFacturaNueva()) {

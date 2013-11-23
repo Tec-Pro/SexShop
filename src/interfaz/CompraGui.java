@@ -31,7 +31,12 @@ public class CompraGui extends javax.swing.JPanel {
         tablaArticulosDefault = (DefaultTableModel) tablaArticulos.getModel();//conveirto la tabla
         tablaCompraDefault = (DefaultTableModel) tablaCompra.getModel();
         tablaProveedoresDefault = (DefaultTableModel) tablaProveedores.getModel();
-        calendarioCompra.setDate(Date.valueOf("2012-12-12"));
+        Calendar miCalendario = Calendar.getInstance();
+        java.util.Date eldia = miCalendario.getTime();
+        int diaHoy = miCalendario.get(Calendar.DAY_OF_MONTH);
+        int mes=miCalendario.get(Calendar.MONTH);
+        int anio =miCalendario.get(Calendar.YEAR);
+        calendarioCompra.setDate(Date.valueOf(anio+"-"+(mes+1)+"-"+diaHoy));
     }
 
     /**
@@ -327,7 +332,7 @@ public class CompraGui extends javax.swing.JPanel {
 
         panelClientesAarticulos.setBorder(null);
 
-        panelArticulos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Artículos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelArticulos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Artículos", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         tablaArticulos.setAutoCreateRowSorter(true);
         tablaArticulos.setModel(new javax.swing.table.DefaultTableModel(
@@ -369,7 +374,7 @@ public class CompraGui extends javax.swing.JPanel {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
         );
 
-        panelProveedores.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelProveedores.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Proveedores", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         busquedaNombreProveedor.setToolTipText("Filtrar busqueda por ID");
 
@@ -481,7 +486,7 @@ public class CompraGui extends javax.swing.JPanel {
                         .addComponent(panelArticulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        panelCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
+        panelCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compra", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
 
         labelCliente.setFont(new java.awt.Font("Century Schoolbook L", 0, 14)); // NOI18N
         labelCliente.setText("Proveedor");
@@ -533,6 +538,8 @@ public class CompraGui extends javax.swing.JPanel {
         borrarArticulosSeleccionados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrarSeleccionado.png"))); // NOI18N
         borrarArticulosSeleccionados.setText("Borrar articulos seleccionados");
         borrarArticulosSeleccionados.setToolTipText("Borrar articulos seleccionados en la factura");
+
+        calendarioCompra.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout panelCompraLayout = new javax.swing.GroupLayout(panelCompra);
         panelCompra.setLayout(panelCompraLayout);

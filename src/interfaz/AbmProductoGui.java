@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -81,13 +82,13 @@ public class AbmProductoGui extends javax.swing.JPanel {
      */
     public void habilitarCampos(boolean b) {
         marca.setEditable(b);
-        stock.setEditable(b);
+        stock.enable(b);
         tipo.setEditable(b);
         idArticulo.setEditable(b);
         nombre.setEditable(b);
         precioCompra.setEditable(b);
         precioVenta.setEditable(b);
-        proveedores.setEditable(b);
+        proveedores.setEnabled(b);
     }
 
     public JButton getModificarPrecios() {
@@ -103,7 +104,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
      */
     public void limpiarCampos() {
         marca.setText("");
-        stock.setText("");
+        stock.setValue(0);
         tipo.setText("");
         idArticulo.setText("");
         nombre.setText("");
@@ -113,7 +114,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
     
     public void CargarCampos(Producto p) {
         marca.setText(p.getString("marca"));
-        stock.setText(p.getString("stock"));
+        stock.setValue(p.getInteger("stock"));
         tipo.setText(p.getString("tipo"));
         idArticulo.setText(p.getString("numero_producto"));
         nombre.setText(p.getString("nombre"));
@@ -221,7 +222,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
      * @return JTextField
      * @exception
      */
-    public JTextField getStock() {
+    public JSpinner getStock() {
         return stock;
     }
 
@@ -392,9 +393,9 @@ public class AbmProductoGui extends javax.swing.JPanel {
         labelPrecio = new javax.swing.JLabel();
         proveedores = new javax.swing.JComboBox();
         labelStock = new javax.swing.JLabel();
-        stock = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         precioVenta = new javax.swing.JTextField();
+        stock = new javax.swing.JSpinner();
         panelArticulos = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -430,16 +431,19 @@ public class AbmProductoGui extends javax.swing.JPanel {
 
         modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/modificar.png"))); // NOI18N
         modificar.setToolTipText("Modificar articulo");
+        modificar.setEnabled(false);
         modificar.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(modificar);
 
         borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrar.png"))); // NOI18N
         borrar.setToolTipText("Borrar articulo");
+        borrar.setEnabled(false);
         borrar.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(borrar);
 
         guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/guardar.png"))); // NOI18N
         guardar.setToolTipText("Guardar articulo");
+        guardar.setEnabled(false);
         guardar.setPreferredSize(new java.awt.Dimension(70, 70));
         panelControlArticulo.add(guardar);
 
@@ -506,9 +510,6 @@ public class AbmProductoGui extends javax.swing.JPanel {
         labelStock.setFont(new java.awt.Font("Century Schoolbook L", 0, 15)); // NOI18N
         labelStock.setText("Stock");
 
-        stock.setEditable(false);
-        stock.setToolTipText("Stock del articulo");
-
         jLabel1.setText("Precio de venta");
 
         precioVenta.setEditable(false);
@@ -538,21 +539,23 @@ public class AbmProductoGui extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(precioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelArticuloLayout.createSequentialGroup()
-                        .addComponent(labelMarca)
-                        .addGap(24, 24, 24)
-                        .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel1)
-                        .addGap(12, 12, 12)
-                        .addComponent(precioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelArticuloLayout.createSequentialGroup()
-                        .addComponent(labelProveedor)
-                        .addGap(12, 12, 12)
-                        .addComponent(proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(labelStock)
-                        .addGap(12, 12, 12)
-                        .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelArticuloLayout.createSequentialGroup()
+                                .addComponent(labelMarca)
+                                .addGap(24, 24, 24)
+                                .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel1))
+                            .addGroup(panelArticuloLayout.createSequentialGroup()
+                                .addComponent(labelProveedor)
+                                .addGap(12, 12, 12)
+                                .addComponent(proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(labelStock)))
+                        .addGap(8, 8, 8)
+                        .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(precioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(stock))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelArticuloLayout.setVerticalGroup(
@@ -593,9 +596,10 @@ public class AbmProductoGui extends javax.swing.JPanel {
                     .addComponent(proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelArticuloLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(labelStock))
-                    .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelArticuloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelStock)
+                            .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         panelArticulos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Artículos", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
@@ -763,7 +767,7 @@ public class AbmProductoGui extends javax.swing.JPanel {
     private javax.swing.JTextField precioVenta;
     private javax.swing.JComboBox proveedores;
     private javax.swing.JButton siguiente;
-    private javax.swing.JTextField stock;
+    private javax.swing.JSpinner stock;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField tipo;
     private javax.swing.JLabel titulo;

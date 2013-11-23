@@ -6,6 +6,8 @@ package interfaz;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.Calendar;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -35,14 +37,14 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         this.eliminar.addActionListener(lis); //boton eliminar
     }
 
-     public JDateChooser getClendarioDesde(){
+    public JDateChooser getClendarioDesde() {
         return calendarioDesde;
     }
-    
-    public JDateChooser getClendarioHasta(){
+
+    public JDateChooser getClendarioHasta() {
         return calendarioHasta;
     }
-    
+
     public JTextField getFiltroNombre() {
         return filtroNombre;
     }
@@ -83,14 +85,14 @@ public class ComprasRealizadas extends javax.swing.JPanel {
         return filtroId;
     }
 
-    public JTextField getCalenDesdeText(){
-        return ((JTextField)calendarioDesde.getDateEditor().getUiComponent());
+    public JTextField getCalenDesdeText() {
+        return ((JTextField) calendarioDesde.getDateEditor().getUiComponent());
     }
-    
-    public JTextField getCalenHastaText(){
-        return ((JTextField)calendarioHasta.getDateEditor().getUiComponent());
+
+    public JTextField getCalenHastaText() {
+        return ((JTextField) calendarioHasta.getDateEditor().getUiComponent());
     }
-        
+
     public JTable getTablaCompra() {
         return tablaCompra;
     }
@@ -109,6 +111,17 @@ public class ComprasRealizadas extends javax.swing.JPanel {
 
     public JDateChooser getCalendarioHasta() {
         return calendarioHasta;
+    }
+
+    public void limpiarCompra() {
+        tablaCompraDefault.setRowCount(0);
+        proveedorCompra.setText("");
+        Calendar miCalendario = Calendar.getInstance();
+        java.util.Date eldia = miCalendario.getTime();
+        int diaHoy = miCalendario.get(Calendar.DAY_OF_MONTH);
+        int mes = miCalendario.get(Calendar.MONTH);
+        int anio = miCalendario.get(Calendar.YEAR);
+        calendarioCompra.setDate(Date.valueOf(anio + "-" + (mes + 1) + "-" + diaHoy));
     }
 
     /**
@@ -415,7 +428,6 @@ public class ComprasRealizadas extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser calendarioCompra;
     private com.toedter.calendar.JDateChooser calendarioDesde;
