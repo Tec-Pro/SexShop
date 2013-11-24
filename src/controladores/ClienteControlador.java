@@ -42,10 +42,11 @@ public class ClienteControlador implements ActionListener {
     private JTable tabla;
     private ArticulosCompradosGui artCom;
     private List prodComprados;
+    private VentaControlador ventaControlador;
     
     List<Cliente> cl;
 
-    public ClienteControlador(AplicacionGui apg){
+    public ClienteControlador(AplicacionGui apg, VentaControlador ventaControlador){
         abrirBase();
         apliGui = apg;
         cl = new LinkedList<Cliente>();
@@ -55,6 +56,7 @@ public class ClienteControlador implements ActionListener {
         clienteGui.setActionListener(this);
         nuevoPulsado = false;
         modificarPulsado = false;
+        this.ventaControlador = ventaControlador;
         ba = clienteGui.getBusquedaApellido();
         ba.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -79,6 +81,7 @@ public class ClienteControlador implements ActionListener {
         tablaClientes = clienteGui.getTablaClientes();  
         cl = cb.filtroCliente("","","");
         actualizarLista();
+        if (Base.hasConnection())
         Base.close();
 
     }
@@ -126,6 +129,7 @@ public class ClienteControlador implements ActionListener {
         abrirBase();
         cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -133,6 +137,7 @@ public class ClienteControlador implements ActionListener {
         abrirBase();
         cl = cb.filtroCliente("",ba.getText(),bc.getText());
         actualizarLista();
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -145,6 +150,7 @@ public class ClienteControlador implements ActionListener {
         int r = tabla.getSelectedRow();
         Cliente c = cb.buscarCliente(tabla.getValueAt(r, 0));
         clienteGui.CargarCampos(c);
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -154,6 +160,7 @@ public class ClienteControlador implements ActionListener {
         JButton b = (JButton)e.getSource();
         if(b.equals(clienteGui.getArticulosComprados())){
             if(nuevoPulsado){
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
@@ -204,6 +211,7 @@ public class ClienteControlador implements ActionListener {
             cargarDatosCliente(c,false);
             if(c.getString("nombre").equals("") || c.getString("apellido").equals("")){
                 JOptionPane.showMessageDialog(clienteGui,"Un cliente debe tener nombre y apellido");
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
@@ -226,6 +234,7 @@ public class ClienteControlador implements ActionListener {
             cargarDatosCliente(cliente,true);
             if(cliente.getString("nombre").equals("") || cliente.getString("apellido").equals("")){
                 JOptionPane.showMessageDialog(clienteGui,"Un cliente debe tener nombre y apellido");
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
@@ -263,6 +272,8 @@ public class ClienteControlador implements ActionListener {
                      JOptionPane.showMessageDialog(clienteGui,"No hay ningun cliente seleccionado");
             }     
         }
+        ventaControlador.actualizarListaCliente();
+        if (Base.hasConnection())
         Base.close();
     }  
 }

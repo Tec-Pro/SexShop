@@ -42,7 +42,7 @@ public class ProveedoresControlador implements ActionListener {
     private boolean nuevoPulsado;
     private boolean modificarPulsado;
     
-    public ProveedoresControlador(AplicacionGui app){
+    public ProveedoresControlador(AplicacionGui app, CompraControlador cc){
         abrirBase();
         apliGui = app;
         provList = new LinkedList<Proveedor>();
@@ -85,6 +85,7 @@ public class ProveedoresControlador implements ActionListener {
             }
         });
         actualizarLista();
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -151,13 +152,15 @@ public class ProveedoresControlador implements ActionListener {
         abrirBase();
         provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
         actualizarLista();
+        if (Base.hasConnection())
         Base.close();
     }
     
     public void busquedaNombreKeyReleased(java.awt.event.KeyEvent evt){
         abrirBase();
         provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
-        actualizarLista();;
+        actualizarLista();
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -165,6 +168,7 @@ public class ProveedoresControlador implements ActionListener {
         abrirBase();
         provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
         actualizarLista();
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -176,6 +180,7 @@ public class ProveedoresControlador implements ActionListener {
         int r = tablaProv.getSelectedRow();
         Proveedor p = Proveedor.findById(tablaProv.getValueAt(r, 0));
         provGui.CargarCampos(p);
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -185,6 +190,7 @@ public class ProveedoresControlador implements ActionListener {
         JButton b = (JButton)e.getSource();
         if(b.equals(provGui.getArticulos())){
             if(nuevoPulsado){
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
@@ -231,11 +237,13 @@ public class ProveedoresControlador implements ActionListener {
             System.out.println("pulsado guardar crear");
             Proveedor c = new Proveedor();
             if(!cargarDatosProv(c)){
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
             if(c.getString("nombre").equals("") || c.getString("cuil").equals("")){
                 JOptionPane.showMessageDialog(provGui,"Un Proveedor debe tener nombre y cuil");
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
@@ -262,11 +270,13 @@ public class ProveedoresControlador implements ActionListener {
             System.out.println("pulsado guardar modificar");
             Proveedor prov = new Proveedor();
             if(!cargarDatosProv(prov)){
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
             if(prov.get("nombre").equals("")){
                 JOptionPane.showMessageDialog(provGui,"Un Proveedor debe tener nombre");
+                if (Base.hasConnection())
                 Base.close();
                 return;
             }
@@ -299,6 +309,7 @@ public class ProveedoresControlador implements ActionListener {
                      JOptionPane.showMessageDialog(provGui,"No hay ningun proveedor seleccionado");
             }     
         }
+        if (Base.hasConnection())
         Base.close();
         
     }

@@ -131,6 +131,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
             row[2] = a.getString("apellido");
             tablaProveedores.addRow(row);
         }
+        if (Base.hasConnection())
         Base.close();
     }
      
@@ -146,6 +147,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
             row[2] = a.getString("marca");
             tablaProd.addRow(row);
         }
+        if (Base.hasConnection())
         Base.close();
     }
     
@@ -174,6 +176,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                         cols[2] = p.get("nombre") + " " + p.get("marca");
                         cols[3] = BigDecimal.valueOf(p.getFloat("precio_compra")).setScale(2, RoundingMode.CEILING);
                         cols[4] = BigDecimal.valueOf(p.getFloat("precio_compra")).setScale(2, RoundingMode.CEILING);;
+                        if (Base.hasConnection())
                         Base.close();
                         compraGui.getTablaCompraDefault().addRow(cols);
                         setCellEditor();
@@ -220,6 +223,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                 for (int i = 0; i < compraGui.getTablaCompra().getRowCount(); i++) {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
+                    if (Base.hasConnection())
                     Base.close();
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
                    // BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
@@ -240,6 +244,7 @@ public class CompraControlador implements ActionListener,CellEditorListener{
                 }
             }
             controladorCompras.actualizarListaCompras();
+            if (Base.hasConnection())
             Base.close();
             
          }

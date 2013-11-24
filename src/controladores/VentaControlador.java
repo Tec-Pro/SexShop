@@ -114,18 +114,17 @@ public class VentaControlador implements ActionListener, CellEditorListener {
     }
 
     public void busquedaClienteKeyReleased(java.awt.event.KeyEvent evt) {
-        clientelista = busqueda.filtroCliente(textnom.getText(), textap.getText(), textcodcli.getText());
         actualizarListaCliente();
     }
 
     public void busquedaProductoKeyReleased(java.awt.event.KeyEvent evt) {
-        prodlista = busqueda.filtroProducto(textcodprod.getText(), textnom.getText(), textmarca.getText());
         actualizarListaProd();
     }
 
-    private void actualizarListaCliente() {
+    public void actualizarListaCliente() {
         abrirBase();
         tablaClientes.setRowCount(0);
+        clientelista = busqueda.filtroCliente(textnom.getText(), textap.getText(), textcodcli.getText());
         Iterator<Cliente> it = clientelista.iterator();
         while (it.hasNext()) {
             Cliente a = it.next();
@@ -135,12 +134,14 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             row[2] = a.getString("apellido");
             tablaClientes.addRow(row);
         }
+        if (Base.hasConnection())
         Base.close();
     }
 
-    private void actualizarListaProd() {
+    public void actualizarListaProd() {
         abrirBase();
         tablaProd.setRowCount(0);
+        prodlista = busqueda.filtroProducto(textcodprod.getText(), textnom.getText(), textmarca.getText());
         Iterator<Producto> it = prodlista.iterator();
         while (it.hasNext()) {
             Producto a = it.next();
@@ -150,6 +151,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             row[2] = a.getString("marca");
             tablaProd.addRow(row);
         }
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -178,6 +180,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                         cols[2] = p.get("nombre") + " " + p.get("marca");
                         cols[3] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);
                         cols[4] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);
+                        if (Base.hasConnection())
                         Base.close();
                         ventaGui.getTablaFacturaDefault().addRow(cols);
                         setCellEditor();
@@ -222,6 +225,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 for (int i = 0; i < ventaGui.getTablaFactura().getRowCount(); i++) {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
+                    if (Base.hasConnection())
                     Base.close();
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
                     BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
@@ -251,6 +255,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 }
             }
             ventasControlador.actualizarListaFacturas();
+            if (Base.hasConnection())
             Base.close();
         }
 
@@ -272,6 +277,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 for (int i = 0; i < ventaGui.getTablaFactura().getRowCount(); i++) {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
+                    if (Base.hasConnection())
                     Base.close();
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
                     BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
@@ -286,6 +292,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 v.set("id", idFacturaAModificar);
                 abrirBase();
                 if (abmVenta.modificar(v)) {
+                    if (Base.hasConnection())
                     Base.close();
                     if (JOptionPane.showConfirmDialog(ventaGui, "¿Desea abrir el dialogo de impresión?", "¡Venta modificada!", JOptionPane.YES_NO_OPTION) == 0) {
                         try {

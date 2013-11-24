@@ -46,8 +46,9 @@ public class ArticulosControlador implements ActionListener {
     private JTable tabla;
     List<Producto> pl;
     private busqueda pb;
+    private VentaControlador vc;
 
-    public ArticulosControlador(AbmProductoGui apg) {
+    public ArticulosControlador(AbmProductoGui apg, VentaControlador vc, CompraControlador cc) {
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         pl = new LinkedList<Producto>();
@@ -130,6 +131,7 @@ public class ArticulosControlador implements ActionListener {
             row[2] = a.getString("marca");
             tablaProductos.addRow(row);
         }
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -161,6 +163,7 @@ public class ArticulosControlador implements ActionListener {
             String pr = nom + ";" + cuil;
             prodGui.getProveedores().addItem(pr);
         }
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -210,7 +213,7 @@ public class ArticulosControlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == prodGui.getModificar()) {
+        if (e.getSource() == prodGui.getModificar()) {      //Modificar producto
             prodGui.getGuardar().setEnabled(true);
             modificarPulsado = true;
             nuevoPulsado = false;
@@ -240,11 +243,12 @@ public class ArticulosControlador implements ActionListener {
                 prodGui.getProveedores().setSelectedItem(pr);
             }
         }
+            if (Base.hasConnection())
             Base.close();
 
             //Agregar al combo todos los proveedores!
         }
-        if (e.getSource() == prodGui.getNuevo()) {
+        if (e.getSource() == prodGui.getNuevo()) { //Producto nuevo
             prodGui.getGuardar().setEnabled(true);
             nuevoPulsado = true;
             modificarPulsado=false;
@@ -263,6 +267,7 @@ public class ArticulosControlador implements ActionListener {
                 String prove = nom + ";" + cuil;
                 prodGui.getProveedores().addItem(prove);
             }
+            if (Base.hasConnection())
             Base.close();
             //Agregar al combo todos los proveedores
         }
@@ -271,6 +276,7 @@ public class ArticulosControlador implements ActionListener {
             abrirBase();
             Producto p = Producto.first("numero_producto = ?", id);
             cargarDatosProd(p, false);
+            if (Base.hasConnection())
             Base.close();
             String prov = (String) prodGui.getProveedores().getSelectedItem();
             String[] proveedor = prov.split(";");
@@ -287,6 +293,7 @@ public class ArticulosControlador implements ActionListener {
                 prodGui.habilitarCampos(false);
                 prodGui.getModificar().setEnabled(false);
                 prodGui.getGuardar().setEnabled(false);
+                vc.actualizarListaProd();
             } else {
                 JOptionPane.showMessageDialog(prodGui, "El número de producto ya existe");
             }
@@ -308,10 +315,11 @@ public class ArticulosControlador implements ActionListener {
                 nuevoPulsado = false;
                 prodGui.habilitarCampos(false);
                 prodGui.getGuardar().setEnabled(false);
-
+                vc.actualizarListaProd();
             } else {
                 JOptionPane.showMessageDialog(prodGui, "Producto existente");
             }
+            if (Base.hasConnection())
             Base.close();
         }
 
@@ -329,7 +337,7 @@ public class ArticulosControlador implements ActionListener {
                     prodGui.getBorrar().setEnabled(false);
                     prodGui.getModificar().setEnabled(false);
                     prodGui.getGuardar().setEnabled(false);
-
+                    vc.actualizarListaProd();
                 } else {
                     JOptionPane.showMessageDialog(prodGui, "No se ha borrado el producto");
                 }
@@ -344,6 +352,7 @@ public class ArticulosControlador implements ActionListener {
                 abrirBase();
                 Producto c = Producto.first("numero_producto =?", tabla.getValueAt(r, 0));
                 Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
+                if (Base.hasConnection())
                 Base.close();
 
                 prodGui.CargarCampos(c);
@@ -365,6 +374,7 @@ public class ArticulosControlador implements ActionListener {
                 abrirBase();
                 Producto c = Producto.first("numero_producto =?", tabla.getValueAt(r, 0));
                 Proveedor p = Proveedor.first("id = ?", c.getString("proveedor_id"));
+                if (Base.hasConnection())
                 Base.close();
                 prodGui.CargarCampos(c);
                 String nom = p.getString("nombre");
@@ -392,6 +402,7 @@ public class ArticulosControlador implements ActionListener {
                 row[6] = BigDecimal.valueOf(Double.valueOf(a.getString("precio_venta")));
                 t.addRow(row);
             }
+            if (Base.hasConnection())
             Base.close();
             mpp.setLocationRelativeTo(prodGui);
             mpp.setVisible(true);
@@ -405,6 +416,7 @@ public class ArticulosControlador implements ActionListener {
                     if (p.saveIt()) {
                         JOptionPane.showMessageDialog(prodGui, "Precios modificados exitosamente", "Precios modificados", JOptionPane.INFORMATION_MESSAGE);
                     }
+                    if (Base.hasConnection())
                     Base.close();
                 }
 
@@ -419,6 +431,7 @@ public class ArticulosControlador implements ActionListener {
          Producto p = Producto.first("id = ?", id);
          p.set("precio_venta", mpp.getPesos().getText());
          p.saveIt();
+         if (Base.hasConnection())
          Base.close();
          mpp.dispose();
          JOptionPane.showMessageDialog(apgui, "Precio modificado exitosamente.");

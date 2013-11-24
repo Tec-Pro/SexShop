@@ -136,6 +136,7 @@ public class ComprasRealizadasControlador implements ActionListener {
         });
         provList = buscar.filtroProveedor("", "", "");
         actualizarListaCompras();
+        if (Base.hasConnection())
         Base.close();
 
     }
@@ -185,6 +186,7 @@ public class ComprasRealizadasControlador implements ActionListener {
         dateDesde = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DATE);
         abrirBase();
         actualizarListaCompras();
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -193,6 +195,7 @@ public class ComprasRealizadasControlador implements ActionListener {
         dateHasta = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DATE);
         abrirBase();
         actualizarListaCompras();
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -200,6 +203,7 @@ public class ComprasRealizadasControlador implements ActionListener {
         abrirBase();
         provList = buscar.filtroProveedor(filtCuil.getText(), filtNomb.getText(), filtId.getText());
         actualizarListaCompras();
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -207,6 +211,7 @@ public class ComprasRealizadasControlador implements ActionListener {
         abrirBase();
         provList = buscar.filtroProveedor(filtCuil.getText(), filtNomb.getText(), filtId.getText());
         actualizarListaCompras();
+        if (Base.hasConnection())
         Base.close();
     }
 
@@ -214,6 +219,7 @@ public class ComprasRealizadasControlador implements ActionListener {
         abrirBase();
         provList = buscar.filtroProveedor(filtCuil.getText(), filtNomb.getText(), filtId.getText());
         actualizarListaCompras();
+        if (Base.hasConnection())
         Base.close();
 
     }
@@ -228,6 +234,7 @@ public class ComprasRealizadasControlador implements ActionListener {
             prodCompras = buscar.filtroComprados(tablaCompras.getValueAt(r, 0).toString(), "");
         }
         actualizarCompra();
+        if (Base.hasConnection())
         Base.close();
 
     }
@@ -256,6 +263,7 @@ public class ComprasRealizadasControlador implements ActionListener {
                 actualizarListaCompras();
                 comprasGui.limpiarCompra();
                 JOptionPane.showMessageDialog(comprasGui, "Compra borrada exitosamente");
+                if (Base.hasConnection())
                 Base.close();
             }
         }
@@ -277,6 +285,7 @@ public class ComprasRealizadasControlador implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(comprasGui, "Error al cancelar compra");
                 }
+                if (Base.hasConnection())
                 Base.close();
             }
         }

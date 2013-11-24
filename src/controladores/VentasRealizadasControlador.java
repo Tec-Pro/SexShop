@@ -81,7 +81,7 @@ public class VentasRealizadasControlador implements ActionListener {
         prodVentas = new LinkedList<ProductosVentas>();
         abmventa = new ABMVenta();
         reporteFactura = new ControladorJReport(("factura.jasper"));
-
+        if (Base.hasConnection())
         Base.close();
         tablaFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -162,6 +162,7 @@ public class VentasRealizadasControlador implements ActionListener {
                 facturasDefault.addRow(row);
             }
         }
+        if (Base.hasConnection())
         Base.close();
         ventasGui.getModificar().setEnabled(false);
         ventasGui.getDevolucion().setEnabled(false);
@@ -207,6 +208,7 @@ public class VentasRealizadasControlador implements ActionListener {
     public void filtroNombreKeyReleased(java.awt.event.KeyEvent evt) {
         abrirBase();
         cl = buscar.filtroCliente(filtNomb.getText(), filtApe.getText(), filtId.getText());
+        if (Base.hasConnection())
         Base.close();
         actualizarListaFacturas();
     }
@@ -219,6 +221,7 @@ public class VentasRealizadasControlador implements ActionListener {
     public void filtroIdKeyReleased(java.awt.event.KeyEvent evt) {
         abrirBase();
         cl = buscar.filtroCliente(filtNomb.getText(), filtApe.getText(), filtId.getText());
+        if (Base.hasConnection())
         Base.close();
         actualizarListaFacturas();
     }
@@ -238,6 +241,7 @@ public class VentasRealizadasControlador implements ActionListener {
 
         }
         actualizarFactura();
+        if (Base.hasConnection())
         Base.close();
 
     }
