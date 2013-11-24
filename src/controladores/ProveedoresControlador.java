@@ -40,12 +40,14 @@ public class ProveedoresControlador implements ActionListener {
     private DefaultTableModel modelProv;
     private JTable tablaProv;
     private boolean nuevoPulsado;
+    private CompraControlador cc;
     private boolean modificarPulsado;
     
     public ProveedoresControlador(AplicacionGui app, CompraControlador cc){
         abrirBase();
         apliGui = app;
         provList = new LinkedList<Proveedor>();
+        this.cc = cc;
         buscar = new busqueda();
         provGui = apliGui.getAbmProveedorGui();
         provGui.setActionListener(this);
@@ -96,8 +98,9 @@ public class ProveedoresControlador implements ActionListener {
         }
     }
     
-    private void actualizarLista(){
+    public void actualizarLista(){
         modelProv.setRowCount(0);
+        provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
         Iterator<Proveedor> it = provList.iterator();
         while(it.hasNext()){
             Proveedor p = it.next();
@@ -150,7 +153,6 @@ public class ProveedoresControlador implements ActionListener {
     
     public void busquedaCuilKeyReleased(java.awt.event.KeyEvent evt){
         abrirBase();
-        provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
         actualizarLista();
         if (Base.hasConnection())
         Base.close();
@@ -158,7 +160,6 @@ public class ProveedoresControlador implements ActionListener {
     
     public void busquedaNombreKeyReleased(java.awt.event.KeyEvent evt){
         abrirBase();
-        provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
         actualizarLista();
         if (Base.hasConnection())
         Base.close();
@@ -166,7 +167,6 @@ public class ProveedoresControlador implements ActionListener {
     
     public void busquedaIdKeyReleased(java.awt.event.KeyEvent evt){
         abrirBase();
-        provList = buscar.filtroProveedor(buscarCuil.getText(),buscarNombre.getText(),buscarId.getText());
         actualizarLista();
         if (Base.hasConnection())
         Base.close();
@@ -309,6 +309,7 @@ public class ProveedoresControlador implements ActionListener {
                      JOptionPane.showMessageDialog(provGui,"No hay ningun proveedor seleccionado");
             }     
         }
+        cc.actualizarListaProveedor();
         if (Base.hasConnection())
         Base.close();
         

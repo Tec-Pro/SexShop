@@ -180,7 +180,8 @@ public class ABMVenta implements ABMInterface<Venta> {
             cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
             cant = prodViejo.getInteger("stock") - cant;//asigno a cant el valor nuevo del stock
             resultOp = resultOp && prodViejo.setInteger("stock", cant).saveIt();//actualizo el stock del producto
-            Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
+            if (Proveedor.findById(prodViejo.get("proveedor_id"))!=null)
+                Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
         }
         return resultOp;
     }
@@ -204,7 +205,8 @@ public class ABMVenta implements ABMInterface<Venta> {
             cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
             cant = prodViejo.getInteger("stock") + cant;//devuelvo el stock anterior a la venta del producto
             resultOp = resultOp && prodViejo.setInteger("stock", cant).saveIt();//actualizo el stock del producto
-            Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
+            if (Proveedor.findById(prodViejo.get("proveedor_id"))!=null)
+                Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
         }
         return resultOp;
     }

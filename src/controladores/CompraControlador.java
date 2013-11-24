@@ -107,21 +107,18 @@ public class CompraControlador implements ActionListener,CellEditorListener{
     }
    
      public void busquedaProveedorKeyReleased(java.awt.event.KeyEvent evt) {
-        provlista = busqueda.filtroProveedor(textcuil.getText(), textnom.getText(), "");
         actualizarListaProveedor();
     }
 
      public void tablaProvMouseClicked(java.awt.event.MouseEvent evt){
          tablaProd.setRowCount(0);
-         int row = tablaprov.getSelectedRow();
-         abrirBase();
-         prodlista = Producto.where("proveedor_id = ?", tablaProveedores.getValueAt(row, 0));
          actualizarListaProd();
      }
      
-     private void actualizarListaProveedor() {
+     public void actualizarListaProveedor() {
         abrirBase();
         tablaProveedores.setRowCount(0);
+        provlista = busqueda.filtroProveedor(textcuil.getText(), textnom.getText(), "");
         Iterator<Proveedor> it = provlista.iterator();
         while (it.hasNext()) {
             Proveedor a = it.next();
@@ -135,17 +132,21 @@ public class CompraControlador implements ActionListener,CellEditorListener{
         Base.close();
     }
      
-     private void actualizarListaProd() {
+     public void actualizarListaProd() {
         abrirBase();
         tablaProd.setRowCount(0);
-        Iterator<Producto> it = prodlista.iterator();
-        while (it.hasNext()) {
-            Producto a = it.next();
-            String row[] = new String[3];
-            row[0] = a.getString("numero_producto");
-            row[1] = a.getString("nombre");
-            row[2] = a.getString("marca");
-            tablaProd.addRow(row);
+        int row = tablaprov.getSelectedRow();
+        if (row>=0){
+            prodlista = Producto.where("proveedor_id = ?", tablaProveedores.getValueAt(row, 0));
+            Iterator<Producto> it = prodlista.iterator();
+            while (it.hasNext()) {
+                Producto a = it.next();
+                String rowArray[] = new String[3];
+                rowArray[0] = a.getString("numero_producto");
+                rowArray[1] = a.getString("nombre");
+                rowArray[2] = a.getString("marca");
+                tablaProd.addRow(rowArray);
+            }
         }
         if (Base.hasConnection())
         Base.close();
