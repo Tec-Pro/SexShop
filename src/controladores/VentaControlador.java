@@ -254,7 +254,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                     JOptionPane.showMessageDialog(ventaGui, "Ocurrió un error inesperado, venta no realizada");
                 }
             }
-            ventasControlador.actualizarListaFacturas();
             if (Base.hasConnection())
             Base.close();
         }
@@ -316,7 +315,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 
             }
         }
-
+        ventasControlador.actualizarListaFacturas();
+        if(Base.hasConnection())
+        Base.close();
     }
 
     public void setCellEditor() {

@@ -151,6 +151,7 @@ public class VentasRealizadasControlador implements ActionListener {
     public void actualizarListaFacturas() {
         facturasDefault.setRowCount(0);
         abrirBase();
+        cl = buscar.filtroCliente("", "", "");
         for (Cliente c : cl) {
             vl = buscar.filtroVenta(c.getId().toString(), dateDesde, dateHasta);
 

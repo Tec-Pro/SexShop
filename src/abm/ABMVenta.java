@@ -202,12 +202,14 @@ public class ABMVenta implements ABMInterface<Venta> {
             par = null;
             par = (Pair) itr.next(); //saco el par de la lista
             prodViejo = (Producto) par.first(); //saco el producto del par
-            cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
-            cant = prodViejo.getInteger("stock") + cant;//devuelvo el stock anterior a la venta del producto
-            resultOp = resultOp && prodViejo.setInteger("stock", cant).saveIt();//actualizo el stock del producto
-            if (Proveedor.findById(prodViejo.get("proveedor_id"))!=null)
-                Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
-        }
+            if (prodViejo.exists()){ //si existe el producto en la base
+                cant = (Integer)((Pair) par.second()).first();//saco la cantidad del par
+                cant = prodViejo.getInteger("stock") + cant;//devuelvo el stock anterior a la venta del producto
+                resultOp = resultOp && prodViejo.setInteger("stock", cant).saveIt();//actualizo el stock del producto
+                if (Proveedor.findById(prodViejo.get("proveedor_id"))!=null)
+                    Proveedor.findById(prodViejo.get("proveedor_id")).add(prodViejo);//creo la relacion
+                }
+            }
         return resultOp;
     }
 
@@ -306,23 +308,5 @@ private LinkedList<Pair> buscarProductosVendidos(int idVenta) {
         }
         return listaDePares;
     }
-    
-    
-    public LinkedList<Pair> buscarAuxiliar(int idVenta) {
-        Integer cant;
-        ProductosVentas prodVendido;
-        Producto prod;
-        LinkedList<Pair> listaDePares = new LinkedList<Pair>();
-        LazyList<ProductosVentas> productos = ProductosVentas.find("venta_id = ?", idVenta);
-        Iterator itr = productos.iterator();
-        while (itr.hasNext()) {
-            prodVendido = (ProductosVentas) itr.next(); //saco el modelo de la lista
-            prod = Producto.findFirst("numero_producto = ?", prodVendido.getInteger("producto_id"));//saco el producto del modelo
-            cant = (Integer) prodVendido.getInteger("cantidad");//saco la cantidad del modelo
-            Pair par = new Pair(prod, cant); //creo el par producto-cantidad
-            listaDePares.add(par);//agrego el par a la lista de pares
-            //ProductosVendido.delete("idventa = ? AND idproducto = ?",prodVendido.getInteger("idventa"),prodVendido.getInteger("idproducto"));//elimino el modelo de la base de datos
-        }
-        return listaDePares;
-    }
+  
 }
