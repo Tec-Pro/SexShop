@@ -47,6 +47,7 @@ public class ArticulosControlador implements ActionListener {
     List<Producto> pl;
     private busqueda pb;
     private VentaControlador vc;
+    private CompraControlador cc;
 
     public ArticulosControlador(AbmProductoGui apg, VentaControlador vc, CompraControlador cc) {
 
@@ -55,6 +56,8 @@ public class ArticulosControlador implements ActionListener {
         pb = new busqueda();
         abmProd = new ABMProducto();
         this.prodGui = apg;
+        this.vc = vc;
+        this.cc = cc;
         nuevoPulsado = false;
         modificarPulsado = false;
         apg.setActionListener(this);
@@ -158,10 +161,12 @@ public class ArticulosControlador implements ActionListener {
         if (p != null) {
             prodGui.CargarCampos(p);
             Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
-            String nom = prov.getString("nombre");
-            String cuil = prov.getString("cuil");
-            String pr = nom + ";" + cuil;
-            prodGui.getProveedores().addItem(pr);
+            if (prov !=null){
+                String nom = prov.getString("nombre");
+                String cuil = prov.getString("cuil");
+                String pr = nom + ";" + cuil;
+                prodGui.getProveedores().addItem(pr);
+            }
         }
         if (Base.hasConnection())
         Base.close();
@@ -237,10 +242,12 @@ public class ArticulosControlador implements ActionListener {
             if (p != null) {
                 prodGui.CargarCampos(p);
                 Proveedor prov = Proveedor.findById(p.getInteger("proveedor_id"));
-                String nom = prov.getString("nombre");
-                String cuil = prov.getString("cuil");
-                String pr = nom + ";" + cuil;
-                prodGui.getProveedores().setSelectedItem(pr);
+                if (prov !=null){
+                    String nom = prov.getString("nombre");
+                    String cuil = prov.getString("cuil");
+                    String pr = nom + ";" + cuil;
+                    prodGui.getProveedores().setSelectedItem(pr);
+                }
             }
         }
             if (Base.hasConnection())
@@ -293,7 +300,6 @@ public class ArticulosControlador implements ActionListener {
                 prodGui.habilitarCampos(false);
                 prodGui.getModificar().setEnabled(false);
                 prodGui.getGuardar().setEnabled(false);
-                vc.actualizarListaProd();
             } else {
                 JOptionPane.showMessageDialog(prodGui, "El número de producto ya existe");
             }
@@ -315,10 +321,10 @@ public class ArticulosControlador implements ActionListener {
                 nuevoPulsado = false;
                 prodGui.habilitarCampos(false);
                 prodGui.getGuardar().setEnabled(false);
-                vc.actualizarListaProd();
             } else {
                 JOptionPane.showMessageDialog(prodGui, "Producto existente");
             }
+            vc.actualizarListaProd();
             if (Base.hasConnection())
             Base.close();
         }
@@ -337,7 +343,6 @@ public class ArticulosControlador implements ActionListener {
                     prodGui.getBorrar().setEnabled(false);
                     prodGui.getModificar().setEnabled(false);
                     prodGui.getGuardar().setEnabled(false);
-                    vc.actualizarListaProd();
                 } else {
                     JOptionPane.showMessageDialog(prodGui, "No se ha borrado el producto");
                 }
@@ -424,6 +429,8 @@ public class ArticulosControlador implements ActionListener {
 
 
         }
+        vc.actualizarListaProd();
+        cc.actualizarListaProd();
         /*if(e.getSource() == mpp.getAceptar()){
          int srow = prodGui.getTabla().getSelectedRow();
          Object id = prodGui.getTablaArticulos().getValueAt(srow, 0);
