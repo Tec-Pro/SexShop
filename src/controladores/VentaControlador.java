@@ -54,7 +54,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
     private ControladorJReport reporteFactura;
     private Integer idFacturaAModificar;
     private VentasRealizadasControlador ventasControlador;
-    
+
     public VentaControlador(VentaGui ventaGui, VentasRealizadasControlador ventasControlador) throws JRException, ClassNotFoundException, SQLException {
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
@@ -63,7 +63,7 @@ public class VentaControlador implements ActionListener, CellEditorListener {
         busqueda = new busqueda();
         abmVenta = new ABMVenta();
         this.ventaGui = ventaGui;
-        this.ventasControlador= ventasControlador;
+        this.ventasControlador = ventasControlador;
         ventaGui.setActionListener(this);
         tablap = ventaGui.getTablaArticulos();
 
@@ -134,8 +134,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             row[2] = a.getString("apellido");
             tablaClientes.addRow(row);
         }
-        if (Base.hasConnection())
-        Base.close();
+        if (Base.hasConnection()) {
+            Base.close();
+        }
     }
 
     public void actualizarListaProd() {
@@ -151,8 +152,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
             row[2] = a.getString("marca");
             tablaProd.addRow(row);
         }
-        if (Base.hasConnection())
-        Base.close();
+        if (Base.hasConnection()) {
+            Base.close();
+        }
     }
 
     @Override
@@ -180,8 +182,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                         cols[2] = p.get("nombre") + " " + p.get("marca");
                         cols[3] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);
                         cols[4] = BigDecimal.valueOf(p.getFloat("precio_venta")).setScale(2, RoundingMode.CEILING);
-                        if (Base.hasConnection())
-                        Base.close();
+                        if (Base.hasConnection()) {
+                            Base.close();
+                        }
                         ventaGui.getTablaFacturaDefault().addRow(cols);
                         setCellEditor();
                         actualizarPrecio();
@@ -225,8 +228,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 for (int i = 0; i < ventaGui.getTablaFactura().getRowCount(); i++) {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
-                    if (Base.hasConnection())
-                    Base.close();
+                    if (Base.hasConnection()) {
+                        Base.close();
+                    }
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
                     BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
                     Pair parCantYPrecioFinal = new Pair(cantidad, precioFinal.doubleValue());
@@ -254,8 +258,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                     JOptionPane.showMessageDialog(ventaGui, "Ocurrió un error inesperado, venta no realizada");
                 }
             }
-            if (Base.hasConnection())
-            Base.close();
+            if (Base.hasConnection()) {
+                Base.close();
+            }
         }
 
         if (e.getSource() == ventaGui.getFacturaNueva()) {
@@ -276,8 +281,9 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 for (int i = 0; i < ventaGui.getTablaFactura().getRowCount(); i++) {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
-                    if (Base.hasConnection())
-                    Base.close();
+                    if (Base.hasConnection()) {
+                        Base.close();
+                    }
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
                     BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
                     Pair parCantYPrecioFinal = new Pair(cantidad, precioFinal.doubleValue());
@@ -291,8 +297,6 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 v.set("id", idFacturaAModificar);
                 abrirBase();
                 if (abmVenta.modificar(v)) {
-                    if (Base.hasConnection())
-                    Base.close();
                     if (JOptionPane.showConfirmDialog(ventaGui, "¿Desea abrir el dialogo de impresión?", "¡Venta modificada!", JOptionPane.YES_NO_OPTION) == 0) {
                         try {
                             reporteFactura.mostrarFactura(idFacturaAModificar);
@@ -312,12 +316,14 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 } else {
                     JOptionPane.showMessageDialog(ventaGui, "Ocurrió un error inesperado, venta no realizada");
                 }
-                
+
+            }
+            ventasControlador.actualizarListaFacturas();
+            if (Base.hasConnection()) {
+                Base.close();
             }
         }
-        ventasControlador.actualizarListaFacturas();
-        if(Base.hasConnection())
-        Base.close();
+
     }
 
     public void setCellEditor() {
@@ -371,6 +377,4 @@ public class VentaControlador implements ActionListener, CellEditorListener {
     public void setIdFacturaAModificar(Integer idFacturaAModificar) {
         this.idFacturaAModificar = idFacturaAModificar;
     }
-    
-    
 }

@@ -154,6 +154,9 @@ public class ComprasRealizadasControlador implements ActionListener {
                 modelCompras.addRow(row);
             }
         }
+        comprasGui.getModificar().setEnabled(false);
+        comprasGui.getDevolucion().setEnabled(false);
+        comprasGui.getEliminar().setEnabled(false);
     }
 
     private void actualizarCompra() {
@@ -225,6 +228,9 @@ public class ComprasRealizadasControlador implements ActionListener {
     }
 
     public void tablaComprasMouseReleased(java.awt.event.MouseEvent evt) {
+        comprasGui.getModificar().setEnabled(true);
+        comprasGui.getDevolucion().setEnabled(true);
+        comprasGui.getEliminar().setEnabled(true);
         abrirBase();
         int r = tablaCompras.getSelectedRow();
         //Proveedor  = Proveedor.findById(tablaCompras.getValueAt(r, 0));

@@ -269,6 +269,7 @@
                       <Image iconType="3" name="/interfaz/Icons/modificar.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Modificar compra"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="eliminar">
@@ -277,6 +278,7 @@
                       <Image iconType="3" name="/interfaz/Icons/borrar.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Eliminar el registro de la compra de la base de datos"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="devolucion">
@@ -285,6 +287,7 @@
                       <Image iconType="3" name="/interfaz/Icons/devolver.png"/>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="Compra cancelada (Se borrar&#xe1;)"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>

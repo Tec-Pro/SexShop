@@ -269,14 +269,17 @@ public class ComprasRealizadas extends javax.swing.JPanel {
 
         modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/modificar.png"))); // NOI18N
         modificar.setToolTipText("Modificar compra");
+        modificar.setEnabled(false);
         panelControlFactura.add(modificar);
 
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/borrar.png"))); // NOI18N
         eliminar.setToolTipText("Eliminar el registro de la compra de la base de datos");
+        eliminar.setEnabled(false);
         panelControlFactura.add(eliminar);
 
         devolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/Icons/devolver.png"))); // NOI18N
         devolucion.setToolTipText("Compra cancelada (Se borrará)");
+        devolucion.setEnabled(false);
         panelControlFactura.add(devolucion);
 
         comprasRealizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Compras realizadas", 0, 0, new java.awt.Font("Century Schoolbook L", 3, 18))); // NOI18N
