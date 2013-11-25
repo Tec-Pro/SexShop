@@ -249,7 +249,6 @@ public class CompraControlador implements ActionListener, CellEditorListener {
                 } else {
                     JOptionPane.showMessageDialog(apgui, "Ocurrió un error inesperado, compra no realizada");
                 }
-                controladorCompras.actualizarListaCompras();
                 if (Base.hasConnection()) {
                     Base.close();
                 }
@@ -298,17 +297,12 @@ public class CompraControlador implements ActionListener, CellEditorListener {
                 } else {
                     JOptionPane.showMessageDialog(compraGui, "Ocurrió un error inesperado, compra no realizada");
                 }
-                controladorCompras.actualizarListaCompras();
                 if (Base.hasConnection()) {
                     Base.close();
                 }
             }
         }
-
-
-
-
-
+        controladorCompras.actualizarListaCompras();
     }
 
     public void setCellEditor() {

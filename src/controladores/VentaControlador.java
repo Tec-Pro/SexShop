@@ -318,12 +318,11 @@ public class VentaControlador implements ActionListener, CellEditorListener {
                 }
 
             }
-            ventasControlador.actualizarListaFacturas();
             if (Base.hasConnection()) {
                 Base.close();
             }
         }
-
+        ventasControlador.actualizarListaFacturas();                 
     }
 
     public void setCellEditor() {

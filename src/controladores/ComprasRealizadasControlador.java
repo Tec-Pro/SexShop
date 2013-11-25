@@ -142,6 +142,7 @@ public class ComprasRealizadasControlador implements ActionListener {
     }
 
     public void actualizarListaCompras() {
+        abrirBase();
         modelCompras.setRowCount(0);
         for (Proveedor p : provList) {
             compraList = buscar.filtroCompra(p.getId().toString(), dateDesde, dateHasta);
@@ -157,9 +158,12 @@ public class ComprasRealizadasControlador implements ActionListener {
         comprasGui.getModificar().setEnabled(false);
         comprasGui.getDevolucion().setEnabled(false);
         comprasGui.getEliminar().setEnabled(false);
+        if (Base.hasConnection())
+            Base.close();
     }
 
     private void actualizarCompra() {
+        abrirBase();
         modelCompra.setRowCount(0);
         for (ProductosCompras pv : prodCompras) {
             Object row[] = new Object[4];
@@ -172,6 +176,8 @@ public class ComprasRealizadasControlador implements ActionListener {
             modelCompra.addRow(row);
         }
         setTotal();
+        if (Base.hasConnection())
+            Base.close();
     }
 
     private void setTotal() {

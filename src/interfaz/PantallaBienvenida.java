@@ -4,6 +4,8 @@
  */
 package interfaz;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author nico
@@ -32,6 +34,7 @@ public class PantallaBienvenida extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/Logo.png")).getImage());
         setUndecorated(true);
         getContentPane().setLayout(new java.awt.BorderLayout());
 

@@ -5,6 +5,7 @@
 package interfaz;
 
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -101,6 +102,7 @@ public class LoginGui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingreso");
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/Logo.png")).getImage());
         setResizable(false);
 
         panelTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/fondoCliente2.jpg"))); // NOI18N
