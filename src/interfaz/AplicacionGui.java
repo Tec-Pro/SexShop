@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
 import net.sf.jasperreports.engine.JRException;
 
@@ -121,8 +122,9 @@ public class AplicacionGui extends javax.swing.JFrame {
         listarArticulos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Programa");
+        setTitle("SOFTWARE DE GESTION A MEDIA LUZ");
         setExtendedState(6);
+        setIconImage(new ImageIcon(getClass().getResource("/interfaz/Logo.png")).getImage());
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(879, 488));
         getContentPane().setLayout(new java.awt.BorderLayout());
