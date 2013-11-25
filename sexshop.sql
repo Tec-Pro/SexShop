@@ -96,7 +96,7 @@ create table clientes_productos(
 	check (cantidad>0),
     constraint pkadquirio primary key(id),
     constraint fkadquiriocliente foreign key(cliente_id) references clientes(id) on delete set null ,
-    constraint fkadquirioproducto foreign key(producto_id) references productos(numero_producto) on delete set null
+    constraint fkadquirioproducto foreign key(producto_id) references productos(numero_producto) on delete cascade
 );
 
 
@@ -110,7 +110,7 @@ create table productos_ventas (
 	check (precio_final>0),
     primary key(id),
     foreign key (venta_id) references ventas(id) on delete set null,
-    foreign key(producto_id) references productos(numero_producto) on delete set null
+    foreign key(producto_id) references productos(numero_producto) on delete cascade
 );
 
 
@@ -119,9 +119,11 @@ create table productos_compras (
     compra_id integer,
     producto_id integer,
     cantidad integer not null,
+	precio_final float not null,
 	check (cantidad>0),
+	check (precio_final>0),
     primary key(id),
     foreign key (compra_id) references compras(id) on delete set null,
-    foreign key(producto_id) references productos(numero_producto) on delete set null
+    foreign key(producto_id) references productos(numero_producto) on delete cascade
 );
 
