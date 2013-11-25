@@ -48,8 +48,10 @@ public class ArticulosControlador implements ActionListener {
     private busqueda pb;
     private VentaControlador vc;
     private CompraControlador cc;
+    private VentasRealizadasControlador vrc;
+    private ComprasRealizadasControlador crc;
 
-    public ArticulosControlador(AbmProductoGui apg, VentaControlador vc, CompraControlador cc) {
+    public ArticulosControlador(AbmProductoGui apg, VentaControlador vc, CompraControlador cc, VentasRealizadasControlador vrc, ComprasRealizadasControlador crc) {
 
         //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/sexshop", "root", "root");
         pl = new LinkedList<Producto>();
@@ -58,6 +60,8 @@ public class ArticulosControlador implements ActionListener {
         this.prodGui = apg;
         this.vc = vc;
         this.cc = cc;
+        this.vrc = vrc;
+        this.crc = crc;
         nuevoPulsado = false;
         modificarPulsado = false;
         apg.setActionListener(this);
@@ -431,6 +435,8 @@ public class ArticulosControlador implements ActionListener {
         }
         vc.actualizarListaProd();
         cc.actualizarListaProd();
+        vrc.actualizarListaFacturas();
+        crc.actualizarListaCompras();
         /*if(e.getSource() == mpp.getAceptar()){
          int srow = prodGui.getTabla().getSelectedRow();
          Object id = prodGui.getTablaArticulos().getValueAt(srow, 0);

@@ -78,7 +78,7 @@ public class MainControlador implements ActionListener {
         compraControlador = new CompraControlador(app.getCompraGui(), compraRealiz);
         cl = new ClienteControlador(app, ventacont);
         provContr = new ProveedoresControlador(app, compraControlador);
-        ac = new ArticulosControlador(app.getAbmProductoGui(), ventacont, compraControlador);
+        ac = new ArticulosControlador(app.getAbmProductoGui(), ventacont, compraControlador, vtasRealiz, compraRealiz);
         log.setVisible(true);
         pb.dispose();
         mu = new ManejoUsuario();
@@ -122,34 +122,37 @@ public class MainControlador implements ActionListener {
             DefaultTableModel tablita = c.getTablaCompraDefault();
             tablita.setRowCount(0);
             Proveedor proveedor = Proveedor.findById(idProveedor);
-            String nombreYApellido = idProveedor + " " + proveedor.getString("nombre") + " " + proveedor.getString("apellido");
-            c.getProveedorCompra().setText(nombreYApellido);
-            LazyList<ProductosCompras> pr = ProductosCompras.find("compra_id = ?", idFac);
-            Iterator<ProductosCompras> it = pr.iterator();
-            while (it.hasNext()) {
-                ProductosCompras prod = it.next();
-                Producto producto = Producto.findFirst("numero_producto = ?", prod.get("producto_id"));
-                if (producto != null) {
-                    Integer numeroProducto = prod.getInteger("producto_id");
-                    String nombre = producto.getString("nombre") + " " + producto.getString("marca");
-                    Float precio = producto.getFloat("precio_compra");
-                    Integer cantidad = prod.getInteger("cantidad");
-                    Object cols[] = new Object[5];
-                    cols[0] = numeroProducto;
-                    cols[1] = cantidad;
-                    cols[2] = nombre;
-                    cols[3] = BigDecimal.valueOf(precio).setScale(2, RoundingMode.CEILING);
-                    cols[4] = BigDecimal.valueOf(precio * cantidad).setScale(2, RoundingMode.CEILING);
-                    c.getTablaCompraDefault().addRow(cols);
+            if (proveedor != null){
+                String nombreYApellido = idProveedor + " " + proveedor.getString("nombre") + " " + proveedor.getString("apellido");
+                c.getProveedorCompra().setText(nombreYApellido);
+                LazyList<ProductosCompras> pr = ProductosCompras.find("compra_id = ?", idFac);
+                Iterator<ProductosCompras> it = pr.iterator();
+                while (it.hasNext()) {
+                    ProductosCompras prod = it.next();
+                    Producto producto = Producto.findFirst("numero_producto = ?", prod.get("producto_id"));
+                    if (producto != null) {
+                        Integer numeroProducto = prod.getInteger("producto_id");
+                        String nombre = producto.getString("nombre") + " " + producto.getString("marca");
+                        Float precio = producto.getFloat("precio_compra");
+                        Integer cantidad = prod.getInteger("cantidad");
+                        Object cols[] = new Object[5];
+                        cols[0] = numeroProducto;
+                        cols[1] = cantidad;
+                        cols[2] = nombre;
+                        cols[3] = BigDecimal.valueOf(precio).setScale(2, RoundingMode.CEILING);
+                        cols[4] = BigDecimal.valueOf(precio * cantidad).setScale(2, RoundingMode.CEILING);
+                        c.getTablaCompraDefault().addRow(cols);
+                    }
                 }
-            }
-            c.getTotalCompra().setText(String.valueOf(compra.getFloat("monto")));
+                c.getTotalCompra().setText(String.valueOf(compra.getFloat("monto")));
             Base.close();
             compraControlador.setIdCompraAModificar(idFac);
             c.getModificar().setEnabled(true);
             c.getRealizarCompra().setEnabled(false);
             compraControlador.setCellEditor();
-
+            }else{
+                JOptionPane.showMessageDialog(app, "El proveedor asociado a esta factura ya no existe", "PROVEEDOR INEXISTENTE",JOptionPane.ERROR_MESSAGE);
+            }
         }
         if (b.equals(app.getVentasRealizadas().getModificar())) {
             System.out.println("entre");
@@ -165,34 +168,37 @@ public class MainControlador implements ActionListener {
             DefaultTableModel tablita = v.getTablaFacturaDefault();
             tablita.setRowCount(0);
             Cliente cliente = Cliente.findById(idCliente);
-            String nombreYApellido = idCliente + " " + cliente.getString("nombre") + " " + cliente.getString("apellido");
-            v.getClienteFactura().setText(nombreYApellido);
-            LazyList<ProductosVentas> pr = ProductosVentas.find("venta_id = ?", idFac);
-            Iterator<ProductosVentas> it = pr.iterator();
-            while (it.hasNext()) {
-                ProductosVentas prod = it.next();
-                Producto producto = Producto.findFirst("numero_producto = ?", prod.get("producto_id"));
-                if (producto != null) {
-                    Integer numeroProducto = (Integer) producto.getInteger("numero_producto");
-                    String nombre = producto.getString("nombre") + " " + producto.getString("marca");
-                    Float precio = prod.getFloat("precio_final");
-                    Integer cantidad = prod.getInteger("cantidad");
-                    Object cols[] = new Object[5];
-                    cols[0] = numeroProducto;
-                    cols[1] = cantidad;
-                    cols[2] = nombre;
-                    cols[3] = BigDecimal.valueOf(precio).setScale(2, RoundingMode.CEILING);
-                    cols[4] = BigDecimal.valueOf(precio * cantidad).setScale(2, RoundingMode.CEILING);
-                    v.getTablaFacturaDefault().addRow(cols);
+            if (cliente != null){
+                String nombreYApellido = idCliente + " " + cliente.getString("nombre") + " " + cliente.getString("apellido");
+                v.getClienteFactura().setText(nombreYApellido);
+                LazyList<ProductosVentas> pr = ProductosVentas.find("venta_id = ?", idFac);
+                Iterator<ProductosVentas> it = pr.iterator();
+                while (it.hasNext()) {
+                    ProductosVentas prod = it.next();
+                    Producto producto = Producto.findFirst("numero_producto = ?", prod.get("producto_id"));
+                    if (producto != null) {
+                        Integer numeroProducto = (Integer) producto.getInteger("numero_producto");
+                        String nombre = producto.getString("nombre") + " " + producto.getString("marca");
+                        Float precio = prod.getFloat("precio_final");
+                        Integer cantidad = prod.getInteger("cantidad");
+                        Object cols[] = new Object[5];
+                        cols[0] = numeroProducto;
+                        cols[1] = cantidad;
+                        cols[2] = nombre;
+                        cols[3] = BigDecimal.valueOf(precio).setScale(2, RoundingMode.CEILING);
+                        cols[4] = BigDecimal.valueOf(precio * cantidad).setScale(2, RoundingMode.CEILING);
+                        v.getTablaFacturaDefault().addRow(cols);
+                    }
                 }
+                v.getTotalFactura().setText(String.valueOf(factura.getFloat("monto")));
+                Base.close();
+                ventacont.setIdFacturaAModificar(idFac);
+                v.getModificar().setEnabled(true);
+                v.getRealizarVenta().setEnabled(false);
+                ventacont.setCellEditor();
+            } else {
+                JOptionPane.showMessageDialog(app, "El cliente asociado a esta factura ya no existe","CLIENTE INEXISTENTE",JOptionPane.ERROR_MESSAGE);
             }
-            v.getTotalFactura().setText(String.valueOf(factura.getFloat("monto")));
-            Base.close();
-            ventacont.setIdFacturaAModificar(idFac);
-            v.getModificar().setEnabled(true);
-            v.getRealizarVenta().setEnabled(false);
-            ventacont.setCellEditor();
-
 
         }
     }

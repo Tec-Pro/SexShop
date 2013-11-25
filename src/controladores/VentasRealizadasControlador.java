@@ -76,6 +76,7 @@ public class VentasRealizadasControlador implements ActionListener {
         dateHasta = "9999-0-0";
         buscar = new busqueda();
         cl = buscar.filtroCliente("", "", "");
+        vl = buscar.filtroVenta("", "", "");
         factDefault = ventasGui.getTablaFacturaDefault();
         tablaFact = ventasGui.getTablaFactura();
         prodVentas = new LinkedList<ProductosVentas>();
@@ -154,7 +155,6 @@ public class VentasRealizadasControlador implements ActionListener {
         cl = buscar.filtroCliente("", "", "");
         for (Cliente c : cl) {
             vl = buscar.filtroVenta(c.getId().toString(), dateDesde, dateHasta);
-
             for (Venta v : vl) {
                 String row[] = new String[3];
                 row[0] = v.getId().toString();
@@ -174,6 +174,7 @@ public class VentasRealizadasControlador implements ActionListener {
 
     private void actualizarFactura() {
         factDefault.setRowCount(0);
+        abrirBase();
         for (ProductosVentas pv : prodVentas) {
             Object row[] = new Object[4];
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
@@ -185,6 +186,8 @@ public class VentasRealizadasControlador implements ActionListener {
             factDefault.addRow(row);
         }
         setTotal();
+        if(Base.hasConnection())
+            Base.close();
     }
 
     private void limpiarFactura() {
