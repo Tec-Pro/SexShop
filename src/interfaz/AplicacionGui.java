@@ -4,7 +4,6 @@
  */
 package interfaz;
 
-
 import controladores.ControladorJReport;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
 import net.sf.jasperreports.engine.JRException;
-
 
 /**
  *
@@ -36,7 +34,6 @@ public class AplicacionGui extends javax.swing.JFrame {
     ControladorJReport reporteArticulos;
     ControladorJReport reporteFactura;
 
-
     /**
      * Creates new form AplicacionGui
      */
@@ -44,47 +41,44 @@ public class AplicacionGui extends javax.swing.JFrame {
         initComponents();
         abmCliente = new AbmClienteGui(); //creo el panel de abmClente
         abmProducto = new AbmProductoGui();//creo panel abmProducto
-        ventasRealizadas= new VentasRealizadas();
-        abmProveedor= new AbmProveedorGui();
-        venta= new VentaGui();
+        ventasRealizadas = new VentasRealizadas();
+        abmProveedor = new AbmProveedorGui();
+        venta = new VentaGui();
         compraGui = new CompraGui();
         comprasRealizadas = new ComprasRealizadas();
-        acercaDe = new AcercaDe();
         //venta.setActionListener(this);
         tab.add("Cliente", abmCliente);//se los agrego al contenedor de tabs
         tab.add("Producto", abmProducto);
         tab.add("Venta", venta);
-        
+
         tab.add("Ventas realizadas", ventasRealizadas);
         tab.add("Proveedor", abmProveedor);
-        tab.add("Compras",compraGui);
+        tab.add("Compra", compraGui);
         tab.add("Compras realizadas", comprasRealizadas);
-        tab.add("Acerca de", acercaDe);
         tab.setToolTipTextAt(0, "Alta baja y modificacion de clientes");
         tab.setToolTipTextAt(1, "Alta baja y modificacion de productos");
         tab.setToolTipTextAt(2, "Realizar una venta nueva");
-        tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");       
+        tab.setToolTipTextAt(3, "Ver todas las ventas realizadas para realizar posibles modificaciones");
         tab.setToolTipTextAt(4, "Alta baja y modificación de proveedores");
         tab.setToolTipTextAt(5, "Realizar una compra");
         tab.setToolTipTextAt(6, "Compras realizadas");
-        tab.setToolTipTextAt(7, "Acerca de");
         //controlador
         reporteClientes = new ControladorJReport("listadoClientes.jasper");
         reporteArticulos = new ControladorJReport("listadoProductos.jasper");
         reporteFactura = new ControladorJReport(("factura.jasper"));
     }
 
-    public AbmClienteGui getAbmClienteGui(){
+    public AbmClienteGui getAbmClienteGui() {
         return abmCliente;
     }
-    
-    public AbmProveedorGui getAbmProveedorGui(){
+
+    public AbmProveedorGui getAbmProveedorGui() {
         return abmProveedor;
     }
-    
-    public AbmProductoGui getAbmProductoGui(){
+
+    public AbmProductoGui getAbmProductoGui() {
         return abmProducto;
-    } 
+    }
 
     public VentaGui getVenta() {
         return venta;
@@ -97,13 +91,11 @@ public class AplicacionGui extends javax.swing.JFrame {
     public ComprasRealizadas getComprasRealizadas() {
         return comprasRealizadas;
     }
-    
-    
-    
-    public VentasRealizadas  getVentasRealizadas(){
+
+    public VentasRealizadas getVentasRealizadas() {
         return ventasRealizadas;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,6 +112,8 @@ public class AplicacionGui extends javax.swing.JFrame {
         listar = new javax.swing.JMenu();
         listarClientes = new javax.swing.JMenuItem();
         listarArticulos = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SOFTWARE DE GESTION A MEDIA LUZ");
@@ -164,13 +158,23 @@ public class AplicacionGui extends javax.swing.JFrame {
 
         jMenuBar1.add(listar);
 
+        jMenu2.setText("ayuda");
+
+        jMenuItem2.setText("Acerca de");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
+
     //borrar después
     private void listarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClientesActionPerformed
         try {
@@ -198,31 +202,36 @@ public class AplicacionGui extends javax.swing.JFrame {
     }//GEN-LAST:event_listarArticulosActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-/**
- * @param args the command line arguments
- */
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+
+        acercaDe = new AcercaDe();
+        acercaDe.setSize(755, 434);
+        acercaDe.setLocationRelativeTo(null);
+        acercaDe.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    /**
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu listar;
     private javax.swing.JMenuItem listarArticulos;
     private javax.swing.JMenuItem listarClientes;
     private javax.swing.JTabbedPane tab;
     // End of variables declaration//GEN-END:variables
+
     public JTabbedPane getTab() {
         return tab;
     }
-
-
-  
-    
-   
 }

@@ -206,6 +206,7 @@ public class ProveedoresControlador implements ActionListener {
                 row[3] = p.get("tipo").toString();
                 art.getTablaArticulosProveedor().addRow(row);
             }
+            art.setLocationRelativeTo(null);
             art.setVisible(true);
         }
         if(b.equals(provGui.getSiguiente())){ //permite avanzar al siguiente proveedor de la lista

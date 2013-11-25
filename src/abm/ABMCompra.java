@@ -144,7 +144,7 @@ public class ABMCompra implements ABMInterface<Compra> {
             par = (Pair) itr.next(); //saco el par de la lista
             prod = (Producto) par.first(); //saco el producto del par
             cant = (Integer) par.second();//saco la cantidad del par
-            ProductosCompras prodComprado = ProductosCompras.create("compra_id", idCompra, "producto_id", prod.get("numero_producto"), "cantidad", cant);
+            ProductosCompras prodComprado = ProductosCompras.create("compra_id", idCompra, "producto_id", prod.get("numero_producto"), "cantidad", cant,"precio_final",prod.get("precio_compra"));
             resultOp = resultOp && prodComprado.saveIt();
         }
         return resultOp;
@@ -213,4 +213,6 @@ public class ABMCompra implements ABMInterface<Compra> {
         }
         return resultOp;
     }
+    
+    
 }

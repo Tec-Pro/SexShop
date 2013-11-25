@@ -26,11 +26,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 import modelos.Compra;
 import modelos.Producto;
+import modelos.ProductosCompras;
 import modelos.Proveedor;
 import modelos.Venta;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.util.Pair;
 import org.javalite.activejdbc.Base;
+import org.javalite.activejdbc.LazyList;
+import org.javalite.activejdbc.Model;
 
 /**
  *
@@ -117,6 +120,14 @@ public class CompraControlador implements ActionListener, CellEditorListener {
     public void tablaProvMouseClicked(java.awt.event.MouseEvent evt) {
         tablaProd.setRowCount(0);
         actualizarListaProd();
+        int row = compraGui.getTablaProveedores().getSelectedRow();
+            if (row > -1) {
+                String id = (String) tablaprov.getValueAt(row, 0);
+                String nom = (String) tablaprov.getValueAt(row, 1);
+                String ap = (String) tablaprov.getValueAt(row, 2);
+                compraGui.getProveedorCompra().setText(id + " " + nom + " " + ap);
+                compraGui.getTablaCompraDefault().setRowCount(0);
+            }
     }
 
     public void actualizarListaProveedor() {
@@ -232,7 +243,7 @@ public class CompraControlador implements ActionListener, CellEditorListener {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
-                    BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
+                    BigDecimal precioFinal = ((BigDecimal) tablafac.getValueAt(i, 3)).setScale(2, RoundingMode.CEILING);
                     producto.set("precio_compra", precioFinal);
                     producto.saveIt();
                     Pair par = new Pair(producto, cantidad); //creo el par
@@ -277,7 +288,7 @@ public class CompraControlador implements ActionListener, CellEditorListener {
                     abrirBase();
                     Producto producto = Producto.findFirst("numero_producto = ?", tablafac.getValueAt(i, 0));
                     Integer cantidad = (Integer) tablafac.getValueAt(i, 1); //saco la cantidad
-                    BigDecimal precioFinal = (BigDecimal) tablafac.getValueAt(i, 3);
+                    BigDecimal precioFinal = ((BigDecimal) tablafac.getValueAt(i, 3)).setScale(2, RoundingMode.CEILING);
                     producto.set("precio_compra", precioFinal);
                     producto.saveIt();
                     Pair par = new Pair(producto, cantidad); //creo el par

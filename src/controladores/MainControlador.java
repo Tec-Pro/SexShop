@@ -133,7 +133,7 @@ public class MainControlador implements ActionListener {
                     if (producto != null) {
                         Integer numeroProducto = prod.getInteger("producto_id");
                         String nombre = producto.getString("nombre") + " " + producto.getString("marca");
-                        Float precio = producto.getFloat("precio_compra");
+                        Float precio = prod.getFloat("precio_final");
                         Integer cantidad = prod.getInteger("cantidad");
                         Object cols[] = new Object[5];
                         cols[0] = numeroProducto;

@@ -178,6 +178,7 @@ public class ClienteControlador implements ActionListener {
                 row[4] = cp.get("cantidad").toString();
                 artCom.getTablaProductosComprados().addRow(row);
             }
+            artCom.setLocationRelativeTo(null);
             artCom.setVisible(true);
         }
         if(b.equals(clienteGui.getSiguiente())){ //permite avanzar al siguiente cliente de la lista

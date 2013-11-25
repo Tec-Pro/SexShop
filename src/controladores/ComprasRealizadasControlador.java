@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -170,7 +172,7 @@ public class ComprasRealizadasControlador implements ActionListener {
             row[0] = Integer.parseInt(pv.get("cantidad").toString());
             Producto p = Producto.findFirst("numero_producto = ?",pv.get("producto_id"));
             row[1] = p.get("nombre") + ", " + p.get("marca");
-            Float a = Float.parseFloat(p.get("precio_compra").toString());
+            Float a = Float.parseFloat(pv.get("precio_final").toString());
             row[2] = a;
             row[3] = Integer.parseInt(pv.get("cantidad").toString()) * a;
             modelCompra.addRow(row);
@@ -182,11 +184,13 @@ public class ComprasRealizadasControlador implements ActionListener {
 
     private void setTotal() {
         Float total = Float.parseFloat("0.0");
+        BigDecimal totalBig = BigDecimal.ZERO;
 
         for (int i = 0; i < tablaCompra.getRowCount(); i++) {
             total += Float.parseFloat(modelCompra.getValueAt(i, 3).toString());
+            totalBig=BigDecimal.valueOf(total.doubleValue()).setScale(2, RoundingMode.CEILING);
         }
-        comprasGui.getTotalCompra().setText(total.toString());
+        comprasGui.getTotalCompra().setText(totalBig.toPlainString() );
     }
 
     public void calenDesdePropertyChange(PropertyChangeEvent e) {
